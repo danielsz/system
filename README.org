@@ -1,4 +1,18 @@
-(ns framework.application
+* Framework
+** Is it good?
+Yes.
+** Installation
+** Usage
+#+BEGIN_SRC clojure
+(ns user
+  (:require [reloaded.repl :refer [system init start stop go reset]]
+            [my-app.application :refer [dev-system]]))
+
+(reloaded.repl/set-init! dev-system)
+#+END_SRC
+
+#+BEGIN_SRC clojure
+(ns my-app.application
   (:require 
    [com.stuartsierra.component :as component]
    (framework.components 
@@ -30,4 +44,4 @@
      :web (new-web-server (env :http-port) (env :trace-headers))
      :repl-server (new-repl-server (Integer. (env :repl-port)))))
 
-
+#+END_SRC
