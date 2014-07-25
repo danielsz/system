@@ -27,4 +27,4 @@
   :repositories [["snapshots" {:url "https://clojars.org/" :creds :gpg}]
                  ["releases" {:url "https://clojars.org/" :creds :gpg}]]
   :scm {:name "git"
-        :url "https://github.com/danielsz/back-end-template"})
+        :url "https://github.com/danielsz/framework"})
