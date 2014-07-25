@@ -1,6 +1,6 @@
 (defproject org.danielsz/framework "0.1.0-SNAPSHOT"
-  :description "TODO"
-  :url "TODO"
+  :description "Clojure application components à la carte"
+  :url "https://github.com/danielsz/framework"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.6.0"]
@@ -18,13 +18,11 @@
   :profiles {:dev {:dependencies [[ring-mock "0.1.5"]
                                   [compojure "1.1.8"]]
                    :source-paths ["dev"]
-                   :env {:http-port 3000 :trace-headers true
+                   :env {:http-port 3000 
                          :db-url "datomic:mem://localhost:4334/framework"}}
-             :production {:env {:http-port 8000 :trace-headers false
+             :production {:env {:http-port 8000
                                 :repl-port 8001
                                 :db-url "datomic:free://localhost:4334/framework"
                                 :mongo-url "mongodb://heroku_url"}}}
-  :repositories [["snapshots" {:url "https://clojars.org/" :creds :gpg}]
-                 ["releases" {:url "https://clojars.org/" :creds :gpg}]]
   :scm {:name "git"
         :url "https://github.com/danielsz/framework"})

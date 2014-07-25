@@ -1,7 +1,8 @@
-(ns framework.components.jetty-test
-  (:require [framework.components.jetty :refer [new-web-server]]
+(ns framework.components.http-kit-test
+  (:require [framework.components.http-kit :refer [new-web-server]]
    [com.stuartsierra.component :as component]
-   [clojure.test :refer [testing deftest is]]))
+   [clojure.test :refer [testing deftest is]]
+   [ring.mock.request :refer :all]))
 
 (defn handler [request]
   {:status 200
@@ -13,8 +14,6 @@
 (deftest http-server-lifecycle
   (alter-var-root #'http-server component/start)
   (is (:server http-server) "HTTP server has been added to component")
-  (is (.isStarted (:server http-server)) "HTTP server starts")
-  (alter-var-root #'http-server component/stop)
-  (is (.isStopped (:server http-server)) "HTTP server stops"))
+  (alter-var-root #'http-server component/stop))
 
 

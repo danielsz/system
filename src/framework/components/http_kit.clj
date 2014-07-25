@@ -2,7 +2,7 @@
   (:require [com.stuartsierra.component :as component]
             [org.httpkit.server :refer [run-server]]))
 
-(defrecord WebServer [port debug server handler]
+(defrecord WebServer [port server handler]
   component/Lifecycle
   (start [component]
     (let [server (run-server handler {:port port :join? false})]
@@ -13,5 +13,5 @@
       component)))
 
 (defn new-web-server
-  [port debug]
-  (map->WebServer {:port port :debug debug :handler handler}))
+  [port handler]
+  (map->WebServer {:port port :handler handler}))
