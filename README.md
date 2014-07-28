@@ -23,13 +23,9 @@ Yes.
 
 ## Usage<a id="sec-1-3" name="sec-1-3"></a>
 
-    (ns user
-      (:require [reloaded.repl :refer [system init start stop go reset]]
-                [my-app.application :refer [dev-system]]))
-    
-    (reloaded.repl/set-init! dev-system)
+First, assemble your application. 
 
-    (ns my-app.application
+    (ns my-app.systems
       (:require 
        [com.stuartsierra.component :as component]
        (framework.components 
@@ -39,11 +35,6 @@ Yes.
         [mongo :refer [new-mongo-db]])
        [environ.core :refer [env]]))
     
-    
-    (defn system-map []
-      (if (bound? (ns-resolve 'framework.core 'system))
-        (deref (ns-resolve 'framework.core 'system))
-        (deref (ns-resolve 'user 'system))))
     
     (defn dev-system []
       (component/system-map
@@ -60,3 +51,24 @@ Yes.
          :mongo-db (new-mongo-db (env :mongo-url))
          :web (new-web-server (env :http-port) (env :trace-headers))
          :repl-server (new-repl-server (Integer. (env :repl-port)))))
+
+Then, in user.clj:
+
+    (ns user
+      (:require [reloaded.repl :refer [system init start stop go reset]]
+                [my-app.systems :refer [dev-system]]))
+    
+    (reloaded.repl/set-init! dev-system)
+
+And for production, in core.clj:
+
+    (ns my-app.core
+      (:gen-class)
+      (:require [reloaded.repl :refer [system init start stop go reset]]
+                [my-app.systems :refer [prod-system]]))
+    
+    (defn -main 
+      []
+      "Start the application"
+      (reloaded.repl/set-init! prod-system)
+      (go))
