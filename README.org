@@ -1,7 +1,24 @@
 * System
+** What is it?
+System owes to [[https://github.com/stuartsierra/component][component]] both in spirit and in name. Component gave you the ability to implement the reload pattern as promoted by Stuart Sierra, System gives you a set of readymade components. This set is open to contributions from the community and so is expected to expand. Currently includes: 
+
+- Jetty (HTTP server)
+- Http-kit (Async HTTP server)
+- Datomic (Immutable database)
+- Monger (MongoDB client)
+- Sente (Websockets/Ajax communications library)
+- nREPL (Clojure network REPL )
+- Langohr (RabbitMQ client)
+
 ** Is it good?
-Yes.
+[[https://news.ycombinator.com/item?id%3D3067434][Yes]].
 ** Installation
+Add the following to the Leiningen dependencies in project.clj. 
+#+BEGIN_SRC 
+[org.danielsz/system "0.1.0-SNAPSHOT"]
+#+END_SRC
+
+
 ** Usage
 
 First, assemble your application. 
@@ -67,3 +84,5 @@ Or, if you don’t want to have a handler on your application:
   "Start the application"
   (alter-var-root #'system (fn [_] (component/start (prod-system))))) 
 #+END_SRC 
+** Contributing
+Please fork and issue a pull request to add more components. Please don't forget to include tests. You can refer to the existing ones to get started.
