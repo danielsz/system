@@ -4,11 +4,10 @@
    [com.stuartsierra.component :as component]
    [clojure.test :refer [deftest is]]
    [monger.db :as db]
-   [monger.collection]
-   [environ.core :refer [env]]))
+   [monger.collection]))
 
 
-(def mongo-db-prod (new-mongo-db (env :mongo-url)))
+(def mongo-db-prod (new-mongo-db "mongodb://127.0.0.1/monger-test4"))
 (def mongo-db-dev (new-mongo-db)) 
 
 (deftest mongo-production

@@ -2,11 +2,9 @@
   (:require [system.components.datomic :refer [new-datomic-db]]
    [com.stuartsierra.component :as component]
    [datomic.api :as d]
-   [clojure.test :refer [deftest is]]
-   [environ.core :refer [env]]))
+   [clojure.test :refer [deftest is]]))
 
-(def uri (str (env :db-url) "-test"))
-
+(def uri "datomic:mem://localhost:4334/framework-test")
 (def datomic-db (new-datomic-db uri))
  
 (deftest datomic-lifecycle

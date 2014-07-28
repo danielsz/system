@@ -1,8 +1,7 @@
 (ns system.components.http-kit-test
   (:require [system.components.http-kit :refer [new-web-server]]
    [com.stuartsierra.component :as component]
-   [clojure.test :refer [testing deftest is]]
-   [ring.mock.request :refer :all]))
+   [clojure.test :refer [testing deftest is]]))
 
 (defn handler [request]
   {:status 200

@@ -1,4 +1,4 @@
-* Framework
+* System
 ** Is it good?
 Yes.
 ** Installation
@@ -9,7 +9,7 @@ First, assemble your application.
 (ns my-app.systems
   (:require 
    [com.stuartsierra.component :as component]
-   (framework.components 
+   (system.components 
     [jetty :refer [new-web-server]]
     [repl-server :refer [new-repl-server]]
     [datomic :refer [new-datomic-db]]
@@ -21,7 +21,7 @@ First, assemble your application.
   (component/system-map
    :datomic-db (new-datomic-db (env :db-url))
    :mongo-db (new-mongo-db)
-   :web (new-web-server (Integer. (env :http-port)) (env :trace-headers))))
+   :web (new-web-server (Integer. (env :http-port)) handler)))
 
 
 (defn prod-system []
