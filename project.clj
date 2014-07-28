@@ -9,7 +9,7 @@
                  [org.clojure/tools.nrepl "0.2.3"]
                  [reloaded.repl "0.1.0"]
                  [com.stuartsierra/component "0.2.1"]
-                 [com.datomic/datomic-free "0.9.4609"]
+                 [com.datomic/datomic-free "0.9.4815.12"]
                  [com.novemberain/monger "2.0.0"]
                  [com.novemberain/langohr "2.11.0"]
                  [com.taoensso/sente "0.15.1"]
