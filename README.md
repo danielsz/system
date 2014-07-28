@@ -40,7 +40,7 @@ Add the following to the Leiningen dependencies in project.clj.
 
 ## Usage<a id="sec-1-4" name="sec-1-4"></a>
 
-First, assemble your application. 
+First, assemble your system(s) in a namespace of your choosing. Here we define two systems, development and production. 
 
     (ns my-app.systems
       (:require 
@@ -52,13 +52,11 @@ First, assemble your application.
         [mongo :refer [new-mongo-db]])
        [environ.core :refer [env]]))
     
-    
     (defn dev-system []
       (component/system-map
        :datomic-db (new-datomic-db (env :db-url))
        :mongo-db (new-mongo-db)
-       :web (new-web-server (Integer. (env :http-port)) handler)))
-    
+       :web (new-web-server (env :http-port) handler)))
     
     (defn prod-system []
       "Assembles and returns components for a production application"
@@ -67,7 +65,9 @@ First, assemble your application.
          :datomic-db (new-datomic-db (env :db-url))
          :mongo-db (new-mongo-db (env :mongo-url))
          :web (new-web-server (env :http-port) (env :trace-headers))
-         :repl-server (new-repl-server (Integer. (env :repl-port)))))
+         :repl-server (new-repl-server (env :repl-port))))
+
+Note: Component allows you to define dependency relationships within systems. Be sure to consult Component’s API to see all that is possible.
 
 Then, in user.clj:
 
@@ -77,7 +77,20 @@ Then, in user.clj:
     
     (reloaded.repl/set-init! dev-system)
 
-And for production, in core.clj:
+You can then manipulate the system in the REPL: `(go)`, `(reset)` or `(stop)`. The system map is accessible at any time, it is a var called `system` (you guessed it). 
+
+In production, in core.clj:
+
+    (ns my-app.core
+      (:gen-class)
+      (:require [my-app.systems :refer [prod-system]]))
+    
+    (defn -main 
+      []
+      "Start the application"
+      (alter-var-root #'prod-system component/start)
+
+Or, if you want to keep a handler on your system in production:
 
     (ns my-app.core
       (:gen-class)
@@ -89,13 +102,6 @@ And for production, in core.clj:
       "Start the application"
       (reloaded.repl/set-init! prod-system)
       (go))
-
-Or, if you don’t want to have a handler on your application:
-
-    (defn -main 
-      []
-      "Start the application"
-      (alter-var-root #'system (fn [_] (component/start (prod-system)))))
 
 ## Contributing<a id="sec-1-5" name="sec-1-5"></a>
 
