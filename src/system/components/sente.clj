@@ -1,4 +1,4 @@
-(ns framework.components.sente
+(ns system.components.sente
   (:require [com.stuartsierra.component :as component]
             [taoensso.sente :as sente]))
 

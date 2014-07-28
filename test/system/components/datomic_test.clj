@@ -1,5 +1,5 @@
-(ns framework.components.datomic-test
-  (:require [framework.components.datomic :refer [new-datomic-db]]
+(ns system.components.datomic-test
+  (:require [system.components.datomic :refer [new-datomic-db]]
    [com.stuartsierra.component :as component]
    [datomic.api :as d]
    [clojure.test :refer [deftest is]]

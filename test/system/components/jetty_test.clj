@@ -1,5 +1,5 @@
-(ns framework.components.jetty-test
-  (:require [framework.components.jetty :refer [new-web-server]]
+(ns system.components.jetty-test
+  (:require [system.components.jetty :refer [new-web-server]]
    [com.stuartsierra.component :as component]
    [clojure.test :refer [testing deftest is]]))
 

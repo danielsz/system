@@ -1,4 +1,4 @@
-(ns framework.components.jetty
+(ns system.components.jetty
   (:require [com.stuartsierra.component :as component]
             [ring.adapter.jetty :refer [run-jetty]]))
 

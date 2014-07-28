@@ -58,3 +58,12 @@ And for production, in core.clj:
   (reloaded.repl/set-init! prod-system)
   (go))
 #+END_SRC
+
+
+Or, if you don’t want to have a handler on your application:
+#+BEGIN_SRC clojure
+(defn -main 
+  []
+  "Start the application"
+  (alter-var-root #'system (fn [_] (component/start (prod-system))))) 
+#+END_SRC 

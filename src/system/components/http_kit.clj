@@ -1,4 +1,4 @@
-(ns framework.components.http-kit
+(ns system.components.http-kit
   (:require [com.stuartsierra.component :as component]
             [org.httpkit.server :refer [run-server]]))
 

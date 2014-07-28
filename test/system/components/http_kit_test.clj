@@ -1,5 +1,5 @@
-(ns framework.components.http-kit-test
-  (:require [framework.components.http-kit :refer [new-web-server]]
+(ns system.components.http-kit-test
+  (:require [system.components.http-kit :refer [new-web-server]]
    [com.stuartsierra.component :as component]
    [clojure.test :refer [testing deftest is]]
    [ring.mock.request :refer :all]))

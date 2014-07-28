@@ -1,4 +1,4 @@
-(ns framework.components.rabbitmq
+(ns system.components.rabbitmq
   (:require [com.stuartsierra.component :as component]
             [environ.core :refer [env]]
             [langohr.core      :as rmq]

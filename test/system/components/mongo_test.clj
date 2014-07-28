@@ -1,6 +1,6 @@
-(ns framework.components.mongo-test
+(ns system.components.mongo-test
   (:require 
-   [framework.components.mongo :refer [new-mongo-db]]
+   [system.components.mongo :refer [new-mongo-db]]
    [com.stuartsierra.component :as component]
    [clojure.test :refer [deftest is]]
    [monger.db :as db]
