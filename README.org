@@ -10,6 +10,8 @@ System owes to [[https://github.com/stuartsierra/component][component]] both in 
 - nREPL (Clojure network REPL )
 - Langohr (RabbitMQ client)
 
+** Motivation
+Having a good experience at the REPL is all what a Lisp is about. Reloaded components find themselves in almost every project, since most applications require external dependencies (a web server, a database, etc.). My first attempt to tackle the problem of avoiding boilerplate code was to use a Leiningen template. The problem is that Leiningen templates are hard to maintain, and difficult to retrofit on exisiting projects. As time goes by, dependencies get new versions, and I found myself painstakingly updating a bad solution. Then it dawned on me that a library would better fit the bill. And so *System* came to light. I now use it in every project with tremendous productivity boost.
 ** Is it good?
 [[https://news.ycombinator.com/item?id%3D3067434][Yes]].
 ** Installation
@@ -31,6 +33,7 @@ First, assemble your system(s) in a namespace of your choosing. Here we define t
     [repl-server :refer [new-repl-server]]
     [datomic :refer [new-datomic-db]]
     [mongo :refer [new-mongo-db]])
+   [my-app.webapp :refer [handler]]
    [environ.core :refer [env]]))
 
 (defn dev-system []
@@ -45,12 +48,12 @@ First, assemble your system(s) in a namespace of your choosing. Here we define t
     (component/system-map
      :datomic-db (new-datomic-db (env :db-url))
      :mongo-db (new-mongo-db (env :mongo-url))
-     :web (new-web-server (env :http-port) (env :trace-headers))
+     :web (new-web-server (env :http-port) handler)
      :repl-server (new-repl-server (env :repl-port))))
 
 #+END_SRC
 
-Note: Component allows you to define dependency relationships within systems. Be sure to consult Component’s API to see all that is possible.
+Note: Component allows you to define dependency relationships within systems. Be sure to consult Component’s API to see the range of options.
 
 Then, in user.clj:
 #+BEGIN_SRC clojure
@@ -60,7 +63,7 @@ Then, in user.clj:
 
 (reloaded.repl/set-init! dev-system)
 #+END_SRC
-You can then manipulate the system in the REPL: ~(go)~, ~(reset)~ or ~(stop)~. The system map is accessible at any time, it is a var called ~system~ (you guessed it). 
+You can then manipulate the system in the REPL: ~(go)~, ~(reset)~ or ~(stop)~. The system map is accessible at any time, it resides in a var named, as you can guess, ~system~. 
 
 In production, in core.clj:
 
