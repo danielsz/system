@@ -99,7 +99,7 @@ The canonical reference is this:
 
 And here are more references all touching on the topic.  
 - [[http://www.infoq.com/presentations/Clojure-Large-scale-patterns-techniques][Clojure in the Large]]
--[[http://martintrojer.github.io/clojure/2013/09/07/retrofitting-the-reloaded-pattern-into-clojure-projects/][ Retrofitting the Reloaded pattern into Clojure projects]]
+- [[http://martintrojer.github.io/clojure/2013/09/07/retrofitting-the-reloaded-pattern-into-clojure-projects/][Retrofitting the Reloaded pattern into Clojure projects]]
 - [[http://software-ninja-ninja.blogspot.co.il/2014/04/5-faces-of-dependency-injection-in.html][5 faces of dependency injection in Clojure]]
 - [[https://github.com/weavejester/reloaded.repl][REPL functions to support the reloaded workflow]]
 
