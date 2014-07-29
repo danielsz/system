@@ -1,6 +1,6 @@
 * System
 ** What is it?
-System owes to [[https://github.com/stuartsierra/component][component]] both in spirit and in name. Component gave you the ability to implement the reload pattern as promoted by Stuart Sierra, System gives you a set of readymade components. This set is open to contributions from the community and so is expected to expand. Currently includes: 
+System owes to [[https://github.com/stuartsierra/component][component]] both in spirit and in name. The component library helps implementing the reloaded pattern as championed by Stuart Sierra. System is built on top of it, offering a set of readymade components. This idea is to expand the set over time with contributions from the community. It currently includes: 
 
 - Jetty (HTTP server)
 - Http-kit (Async HTTP server)
@@ -11,7 +11,7 @@ System owes to [[https://github.com/stuartsierra/component][component]] both in 
 - Langohr (RabbitMQ client)
 
 ** Motivation
-Having a good experience at the REPL is all what a Lisp is about. Reloaded components find themselves in almost every project, since most applications require external dependencies (a web server, a database, etc.). My first attempt to tackle the problem of avoiding boilerplate code was to use a Leiningen template. The problem is that Leiningen templates are hard to maintain, and difficult to retrofit on exisiting projects. As time goes by, dependencies get new versions, and I found myself painstakingly updating a bad solution. Then it dawned on me that a library would better fit the bill. And so *System* came to light. I now use it in every project with tremendous productivity boost.
+Having a good experience at the REPL is all what Lisp is about. Reloaded components find themselves in almost every project, since most applications require external dependencies (a web server, a database, etc.). My first attempt to tackle the problem of avoiding the boilerplate code was to use a Leiningen template. The problem is that Leiningen templates are hard to maintain, and difficult to retrofit on exisiting projects. As time goes by, dependencies get new versions, and I found myself painstakingly updating the template. Then it dawned on me that a library would better fit the bill. And so *System* came to light. I now use it in every project with tremendous productivity boost.
 ** Is it good?
 [[https://news.ycombinator.com/item?id%3D3067434][Yes]].
 ** Installation
@@ -19,7 +19,6 @@ Add the following to the Leiningen dependencies in project.clj.
 #+BEGIN_SRC 
 [org.danielsz/system "0.1.0-SNAPSHOT"]
 #+END_SRC
-
 
 ** Usage
 
@@ -53,7 +52,7 @@ First, assemble your system(s) in a namespace of your choosing. Here we define t
 
 #+END_SRC
 
-Note: Component allows you to define dependency relationships within systems. Be sure to consult Component’s API to see the range of options.
+Note: Component allows you to define dependency relationships within systems. Be sure to consult component’s API to see the range of options.
 
 Then, in user.clj:
 #+BEGIN_SRC clojure
@@ -92,7 +91,17 @@ Or, if you want to keep a handler on your system in production:
   (reloaded.repl/set-init! prod-system)
   (go))
 #+END_SRC
+** Background info
+Here are a couple of links that are sure to shed more light on the motivations of the reloaded workflow.
 
+The canonical reference is this: 
+[[http://thinkrelevance.com/blog/2013/06/04/clojure-workflow-reloaded][My Clojure Workflow, Reloaded]]
+
+And here are more references all touching on the topic. 
+[[http://www.infoq.com/presentations/Clojure-Large-scale-patterns-techniques][Clojure in the Large]]
+[[http://martintrojer.github.io/clojure/2013/09/07/retrofitting-the-reloaded-pattern-into-clojure-projects/][Retrofitting the Reloaded pattern into Clojure projects]]
+[[http://software-ninja-ninja.blogspot.co.il/2014/04/5-faces-of-dependency-injection-in.html][5 faces of dependency injection in Clojure]]
+[[https://github.com/weavejester/reloaded.repl][REPL functions to support the reloaded workflow]]
 
 ** Contributing
 Please fork and issue a pull request to add more components. Please don't forget to include tests. You can refer to the existing ones to get started.
