@@ -11,7 +11,7 @@ System owes to [[https://github.com/stuartsierra/component][component]] both in 
 - [[http://clojurerabbitmq.info/][Langohr]] (RabbitMQ client)
 
 ** Motivation
-Having a good experience at the REPL is all what Lisp is about. Reloaded components find themselves in almost every project, since most applications require external dependencies (a web server, a database, etc.). My first attempt to tackle the problem of the boilerplate was to use a Leiningen template. The problem is that Leiningen templates are hard to maintain, and difficult to retrofit on exisiting projects. As time goes by, dependencies get new versions, and I found myself painstakingly and repeatedly updating the template for future use. Then it dawned on me that a library would better fit the bill. And so *system* came to light. It’s now the first dependency I add to any project, allowing me to focus on the application instantly, and stop worrying about setup and infrastructure. 
+A good REPL experience is a prerogative of Lisp languages. [[https://github.com/stuartsierra/reloaded][Reloaded]] components enable this in Clojureland. Since they come up in almost every project, first steps are generally devoted to setup and infrastructure. My first attempt to tackle the boilerplate was a Leiningen [[https://github.com/danielsz/back-end-template][template]]. The problem is that Leiningen templates are hard to maintain, and difficult to retrofit on existing projects. I was finding myself repeatedly updating the template for future use. Then it dawned on me that a library would better fit the bill. And so *system* came to light. It’s now the first dependency I add to any project, allowing me to focus from the get-go on the substance of my application.
 ** Is it good?
 [[https://news.ycombinator.com/item?id=3067434][Yes.]]
 ** Installation
@@ -94,10 +94,10 @@ Or, if you want to keep a handler on your system in production:
 ** The Reloaded pattern
 Here are a couple of links that are sure to shed more light on the motivations of the reloaded workflow.
 
-The canonical reference is this: 
+The canonical reference: 
 [[http://thinkrelevance.com/blog/2013/06/04/clojure-workflow-reloaded][My Clojure Workflow, Reloaded]]
 
-And here are more references all touching on the topic.  
+And more references touching on the topic.  
 - [[http://www.infoq.com/presentations/Clojure-Large-scale-patterns-techniques][Clojure in the Large]]
 - [[http://martintrojer.github.io/clojure/2013/09/07/retrofitting-the-reloaded-pattern-into-clojure-projects/][Retrofitting the Reloaded pattern into Clojure projects]]
 - [[http://software-ninja-ninja.blogspot.co.il/2014/04/5-faces-of-dependency-injection-in.html][5 faces of dependency injection in Clojure]]
