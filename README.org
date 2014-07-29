@@ -106,4 +106,4 @@ And here are more references all touching on the topic.
 ** Contributing
 Please fork and issue a pull request to add more components. Please don't forget to include tests. You can refer to the existing ones to get started.
 ** Credits
-I wish to thank [[https://github.com/stuartsierra][Stuart Sierra]] for his guidance. Special thanks to [[https://github.com/weavejester][James Reevese]] for the ~reloaded.repl~ library and general inspiration. Thanks to [[https://github.com/ptaoussanis][Peter Taoussanis]], the friendly OSS contributor, who helped to ‘componentize’ Sente, an amazing library on its own right.
+I wish to thank [[https://github.com/stuartsierra][Stuart Sierra]] for his guidance. Special thanks to [[https://github.com/weavejester][James Reeves]] for the [[https://github.com/weavejester/reloaded.repl][reloaded.rep]]l library and general inspiration. Thanks to [[https://github.com/ptaoussanis][Peter Taoussanis]], the friendly OSS contributor, who helped to ‘componentize’ [[https://github.com/ptaoussanis/sente][sente]], an amazing library on its own right.
