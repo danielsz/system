@@ -91,7 +91,7 @@ Or, if you want to keep a handler on your system in production:
   (reloaded.repl/set-init! prod-system)
   (go))
 #+END_SRC
-** Background info
+** The Reloaded pattern
 Here are a couple of links that are sure to shed more light on the motivations of the reloaded workflow.
 
 The canonical reference is this: 
