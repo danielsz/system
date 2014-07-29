@@ -105,3 +105,5 @@ And here are more references all touching on the topic.
 
 ** Contributing
 Please fork and issue a pull request to add more components. Please don't forget to include tests. You can refer to the existing ones to get started.
+** Credits
+I wish to thank Stuart Sierra for his guidance. Special thanks to James Reeves for the ~reloaded.repl~ library and general inspiration. Thanks to Peter Taoussanis, the friendly OSS contributor, who helped to ‘componentize’ Sente, an amazing library on its own right.
