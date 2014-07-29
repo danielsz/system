@@ -98,10 +98,10 @@ The canonical reference is this:
 [[http://thinkrelevance.com/blog/2013/06/04/clojure-workflow-reloaded][My Clojure Workflow, Reloaded]]
 
 And here are more references all touching on the topic.  
-[[http://www.infoq.com/presentations/Clojure-Large-scale-patterns-techniques][- Clojure in the Large]]
-[[http://martintrojer.github.io/clojure/2013/09/07/retrofitting-the-reloaded-pattern-into-clojure-projects/][- Retrofitting the Reloaded pattern into Clojure projects]]
-[[http://software-ninja-ninja.blogspot.co.il/2014/04/5-faces-of-dependency-injection-in.html][- 5 faces of dependency injection in Clojure]]
-[[https://github.com/weavejester/reloaded.repl][- REPL functions to support the reloaded workflow]]
+- [[http://www.infoq.com/presentations/Clojure-Large-scale-patterns-techniques][Clojure in the Large]]
+-[[http://martintrojer.github.io/clojure/2013/09/07/retrofitting-the-reloaded-pattern-into-clojure-projects/][ Retrofitting the Reloaded pattern into Clojure projects]]
+- [[http://software-ninja-ninja.blogspot.co.il/2014/04/5-faces-of-dependency-injection-in.html][5 faces of dependency injection in Clojure]]
+- [[https://github.com/weavejester/reloaded.repl][REPL functions to support the reloaded workflow]]
 
 ** Contributing
 Please fork and issue a pull request to add more components. Please don't forget to include tests. You can refer to the existing ones to get started.
