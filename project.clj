@@ -10,6 +10,8 @@
                                   [ring "1.3.0"]
                                   [com.datomic/datomic-free "0.9.4815.12"]
                                   [com.novemberain/monger "2.0.0"]
+                                  [org.clojure/java.jdbc "0.3.5"]
+                                  [com.h2database/h2 "1.4.180"]
                                   [com.novemberain/langohr "2.11.0"]
                                   [com.taoensso/sente "0.15.1"]
                                   [http-kit "2.1.18"]]}}
