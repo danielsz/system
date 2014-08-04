@@ -5,6 +5,7 @@ System owes to [[https://github.com/stuartsierra/component][component]] both in 
 - [[https://github.com/mmcgrana/ring][Jetty]] (HTTP server)
 - [[http://http-kit.org/][HTTP kit]] (Async HTTP server)
 - [[http://www.datomic.com/][Datomic]] (Immutable database)
+- [[http://www.h2database.com/][H2]] (H2 relational database)
 - [[http://clojuremongodb.info/][Monger]] (MongoDB client)
 - [[https://github.com/ptaoussanis/sente][Sente]] (Websockets/Ajax communications library)
 - [[https://github.com/clojure/tools.nrepl][nREPL]] (Clojure network REPL )
