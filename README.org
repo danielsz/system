@@ -1,6 +1,6 @@
-* System
+* system
 ** What is it?
-System owes to [[https://github.com/stuartsierra/component][component]] both in spirit and in name. The component library helps implementing the reloaded pattern as championed by Stuart Sierra. System is built on top of it, offering a set of readymade components. This idea is to expand the set over time with contributions from the community. It currently includes: 
+*system* owes to [[https://github.com/stuartsierra/component][component]] both in spirit and in name. The component library helps implementing the reloaded pattern as championed by Stuart Sierra. *system* is built on top of it, offering a set of readymade components. This idea is to expand the set over time with contributions from the community. It currently includes: 
 
 - [[https://github.com/mmcgrana/ring][Jetty]] (HTTP server)
 - [[http://http-kit.org/][HTTP kit]] (Async HTTP server)
