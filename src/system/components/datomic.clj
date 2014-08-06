@@ -7,10 +7,7 @@
   (start [component]
     (let [db (d/create-database uri)
           conn (d/connect uri)]
-      (assoc component :db (d/db conn))
-      ;(d/transact conn schema)
-      ;(d/transact conn (read-string (slurp "seed-data.edn")))
-      ))
+      (assoc component :db (d/db conn))))
   (stop [component]
     (assoc component :db nil)))
 
