@@ -53,7 +53,27 @@ First, assemble your system(s) in a namespace of your choosing. Here we define t
 
 #+END_SRC
 
-*Note:* Component allows you to define dependency relationships within systems. Be sure to consult component’s API to see the range of options.
+There is also a convenience macro ~defsystem~ that allows you to write the above more succinctly:
+
+#+BEGIN_SRC clojure
+(ns my-app.systems
+  (:require 
+   [system.core :refer [defsystem]]
+   (system.components 
+    [jetty :refer [new-web-server]]
+    [repl-server :refer [new-repl-server]]
+    [datomic :refer [new-datomic-db]]
+    [mongo :refer [new-mongo-db]])
+   [my-app.webapp :refer [handler]]
+   [environ.core :refer [env]]))
+
+(defsystem dev-system 
+  {:datomic-db (new-datomic-db (env :db-url))
+   :mongo-db (new-mongo-db)
+   :web (new-web-server (env :http-port) handler)})
+
+#+END_SRC
+*Note:* Component allows you to define dependency relationships within systems. Don’t use the above macro for those cases. Be sure to consult component’s API to see the range of options available to you.
 
 Then, in user.clj:
 #+BEGIN_SRC clojure
