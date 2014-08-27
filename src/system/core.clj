@@ -4,5 +4,5 @@
 
 (defmacro defsystem
   "Convenience macro to build a system"
-  [var system-map]
-  `(def ~var (apply component/system-map ~@system-map)))
+  [fn system-map]
+  `(defn ~fn [] (apply component/system-map ~@system-map)))

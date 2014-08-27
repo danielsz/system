@@ -68,9 +68,9 @@ There is also a convenience macro ~defsystem~ that allows you to write the above
    [environ.core :refer [env]]))
 
 (defsystem dev-system 
-  {:datomic-db (new-datomic-db (env :db-url))
+  [:datomic-db (new-datomic-db (env :db-url))
    :mongo-db (new-mongo-db)
-   :web (new-web-server (env :http-port) handler)})
+   :web (new-web-server (env :http-port) handler)])
 
 #+END_SRC
 *Note:* Component allows you to define dependency relationships within systems. Don’t use the above macro for those cases. Be sure to consult component’s API to see the range of options available to you.
