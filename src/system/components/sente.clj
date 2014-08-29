@@ -6,7 +6,7 @@
   component/Lifecycle
   (start [component]
     (let [{:keys [ch-recv send-fn ajax-post-fn ajax-get-or-ws-handshake-fn connected-uids]}
-      (sente/make-channel-socket! {})]
+          (sente/make-channel-socket! {})]
       (assoc component 
         :ring-ajax-post ajax-post-fn 
         :ring-ajax-get-or-ws-handshake ajax-get-or-ws-handshake-fn
