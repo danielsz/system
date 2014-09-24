@@ -5,15 +5,15 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [reloaded.repl "0.1.0"]
-                 [com.stuartsierra/component "0.2.1"]]
-  :profiles {:dev {:dependencies [[org.clojure/tools.nrepl "0.2.3"]
-                                  [ring "1.3.0"]
+                 [com.stuartsierra/component "0.2.2"]]
+  :profiles {:dev {:dependencies [[org.clojure/tools.nrepl "0.2.6"]
+                                  [ring "1.3.1"]
                                   [com.datomic/datomic-free "0.9.4815.12"]
                                   [com.novemberain/monger "2.0.0"]
                                   [org.clojure/java.jdbc "0.3.5"]
-                                  [com.h2database/h2 "1.4.180"]
+                                  [com.h2database/h2 "1.4.181"]
                                   [com.novemberain/langohr "2.11.0"]
-                                  [com.taoensso/sente "0.15.1"]
-                                  [http-kit "2.1.18"]]}}
+                                  [com.taoensso/sente "1.0.0"]
+                                  [http-kit "2.1.19"]]}}
   :scm {:name "git"
         :url "https://github.com/danielsz/system"})
