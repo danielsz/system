@@ -2,7 +2,8 @@
   (:require [com.stuartsierra.component :as component]
             [taoensso.sente :as sente]))
 
-(defrecord ChannelSockets [ring-ajax-post ring-ajax-get-or-ws-handshake ch-chsk chsk-send! connected-uids chsk-router handler]
+
+(defrecord ChannelSockets [ring-ajax-post ring-ajax-get-or-ws-handshake ch-chsk chsk-send! connected-uids router handler]
   component/Lifecycle
   (start [component]
     (let [{:keys [ch-recv send-fn ajax-post-fn ajax-get-or-ws-handshake-fn connected-uids]}
@@ -13,10 +14,11 @@
         :ch-chsk ch-recv
         :chsk-send! send-fn
         :connected-uids connected-uids
-        :chsk-router (sente/start-chsk-router-loop! handler ch-recv))))
+        :router (atom (sente/start-chsk-router! ch-recv handler)))))
   (stop [component]
-    ((:chsk-router component))
-    component))
+    (if-let [stop-f @router] 
+      (assoc component :router (stop-f))
+      component)))
 
 (defn new-channel-sockets
   [handler]
