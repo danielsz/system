@@ -1,0 +1,12 @@
+* Example project
+
+** What is this?
+This project gives you an overview of how you might want to structure a Clojure app.
+To keep things simple, the example project starts a web server in development, and a web server + remote repl in production. 
+** Instructions
+*** Development
+Start a repl and type (go) in the user namespace.
+*** Production
+#+BEGIN_SRC sh
+lein with-profile prod run
+#+END_SRC
