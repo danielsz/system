@@ -27,6 +27,8 @@ Add the following to the Leiningen dependencies in project.clj.
 [org.danielsz/system "0.1.1-SNAPSHOT"]
 #+END_SRC
 
+** Example project
+An example project is available under the example folder. It is a self-contained project that will help you get started.
 ** Usage
 
 First, assemble your system(s) in a namespace of your choosing. Here we define two systems, development and production. 
