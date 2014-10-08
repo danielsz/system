@@ -9,13 +9,13 @@
                  [compojure "1.2.0"]
                  [hiccup "1.0.5"]
                  [org.danielsz/system "0.1.1"]
-                 [environ "1.0.0"]
-                 [org.clojure/tools.nrepl "0.2.5"]]
+                 [environ "1.0.0"]]
   :plugins [[lein-environ "1.0.0"]]
   :profiles {:dev {:source-paths ["dev"]
                    :env {:http-port 3000}}
              :prod {:env {:http-port 8000
-                          :repl-port 8001}}
+                          :repl-port 8001}
+                    :dependencies [[org.clojure/tools.nrepl "0.2.5"]]}
              :uberjar {:aot :all}}
   :main ^:skip-aot example.core
   :target-path "target/%s")
