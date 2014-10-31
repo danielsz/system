@@ -8,6 +8,7 @@
                  [com.stuartsierra/component "0.2.2"]]
   :profiles {:dev {:dependencies [[org.clojure/tools.nrepl "0.2.6"]
                                   [ring "1.3.1"]
+                                  [im.chit/hara.io.watch "2.1.7"]
                                   [com.datomic/datomic-free "0.9.4815.12"]
                                   [com.novemberain/monger "2.0.0"]
                                   [org.clojure/java.jdbc "0.3.5"]
