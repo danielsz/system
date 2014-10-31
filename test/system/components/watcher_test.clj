@@ -18,5 +18,3 @@
             _  (reset! box (component/start wtch))]
         (spit "test.watcher" "Hello")
         @result)))
-
-(watcher-lifecycle)
