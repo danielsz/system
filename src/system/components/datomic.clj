@@ -2,15 +2,14 @@
   (:require [com.stuartsierra.component :as component]
             [datomic.api :as d]))
 
-(defrecord Datomic [uri db]
+(defrecord Datomic [uri conn]
   component/Lifecycle
   (start [component]
     (let [db (d/create-database uri)
           conn (d/connect uri)]
-      (assoc component :db (d/db conn))))
+      (assoc component :conn conn)))
   (stop [component]
-    (assoc component :db nil)))
+    (assoc component :conn nil)))
 
 (defn new-datomic-db [uri]
   (map->Datomic {:uri uri}))
-
