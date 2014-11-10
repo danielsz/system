@@ -5,7 +5,7 @@
 (defrecord WebServer [port server handler]
   component/Lifecycle
   (start [component]
-    (let [server (run-server handler {:port port :join? false})]
+    (let [server (run-server handler {:port port})]
       (assoc component :server server)))
   (stop [component]
     (when server
