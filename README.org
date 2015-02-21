@@ -128,7 +128,7 @@ A convenience macro, ~defsystem~, allows you to declare systems succinctly:
 
 *** At runtime
 
-At runtime, the *system* var can be used anywhere after requiring it from `reloaded.repl`:
+At runtime, the *system* var can be used anywhere after requiring it from the *reloaded.repl* namespace:
 
 #+BEGIN_SRC clojure
 (ns front-end.webapp.handler
