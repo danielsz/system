@@ -138,6 +138,30 @@ And more references touching on the topic.
 - [[http://software-ninja-ninja.blogspot.co.il/2014/04/5-faces-of-dependency-injection-in.html][5 faces of dependency injection in Clojure]]
 - [[https://github.com/weavejester/reloaded.repl][REPL functions to support the reloaded workflow]]
 
+** Accessing the system in non-components
+If needed, the running `system` can be accessed by importing the `system` var from `reloaded.repl`:
+#+BEGIN_SRC clojure
+(ns front-end.webapp.handler
+ (:require [reloaded.repl :refer [system]]))
+#+END_SRC
+
+When using [[https://github.com/ptaoussanis/sente][Sente]] for example, you must define a number of specific routes (e.g. /chsk) in your ring handler. The problem is that those routes are served by callbacks provided by the [[https://github.com/danielsz/system/blob/master/src/system/components/sente.clj][sente component]]. 
+
+One option would to make the ring handlers themselves a component which depends on the sente component. Another is to directly access the system in your ring handler:
+
+#+BEGIN_SRC clojure
+(ns front-end.webapp.handler
+ (:require [reloaded.repl :refer [system]]))
+ 
+(defroutes routes
+  (GET "/" [] (html/index))
+  (GET  "/chsk" req ((:ring-ajax-get-or-ws-handshake (:sente system)) req))
+  (POST "/chsk" req ((:ring-ajax-post (:sente system)) req))
+  (route/not-found (html/404)))
+#+END_SRC
+
+As ever, it is a trade off - "golden hammer - everything must be a component" or global vars.
+
 ** Contributing
 Please fork and issue a pull request to add more components. Please don't forget to include tests. You can refer to the existing ones to get started.
 ** Credits
