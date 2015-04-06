@@ -1,0 +1,29 @@
+* Example project
+
+** What is this?
+This project gives you an overview of how you might want to structure a Clojure web app with the [[https://github.com/danielsz/system/][system]] library.
+The example project starts a web server in development mode, and a web server + remote repl in production. 
+The build tool used in this project is [[http://boot-clj.com/][Boot]].
+** Instructions
+*** Development
+ Start a repl: 
+#+BEGIN_SRC bash
+$ boot repl
+#+END_SRC
+In the boot.user namespace, type: 
+#+BEGIN_SRC clojure 
+boot.user=> (go)
+#+END_SRC
+Your local web app can be found on [[http://localhost:300][localhost]] on port 3000.
+*** Production
+Package an uberjar:
+#+BEGIN_SRC sh
+$ boot build
+#+END_SRC
+
+You are ready to launch:
+#+BEGIN_SRC sh
+$ java -jar target/myproject-1.0.0.jar
+#+END_SRC
+
+Your web app will be found on port 8000, and on port 8001 you will be able to connect to its repl for remote debugging.
