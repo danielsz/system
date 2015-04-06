@@ -24,7 +24,7 @@ Add the following to the Leiningen dependencies in project.clj.
 [[http://clojars.org/org.danielsz/system/latest-version.svg]]
 
 ** Example project
-An example project is available under the examples folder. It is a self-contained project that will help you get started. You can select the example project with a [[http://leiningen.org/][Leinigen]] toolchain or a [[http://boot-clj.com/][Boot]] toolchain.
+An example project is available under the examples folder. It is a self-contained project that will help you get started. Both the [[http://leiningen.org/][Leinigen]] and [[http://boot-clj.com/][Boot]] toolchain are covered.
 ** Usage
 
 First, assemble your system(s) in a namespace of your choosing. Here we define two systems, development and production. 
