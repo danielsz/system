@@ -1,0 +1,102 @@
+/*
+Copyright (c) 2008, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.net/yui/license.txt
+version: 2.6.0
+*/
+html{color:#000;background:#FFF;}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}table{border-collapse:collapse;border-spacing:0;}fieldset,img{border:0;}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}li{list-style:none;}caption,th{text-align:left;}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}q:before,q:after{content:'';}abbr,acronym{border:0;font-variant:normal;}sup{vertical-align:text-top;}sub{vertical-align:text-bottom;}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;}input,textarea,select{*font-size:100%;}legend{color:#000;}del,ins{text-decoration:none;}
+
+body {
+    font-family: sans-serif;
+    background: #a00;
+    padding: 1em;
+}
+
+#exception {
+    background: #f2f2f2;
+    color: #333;
+    padding: 1em;
+}
+
+h1 {
+    color: #800;
+    font-size: 32pt;
+    text-align: center;
+    margin-bottom: 0.3em;
+}
+
+.message {
+    font-size: 16pt;
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+#causes h2 {
+    font-size: 22pt;
+    text-align: center;
+    margin-bottom: 0.3em;
+}
+
+#causes h2 .class {
+    color: #800;
+}
+
+#causes .message {
+    font-size: 14pt;
+}
+
+.trace {
+    width: 90%;
+    margin: auto;
+}
+
+.trace table {
+    width: 100%;
+    font-size: 12pt;
+    background: #dadada;
+    border: 0.8em solid #dadada;
+    margin-bottom: 1.5em;
+}
+
+.trace table tr.clojure {
+    color: #222;
+}
+
+.trace table tr.java {
+    color: #6a6a6a;
+}
+
+.trace td {
+    padding-top: 0.4em;
+    padding-bottom: 0.4em;
+}
+
+.trace td.method {
+    padding-left: 1em;
+    padding-right: 0.2em;
+    text-aligh: left;
+}
+
+.trace td.source {
+    padding-left: 0.2em;
+    text-align: right;
+}
+
+.trace .views {
+    width: 100%;
+    background: #bcbcbc;
+    padding: 0.5em 0;
+}
+
+.views .label, .views ul, .views li {
+    display: inline-block;
+}
+
+.trace .views .label {
+    padding: 0 1em;
+}
+
+.trace .views li {
+    padding: 0 2em;
+    cursor: pointer;
+}
