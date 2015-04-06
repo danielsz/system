@@ -1,0 +1,3 @@
+* Examples
+
+You will find two examples. One using Leiningen, the other one using Boot. Enjoy!

@@ -5,11 +5,18 @@ This project gives you an overview of how you might want to structure a Clojure 
 The example project starts a web server in development mode, and a web server + remote repl in production. 
 ** Instructions
 *** Development
-Start a repl and type (go) in the user namespace. 
-Your local web app can be found on [[http://localhost:300][localhost]] on port 3000.
+Start a repl:
+#+BEGIN_SRC bash
+$ lein repl
+#+END_SRC
+
+In the user namespace, type: 
 #+BEGIN_SRC clojure 
 user=> (go)
 #+END_SRC
+
+Your local web app can be found on [[http://localhost:300][localhost]] on port 3000.
+
 *** Production
 #+BEGIN_SRC sh
 lein with-profile prod run
