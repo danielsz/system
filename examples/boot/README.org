@@ -8,7 +8,7 @@ The build tool used in this project is [[http://boot-clj.com/][Boot]].
 *** Development
  Start a repl: 
 #+BEGIN_SRC bash
-$ boot repl
+$ boot environ -e http-port=3000 repl
 #+END_SRC
 In the boot.user namespace, type: 
 #+BEGIN_SRC clojure 
@@ -23,7 +23,7 @@ $ boot build
 
 You are ready to launch:
 #+BEGIN_SRC sh
-$ java -jar target/myproject-1.0.0.jar
+$ java -jar -Dhttp.port=8000 -Drepl.port=8001 target/myproject-1.0.0.jar
 #+END_SRC
 
 Your web app will be found on port 8000, and on port 8001 you will be able to connect to its repl for remote debugging.
