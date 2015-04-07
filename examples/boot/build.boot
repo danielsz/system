@@ -5,11 +5,13 @@
                  [ring "1.3.2"]
                  [environ "1.0.0"]
                  [compojure "1.3.3"]
+                 [danielsz/boot-environ "0.0.1"]
                  [org.clojure/tools.nrepl "0.2.10"]])
 
 (require
  '[reloaded.repl :refer [system init start stop go reset]]
- '[example.systems :refer [dev-system]])
+ '[example.systems :refer [dev-system]]
+ '[danielsz.boot-environ :refer [environ]])
 
 (reloaded.repl/set-init! dev-system)
 

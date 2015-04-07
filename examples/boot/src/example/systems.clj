@@ -7,8 +7,8 @@
             [example.handler :refer [app]]))
 
 (defsystem dev-system
-  [:web (new-web-server 3000 app)])
+  [:web (new-web-server (env :http-port) app)])
 
 (defsystem prod-system
-  [:web (new-web-server 8000 app)
-   :repl-server (new-repl-server 8001)])
+  [:web (new-web-server (env :http-port) app)
+   :repl-server (new-repl-server (env :repl-port))])
