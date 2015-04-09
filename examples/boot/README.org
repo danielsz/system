@@ -36,7 +36,7 @@ Your local web app can be found on [[http://localhost:300][localhost]] on port 3
 boot.user=> (reset)
 #+END_SRC
 
-_*Note*_: *build.boot* requires the system var in its namespace declarations. 
+_Note_: Please make sure *build.boot* requires the system var in its namespace declarations. 
 
 *** Production
 Package an uberjar:
