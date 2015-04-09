@@ -1,4 +1,4 @@
-(defproject org.danielsz/system "0.1.5-SNAPSHOT"
+(defproject org.danielsz/system "0.1.6"
   :description "Reloaded components à la carte"
   :url "https://github.com/danielsz/system"
   :license {:name "Eclipse Public License"
@@ -15,7 +15,7 @@
                                   [org.clojure/java.jdbc "0.3.5"]
                                   [com.h2database/h2 "1.4.181"]
                                   [com.novemberain/langohr "2.11.0"]
-                                  [com.taoensso/sente "1.4.0-beta1"]
+                                  [com.taoensso/sente "1.4.1"]
                                   [org.danielsz/etsy "0.1.2" ]
                                   [http-kit "2.1.19"]
                                   [aleph "0.4.0-alpha9"]]}}

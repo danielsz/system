@@ -1,4 +1,6 @@
 * Changes 
+** 0.1.6
+- Latest Sente version. This is a breaking change for Sente.
 ** 0.1.5
 - Added example project for the Boot build tool.
 - Added boot task to reload namespaces on file changes. 
