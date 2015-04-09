@@ -1,1 +1,1 @@
-{:repl-port 8002, :http-port 3000}
+{:http-port 3000}

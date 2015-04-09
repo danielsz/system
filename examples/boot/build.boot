@@ -1,6 +1,6 @@
 (set-env!
  :resource-paths #{"src"}
- :dependencies '[[org.danielsz/system "0.1.4"]
+ :dependencies '[[org.danielsz/system "0.1.5-SNAPSHOT"]
                  [ring/ring-defaults "0.1.4"]
                  [ring "1.3.2"]
                  [environ "1.0.0"]
@@ -9,11 +9,19 @@
                  [org.clojure/tools.nrepl "0.2.10"]])
 
 (require
- '[reloaded.repl :refer [system init start stop go reset]]
+ '[reloaded.repl :as repl :refer [start stop go reset]]
  '[example.systems :refer [dev-system]]
- '[danielsz.boot-environ :refer [environ]])
+ '[danielsz.boot-environ :refer [environ]]
+ '[system.boot :refer [system]])
 
-(reloaded.repl/set-init! dev-system)
+(deftask dev
+  "Run a restartable system in the Repl"
+  []
+  (comp
+   (environ :env {:http-port 3000})
+   (watch :verbose true)
+   (system :sys #'dev-system)
+   (repl :server true)))
 
 (deftask build
   "Builds an uberjar of this project that can be run with java -jar"

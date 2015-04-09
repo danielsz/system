@@ -24,7 +24,7 @@
    [:body 
     
     [:div#main-area.container
-     [:p "This is an example project for systems."]]
+     [:p "This is an example project for system."]]
     
     
     (include-js 

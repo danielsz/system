@@ -3,18 +3,39 @@
 ** What is this?
 This project gives you an overview of how you might want to structure a Clojure web app with the [[https://github.com/danielsz/system/][system]] library.
 The example project starts a web server in development mode, and a web server + remote repl in production. 
-The build tool used in this project is [[http://boot-clj.com/][Boot]].
+The build tool used in this project is [[http://boot-clj.com/][Boot]]. 
 ** Instructions
 *** Development
- Start a repl: 
+
+Run a development pipeline from the command line:
 #+BEGIN_SRC bash
-$ boot environ -e http-port=3000 repl
+$ boot environ -e http-port=3000 watch -v system -s dev-system repl -s
 #+END_SRC
+
+Alternatively, write it in *build.boot* as a function:
+
+#+BEGIN_SRC clojure
+(deftask dev
+  "Run a restartable system in the Repl"
+  []
+  (comp
+   (environ :env {:http-port 3000})
+   (watch :verbose true)
+   (system :sys #'dev-system)
+   (repl :server true)))
+#+END_SRC
+
+You’re all set now. You can connect to your REPL from your favorite editor, and then start your application:
 In the boot.user namespace, type: 
 #+BEGIN_SRC clojure 
 boot.user=> (go)
 #+END_SRC
-Your local web app can be found on [[http://localhost:300][localhost]] on port 3000.
+Your local web app can be found on [[http://localhost:300][localhost]] on port 3000. Now you can edit your source files and make changes. Save and restart your application:
+
+#+BEGIN_SRC clojure 
+boot.user=> (reset)
+#+END_SRC
+
 *** Production
 Package an uberjar:
 #+BEGIN_SRC sh

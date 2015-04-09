@@ -10,13 +10,12 @@
 (def modified-namespaces
   (ns-tracker (into [] dirs)))
 
-(core/deftask system [s sys SYS str "The system to restart in the REPL workflow"]
-  (let [system (resolve (symbol sys))]
-    (core/with-pre-wrap fileset
-      (set-init! system)
-      (util/info (str  "Current system: " system "\n"))
-      (when-let [modified (modified-namespaces)]
-        (doseq [ns-sym modified]
-          (require ns-sym :reload))
-        (util/info (str "Reloading " (pr-str modified) "\n")))
-      fileset)))
+(core/deftask system [s sys SYS code "The system to restart in the REPL workflow"] 
+  (core/with-pre-wrap fileset
+    (set-init! sys)
+    (util/info (str "Current system: " sys "\n"))
+    (when-let [modified (modified-namespaces)]
+      (doseq [ns-sym modified]
+        (require ns-sym :reload))
+      (util/info (str "Reloading " (pr-str modified) "\n")))
+    fileset))
