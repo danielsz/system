@@ -1,2 +1,4 @@
-*** 0.1.5-SNAPSHOT
-***** Added example project for the Boot build tool.
+* Changes 
+** 0.1.5
+- Added example project for the Boot build tool.
+- Added boot task to reload namespaces on file changes. 
