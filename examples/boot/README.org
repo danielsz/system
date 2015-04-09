@@ -30,7 +30,7 @@ In the boot.user namespace, type:
 #+BEGIN_SRC clojure 
 boot.user=> (go)
 #+END_SRC
-Your local web app can be found on [[http://localhost:300][localhost]] on port 3000. Now you can edit your source files and make changes. Save and restart your application:
+Your local web app can be found on [[http://localhost:300][localhost]] on port 3000. Now you can edit your source files and make changes. Save and restart your application whenever you want a clean slate:
 
 #+BEGIN_SRC clojure 
 boot.user=> (reset)
