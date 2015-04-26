@@ -7,5 +7,6 @@
 (defn -main
   "Start a production system."
   [& args]
-  (reloaded.repl/set-init! prod-system)
-  (go))
+  (let [system (or (first args) #'prod-system)]
+    (reloaded.repl/set-init! system)
+    (go)))

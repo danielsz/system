@@ -23,6 +23,14 @@
    (system :sys #'dev-system)
    (repl :server true)))
 
+(deftask dev-run
+  "Run a dev system from the command line"
+  []
+  (comp
+   (environ :env {:http-port 3000})
+   (run :main-namespace "example.core" :arguments [#'dev-system])
+   (wait)))
+
 (deftask build
   "Builds an uberjar of this project that can be run with java -jar"
   []
