@@ -1,4 +1,6 @@
 * Changes 
+** Current
+- New boot task to run a dev system on the command line (versus REPL).
 ** 0.1.6
 - Latest Sente version. This is a breaking change for Sente.
 ** 0.1.5
