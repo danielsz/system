@@ -12,7 +12,7 @@
  '[reloaded.repl :as repl :refer [start stop go reset]]
  '[example.systems :refer [dev-system]]
  '[danielsz.boot-environ :refer [environ]]
- '[system.boot :refer [system]])
+ '[system.boot :refer [system run]])
 
 (deftask dev
   "Run a restartable system in the Repl"
