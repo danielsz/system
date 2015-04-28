@@ -1,6 +1,7 @@
 * Changes 
 ** O.1.8-SNAPSHOT
 - switch to enable hot-reloadable system
+- file-based granularity to only restart the system when user-specified files change.
 ** 0.1.7
 - Example of a task to run a dev system on the command line (versus REPL).
 - ~run~ boot task is not built-in. So it now ships with ~system~.
