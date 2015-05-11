@@ -1,6 +1,6 @@
 (set-env!
  :resource-paths #{"src"}
- :dependencies '[[org.danielsz/system "0.1.7"]
+ :dependencies '[[org.danielsz/system "0.1.8-SNAPSHOT"]
                  [ring/ring-defaults "0.1.4"]
                  [ring "1.3.2"]
                  [environ "1.0.0"]
@@ -20,7 +20,7 @@
   (comp
    (environ :env {:http-port 3000})
    (watch :verbose true)
-   (system :sys #'dev-system)
+   (system :sys #'dev-system :hot-reload true :files ["handler.clj" "index.clj"])
    (repl :server true)))
 
 (deftask dev-run
