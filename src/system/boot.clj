@@ -5,12 +5,6 @@
             [boot.core       :as core]
             [boot.util       :as util]))
 
-(def dirs (core/get-env :directories))
-
-(def fs-prev-state (atom nil))
-
-(def modified-namespaces
-  (ns-tracker (into [] dirs)))
 
 (defn- modified-files? [before-fileset after-fileset files]
   (->> (core/fileset-diff @before-fileset after-fileset)
@@ -21,18 +15,21 @@
 (core/deftask system [s sys SYS code "The system to restart in the boot pipeline"
                       r hot-reload    bool  "Enable hot-reloading."
                       f files    FILES       [str] "A vector of filenames applying to the hot-reloading behavior."]
-  (core/with-pre-wrap fileset
-    (set-init! sys)
-    (util/info (str "Current system: " sys "\n"))
-    (when-let [modified (modified-namespaces)]
-      (doseq [ns-sym modified]
-        (require ns-sym :reload))
-      (util/info (str "Reloading namespaces " (pr-str modified) "\n"))
-      (when hot-reload (binding [*ns* *ns*]
-                         (if files
-                           (when (modified-files? fs-prev-state fileset files) (reset))
-                           (reset)))))
-    (reset! fs-prev-state fileset)))
+  (let [fs-prev-state (atom nil)
+        dirs (core/get-env :directories)
+        modified-namespaces (ns-tracker (into [] dirs))]
+    (core/with-pre-wrap fileset
+      (set-init! sys)
+      (util/info (str "Current system: " sys "\n"))
+      (when-let [modified (modified-namespaces)]
+        (doseq [ns-sym modified]
+          (require ns-sym :reload))
+        (util/info (str "Reloading namespaces " (pr-str modified) "\n"))
+        (when hot-reload (binding [*ns* *ns*]
+                           (if files
+                             (when (modified-files? fs-prev-state fileset files) (reset))
+                             (reset)))))
+      (reset! fs-prev-state fileset))))
 
 (core/deftask run
   "Run the -main function in some namespace with arguments."
