@@ -1,7 +1,7 @@
 (ns system.boot
   {:boot/export-tasks true}
   (:require [ns-tracker.core :refer :all]
-            [reloaded.repl :refer [set-init! reset]]
+            [reloaded.repl :refer [set-init! reset go]]
             [boot.core       :as core]
             [boot.util       :as util]))
 
@@ -14,13 +14,18 @@
 
 (core/deftask system [s sys SYS code "The system to restart in the boot pipeline"
                       r hot-reload    bool  "Enable hot-reloading."
+                      a auto-start    bool  "Auto-start the system"
                       f files    FILES       [str] "A vector of filenames applying to the hot-reloading behavior."]
   (let [fs-prev-state (atom nil)
         dirs (core/get-env :directories)
-        modified-namespaces (ns-tracker (into [] dirs))]
+        modified-namespaces (ns-tracker (into [] dirs))
+        auto-start (delay
+                     (when auto-start
+                       (util/info (str "Autostarting the system: " (go) "\n"))))]
     (core/with-pre-wrap fileset
       (set-init! sys)
       (util/info (str "Current system: " sys "\n"))
+      @auto-start
       (when-let [modified (modified-namespaces)]
         (doseq [ns-sym modified]
           (require ns-sym :reload))
