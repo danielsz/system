@@ -20,7 +20,7 @@
   (comp
    (environ :env {:http-port 3000})
    (watch :verbose true)
-   (system :sys #'dev-system :hot-reload true :files ["handler.clj" "index.clj"])
+   (system :sys #'dev-system :hot-reload true :auto-start true :files ["handler.clj" "index.clj"])
    (repl :server true)))
 
 (deftask dev-run
