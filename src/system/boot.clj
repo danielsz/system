@@ -12,10 +12,10 @@
        (core/by-name files)
        not-empty))
 
-(core/deftask system [s sys SYS code "The system to restart in the boot pipeline"
-                      r hot-reload    bool  "Enable hot-reloading."
-                      a auto-start    bool  "Auto-start the system"
-                      f files    FILES       [str] "A vector of filenames applying to the hot-reloading behavior."]
+(core/deftask system [s sys SYS code "The system var."
+                      a auto-start bool "Auto-starts the system."
+                      r hot-reload bool "Enables hot-reloading."
+                      f files FILES [str] "A vector of filenames. Restricts hot-reloading to that set."]
   (let [fs-prev-state (atom nil)
         dirs (core/get-env :directories)
         modified-namespaces (ns-tracker (into [] dirs))

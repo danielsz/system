@@ -24,7 +24,7 @@ Add the following to the Leiningen dependencies in project.clj.
 [[http://clojars.org/org.danielsz/system/latest-version.svg]]
 
 ** Example project
-An example project is available under the [[https://github.com/danielsz/system/tree/master/examples][examples]] folder. It is a self-contained project that will help you get started. Both the [[https://github.com/danielsz/system/tree/master/examples/leiningen][Leinigen]] and [[https://github.com/danielsz/system/tree/master/examples/boot][Boot]] toolchain are covered. There is also a [[https://github.com/danielsz/holygrail][tutorial]] in a separate repository that demonstrates the advanced workflows made possible by combining system with boot in particular.
+An example project is available under the [[https://github.com/danielsz/system/tree/master/examples][examples]] folder. It is a self-contained project that will help you get started. Both the [[https://github.com/danielsz/system/tree/master/examples/leiningen][Leinigen]] and [[https://github.com/danielsz/system/tree/master/examples/boot][Boot]] toolchain are covered. 
 ** Usage
 
 First, assemble your system(s) in a namespace of your choosing. Here we define two systems, development and production. 
@@ -137,6 +137,27 @@ At runtime, the *system* var can be used anywhere after requiring it from the *r
  
 For a discussion around a specifice example (i.e. Sente and http-kit), please look [[https://github.com/danielsz/system/issues/14][here]].
 
+** Boot-system
+~System~ and ~Boot~ are a match made in heaven, allowing you to craft yourself very comfortable workflows.
+The available options can be listed like so: 
+#+BEGIN_SRC shell
+$ boot system -h
+#+END_SRC
+
+Which outputs, for example: 
+
+#+BEGIN_SRC shell
+  -h, --help         Print this help info.
+  -s, --sys SYS      Set the system var to SYS.
+  -a, --auto-start   Auto-starts the system.
+  -r, --hot-reload   Enables hot-reloading.
+  -f, --files FILES  Conj FILES onto a vector of filenames. Restricts hot-reloading to that set.
+#+END_SRC
+
+A [[https://github.com/danielsz/holygrail][tutorial]] is available in a separate repository, demonstrating the advanced workflows made possible by combining ~system~ with ~Boot~. 
+
+#+END_CENTER
+You can tailor  some very comfortable workflows when using ~Boot~ together with ~system~.
 ** The Reloaded pattern
 Here are a couple of links that are sure to shed more light on the motivations of the reloaded workflow.
 
