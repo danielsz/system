@@ -76,8 +76,8 @@ In production, in core.clj:
   (:require [my-app.systems :refer [prod-system]]))
 
 (defn -main 
-  []
   "Start the application"
+  []
   (alter-var-root #'prod-system component/start)
 #+END_SRC 
 
@@ -90,8 +90,8 @@ Or, if you want to keep a handler on your system in production:
             [my-app.systems :refer [prod-system]]))
 
 (defn -main 
-  []
   "Start the application"
+  []
   (reloaded.repl/set-init! prod-system)
   (go))
 #+END_SRC
