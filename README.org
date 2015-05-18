@@ -19,10 +19,11 @@ A good REPL experience is a prerogative of Lisp languages. [[https://github.com/
 ** Is it good?
 [[https://news.ycombinator.com/item?id=3067434][Yes.]]
 ** Installation
-Add the following to the Leiningen dependencies in project.clj. 
+Add the following to your project’s dependencies.
 
 [[http://clojars.org/org.danielsz/system/latest-version.svg]]
 
+*ProTip:* Snapshot versions may be available.
 ** Example project
 An example project is available under the [[https://github.com/danielsz/system/tree/master/examples][examples]] folder. It is a self-contained project that will help you get started. Both the [[https://github.com/danielsz/system/tree/master/examples/leiningen][Leinigen]] and [[https://github.com/danielsz/system/tree/master/examples/boot][Boot]] toolchain are covered. 
 ** Usage
