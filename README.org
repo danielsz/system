@@ -24,7 +24,7 @@ Add the following to the Leiningen dependencies in project.clj.
 [[http://clojars.org/org.danielsz/system/latest-version.svg]]
 
 ** Example project
-An example project is available under the examples folder. It is a self-contained project that will help you get started. Both the [[http://leiningen.org/][Leinigen]] and [[http://boot-clj.com/][Boot]] toolchain are covered. There is also a [[https://github.com/danielsz/holygrail][tutorial]] in a separate repository that demonstrates the advanced workflows made possible by combining system with boot in particular.
+An example project is available under the [[https://github.com/danielsz/system/tree/master/examples][examples]] folder. It is a self-contained project that will help you get started. Both the [[https://github.com/danielsz/system/tree/master/examples/leiningen][Leinigen]] and [[https://github.com/danielsz/system/tree/master/examples/boot][Boot]] toolchain are covered. There is also a [[https://github.com/danielsz/holygrail][tutorial]] in a separate repository that demonstrates the advanced workflows made possible by combining system with boot in particular.
 ** Usage
 
 First, assemble your system(s) in a namespace of your choosing. Here we define two systems, development and production. 
