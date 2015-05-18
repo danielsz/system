@@ -12,7 +12,7 @@ Run a development pipeline from the command line:
 $ boot environ -e http-port=3000 watch -v system -s dev-system repl -s
 #+END_SRC
 
-Alternatively, write it in *build.boot* as a function:
+Alternatively, write it in ~build.boot~ as a function:
 
 #+BEGIN_SRC clojure
 (deftask dev
@@ -41,7 +41,7 @@ If you want to run your development system from the command line (without openin
 $ boot dev-run
 #+END_SRC
 
-_Note_: Please make sure *build.boot* requires the system var in its namespace declarations. 
+_Note_: Please make sure ~build.boot~ requires the system var in its namespace declarations. 
 
 *** Production
 Package an uberjar:
