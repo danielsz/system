@@ -155,7 +155,7 @@ Which outputs, for example:
   -f, --files FILES  Conj FILES onto a vector of filenames. Restricts hot-reloading to that set.
 #+END_SRC
 
-A [[https://github.com/danielsz/holygrail][tutorial]] is available in a separate repository, demonstrating the advanced workflows made possible by combining ~system~ with ~Boot~. 
+A [[https://github.com/danielsz/holygrail][tutorial]] is available in a separate repository, demonstrating some advanced trickery.
 
 ** The Reloaded pattern
 Here are a couple of links that are sure to shed more light on the motivations of the reloaded workflow.
