@@ -139,8 +139,14 @@ At runtime, the *system* var can be used anywhere after requiring it from the *r
 For a discussion around a specifice example (i.e. Sente and http-kit), please look [[https://github.com/danielsz/system/issues/14][here]].
 
 ** Boot-system
-~System~ and ~Boot~ are a match made in heaven, allowing you to craft yourself very comfortable workflows.
-The available options can be listed like so: 
+~System~ and ~Boot~ are a match made in heaven. Some of the properties that boot-system brings to your workflow are:
+
+- Interactive programming via the REPL.
+- Restartable system. What warrants a system restart is user-configurable. File-based granularity.
+- Manual and automatic mode, ie. either you manipulate the system in the REPL, or you configure it to react to editing changes. Changes that do not affect the system are available immediately via namespace reloading.
+- Hot-reloading in the browser
+
+The system task is invoked like any boot task, and its options are queried like so: 
 #+BEGIN_SRC shell
 $ boot system -h
 #+END_SRC
