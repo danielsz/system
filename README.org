@@ -143,15 +143,15 @@ For a discussion around a specifice example (i.e. Sente and http-kit), please lo
 
 - Manual and automatic mode, ie. either you manipulate the system in the REPL, or you configure it to react to editing changes. 
 - Restartable system. What warrants a system restart is user-configurable. File-based granularity.
-- Changes that do not require a restart are available in the running system via namespace reloading.
+- Changes that do not require a restart are available in the running system instantly (via namespace reloading).
 - Full /Lisp-style/ interactive programming via the REPL and hot-reloading in the browser.
 
-The ~system~ task is invoked like any ~boot~ task, and its options are queried like so: 
+The ~system~ task is invoked like any ~boot~ task. 
 #+BEGIN_SRC shell
 $ boot system -h
 #+END_SRC
 
-Which outputs, for example: 
+Which outputs, for example:
 
 #+BEGIN_SRC shell
   -h, --help         Print this help info.
@@ -161,7 +161,7 @@ Which outputs, for example:
   -f, --files FILES  Conj FILES onto a vector of filenames. Restricts hot-reloading to that set.
 #+END_SRC
 
-A [[https://github.com/danielsz/holygrail][tutorial]] is available in a separate repository, demonstrating some advanced trickery.
+A [[https://github.com/danielsz/holygrail][tutorial]] is available in a separate repository.
 
 ** The Reloaded pattern
 Here are a couple of links that are sure to shed more light on the motivations of the reloaded workflow.
