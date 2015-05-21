@@ -18,7 +18,7 @@
                                   [com.taoensso/sente "1.4.1"]
                                   [org.danielsz/etsy "0.1.2" ]
                                   [http-kit "2.1.19"]
-                                  [org.elasticsearch/elasticsearch "1.4.5"
+                                  [org.elasticsearch/elasticsearch "1.5.2"
                                    :exclusions [org.antlr/antlr-runtime
                                                 org.apache.lucene/lucene-analyzers-common
                                                 org.apache.lucene/lucene-grouping
