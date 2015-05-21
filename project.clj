@@ -18,6 +18,21 @@
                                   [com.taoensso/sente "1.4.1"]
                                   [org.danielsz/etsy "0.1.2" ]
                                   [http-kit "2.1.19"]
+                                  [org.elasticsearch/elasticsearch "1.4.5"
+                                   :exclusions [org.antlr/antlr-runtime
+                                                org.apache.lucene/lucene-analyzers-common
+                                                org.apache.lucene/lucene-grouping
+                                                org.apache.lucene/lucene-highlighter
+                                                org.apache.lucene/lucene-join
+                                                org.apache.lucene/lucene-memory
+                                                org.apache.lucene/lucene-misc
+                                                org.apache.lucene/lucene-queries
+                                                org.apache.lucene/lucene-queryparser
+                                                org.apache.lucene/lucene-sandbox
+                                                org.apache.lucene/lucene-spatial
+                                                org.apache.lucene/lucene-suggest
+                                                org.ow2.asm/asm
+                                                org.ow2.asm/asm-commons]]
                                   [aleph "0.4.0-alpha9"]]}}
   :scm {:name "git"
         :url "https://github.com/danielsz/system"})
