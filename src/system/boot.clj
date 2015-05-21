@@ -30,7 +30,7 @@
         (doseq [ns-sym modified]
           (require ns-sym :reload))
         (util/info (str "Reloading namespaces " (pr-str modified) "\n"))
-        (when hot-reload (binding [*ns* *ns*]
+        (when hot-reload (with-bindings {#'*ns* *ns*} ; because of exception "Can't set!: *ns* from non-binding thread"
                            (if files
                              (when (modified-files? fs-prev-state fileset files) (reset))
                              (reset)))))
