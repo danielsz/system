@@ -5,7 +5,7 @@
                  [ring "1.3.2"]
                  [environ "1.0.0"]
                  [compojure "1.3.3"]
-                 [danielsz/boot-environ "0.0.3"]
+                 [danielsz/boot-environ "0.0.4"]
                  [org.clojure/tools.nrepl "0.2.10"]])
 
 (require
