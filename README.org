@@ -177,7 +177,7 @@ And more references touching on the topic.
 - [[https://github.com/weavejester/reloaded.repl][REPL functions to support the reloaded workflow]]
 
 ** Compatibility
-There is a host of components libraries in the Clojure ecosystem, each with its own take, its own philosophy. Navigating this space can be difficult or overwhelming. Due to the nature of Open Source Software, it is unlikely to see any kind of standardization taking place. Let’s embrace the diversity instead, and emphasize the *compatibility* of components. As long as a non-system component adheres to Stuart Sierra’s Lifecycle protocol, you can import it in your `systems` namespace and refer to it as any other native `system` component. 
+There is a host of components libraries in the Clojure ecosystem, each with its own take, its own philosophy. Navigating this space can be difficult or overwhelming. Due to the nature of Open Source Software, it is unlikely to see any kind of standardization taking place. Let’s embrace the diversity instead, and emphasize the *compatibility* of components. As long as a non-system component adheres to Stuart Sierra’s Lifecycle protocol, you can import it in your ~systems~ namespace and refer to it as any other native ~system~ component. 
 ** Contributing
 Please fork and issue a pull request to add more components. Please don't forget to include tests. You can refer to the existing ones to get started.
 ** Credits
