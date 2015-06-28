@@ -7,6 +7,7 @@
 - [[https://github.com/ztellman/aleph][aleph]] (Async HTTP server)
 - [[http://www.datomic.com/][Datomic]] (Immutable database)
 - [[http://www.h2database.com/][H2]] (H2 relational database)
+- [[http://www.postgresql.org][PostgreSQL]] (SQL Database)
 - [[http://clojuremongodb.info/][Monger]] (MongoDB client)
 - [[https://github.com/ptaoussanis/sente][Sente]] (Websockets/Ajax communications library)
 - [[https://github.com/clojure/tools.nrepl][nREPL]] (Clojure network REPL )
