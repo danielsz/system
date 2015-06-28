@@ -185,12 +185,13 @@ There is a host of components libraries in the Clojure ecosystem, each with its 
 
 Navigating this space can be difficult or overwhelming. Due to the nature of Open Source Software, it is unlikely to see any kind of standardization taking place. Let’s embrace the diversity instead, and emphasize the *compatibility* of components. As long as a component adheres to Stuart Sierra’s Lifecycle protocol, you can import it in your ~systems~ namespace and refer to it as any other native ~system~ component. 
 
+*** Choosing
+
 To help choose if ~system~ is right for you, here are a couple of tips. Take a component for an often used dependency (a web server, for example, or a database), and compare their source code. The ~system~ library puts an emphasis on two properties: 
 
 - minimalism: ~system~ provides a way to instantiate components that fulfill the Licecycle protocol (~start~ and ~stop~). Nothing more, nothing less. 
 - Interactive programming: ~system~ is best used in a Lispy, interactive workflow, hence its deep integration with boot.
 
-*** Choosing
 
 ** Contributing
 Please fork and issue a pull request to add more components. Please don't forget to include tests. You can refer to the existing ones to get started.
