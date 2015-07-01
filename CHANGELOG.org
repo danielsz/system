@@ -1,4 +1,6 @@
 * Changes 
+** 0.1.9-SNAPSHOT
+- ns-tracker latest version
 ** 0.1.8
 - switch to enable hot-reloadable system
 - file-based granularity to only restart the system when user-specified files change.
