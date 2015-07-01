@@ -5,7 +5,7 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [reloaded.repl "0.1.0"]
-                 [ns-tracker "0.2.2"]
+                 [ns-tracker "0.3.0"]
                  [com.stuartsierra/component "0.2.2"]]
   :profiles {:dev {:dependencies [[org.clojure/tools.nrepl "0.2.6"]
                                   [ring "1.3.1"]
