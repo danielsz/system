@@ -5,10 +5,11 @@
   (:import [org.elasticsearch.action.search SearchRequest]))
 
 (deftest test-elasticsearch
-  (let [elasticsearch-db (component/start
+  (let [cluster-name (str "elasticsearch_" (System/getProperty "user.name"))
+        elasticsearch-db (component/start
                            (new-elasticsearch-db
                              [["localhost" 9300]]
-                             {"cluster.name" "elasticsearch"}))]
+                             {"cluster.name" cluster-name}))]
     (try
       (is @(.search (:client elasticsearch-db)
                     (SearchRequest. (make-array String 0))))
