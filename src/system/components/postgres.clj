@@ -5,10 +5,10 @@
 
 (def DEFAULT-DB-SPEC
   {:classname   "org.postgresql.Driver" ; must be in classpath
-   :subprotocol "h2"
-   :subname "~/test"
-   :user     "sa"
-   :password ""
+   :subprotocol "postgresql"
+   :subname ""
+   :user     "test"
+   :password "test"
    :host "127.0.0.1"})
 
 (defn new-postgres-database
