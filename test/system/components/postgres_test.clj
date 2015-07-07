@@ -5,14 +5,19 @@
             [com.stuartsierra.component :as component]))
 
 
-;; Assumes you have a database named "test" setup and
-;; PostgreSQL running. Also, create a user with username "test"
-;; and password "test".
+;; Assumes you have run `script/pg_test_setup.sh'
 
+(def test-db-spec
+  {:classname   "org.postgresql.Driver"
+   :subprotocol "postgresql"
+   :subname "system_test_db"
+   :user    "system_test_user"
+   :password ""
+   :host "127.0.0.1"})
 
 (deftest postgres-test-create-table-and-insert
   (let [db (component/start
-            (p/new-postgres-database p/DEFAULT-DB-SPEC))
+            (p/new-postgres-database test-db-spec))
         msg "It works!"]
     (jdbc/execute! db ["CREATE TEMP TABLE test (coltest varchar(20));"])
     (jdbc/insert! db :test {:coltest msg})
