@@ -2,6 +2,8 @@
 ** 0.1.9-SNAPSHOT
 - EPL License
 - ns-tracker latest version
+- http-kit full options
+- postgres component
 ** 0.1.8
 - switch to enable hot-reloadable system
 - file-based granularity to only restart the system when user-specified files change.
