@@ -1,3 +1,13 @@
 * Examples
 
+** Simple example
+
 Please select your preferred toolchain, [[https://github.com/danielsz/system/tree/master/examples/leiningen][Leiningen]] or [[https://github.com/danielsz/system/tree/master/examples/boot][Boot]]. Enjoy!
+
+** Web service
+
+A full web service with CRUD functionality is presented here. This [[https://github.com/danielsz/system-advanced-example][example]] was created to answer questions regarding how components work together (web handler and database). 
+
+** Holy grail
+
+[[https://github.com/danielsz/holygrail][Demo + screencast]] demonstrating the live, Lispy, REPL-y experience made possible with boot + system.
