@@ -1,0 +1,3 @@
+[submodule "examples/web-service"]
+	path = examples/web-service
+	url = git@github.com:danielsz/system-advanced-example.git
