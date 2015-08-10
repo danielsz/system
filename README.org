@@ -129,16 +129,20 @@ A convenience macro, ~defsystem~, allows you to declare systems succinctly:
 #+END_SRC
 *Note:* Component allows you to define dependency relationships within systems. Please don’t use said macro for those cases. Be sure to consult component’s API to see the range of options available to you.
 
-*** At runtime
+*** At runtime (using your components)
 
 At runtime, the *system* var can be used anywhere after requiring it from the *reloaded.repl* namespace:
 
 #+BEGIN_SRC clojure
 (ns front-end.webapp.handler
  (:require [reloaded.repl :refer [system]]))
-#+END_SRC
  
-For a discussion around a specifice example (i.e. Sente and http-kit), please look [[https://github.com/danielsz/system/issues/14][here]].
+(code-using system ...)
+#+END_SRC
+
+Note this pattern of directly accessing the global system var is in contrast with the pattern of dependency injection integral to Stuart Sierra's vision of Component. This design decision embodies a tradeoff between flexibility and scoping of component access, without which System's goal of providing readymade, reusable components would be difficult or impossible.
+ 
+For a discussion around a specific example (i.e. Sente and http-kit), please look [[https://github.com/danielsz/system/issues/14][here]].
 
 ** Boot-system
 ~System~ and ~Boot~ are a match made in heaven. Some of the properties that boot-system brings to your workflow are:
