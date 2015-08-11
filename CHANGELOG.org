@@ -4,6 +4,8 @@
 - ns-tracker latest version
 - http-kit full options
 - postgres component
+- latest component (0.2.3)
+- Web service example
 ** 0.1.8
 - switch to enable hot-reloadable system
 - file-based granularity to only restart the system when user-specified files change.

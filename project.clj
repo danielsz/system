@@ -6,7 +6,7 @@
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [reloaded.repl "0.1.0"]
                  [ns-tracker "0.3.0"]
-                 [com.stuartsierra/component "0.2.2"]]
+                 [com.stuartsierra/component "0.2.3"]]
   :profiles {:dev {:dependencies [[org.clojure/tools.nrepl "0.2.6"]
                                   [ring "1.3.1"]
                                   [im.chit/hara.io.watch "2.1.7"]
