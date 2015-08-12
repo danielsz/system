@@ -6,7 +6,9 @@ Please select your preferred toolchain, [[https://github.com/danielsz/system/tre
 
 ** Web service
 
-A full web service with CRUD functionality is presented here. This [[https://github.com/danielsz/system-advanced-example][example]] was created to answer questions regarding how components work together (web handler and database). 
+A full web service with CRUD functionality is presented here. Two versions of the same example are available, demonstrating different ways to make components work together.
+- [[https://github.com/danielsz/system-dependency-injection][DI]]: The officially sanctioned dependency injection pattern according to Stuart’s component library. 
+- [[https://github.com/danielsz/system-advanced-example][Global]]: The system map as a global environment-like map.
 
 ** Holy grail
 
