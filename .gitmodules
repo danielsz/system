@@ -1,3 +1,6 @@
 [submodule "examples/web-service"]
 	path = examples/web-service
 	url = git@github.com:danielsz/system-advanced-example.git
+[submodule "examples/dependency-injection"]
+	path = examples/dependency-injection
+	url = git@github.com:danielsz/system-dependency-injection.git
