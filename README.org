@@ -129,7 +129,7 @@ A convenience macro, ~defsystem~, allows you to declare systems succinctly:
 #+END_SRC
 *Note:* Component allows you to define dependency relationships within systems. Please don’t use said macro for those cases. Be sure to consult component’s API to see the range of options available to you.
 
-*** At runtime (using your components)
+*** At runtime: global system map vs dependency injection
 
 At runtime, the *system* var can be used anywhere after requiring it from the *reloaded.repl* namespace:
 
@@ -140,9 +140,13 @@ At runtime, the *system* var can be used anywhere after requiring it from the *r
 (code-using system ...)
 #+END_SRC
 
-Note this pattern of directly accessing the global system var is in contrast with the pattern of dependency injection integral to Stuart Sierra's vision of Component. This design decision embodies a tradeoff between flexibility and scoping of component access, without which System's goal of providing readymade, reusable components would be difficult or impossible.
- 
-For a discussion around a specific example (i.e. Sente and http-kit), please look [[https://github.com/danielsz/system/issues/14][here]].
+Note this pattern of directly accessing the global system var is in contrast with the pattern of dependency injection integral to Stuart Sierra's vision of Component. In this perspective, /components are defined in terms of the components on which they depend/. System, as a repository of readymade, reusable components, cannot and does not anticipate all the possible ways in which users will want to assemble components together. What it can and does, however, is anticipate common scenarii. Like a web application, for [[https://github.com/danielsz/system-dependency-injection][example]], where the server depends on routes, which in turn depend on a database. 
+
+#+BEGIN_QUOTE
+As with many patterns, DI can be abused. It is easy to get carried away with dependency injection and build a towering dependency graph that is unnecessary and even counter-productive. — Ben Morris in [[http://www.ben-morris.com/how-not-to-use-dependency-injection-service-locators-and-injection-mania/][How not to use dependency injection: service locators and injection mania.]]
+#+END_QUOTE
+
+Whatever you do, use your best judgment.
 
 ** Boot-system
 ~System~ and ~Boot~ are a match made in heaven. Some of the properties that boot-system brings to your workflow are:
