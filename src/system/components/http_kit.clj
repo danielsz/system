@@ -5,7 +5,10 @@
 (defrecord WebServer [options server handler]
   component/Lifecycle
   (start [component]
-    (let [server (run-server handler options)]
+    (let [handler (if (satisfies? component/Lifecycle handler)
+                (:app handler)
+                handler)
+          server (run-server handler options)]
       (assoc component :server server)))
   (stop [component]
     (when server
@@ -22,6 +25,7 @@
                     (pr-str invalid-keys)))))
 
 (defn new-web-server
+  ([port] (map->WebServer {:options {:port port}}))
   ([port handler] (new-web-server port handler {}))
   ([port handler options]
    (assert-only-contains-options! options)
