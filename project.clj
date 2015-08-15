@@ -14,7 +14,7 @@
                                   [com.novemberain/monger "2.0.1"]
                                   [org.clojure/java.jdbc "0.3.5"]
                                   [com.h2database/h2 "1.4.181"]
-                                  [postgresql "9.3-1102.jdbc41"]
+                                  [org.postgresql/postgresql "9.4-1201-jdbc41"]
                                   [com.novemberain/langohr "2.11.0"]
                                   [com.taoensso/sente "1.4.1"]
                                   [org.danielsz/etsy "0.1.2" ]
