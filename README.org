@@ -15,6 +15,7 @@
 - [[https://github.com/danielsz/etsy-clojure-api][Etsy]] (Etsy client)
 - [[http://docs.caudate.me/hara/#haraiowatch][hara.io.watch]] (File watcher)
 - [[https://www.elastic.co/][Elasticsearch]] (Elasticsearch full-text search engine)
+- Generic app component for typical Ring applications 
 
 ** Motivation
 A good REPL experience is a prerogative of Lisp languages. [[https://github.com/stuartsierra/reloaded][Reloaded]] components enable this goodness in Clojureland. Since they require an amount of setup, the first steps when starting a new project are generally devoted to infrastructure. My first attempt to tackle the boilerplate was a Leiningen [[https://github.com/danielsz/back-end-template][template]]. The problem is that Leiningen templates are hard to maintain and difficult to retrofit on existing projects. I was finding myself repeatedly updating the template for future use. Then it dawned on me that a library would better fit the bill. And so *system* came to light. It’s now the first dependency I add to any project, allowing me to focus from the get-go on the substance of my application.

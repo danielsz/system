@@ -5,6 +5,7 @@
 - http-kit full options
 - postgres component
 - latest component (0.2.3)
+- Generic app component for typical Ring applications
 - Web service example
 ** 0.1.8
 - switch to enable hot-reloadable system
