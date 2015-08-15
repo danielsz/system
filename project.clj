@@ -1,4 +1,4 @@
-(defproject org.danielsz/system "0.1.9"
+(defproject org.danielsz/system "0.2.0-SNAPSHOT"
   :description "Reloaded components à la carte"
   :url "https://github.com/danielsz/system"
   :license {:name "Eclipse Public License"
