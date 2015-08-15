@@ -1,12 +1,11 @@
 * Changes 
-** 0.1.9-SNAPSHOT
-- EPL License
-- ns-tracker latest version
-- http-kit full options
-- postgres component
-- latest component (0.2.3)
+** 0.1.9
 - Generic app component for typical Ring applications
 - Web service example
+- Postgres component
+- Latest dependencies: component, ns-tracker.
+- http-kit acces to full options
+- EPL License
 ** 0.1.8
 - switch to enable hot-reloadable system
 - file-based granularity to only restart the system when user-specified files change.
