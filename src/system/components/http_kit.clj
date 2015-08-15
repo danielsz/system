@@ -1,13 +1,17 @@
 (ns system.components.http-kit
-  (:require [com.stuartsierra.component :as component]
-            [org.httpkit.server :refer [run-server]]))
+  (:require [system.components.app]
+            [com.stuartsierra.component :as component]
+            [org.httpkit.server :refer [run-server]])
+  (:import [system.components.app App]))
 
 (defrecord WebServer [options server handler]
   component/Lifecycle
   (start [component]
-    (let [handler (if (satisfies? component/Lifecycle handler)
-                (:app handler)
-                handler)
+    (println handler)
+    (println (satisfies? component/Lifecycle handler))
+    (let [handler (if (instance? App handler)
+                    (:app handler)
+                    handler)
           server (run-server handler options)]
       (assoc component :server server)))
   (stop [component]
