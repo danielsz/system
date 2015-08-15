@@ -7,8 +7,6 @@
 (defrecord WebServer [options server handler]
   component/Lifecycle
   (start [component]
-    (println handler)
-    (println (satisfies? component/Lifecycle handler))
     (let [handler (if (instance? App handler)
                     (:app handler)
                     handler)
