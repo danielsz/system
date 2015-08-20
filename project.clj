@@ -3,7 +3,7 @@
   :url "https://github.com/danielsz/system"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
-  :dependencies [[org.clojure/clojure "1.6.0"]
+  :dependencies [[org.clojure/clojure "1.7.0"]
                  [reloaded.repl "0.1.0"]
                  [ns-tracker "0.3.0"]
                  [com.stuartsierra/component "0.2.3"]]
@@ -16,7 +16,7 @@
                                   [com.h2database/h2 "1.4.181"]
                                   [org.postgresql/postgresql "9.4-1201-jdbc41"]
                                   [com.novemberain/langohr "2.11.0"]
-                                  [com.taoensso/sente "1.4.1"]
+                                  [com.taoensso/sente "1.6.0"]
                                   [org.danielsz/etsy "0.1.2" ]
                                   [http-kit "2.1.19"]
                                   [org.elasticsearch/elasticsearch "1.6.0"
