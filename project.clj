@@ -37,4 +37,4 @@
                                                 org.ow2.asm/asm-commons]]
                                   [aleph "0.4.0-alpha9"]]}}
   :scm {:name "git"
-        :url "https://github.com/danielsz/system"})
+        :url "https://github.com/tracksun/system"})

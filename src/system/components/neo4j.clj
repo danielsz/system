@@ -12,7 +12,7 @@
   (stop [component]
     (assoc component :conn nil)))
 
-(defn new-neo4j-conn
+(defn new-neo4j-db
   ([uri]
      (map->Neo4j {:uri uri}))
   ([uri user passwd]
