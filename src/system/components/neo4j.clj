@@ -5,10 +5,9 @@
 (defrecord Neo4j [uri user passwd conn]
   component/Lifecycle
   (start [component]
-    (if (and uri user passwd)
-      (assoc component :conn (n/connect uri user passwd)))
-    (if uri
-      (assoc component :conn (n/connect uri))))
+    (cond
+      (and uri user passwd) (assoc component :conn (n/connect uri user passwd))
+      uri                   (assoc component :conn (n/connect uri))))
   (stop [component]
     (assoc component :conn nil)))
 

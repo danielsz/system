@@ -5,16 +5,16 @@
             [com.stuartsierra.component :as component]))
 
 (def uri "http://localhost:7474/db/data/")
+(def data {:foo "bar"})
 
 (deftest test-neo4j
-  (let [db   (neo4j/new-neo4j-db uri)
-        db   (component/start db)
-        data {:foo "bar"}]
-    (is (:conn db) "conn has been added to component")
+  (let [{:keys [conn] :as db} (-> (neo4j/new-neo4j-db uri)
+                                  component/start)]
+    (is conn "conn has been added to component")
 
-    (let [node (nodes/create (:conn db) data)]
-      (is data (:data (nodes/get db (:id node))))
-      (nodes/delete db (:id node)))
+    (let [node (nodes/create conn data)]
+      (is data (:data (nodes/get conn (:id node))))
+      (nodes/delete conn (:id node)))
 
-    (component/stop db)
-    (is (nil? (:conn db)) "conn has been removed from component")))
+    (let [db (component/stop db)]
+      (is (nil? (:conn db))  "conn has been removed from component"))))
