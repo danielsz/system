@@ -2,6 +2,7 @@
 **  0.2.0-SNAPSHOT
 - Dependencies: clojure 1.7.0, sente 1.6.0
 - Neo4j component
+- Immutant web service component
 ** 0.1.9
 - Generic app component for typical Ring applications
 - Web service example

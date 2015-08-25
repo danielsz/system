@@ -5,6 +5,7 @@
 - [[https://github.com/ring-clojure/ring][Jetty]] (HTTP server)
 - [[http://http-kit.org/][HTTP kit]] (Async HTTP server)
 - [[https://github.com/ztellman/aleph][aleph]] (Async HTTP server)
+- [[http://immutant.org/][Immutant Web]] (Web component in application server suite)
 - [[http://www.datomic.com/][Datomic]] (Immutable database)
 - [[http://www.h2database.com/][H2]] (H2 relational database)
 - [[http://www.postgresql.org][PostgreSQL]] (SQL Database)
