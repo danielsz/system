@@ -1,6 +1,7 @@
 * Changes 
 *  0.2.0
 - Dependencies: clojure 1.7.0, sente 1.6.0
+- Neo4j component
 ** 0.1.9
 - Generic app component for typical Ring applications
 - Web service example
