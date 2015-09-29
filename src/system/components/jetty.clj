@@ -6,8 +6,9 @@
 (defrecord WebServer [port server handler]
   component/Lifecycle
   (start [component]
-    (let [handler (if (or (fn? handler) (= (type handler) clojure.lang.Var))
-                    handler
+    (let [handler (condp #(%1 %2) handler
+                    fn? handler
+                    var? handler
                     (:app handler))
           server (run-jetty handler {:port port :join? false})]
       (assoc component :server server)))
