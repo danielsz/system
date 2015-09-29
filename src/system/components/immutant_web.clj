@@ -5,7 +5,10 @@
 (defrecord WebServer [port server handler]
   component/Lifecycle
   (start [component]
-    (let [server (run handler {:port port})]
+    (let [handler (if (or (fn? handler) (= (type handler) clojure.lang.Var))
+                    handler
+                    (:app handler))
+          server (run handler {:port port})]
       (assoc component :server server)))
   (stop [component]
     (when server

@@ -1,15 +1,14 @@
 (ns system.components.http-kit
   (:require [system.components.app]
             [com.stuartsierra.component :as component]
-            [org.httpkit.server :refer [run-server]])
-  (:import [system.components.app App]))
+            [org.httpkit.server :refer [run-server]]))
 
 (defrecord WebServer [options server handler]
   component/Lifecycle
   (start [component]
-    (let [handler (if (instance? App handler)
-                    (:app handler)
-                    handler)
+    (let [handler (if (or (fn? handler) (= (type handler) clojure.lang.Var))
+                    handler
+                    (:app handler))
           server (run-server handler options)]
       (assoc component :server server)))
   (stop [component]

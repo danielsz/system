@@ -1,15 +1,14 @@
 (ns system.components.jetty
   (:require [system.components.app]
             [com.stuartsierra.component :as component]
-            [ring.adapter.jetty :refer [run-jetty]])
-  (:import [system.components.app App]))
+            [ring.adapter.jetty :refer [run-jetty]]))
 
 (defrecord WebServer [port server handler]
   component/Lifecycle
   (start [component]
-    (let [handler (if (instance? App handler)
-                    (:app handler)
-                    handler)
+    (let [handler (if (or (fn? handler) (= (type handler) clojure.lang.Var))
+                    handler
+                    (:app handler))
           server (run-jetty handler {:port port :join? false})]
       (assoc component :server server)))
   (stop [component]
