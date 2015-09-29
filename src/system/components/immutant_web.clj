@@ -17,5 +17,7 @@
       component)))
 
 (defn new-web-server
-  [port handler]
-  (map->WebServer {:port port :handler handler}))
+  ([port]
+   (map->WebServer {:port port}))
+  ([port handler]
+   (map->WebServer {:port port :handler handler})))
