@@ -9,7 +9,7 @@
                     fn? handler
                     var? handler
                     (:app handler))
-          server (run handler {:port port})]
+          server (run handler {:host "0.0.0.0" :port port})]
       (assoc component :server server)))
   (stop [component]
     (when server
