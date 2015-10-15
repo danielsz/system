@@ -27,7 +27,6 @@
    (new-web-server port handler {}))
   ([port handler options]
    (util/assert-only-contains-options! "immutant-web" options allowed-opts)
-   (map->WebServer {:options (-> {:host "0.0.0.0" :port port}
-                                 (merge options)
-                                 (select-keys allowed-opts))
+   (map->WebServer {:options (merge {:host "0.0.0.0" :port port}
+                                    options)
                     :handler handler})))

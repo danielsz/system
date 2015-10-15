@@ -26,7 +26,6 @@
   ([port handler] (new-web-server port handler {}))
   ([port handler options]
    (util/assert-only-contains-options! "http-kit" options allowed-opts)
-   (map->WebServer {:options (-> {:port port}
-                              (merge options)
-                              (select-keys allowed-opts))
+   (map->WebServer {:options (merge {:port port}
+                                    options)
                     :handler handler})))
