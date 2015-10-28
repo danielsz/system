@@ -22,8 +22,10 @@
   [:ip :port :thread :worker-name-prefix :queue-size :max-body :max-line])
 
 (defn new-web-server
-  ([port] (map->WebServer {:options {:port port}}))
-  ([port handler] (new-web-server port handler {}))
+  ([port]
+   (new-web-server port nil {}))
+  ([port handler]
+   (new-web-server port handler {}))
   ([port handler options]
    (util/assert-only-contains-options! "http-kit" options allowed-opts)
    (map->WebServer {:options (merge {:port port}
