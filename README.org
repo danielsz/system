@@ -72,7 +72,7 @@ Then, in user.clj:
 
 (reloaded.repl/set-init! dev-system)
 #+END_SRC
-You can then manipulate the system in the REPL: ~(go)~, ~(reset)~ or ~(stop)~. The system map is accessible at any time, it resides in a var named, as you can guess, ~#'system~. 
+You can now manipulate the system in the REPL: ~(go)~, ~(reset)~ or ~(stop)~. The system map is accessible at any time, it resides in a var named, as you can guess, ~#'system~. 
 
 In production, in core.clj:
 
