@@ -176,6 +176,10 @@ Which outputs, for example:
 
 A [[https://github.com/danielsz/holygrail][tutorial]] is available in a separate repository.
 
+*** Leiningen
+
+If you are using Leiningen, we recommend [[https://github.com/bhauman/lein-figwheel][Figwheel]] to address browser-side hot-reloading concerns.
+
 ** The Reloaded pattern
 Here are a couple of links that are sure to shed more light on the motivations of the reloaded workflow.
 
