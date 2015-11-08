@@ -1,12 +1,11 @@
-(ns system.components.repl-server-test
+(ns system.components.cider-repl-server-test
   (:require
-   [system.components.repl-server :refer [new-repl-server]]
+   [system.components.cider-repl-server :refer [new-cider-repl-server]]
    [com.stuartsierra.component :as component]
    [clojure.test :refer [deftest is run-tests]]
    [clojure.tools.nrepl :as repl]))
 
-
-(def repl-server (new-repl-server 8082))
+(def repl-server (new-cider-repl-server 8082))
  
 (deftest repl-server-availability
   (alter-var-root #'repl-server component/start)
@@ -17,3 +16,4 @@
                    repl/response-values))) 
       "REPL functions normally")
   (alter-var-root #'repl-server component/stop))
+
