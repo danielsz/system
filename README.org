@@ -187,6 +187,8 @@ Here are a couple of links that are sure to shed more light on the motivations o
 The canonical reference: 
 [[http://thinkrelevance.com/blog/2013/06/04/clojure-workflow-reloaded][My Clojure Workflow, Reloaded]]
 
+A [[http://mattiasbuelens.github.io/interactiveprogrammingtalk/interactiveprogramming.html][video]] of my talk at the BeClojure user group. 
+
 And more references touching on the topic.  
 - [[http://www.infoq.com/presentations/Clojure-Large-scale-patterns-techniques][Clojure in the Large]]
 - [[http://martintrojer.github.io/clojure/2013/09/07/retrofitting-the-reloaded-pattern-into-clojure-projects/][Retrofitting the Reloaded pattern into Clojure projects]]
