@@ -13,6 +13,7 @@
 - [[http://clojureneo4j.info/][Neo4j]] (Graph database)
 - [[https://github.com/ptaoussanis/sente][Sente]] (Websockets/Ajax communications library)
 - [[https://github.com/clojure/tools.nrepl][nREPL]] (Clojure network REPL )
+- [[https://github.com/clojure-emacs/cider-nrepl][Cider nREPL]] (A collection of nREPL middleware designed to enhance CIDER)
 - [[http://clojurerabbitmq.info/][Langohr]] (RabbitMQ client)
 - [[https://github.com/danielsz/etsy-clojure-api][Etsy]] (Etsy client)
 - [[http://docs.caudate.me/hara/#haraiowatch][hara.io.watch]] (File watcher)
