@@ -11,6 +11,7 @@
 - [[http://www.postgresql.org][PostgreSQL]] (SQL Database)
 - [[http://clojuremongodb.info/][Monger]] (MongoDB client)
 - [[http://clojureneo4j.info/][Neo4j]] (Graph database)
+- [[http://clojurequartz.info/][Quartzite]] (Quartz Scheduler) 
 - [[https://github.com/ptaoussanis/sente][Sente]] (Websockets/Ajax communications library)
 - [[https://github.com/clojure/tools.nrepl][nREPL]] (Clojure network REPL )
 - [[https://github.com/clojure-emacs/cider-nrepl][Cider nREPL]] (A collection of nREPL middleware designed to enhance CIDER)

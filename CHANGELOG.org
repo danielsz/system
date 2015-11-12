@@ -3,9 +3,10 @@
 - Dependencies: clojure 1.7.0, sente 1.6.0
 - Cider nREPL component
 - Neo4j component
+- Quartzite component 
 - Immutant web service component
 - Closures are used to expose resources to http requests instead of merging it in the request map (App component)
-- Web components (jetty, immutant, http-kit) can be passed functions, but also components.  Yes, even arbitrary user-defined components, as long as the convention is recpected, namely that (:app my-custom-component) returns a web handler.
+- Web components (jetty, immutant, http-kit) can be passed functions, but also components.  Yes, even arbitrary user-defined components, as long as the convention is respected, namely that (:app my-custom-component) returns a web handler.
 ** 0.1.9
 - Generic app component for typical Ring applications
 - Web service example
