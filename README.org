@@ -207,6 +207,7 @@ There is a host of components libraries in the Clojure ecosystem, each with its 
 - [[https://github.com/juxt/modular][modular]]
 - [[https://github.com/palletops/leaven][leaven]] and [[https://github.com/palletops/bakery][bakery]]
 - [[https://github.com/james-henderson/yoyo][yoyo]]
+- [[http://docs.caudate.me/hara/#haracomponent][hara.component]]
 
 Navigating this space can be difficult or overwhelming. Due to the nature of Open Source Software, it is unlikely to see any kind of standardization taking place. Let’s embrace the diversity instead, and emphasize the *compatibility* of components. As long as a component adheres to Stuart Sierra’s Lifecycle protocol, you can import it in your ~systems~ namespace and refer to it as any other native ~system~ component. 
 
