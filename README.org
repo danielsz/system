@@ -191,7 +191,7 @@ The canonical reference:
 
 I gave a talk at several Clojure user groups (Belgium, Spain, Israel). BeClojure did a great job at recording it and making it available on Youtube. @MattiasBuelens also produced a very nice [[http://mattiasbuelens.github.io/interactiveprogrammingtalk/interactiveprogramming.html][interactive UI]] for the BeClojure talk.
 
-#+HTML: <iframe width="560" height="315" src="https://www.youtube.com/embed/50vU6rp2jyA" frameborder="0" allowfullscreen></iframe>
+#+HTML: <a href="http://www.youtube.com/watch?feature=player_embedded&v=50vU6rp2jyA" target="_blank"><img src="http://img.youtube.com/vi/50vU6rp2jyA/0.jpg" alt="Interactive programming" width="560" height="315" border="10" /></a>
 
 And more references touching on the topic.  
 - [[http://www.infoq.com/presentations/Clojure-Large-scale-patterns-techniques][Clojure in the Large]]
