@@ -1,5 +1,6 @@
 * Changes 
-**  0.2.0-SNAPSHOT
+** 0.2.1-SNAPSHOT
+**  0.2.0
 - Dependencies: clojure 1.7.0, sente 1.6.0
 - Cider nREPL component
 - Neo4j component
