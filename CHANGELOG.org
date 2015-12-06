@@ -1,5 +1,6 @@
 * Changes 
 ** 0.2.1-SNAPSHOT
+- Fixes a long-standing issue with *data-readers* in Boot: https://github.com/boot-clj/boot/issues/47
 **  0.2.0
 - Dependencies: clojure 1.7.0, sente 1.6.0
 - Cider nREPL component
