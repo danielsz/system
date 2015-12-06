@@ -22,19 +22,22 @@
         auto-start (delay
                      (when auto-start
                        (util/info (str "Autostarting the system: " (go) "\n"))))]
-    (core/with-pre-wrap fileset
-      (set-init! sys)
-      (util/info (str "Current system: " sys "\n"))
-      @auto-start
-      (when-let [modified (modified-namespaces)]
-        (doseq [ns-sym modified]
-          (require ns-sym :reload))
-        (util/info (str "Reloading namespaces " (pr-str modified) "\n"))
-        (when hot-reload (with-bindings {#'*ns* *ns*} ; because of exception "Can't set!: *ns* from non-binding thread"
-                           (if files
-                             (when (modified-files? fs-prev-state fileset files) (reset))
-                             (reset)))))
-      (reset! fs-prev-state fileset))))
+    (fn [next-task]
+      (fn [fileset]
+        (#'clojure.core/load-data-readers)
+        (with-bindings {#'*data-readers* (.getRawRoot #'*data-readers*)}
+          (set-init! sys)
+          (util/info (str "Current system: " sys "\n"))
+          @auto-start
+          (when-let [modified (modified-namespaces)]
+            (doseq [ns-sym modified]
+              (require ns-sym :reload))
+            (util/info (str "Reloading namespaces " (pr-str modified) "\n"))
+            (when hot-reload (with-bindings {#'*ns* *ns*} ; because of exception "Can't set!: *ns* from non-binding thread"
+                               (if files
+                                 (when (modified-files? fs-prev-state fileset files) (reset))
+                                 (reset)))))
+          (next-task (reset! fs-prev-state fileset)))))))
 
 (core/deftask run
   "Run the -main function in some namespace with arguments."
