@@ -9,6 +9,7 @@
           conn (d/connect uri)]
       (assoc component :conn conn)))
   (stop [component]
+    (when conn (d/release conn))
     (assoc component :conn nil)))
 
 (defn new-datomic-db [uri]
