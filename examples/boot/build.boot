@@ -1,6 +1,6 @@
 (set-env!
  :resource-paths #{"src"}
- :dependencies '[[org.danielsz/system "0.1.8-SNAPSHOT"]
+ :dependencies '[[org.danielsz/system "0.3.0-SNAPSHOT"]
                  [ring/ring-defaults "0.1.4"]
                  [ring "1.3.2"]
                  [environ "1.0.0"]
