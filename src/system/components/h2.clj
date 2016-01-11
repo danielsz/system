@@ -1,7 +1,8 @@
 (ns system.components.h2
-  (:require [system.components.jdbc :as data]))
+  (:require [system.components.jdbc :as jdbc]
+            [com.stuartsierra.component :as component]))
 
-;; component for an H2 database
+;; returns a JDBC component with a H2 spec
 
 (def DEFAULT-DB-SPEC
   {:classname   "org.h2.Driver" ; must be in classpath
@@ -21,6 +22,9 @@
    :password ""
    :DB_CLOSE_DELAY "-1"})
 
+
 (defn new-h2-database
-  [spec]
-  (data/new-database spec))
+  ([spec]
+   (jdbc/new-database spec))
+  ([spec init-fn]
+   (jdbc/new-database spec init-fn)))

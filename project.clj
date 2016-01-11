@@ -1,4 +1,4 @@
-(defproject org.danielsz/system "0.2.1-SNAPSHOT"
+(defproject org.danielsz/system "0.3.0-SNAPSHOT"
   :description "Reloaded components à la carte"
   :url "https://github.com/danielsz/system"
   :license {:name "Eclipse Public License"
@@ -7,9 +7,9 @@
                  [reloaded.repl "0.1.0"]
                  [ns-tracker "0.3.0"]
                  [com.stuartsierra/component "0.2.3"]]
-  :profiles {:dev {:dependencies [[org.clojure/tools.nrepl "0.2.6"]
-                                  [cider/cider-nrepl "0.10.0-SNAPSHOT"]
-                                  [ring "1.3.1"]
+  :profiles {:dev {:dependencies [[org.clojure/tools.nrepl "0.2.11"]
+                                  [cider/cider-nrepl "0.10.1"]
+                                  [ring "1.4.0"]
                                   [im.chit/hara.io.watch "2.1.7"]
                                   [com.datomic/datomic-free "0.9.4815.12"]
                                   [com.novemberain/monger "2.0.1"]
@@ -22,7 +22,7 @@
                                   [com.taoensso/sente "1.6.0"]
                                   [org.danielsz/etsy "0.1.2" ]
                                   [http-kit "2.1.19"]
-                                  [org.immutant/web "2.0.2"]
+                                  [org.immutant/web "2.1.2"]
                                   [org.elasticsearch/elasticsearch "1.6.0"
                                    :exclusions [org.antlr/antlr-runtime
                                                 org.apache.lucene/lucene-analyzers-common

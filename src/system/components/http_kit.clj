@@ -1,16 +1,12 @@
 (ns system.components.http-kit
-  (:require [system.components.app]
-            [system.util :as util]
+  (:require [system.util :as util]
             [com.stuartsierra.component :as component]
             [org.httpkit.server :refer [run-server]]))
 
 (defrecord WebServer [options server handler]
   component/Lifecycle
   (start [component]
-    (let [handler (condp #(%1 %2) handler
-                    fn? handler
-                    var? handler
-                    (:app handler))
+    (let [handler (get-in component [:handler :handler] handler)
           server (run-server handler options)]
       (assoc component :server server)))
   (stop [component]

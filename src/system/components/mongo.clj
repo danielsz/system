@@ -21,7 +21,7 @@
   ([uri]
    (map->Mongo {:uri uri}))
   ([uri init-fn]
-     (map->Mongo {:uri uri :init-fn init-fn})))
+   (map->Mongo {:uri uri :init-fn init-fn})))
 
 
 

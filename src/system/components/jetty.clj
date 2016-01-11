@@ -1,16 +1,12 @@
 (ns system.components.jetty
-  (:require [system.components.app]
-            [system.util :as util]
+  (:require [system.util :as util]
             [com.stuartsierra.component :as component]
             [ring.adapter.jetty :refer [run-jetty]]))
 
 (defrecord WebServer [options server handler]
   component/Lifecycle
   (start [component]
-    (let [handler (condp #(%1 %2) handler
-                    fn? handler
-                    var? handler
-                    (:app handler))
+    (let [handler (get-in component [:handler :handler] handler)
           server (run-jetty handler options)]
       (assoc component :server server)))
   (stop [component]
