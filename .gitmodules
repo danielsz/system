@@ -4,3 +4,6 @@
 [submodule "examples/dependency-injection"]
 	path = examples/dependency-injection
 	url = git@github.com:danielsz/system-dependency-injection.git
+[submodule "examples/system-duct-style-example"]
+	path = examples/system-duct-style-example
+	url = git@github.com:danielsz/system-duct-style-example.git

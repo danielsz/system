@@ -1,4 +1,8 @@
 * Changes 
+** 0.3.0-SNAPSHOT
+- Incorporates Duct abstractions (endpoint and handlers)
+- App component is deprecated
+- Everybdoy is welcome to participate in the discussion around the upcoming changes: https://github.com/danielsz/system/issues/48
 ** 0.2.1-SNAPSHOT
 - Fixes a long-standing issue with *data-readers* in Boot: https://github.com/boot-clj/boot/issues/47
 - Release Datomic connection upon stop. https://github.com/danielsz/system/pull/46  
