@@ -21,7 +21,7 @@
 (core/deftask system [s sys SYS code "The system var."
                       a auto-start bool "Auto-starts the system."
                       r hot-reload bool "Enables hot-reloading."
-                      f files FILES [str] "A vector of filenames. Restricts hot-reloading to that set."
+                      f files FILES #{str} "A set of filenames. Restricts hot-reloading to that set."
                       x regexes REGEXES #{regex} "A set of regular expressions. Restricts hot-reloading to files matching any regular expression in that set."]
   (let [fs-prev-state (atom nil)
         dirs (core/get-env :directories)
