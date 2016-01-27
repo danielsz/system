@@ -6,16 +6,23 @@
             [boot.util       :as util]))
 
 
-(defn- modified-files? [before-fileset after-fileset files]
+(defn- files-matching-predicate [before-fileset after-fileset predicate]
   (->> (core/fileset-diff @before-fileset after-fileset)
        core/input-files
-       (core/by-name files)
+       predicate
        not-empty))
+
+(defn- modified-files-matching-any-name [before-fileset after-fileset files]
+  (files-matching-predicate before-fileset after-fileset (partial core/by-name files)))
+
+(defn- modified-files-matching-any-regex [before-fileset after-fileset regexes]
+  (files-matching-predicate before-fileset after-fileset (partial core/by-re regexes)))
 
 (core/deftask system [s sys SYS code "The system var."
                       a auto-start bool "Auto-starts the system."
                       r hot-reload bool "Enables hot-reloading."
-                      f files FILES [str] "A vector of filenames. Restricts hot-reloading to that set."]
+                      f files FILES [str] "A vector of filenames. Restricts hot-reloading to that set."
+                      x regexes REGEXES #{regex} "A set of regular expressions. Restricts hot-reloading to files matching any regular expression in that set."]
   (let [fs-prev-state (atom nil)
         dirs (core/get-env :directories)
         modified-namespaces (ns-tracker (into [] dirs))
@@ -33,11 +40,16 @@
             (doseq [ns-sym modified]
               (require ns-sym :reload))
             (util/info (str "Reloading namespaces " (pr-str modified) "\n"))
-            (when hot-reload (with-bindings {#'*ns* *ns*} ; because of exception "Can't set!: *ns* from non-binding thread"
-                               (if files
-                                 (when (modified-files? fs-prev-state fileset files) (reset))
-                                 (reset)))))
-          (next-task (reset! fs-prev-state fileset)))))))
+            (when hot-reload
+              (with-bindings {#'*ns* *ns*} ; because of exception "Can't set!: *ns* from non-binding thread"
+                (cond
+                  regexes
+                    (when (modified-files-matching-any-regex fs-prev-state fileset regexes) (reset))
+                  files
+                    (when (modified-files-matching-any-name fs-prev-state fileset files) (reset))
+                  :else
+                    (reset)))))
+            (next-task (reset! fs-prev-state fileset)))))))
 
 (core/deftask run
   "Run the -main function in some namespace with arguments."
