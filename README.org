@@ -33,7 +33,7 @@ Add the following to your project’s dependencies.
 
 *ProTip:* Snapshot versions may be available.
 
-*Attention:* ~0.3.0-SNAPSHOT~ is a breaking release.
+*Attention:* ~0.3.0-SNAPSHOT~ is a breaking release. Please refer to the changelog.
 
 ** Example project
 An example project is available under the [[https://github.com/danielsz/system/tree/master/examples][examples]] folder. It is a self-contained project that will help you get started. Both the [[https://github.com/danielsz/system/tree/master/examples/leiningen][Leinigen]] and [[https://github.com/danielsz/system/tree/master/examples/boot][Boot]] toolchain are covered. 
