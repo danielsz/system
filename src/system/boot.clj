@@ -14,23 +14,23 @@
 (core/deftask system [s sys SYS code "The system var."
                       a auto-start bool "Auto-starts the system."
                       f files FILES [str] "Will reset the system if a filename in the supplied vector changes."]
+  (set-init! sys)
   (util/info (str "System: " sys "\n"))
-  (#'clojure.core/load-data-readers)
   (->> (core/get-env :directories)
        (apply repl/set-refresh-dirs))
+  (#'clojure.core/load-data-readers)
   (let [fs-prev-state (atom nil)
         init-system (delay
                      (when auto-start
                        (util/info (str "Autostarting the system: " (go) "\n"))))]
     (fn [next-task]
       (fn [fileset]
-        (with-bindings {#'*data-readers* (.getRawRoot #'*data-readers*)}
-          (set-init! sys)
+        (with-bindings {#'*data-readers* (.getRawRoot #'*data-readers*)
+                        #'*ns* *ns*} ;because of exception "Can't set!: *ns* from non-binding thread"
           @init-system
-          (with-bindings {#'*ns* *ns*} ; because of exception "Can't set!: *ns* from non-binding thread"
-            (if (modified-files? fs-prev-state fileset files)
-              (reset)
-              (repl/refresh)))
+          (if (modified-files? fs-prev-state fileset files)
+            (reset)
+            (repl/refresh))
           (next-task (reset! fs-prev-state fileset)))))))
 
 (core/deftask run
