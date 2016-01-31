@@ -7,21 +7,21 @@
 
 (defn- modified-files? [before-fileset after-fileset files]
   (when files (->> (core/fileset-diff @before-fileset after-fileset)
-                core/input-files
-                (core/by-name files)
-                not-empty)))
+                   core/input-files
+                   (core/by-name files)
+                   not-empty)))
 
 (core/deftask system [s sys SYS code "The system var."
                       a auto-start bool "Auto-starts the system."
-                      f files FILES [str] "Will reset the system if a filename in that vector changes."]
+                      f files FILES [str] "Will reset the system if a filename in the supplied vector changes."]
   (util/info (str "System: " sys "\n"))
   (#'clojure.core/load-data-readers)
   (->> (core/get-env :directories)
-    (apply repl/set-refresh-dirs))
+       (apply repl/set-refresh-dirs))
   (let [fs-prev-state (atom nil)
         init-system (delay
-                      (when auto-start
-                        (util/info (str "Autostarting the system: " (go) "\n"))))]
+                     (when auto-start
+                       (util/info (str "Autostarting the system: " (go) "\n"))))]
     (fn [next-task]
       (fn [fileset]
         (with-bindings {#'*data-readers* (.getRawRoot #'*data-readers*)}
