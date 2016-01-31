@@ -14,7 +14,7 @@
 
 (core/deftask system [s sys SYS code "The system var."
                       a auto bool "Manages the lifecycle of the application automatically."
-                      f files FILES [str] "Will reset the system if a filename in the supplied vector changes."]
+                      f files FILES [str] "A vector of files. Will reset the system if a filename in the supplied vector changes."]
   (set-init! sys)
   (->> (core/get-env :directories)
        (apply repl/set-refresh-dirs))
