@@ -188,13 +188,13 @@ Which outputs, for example:
 
 In traditional Lisp systems, users can redefine arbitrary, discrete units of code. Clojure, as a Lisp, is no exception. However, as a hosted language with many advanced dynamic features, code reloading has many [[https://github.com/clojure/tools.namespace#reloading-code-motivation][pitfalls]]. ~tools.namespace~ is what fixes this, but ultimately, reloaded code will not agree with runtime state, and the system will need a full restart. This is  where ~component~ fits in. (Note that both libraries were authored by Stuart Sierra). 
 
-It is important to understand that code reloading and system restarts are orthogonal– both are desirable properties of a programming environment. A full restart is a blunt tool. No need to restart the web server just because a pure helper function was modified. 
+It is important to understand that code reloading and system restarts are orthogonal—both are desirable properties of a programming environment. A full restart is a blunt tool. No need to restart the web server just because a pure helper function was modified. 
 
-We ​*don't want*​ to restart the system with ​*every*​ code change. Ideally, we want to be able to only reload code that has changed, and only restart when necessary. 
+We *don’t want* to restart the system with *every* code change. Ideally, we want to be able to only reload code that has changed, and only restart when necessary. 
 
-~boot-system~ gives you finegrained tuning of system restarts vs code reload. Each time you change a file, ~boot-system~ will reload your code with ~refresh~ in  ~tools.namespace~. Filenames that appear in the `files` vector will trigger a full restart (with ~reset~ in ~component~). Typically, that vector will be small, as most modifications do not warrant a full restart. An example of when you would want a full restart is when you change routes; you will want the web server to be restarted. Another example is when you change a protocol; you would want to recreate all instances of records implementing that protocol.
+~boot-system~ gives you finegrained tuning over system restarts vs code reload. Each time you change a file, ~boot-system~ will reload your code with ~refresh~ in  ~tools.namespace~. Filenames that appear in the ~files~ vector will trigger a full restart (with ~reset~ in ~component~). Typically, that vector will be small, as most modifications do not warrant a full restart. An example of when you would want a full restart is when you change routes; you will want the web server to be restarted. Another example is when you change a protocol; you would want to recreate all instances of records implementing that protocol.
 
-In summary, when you tell boot-system to manage your application lifecycle (with the ~auto~ option), then either of those two things will happen after you change a file: 
+In summary, when you tell boot-system to manage your application lifecycle (with the ~auto~ option), either one of those two things will happen after you change a source file: 
 - ~refresh~ will first unload all affected files in dependency order before reloading them.
 - ~reset~ will restart the system if that file was defined in the ~files~ vector.
 
