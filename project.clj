@@ -3,10 +3,10 @@
   :url "https://github.com/danielsz/system"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
-  :dependencies [[org.clojure/clojure "1.7.0"]
+  :dependencies [[org.clojure/clojure "1.8.0"]
                  [reloaded.repl "0.1.0"]
                  [org.clojure/tools.namespace "0.3.0-alpha3"]
-                 [com.stuartsierra/component "0.2.3"]]
+                 [com.stuartsierra/component "0.3.1"]]
   :profiles {:dev {:dependencies [[org.clojure/tools.nrepl "0.2.11"]
                                   [cider/cider-nrepl "0.10.1"]
                                   [ring "1.4.0"]

@@ -1,24 +1,27 @@
 (set-env!
  :resource-paths #{"src"}
  :dependencies '[[org.danielsz/system "0.3.0-SNAPSHOT"]
-                 [ring/ring-defaults "0.1.4"]
-                 [ring "1.3.2"]
-                 [environ "1.0.0"]
-                 [compojure "1.3.3"]
-                 [danielsz/boot-environ "0.0.4"]
+                 [environ "1.0.2"]
+                 [boot-environ "1.0.2"]
+
+                 [ring/ring-core "1.4.0"]
+                 [ring/ring-jetty-adapter "1.4.0"]
+                 [ring/ring-defaults "0.1.5"]
+                 [compojure "1.4.0"]
+
                  [org.clojure/tools.nrepl "0.2.10"]])
 
 (require
  '[reloaded.repl :as repl :refer [start stop go reset]]
  '[example.systems :refer [dev-system]]
- '[danielsz.boot-environ :refer [environ]]
+ '[environ.boot :refer [environ]]
  '[system.boot :refer [system run]])
 
 (deftask dev
   "Run a restartable system in the Repl"
   []
   (comp
-   (environ :env {:http-port 3000})
+   (environ :env {:http-port "3000"})
    (watch :verbose true)
    (system :sys #'dev-system :auto true :files ["handler.clj" "index.clj"])
    (repl :server true)))
@@ -27,7 +30,7 @@
   "Run a dev system from the command line"
   []
   (comp
-   (environ :env {:http-port 3000})
+   (environ :env {:http-port "3000"})
    (run :main-namespace "example.core" :arguments [#'dev-system])
    (wait)))
 

@@ -15,12 +15,11 @@
 (core/deftask system [s sys SYS code "The system var."
                       a auto bool "Manages the lifecycle of the application automatically."
                       f files FILES [str] "A vector of files. Will reset the system if a filename in the supplied vector changes."]
-  (set-init! sys)
+  (#'clojure.core/load-data-readers)
   (->> (core/get-env :directories)
        (apply repl/set-refresh-dirs))
-  (#'clojure.core/load-data-readers)
   (let [fs-prev-state (atom nil)
-        init-system (delay (util/info (str sys (go) "\n")))]
+        init-system (delay (do (set-init! sys) (util/info (str sys (go) "\n"))))]
     (fn [next-task]
       (fn [fileset]
         (with-bindings {#'*data-readers* (.getRawRoot #'*data-readers*)
@@ -28,8 +27,8 @@
           (when auto
             (when (realized? init-system)
               (if (modified-files? fs-prev-state fileset files)
-                (reset)
-                (repl/refresh)))
+                (do (util/info (str sys ":resetting\n")) (reset))
+                (do (util/info (str sys ":refreshing\n")) (repl/refresh))))
              @init-system)
           (next-task (reset! fs-prev-state fileset)))))))
 
