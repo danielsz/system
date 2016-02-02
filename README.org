@@ -192,11 +192,13 @@ It is important to understand that code reloading and system restarts are orthog
 
 We *don’t want* to restart the system with *every* code change. Ideally, we want to only reload the code that has changed, and occasionally restart (when necessary).
 
-~boot-system~ gives you finegrained tuning over system restarts vs code reload. Each time you change a file, ~boot-system~ will reload your code (with ~refresh~ in  ~tools.namespace~). Filenames that appear in the ~files~ vector will trigger a full restart (with ~reset~ in ~component~). Typically, that vector will be small, as most modifications do not warrant a full restart. An example of when you would want a full restart is when you change routes in a web application; you will want the http server to be restarted. Another example is when you change a protocol; you may want to recreate all instances of the record implementing that protocol. In short, everytime you want to start again with fresh global/runtime state.
+~boot-system~ gives you finegrained tuning over system restarts vs code reload. Each time you change a file, ~boot-system~ will reload your code. Filenames that appear in the ~files~ vector will trigger a full restart. Typically, that vector will be small, as most modifications do not warrant a full restart. An example of when you would want a full restart is when you change a protocol; you may want to recreate all instances of the record implementing that protocol. In short, everytime you want to start again with fresh global/runtime state.
 
 In summary, when you instruct ~boot-system~ to manage your application lifecycle (with the ~auto~ option), either one of those two things will happen after you change a source file: 
 - ~refresh~ will first unload all affected namespaces (to remove old definitions) before reloading them in dependency order.
 - ~reset~ will restart the system if that file was defined in the ~files~ vector.
+
+Note: implementation details are not final. This is a work in progress (0.3.0-SNAPSHOT)
 
 *** The Holy Grail
 
