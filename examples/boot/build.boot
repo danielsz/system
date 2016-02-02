@@ -9,7 +9,7 @@
                  [ring/ring-defaults "0.1.5"]
                  [compojure "1.4.0"]
 
-                 [org.clojure/tools.nrepl "0.2.10"]])
+                 [org.clojure/tools.nrepl "0.2.12"]])
 
 (require
  '[reloaded.repl :as repl :refer [start stop go reset]]
@@ -23,7 +23,7 @@
   (comp
    (environ :env {:http-port "3000"})
    (watch :verbose true)
-   (system :sys #'dev-system :auto true :files ["handler.clj" "index.clj"])
+   (system :sys #'dev-system :auto true :files ["handler.clj" "html.clj"])
    (repl :server true)))
 
 (deftask dev-run

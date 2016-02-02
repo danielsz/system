@@ -1,6 +1,6 @@
 (ns system.boot
   {:boot/export-tasks true}
-  (:require [clojure.tools.namespace.repl :as repl]
+  (:require [ns-tracker.core :refer [ns-tracker]]
             [reloaded.repl :refer [set-init! reset go]]
             [boot.core       :as core]
             [boot.util       :as util]))
@@ -16,19 +16,19 @@
                       a auto bool "Manages the lifecycle of the application automatically."
                       f files FILES [str] "A vector of files. Will reset the system if a filename in the supplied vector changes."]
   (#'clojure.core/load-data-readers)
-  (->> (core/get-env :directories)
-       (apply repl/set-refresh-dirs))
   (let [fs-prev-state (atom nil)
-        init-system (delay (do (set-init! sys) (util/info (str sys (go) "\n"))))]
+        init-system (delay (do (set-init! sys) (util/info (str sys (go) "\n"))))
+        tracker (ns-tracker (into [] (core/get-env :directories)))]
     (fn [next-task]
       (fn [fileset]
-        (with-bindings {#'*data-readers* (.getRawRoot #'*data-readers*)
-                        #'*ns* *ns*} ;because of exception "Can't set!: *ns* from non-binding thread"
+        (with-bindings {#'*data-readers* (.getRawRoot #'*data-readers*)}
           (when auto
             (when (realized? init-system)
-              (if (modified-files? fs-prev-state fileset files)
-                (do (util/info (str sys ":resetting\n")) (reset))
-                (do (util/info (str sys ":refreshing\n")) (repl/refresh))))
+              (doseq [ns-sym (tracker)]
+                  (require ns-sym :reload)
+                  (util/info (str sys ":refreshing:" ns-sym "\n")))
+              (when (modified-files? fs-prev-state fileset files)
+                (util/info (str sys ":restarting\n")) (with-bindings {#'*ns* *ns*} (reset))))
              @init-system)
           (next-task (reset! fs-prev-state fileset)))))))
 
