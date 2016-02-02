@@ -8,8 +8,7 @@
 
 (defroutes routes
   (GET "/" [] (html/index))
-  (GET "/bar" [] (html/index))
-  (GET "/test" [] (-> (response "Testing.")
+  (GET "/test" [] (-> (response "Example.")
                       (content-type "text/html")))
   (route/not-found "<h1>Page not found</h1>"))
 

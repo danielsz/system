@@ -198,7 +198,7 @@ In summary, when you instruct ~boot-system~ to manage your application lifecycle
 - ~refresh~ will first unload all affected namespaces (to remove old definitions) before reloading them in dependency order.
 - ~reset~ will restart the system if that file was defined in the ~files~ vector.
 
-Note: implementation details are not final. This is a work in progress (0.3.0-SNAPSHOT)
+Note: implementation details are not final. This is a work in progress (0.3.0-SNAPSHOT).
 
 *** The Holy Grail
 
