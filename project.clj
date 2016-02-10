@@ -5,6 +5,7 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [reloaded.repl "0.1.0"]
+                 [prismatic/schema "1.0.4"]
                  [ns-tracker "0.3.0"]
                  [com.stuartsierra/component "0.3.1"]]
   :profiles {:dev {:dependencies [[org.clojure/tools.nrepl "0.2.11"]
@@ -12,7 +13,7 @@
                                   [ring "1.4.0"]
                                   [im.chit/hara.io.watch "2.1.7"]
                                   [com.datomic/datomic-free "0.9.4815.12"]
-                                  [com.novemberain/monger "2.0.1"]
+                                  [com.novemberain/monger "3.0.2"]
                                   [org.clojure/java.jdbc "0.3.5"]
                                   [com.h2database/h2 "1.4.181"]
                                   [org.postgresql/postgresql "9.4-1201-jdbc41"]
