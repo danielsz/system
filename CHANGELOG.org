@@ -5,6 +5,8 @@ This is a breaking change release
 - App component is deprecated
 - Everybdoy is welcome to participate in the discussion around the upcoming changes: https://github.com/danielsz/system/issues/48
 - Revised the reloading mechanism. Leveraging tools.namespace.
+- Validation with prismatic/schema
+- Mongo component supports options, credentials
 ** 0.2.1-SNAPSHOT
 - Fixes a long-standing issue with *data-readers* in Boot: https://github.com/boot-clj/boot/issues/47
 - Release Datomic connection upon stop. https://github.com/danielsz/system/pull/46  
