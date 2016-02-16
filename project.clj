@@ -22,6 +22,7 @@
                                   [clojurewerkz/quartzite "2.0.0"]
                                   [com.taoensso/sente "1.6.0"]
                                   [org.danielsz/etsy "0.1.2" ]
+                                  [compojure "1.4.0"]
                                   [http-kit "2.1.19"]
                                   [org.immutant/web "2.1.2"]
                                   [org.elasticsearch/elasticsearch "1.6.0"
