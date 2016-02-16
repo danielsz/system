@@ -1,5 +1,5 @@
 (ns system.components.immutant-web
-  (:require [system.util :as util]
+  (:require [schema.core :as s]
             [com.stuartsierra.component :as component]
             [immutant.web :refer [run stop]]))
 
@@ -14,8 +14,13 @@
       (stop server)
       component)))
 
-(def allowed-opts
-  [:host :port :path :virtual-host :dispatch? :servlet-name])
+(def Options
+  {(s/optional-key :host) s/Str
+   (s/optional-key :port) (s/both s/Int (s/pred pos?))
+   (s/optional-key :path) s/Str
+   (s/optional-key :virtual-host) s/Str
+   (s/optional-key :dispatch?) s/Bool
+   (s/optional-key :servlet-name) s/Str})
 
 (defn new-web-server
   ([port]
@@ -23,7 +28,6 @@
   ([port handler]
    (new-web-server port handler {}))
   ([port handler options]
-   (util/assert-options! "immutant-web" options allowed-opts)
-   (map->WebServer {:options (merge {:host "0.0.0.0" :port port}
-                                    options)
+   (map->WebServer {:options (s/validate Options (merge {:host "0.0.0.0" :port port}
+                                               options))
                     :handler handler})))
