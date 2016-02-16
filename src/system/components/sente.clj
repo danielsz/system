@@ -1,7 +1,12 @@
 (ns system.components.sente
   (:require [com.stuartsierra.component :as component]
+            [compojure.core :refer [routes GET POST]]
             [taoensso.sente :as sente]))
 
+(defn sente-routes [{{ring-ajax-post :ring-ajax-post ring-ajax-get-or-ws-handshake :ring-ajax-get-or-ws-handshake} :sente}]
+  (routes
+   (GET  "/chsk" req (ring-ajax-get-or-ws-handshake req))
+   (POST "/chsk" req (ring-ajax-post                req))))
 
 (defrecord ChannelSockets [ring-ajax-post ring-ajax-get-or-ws-handshake ch-chsk chsk-send! connected-uids router server-adapter event-msg-handler options]
   component/Lifecycle
@@ -14,7 +19,9 @@
         :ch-chsk ch-recv
         :chsk-send! send-fn
         :connected-uids connected-uids
-        :router (atom (sente/start-chsk-router! ch-recv event-msg-handler)))))
+        :router (atom (sente/start-chsk-router! ch-recv (if (:wrap-component? options)
+                                                          (event-msg-handler component)
+                                                          event-msg-handler))))))
   (stop [component]
     (if-let [stop-f @router]
       (assoc component :router (stop-f))
