@@ -15,4 +15,14 @@
   (is (:server http-server) "HTTP server has been added to component")
   (alter-var-root #'http-server component/stop))
 
+(deftest http-server-options-invalid-key-throws
+  (is (thrown? RuntimeException (new-web-server 8080 handler {:threads 7}))))
+
+(deftest http-server-options-invalid-value-throws
+  (is (thrown? RuntimeException (new-web-server 8080 handler {:thread 7.7}))))
+
+(deftest http-server-options-invalid-port-throws
+  (is (thrown? RuntimeException (new-web-server -1 handler {:thread 7}))))
+
+
 
