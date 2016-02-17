@@ -14,3 +14,9 @@
   (alter-var-root #'http-server component/start)
   (is (:server http-server) "HTTP server has been added to component")
   (alter-var-root #'http-server component/stop))
+
+(deftest http-server-illegal-port-throws
+  (is (thrown? RuntimeException (new-web-server -1 handler))))
+
+(deftest http-server-illegal-dispatch-option-throws
+  (is (thrown? RuntimeException (new-web-server 8080 handler {:dispatch? "bob"}))))
