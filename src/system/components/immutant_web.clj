@@ -1,5 +1,6 @@
 (ns system.components.immutant-web
   (:require [schema.core :as s]
+            [system.schema :as ss]
             [com.stuartsierra.component :as component]
             [immutant.web :refer [run stop]]))
 
@@ -15,8 +16,8 @@
       component)))
 
 (def Options
-  {(s/optional-key :host) s/Str
-   (s/optional-key :port) (s/both s/Int (s/pred pos?))
+  {(s/optional-key :host) ss/Hostname
+   (s/optional-key :port) ss/Port
    (s/optional-key :path) s/Str
    (s/optional-key :virtual-host) s/Str
    (s/optional-key :dispatch?) s/Bool
