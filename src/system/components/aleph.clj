@@ -5,12 +5,16 @@
 (defrecord WebServer [port server handler]
   component/Lifecycle
   (start [component]
-    (let [server (start-server handler {:port port :join? false})]
+    (let [handler (get-in component [:handler :handler] handler)
+          server (start-server handler {:port port :join? false})]
       (assoc component :server server)))
   (stop [component]
     (when server
       (.close server)
       component)))
+
 (defn new-web-server
-  [port handler]
-  (map->WebServer {:port port :handler handler}))
+  ([port]
+   (new-web-server port nil))
+  ([port handler]
+   (map->WebServer {:port port :handler handler})))
