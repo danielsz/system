@@ -1,9 +1,10 @@
 (ns system.components.mongo-test
-  (:require 
+  (:require
    [system.components.mongo :refer [new-mongo-db]]
    [com.stuartsierra.component :as component]
-   [clojure.test :refer [deftest is]]
+   [clojure.test :refer [deftest is use-fixtures]]
    [monger.db :as db]
+   [monger.core :as mg]
    [monger.collection :as mc]
    [monger.command :as cmd]))
 
@@ -15,14 +16,26 @@
   (is (mc/exists? db "collection"))
   (mc/drop db "collection"))
 
+(defn current-connections [db]
+  (get-in (cmd/server-status db) ["connections" "current"]))
+
 (def options {:connections-per-host 40
               :threads-allowed-to-block-for-connection-multiplier 300})
 
 (def mongo-db-with-options (new-mongo-db "127.0.0.1" 27017 "test" options))
 (def mongo-db-with-options-and-init (new-mongo-db "127.0.0.1" 27017 "test" options init-fn))
 (def mongo-db-prod (new-mongo-db "mongodb://127.0.0.1/monger-test4"))
-(def mongo-db-dev (new-mongo-db)) 
+(def mongo-db-dev (new-mongo-db))
 (def mongo-with-indices (new-mongo-db "mongodb://127.0.0.1/monger-test4" init-fn))
+
+(defn test-open-connections [f]
+  (let [{:keys [conn db]} (mg/connect-via-uri "mongodb://127.0.0.1/test")
+        initial-cc (current-connections db)]
+    (f)
+    (is (= initial-cc (current-connections db)))
+    (mg/disconnect conn)))
+
+(use-fixtures :each test-open-connections)
 
 (deftest mongo-production
   (alter-var-root #'mongo-db-prod component/start)
@@ -60,6 +73,12 @@
   (alter-var-root #'mongo-db-dev component/start)
   (is (:db mongo-db-dev) "DB has been added to component")
   (create-and-drop-collection (:db mongo-db-dev))
+  (alter-var-root #'mongo-db-dev component/stop)
+  (is (nil? (:db mongo-db-dev)) "DB is stopped"))
+
+(deftest mongo-development-idempotence
+  (alter-var-root #'mongo-db-dev component/start)
+  (test-open-connections #(alter-var-root #'mongo-db-dev component/start))
   (alter-var-root #'mongo-db-dev component/stop)
   (is (nil? (:db mongo-db-dev)) "DB is stopped"))
 

@@ -15,26 +15,31 @@
    (s/optional-key :auto-connect-retry) s/Bool
    (s/optional-key :max-auto-connect-retry-time) s/Int})
 
-(defrecord Mongo [uri init-fn dbname server-address server-port opts user password]
+(defrecord Mongo [uri init-fn dbname server-address server-port opts user password conn]
   component/Lifecycle
   (start [component]
-    (cond
-      opts (let [^MongoOptions opts (mg/mongo-options opts)
-                 ^ServerAddress sa  (mg/server-address server-address server-port)
-                 conn               (if user
-                                      (mg/connect [sa] opts (mcred/create user dbname password))
-                                      (mg/connect sa opts))
-                 db                 (mg/get-db conn dbname)
-                 _ (when init-fn (init-fn db))]
-             (assoc component :db db))
-      uri (let [{:keys [conn db]} (mg/connect-via-uri uri)
-                _ (when init-fn (init-fn db))]
-            (assoc component :db db))
-      :else (let [conn (mg/connect)
-                  db (mg/get-db conn "mongo-dev")]
-              (assoc component :db db))))
+    (if conn
+      component
+      (cond
+        opts (let [^MongoOptions opts (mg/mongo-options opts)
+                   ^ServerAddress sa  (mg/server-address server-address server-port)
+                   conn               (if user
+                                        (mg/connect [sa] opts (mcred/create user dbname password))
+                                        (mg/connect sa opts))
+                   db                 (mg/get-db conn dbname)
+                   _ (when init-fn (init-fn db))]
+               (assoc component :db db :conn conn))
+        uri (let [{:keys [conn db]} (mg/connect-via-uri uri)
+                  _ (when init-fn (init-fn db))]
+              (assoc component :db db :conn conn))
+        :else (let [conn (mg/connect)
+                    db (mg/get-db conn "mongo-dev")]
+                (assoc component :db db :conn conn)))))
+
   (stop [component]
-    (assoc component :db nil)))
+    (when conn (try (mg/disconnect conn)
+                    (catch Throwable t (println t "Error when stopping Mongo component"))))
+    (assoc component :db nil :conn nil)))
 
 (defn new-mongo-db
   ([]
