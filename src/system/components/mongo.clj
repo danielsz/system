@@ -39,7 +39,7 @@
   (stop [component]
     (when conn (try (mg/disconnect conn)
                     (catch Throwable t (println t "Error when stopping Mongo component"))))
-    (assoc component :db nil :conn nil)))
+    (dissoc component :db :conn)))
 
 (defn new-mongo-db
   ([]

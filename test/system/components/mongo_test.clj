@@ -24,9 +24,9 @@
 
 (def mongo-db-with-options (new-mongo-db "127.0.0.1" 27017 "test" options))
 (def mongo-db-with-options-and-init (new-mongo-db "127.0.0.1" 27017 "test" options init-fn))
-(def mongo-db-prod (new-mongo-db "mongodb://127.0.0.1/monger-test4"))
+(def mongo-db-prod (new-mongo-db "mongodb://127.0.0.1/test"))
 (def mongo-db-dev (new-mongo-db))
-(def mongo-with-indices (new-mongo-db "mongodb://127.0.0.1/monger-test4" init-fn))
+(def mongo-with-indices (new-mongo-db "mongodb://127.0.0.1/test" init-fn))
 
 (defn test-open-connections [f]
   (let [{:keys [conn db]} (mg/connect-via-uri "mongodb://127.0.0.1/test")
@@ -34,8 +34,6 @@
     (f)
     (is (= initial-cc (current-connections db)))
     (mg/disconnect conn)))
-
-(use-fixtures :each test-open-connections)
 
 (deftest mongo-production
   (alter-var-root #'mongo-db-prod component/start)
