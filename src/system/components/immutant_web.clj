@@ -23,12 +23,15 @@
    (s/optional-key :dispatch?) s/Bool
    (s/optional-key :servlet-name) s/Str})
 
-(defn new-web-server
-  ([port]
+(s/defn ^:always-validate new-web-server :- WebServer
+  ([port :- sc/Port]
    (new-web-server port nil {}))
-  ([port handler]
+  ([port :- sc/Port
+    handler]
    (new-web-server port handler {}))
-  ([port handler options]
-   (map->WebServer {:options (s/validate Options (merge {:host "0.0.0.0" :port port}
-                                               options))
+  ([port :- sc/Port
+    handler
+    options :- Options]
+   (map->WebServer {:options (merge {:host "0.0.0.0" :port port}
+                                    options)
                     :handler handler})))

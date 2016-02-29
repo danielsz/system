@@ -36,14 +36,17 @@
    (s/optional-key :request-header-size) sc/PosInt
    (s/optional-key :response-header-size) sc/PosInt})
 
-(defn new-web-server
-  ([port]
+(s/defn ^:always-validate new-web-server :- WebServer
+  ([port :- sc/Port]
    (new-web-server port nil {}))
-  ([port handler]
+  ([port :- sc/Port
+    handler]
    (new-web-server port handler {}))
-  ([port handler options]
-   (map->WebServer {:options (s/validate Options (merge {:port port :join? false}
-                                                        options))
+  ([port :- sc/Port
+    handler
+    options :- Options]
+   (map->WebServer {:options (merge {:port port :join? false}
+                                    options)
                     :handler handler})))
 
 
