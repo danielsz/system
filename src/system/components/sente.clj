@@ -23,7 +23,7 @@
                                                           (event-msg-handler component)
                                                           event-msg-handler))))))
   (stop [component]
-    (if-let [stop-f @router]
+    (if-let [stop-f (and router @router)]
       (assoc component :router (stop-f))
       component)))
 
