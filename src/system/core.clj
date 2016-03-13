@@ -1,5 +1,5 @@
 (ns system.core
-  (:require 
+  (:require
    [com.stuartsierra.component :as component]))
 
 (defmacro defsystem

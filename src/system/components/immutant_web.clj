@@ -13,7 +13,7 @@
   (stop [component]
     (when server
       (stop server)
-      component)))
+      (assoc component :server nil))))
 
 (def Options
   {(s/optional-key :host) sc/Hostname
