@@ -247,7 +247,14 @@ To help choose if ~system~ is right for you, here are a couple of tips. Take a c
 
 
 ** Contributing
-Please fork and issue a pull request to add more components. Please don't forget to include tests. You can refer to the existing ones to get started.
+Please fork and issue a pull request to add more components. Please
+don't forget to include tests. You can refer to the existing ones to
+get started.
+
+Calling ~lein test~ will run most of the tests. Since some of the unit
+tests are dependent upon external services being started (such as
+mongo, postgres, and elasticsearch), use ~lein test :dependency~ to
+run the full test suite.
 ** Credits
 I wish to thank [[https://github.com/stuartsierra][Stuart Sierra]] for the pioneering and guidance. Special thanks to [[https://github.com/weavejester][James Reeves]] for the [[https://github.com/weavejester/reloaded.repl][reloaded.rep]]l library and general inspiration. Thanks to [[https://github.com/ptaoussanis][Peter Taoussanis]], the friendly OSS contributor, who helped to ‘componentize’ [[https://github.com/ptaoussanis/sente][sente]], an amazing library on its own right.
 ** License

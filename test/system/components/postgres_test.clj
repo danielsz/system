@@ -15,7 +15,7 @@
    :password ""
    :host "127.0.0.1"})
 
-(deftest postgres-test-create-table-and-insert
+(deftest ^:dependency postgres-test-create-table-and-insert
   (let [db (component/start
             (p/new-postgres-database test-db-spec))
         msg "It works!"]

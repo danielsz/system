@@ -4,7 +4,7 @@
             [clojure.test :refer [deftest is]])
   (:import [org.elasticsearch.action.search SearchRequest]))
 
-(deftest test-elasticsearch
+(deftest ^:dependency test-elasticsearch
   (let [cluster-name (str "elasticsearch_" (System/getProperty "user.name"))
         elasticsearch-db (component/start
                            (new-elasticsearch-db
