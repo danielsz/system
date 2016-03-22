@@ -35,7 +35,7 @@
     (is (= initial-cc (current-connections db)))
     (mg/disconnect conn)))
 
-(deftest mongo-production
+(deftest ^:dependency mongo-production
   (alter-var-root #'mongo-db-prod component/start)
   (is (:db mongo-db-prod) "DB has been added to component")
   (is (= clojure.lang.PersistentHashSet (type (db/get-collection-names (:db mongo-db-prod)))) "Collections on DB is a set")
@@ -44,7 +44,7 @@
   (alter-var-root #'mongo-db-prod component/stop)
   (is (nil? (:db mongo-db-prod)) "DB is stopped"))
 
-(deftest mongo-production-with-options
+(deftest ^:dependency mongo-production-with-options
   (alter-var-root #'mongo-db-with-options component/start)
   (is (:db mongo-db-with-options) "DB has been added to component")
   (is (= clojure.lang.PersistentHashSet (type (db/get-collection-names (:db mongo-db-with-options)))) "Collections on DB is a set")
@@ -53,7 +53,7 @@
   (alter-var-root #'mongo-db-with-options component/stop)
   (is (nil? (:db mongo-db-with-options)) "DB is stopped"))
 
-(deftest mongo-production-with-options-and-init
+(deftest ^:dependency mongo-production-with-options-and-init
   (let [db #'mongo-db-with-options-and-init]
     (alter-var-root db component/start)
     (is (:db mongo-db-with-options-and-init) "DB has been added to component")
@@ -67,20 +67,20 @@
     (alter-var-root db component/stop)
     (is (nil? (:db mongo-db-with-options-and-init)) "DB is stopped")))
 
-(deftest mongo-development
+(deftest ^:dependency mongo-development
   (alter-var-root #'mongo-db-dev component/start)
   (is (:db mongo-db-dev) "DB has been added to component")
   (create-and-drop-collection (:db mongo-db-dev))
   (alter-var-root #'mongo-db-dev component/stop)
   (is (nil? (:db mongo-db-dev)) "DB is stopped"))
 
-(deftest mongo-development-idempotence
+(deftest ^:dependency mongo-development-idempotence
   (alter-var-root #'mongo-db-dev component/start)
   (test-open-connections #(alter-var-root #'mongo-db-dev component/start))
   (alter-var-root #'mongo-db-dev component/stop)
   (is (nil? (:db mongo-db-dev)) "DB is stopped"))
 
-(deftest mongo-indices
+(deftest ^:dependency mongo-indices
   (alter-var-root #'mongo-with-indices component/start)
   (is (:db mongo-with-indices) "DB has been added to component")
   (is (= clojure.lang.PersistentHashSet (type (db/get-collection-names (:db mongo-with-indices)))) "Collections on DB is a set")
@@ -91,6 +91,6 @@
   (alter-var-root #'mongo-with-indices component/stop)
   (is (nil? (:db mongo-with-indices)) "DB is stopped"))
 
-(deftest mongo-with-bogus-options
+(deftest ^:dependency mongo-with-bogus-options
   (is (= {:bogus 'disallowed-key} (try (new-mongo-db "127.0.0.1" 27017 "test" {:bogus true})
                                         (catch clojure.lang.ExceptionInfo e (:error (ex-data e)))))))
