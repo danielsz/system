@@ -7,12 +7,13 @@
 (defrecord JDBCDatabase [db-spec connection init-fn]
   component/Lifecycle
   (start [component]
-    (let [conn (jdbc/get-connection (:db-spec component))
+    (let [conn (or connection (jdbc/get-connection (:db-spec component)))
           _ (when init-fn (init-fn db-spec))]
       (assoc component :connection conn)))
   (stop [component]
-    (.close connection)
-    (assoc component :connection nil)))
+    (when-let [conn (:connection component)]
+      (.close conn))
+    (dissoc component :connection)))
 
 (defn new-database 
   ([db-spec]
