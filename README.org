@@ -251,10 +251,11 @@ Please fork and issue a pull request to add more components. Please
 don't forget to include tests. You can refer to the existing ones to
 get started.
 
-Calling ~lein test~ will run most of the tests. Since some of the unit
-tests are dependent upon external services being started (such as
-mongo, postgres, and elasticsearch), use ~lein test :dependency~ to
-run the full test suite.
+Calling ~lein test~ will tests that have no external
+dependencies. Tests that do require external services being installed
+on your system (such as Mongo, Postgres or Elasticsearch) can be run
+with ~lein test :dependency~. Use ~lein test :all~ to run the full
+test suite.
 ** Credits
 I wish to thank [[https://github.com/stuartsierra][Stuart Sierra]] for the pioneering and guidance. Special thanks to [[https://github.com/weavejester][James Reeves]] for the [[https://github.com/weavejester/reloaded.repl][reloaded.rep]]l library and general inspiration. Thanks to [[https://github.com/ptaoussanis][Peter Taoussanis]], the friendly OSS contributor, who helped to ‘componentize’ [[https://github.com/ptaoussanis/sente][sente]], an amazing library on its own right.
 ** License
