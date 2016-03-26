@@ -21,7 +21,7 @@
                                   [com.novemberain/langohr "2.11.0"]
                                   [clojurewerkz/neocons "3.0.0"]
                                   [clojurewerkz/quartzite "2.0.0"]
-                                  [com.taoensso/sente "1.6.0"]
+                                  [com.taoensso/sente "1.8.1"]
                                   [org.danielsz/etsy "0.1.2" ]
                                   [compojure "1.4.0"]
                                   [http-kit "2.1.19"]
