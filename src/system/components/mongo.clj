@@ -1,8 +1,8 @@
 (ns system.components.mongo
   (:require [com.stuartsierra.component :as component]
+            [system.common.mongo :as common]
             [schema.core :as s]
-            [monger.core :as mg]
-            [monger.credentials :as mcred])
+            [monger.core :as mg])
   (:import [com.mongodb MongoOptions ServerAddress]))
 
 (def Options
@@ -20,21 +20,8 @@
   (start [component]
     (if conn
       component
-      (cond
-        opts (let [^MongoOptions opts (mg/mongo-options opts)
-                   ^ServerAddress sa  (mg/server-address server-address server-port)
-                   conn               (if user
-                                        (mg/connect [sa] opts (mcred/create user dbname password))
-                                        (mg/connect sa opts))
-                   db                 (mg/get-db conn dbname)
-                   _ (when init-fn (init-fn db))]
-               (assoc component :db db :conn conn))
-        uri (let [{:keys [conn db]} (mg/connect-via-uri uri)
-                  _ (when init-fn (init-fn db))]
-              (assoc component :db db :conn conn))
-        :else (let [conn (mg/connect)
-                    db (mg/get-db conn "mongo-dev")]
-                (assoc component :db db :conn conn)))))
+      (let [conn (common/connect component)]
+        (assoc component :conn conn :db (mg/get-db conn)))))
 
   (stop [component]
     (when conn (try (mg/disconnect conn)

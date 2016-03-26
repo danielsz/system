@@ -41,9 +41,11 @@
                                                 org.apache.lucene/lucene-suggest
                                                 org.ow2.asm/asm
                                                 org.ow2.asm/asm-commons]]
-                                  [aleph "0.4.0-alpha9"]]}}
+                                  [aleph "0.4.0-alpha9"]]}
+             :mount {:dependencies [[mount "0.1.10"]]}
+             :mountlite {:dependencies [[functionalbytes/mount-lite "0.9.8"]
+                                        [org.clojure/tools.namespace "0.3.0-alpha3"]]}}
   :scm {:name "git"
         :url "https://github.com/danielsz/system"}
   :test-selectors {:default (complement :dependency)
-                   :dependency :dependency}
-)
+                   :dependency :dependency})
