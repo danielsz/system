@@ -4,13 +4,16 @@
 (def PosInt 
   (s/both s/Int (s/pred pos?)))
 
-(defn port-range-inclusive [min max]
-  (s/both s/Int 
-          (s/both (s/pred #(<= min %) `(~'ge ~min)) 
-                  (s/pred #(<= % max) `(~'le ~max)))))
+(defn port-range-inclusive?
+  [min max]
+  (fn [i] (and (integer? i)
+               (<= min i max))))
 
 (def Port
-  (port-range-inclusive 0 65535))
+  (let [min-valid-port 0
+        max-valid-port 65535]
+    (s/pred (port-range-inclusive? min-valid-port max-valid-port)
+            (str  "An integer p such that " min-valid-port " <= p <= " max-valid-porto))))
 
 (def IpAddress
   s/Str)
