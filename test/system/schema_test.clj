@@ -1,4 +1,4 @@
-(ns system.schema_test
+(ns system.schema-test
   (:require [system.schema :as sc]
             [schema.core :as s]
             [clojure.test :refer [deftest is]]))
