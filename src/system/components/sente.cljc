@@ -49,18 +49,17 @@
 
 ;; Sente does not support CLJ as a client yet
 #?(:cljs
-   (defrecord ChannelSocketClient [ring-ajax-post ring-ajax-get-or-ws-handshake ch-chsk chsk-send! connected-uids router path handler options]
+   (defrecord ChannelSocketClient [chsk ch-chsk chsk-send! chsk-state router path handler options]
      component/Lifecycle
      (start [component]
        (let [handler (or handler (get-in component [:sente-handler :handler]))
-             {:keys [ch-recv send-fn ajax-post-fn ajax-get-or-ws-handshake-fn connected-uids]}
+             {:keys [chsk ch-recv send-fn state]}
              (sente/make-channel-socket-client! path options)]
          (assoc component
-                :ring-ajax-post ajax-post-fn
-                :ring-ajax-get-or-ws-handshake ajax-get-or-ws-handshake-fn
+                :chsk chsk
                 :ch-chsk ch-recv
                 :chsk-send! send-fn
-                :connected-uids connected-uids
+                :chsk-state state
                 :router (atom (sente/start-chsk-router! ch-recv (if (:wrap-component? options)
                                                                   (handler component)
                                                                   handler))))))
