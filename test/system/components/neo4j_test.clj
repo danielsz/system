@@ -7,7 +7,7 @@
 (def uri "http://localhost:7474/db/data/")
 (def data {:foo "bar"})
 
-(deftest test-neo4j
+(deftest ^:dependency test-neo4j
   (let [{:keys [conn] :as db} (-> (neo4j/new-neo4j-db uri)
                                   component/start)]
     (is conn "conn has been added to component")
