@@ -17,7 +17,7 @@
 (defrecord ChannelSocketServer [ring-ajax-post ring-ajax-get-or-ws-handshake ch-chsk chsk-send! connected-uids router web-server-adapter handler options]
   component/Lifecycle
   (start [component]
-    (let [handler (or handler (get-in component [:sente-handler :handler]))
+    (let [handler (get-in component [:sente-handler :handler] handler)
           {:keys [ch-recv send-fn ajax-post-fn ajax-get-or-ws-handshake-fn connected-uids]}
           (sente/make-channel-socket-server! web-server-adapter options)]
       (assoc component
