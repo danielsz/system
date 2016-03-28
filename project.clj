@@ -8,7 +8,8 @@
                  [prismatic/schema "1.0.4"]
                  [ns-tracker "0.3.0"]
                  [com.stuartsierra/component "0.3.1"]]
-  :profiles {:dev {:dependencies [[org.clojure/tools.nrepl "0.2.11"]
+  :profiles {:dev {:dependencies [[org.clojure/clojurescript "1.8.34"]
+                                  [org.clojure/tools.nrepl "0.2.11"]
                                   [cider/cider-nrepl "0.10.1"]
                                   [ring "1.4.0"]
                                   [im.chit/hara.io.watch "2.1.7"]
@@ -21,7 +22,7 @@
                                   [com.novemberain/langohr "2.11.0"]
                                   [clojurewerkz/neocons "3.0.0"]
                                   [clojurewerkz/quartzite "2.0.0"]
-                                  [com.taoensso/sente "1.6.0"]
+                                  [com.taoensso/sente "1.8.1"]
                                   [org.danielsz/etsy "0.1.2" ]
                                   [compojure "1.4.0"]
                                   [http-kit "2.1.19"]
@@ -41,7 +42,15 @@
                                                 org.apache.lucene/lucene-suggest
                                                 org.ow2.asm/asm
                                                 org.ow2.asm/asm-commons]]
-                                  [aleph "0.4.0-alpha9"]]}}
+                                  [aleph "0.4.0-alpha9"]]
+                   :plugins [[lein-cljsbuild "1.1.3"]
+                             [lein-doo "0.1.6"]]
+                   :doo {:build "test"}
+                   :cljsbuild {:builds [{:id "test"
+                                         :source-paths ["src" "test"]
+                                         :compiler {:output-to "resources/public/js/testable.js"
+                                                    :main system.cljs-runner
+                                                    :optimizations :none}}]}}}
   :scm {:name "git"
         :url "https://github.com/danielsz/system"}
   :test-selectors {:default (complement :dependency)
