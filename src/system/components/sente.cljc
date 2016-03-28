@@ -49,20 +49,18 @@
 
 ;; Sente does not support CLJ as a client yet
 #?(:cljs
-   (defrecord ChannelSocketClient [chsk ch-chsk chsk-send! chsk-state router path handler options]
+   (defrecord ChannelSocketClient [chsk ch-chsk chsk-send! chsk-state path router handler options]
      component/Lifecycle
      (start [component]
-       (let [handler (or handler (get-in component [:sente-handler :handler]))
-             {:keys [chsk ch-recv send-fn state]}
-             (sente/make-channel-socket-client! path options)]
-         (assoc component
-                :chsk chsk
-                :ch-chsk ch-recv
-                :chsk-send! send-fn
-                :chsk-state state
-                :router (atom (sente/start-chsk-router! ch-recv (if (:wrap-component? options)
-                                                                  (handler component)
-                                                                  handler))))))
+       (let [{:keys [chsk ch-recv send-fn state]} (sente/make-channel-socket-client! path options)
+             component (assoc component
+                              :chsk chsk
+                              :ch-chsk ch-recv ; ChannelSocket's receive channel
+                              :chsk-send! send-fn ; ChannelSocket's send API fn
+                              :chsk-state state)]
+         (if handler
+           (assoc component :router (atom (sente/start-chsk-router! ch-recv handler)))
+           component)))
      (stop [component]
        (if-let [stop-f (and router @router)]
          (assoc component :router (stop-f))
@@ -70,6 +68,8 @@
 
 #?(:cljs
    (defn new-channel-socket-client
+     ([]
+      (new-channel-socket-client nil "/chsk" {}))
      ([path]
       (new-channel-socket-client nil path {}))
      ([event-msg-handler path]

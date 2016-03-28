@@ -7,3 +7,4 @@
 .DS_Store
 .lein-repl-history
 .nrepl-port
+node_modules/
