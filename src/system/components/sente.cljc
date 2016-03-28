@@ -52,7 +52,8 @@
    (defrecord ChannelSocketClient [chsk ch-chsk chsk-send! chsk-state path router handler options]
      component/Lifecycle
      (start [component]
-       (let [{:keys [chsk ch-recv send-fn state]} (sente/make-channel-socket-client! path options)
+       (let [handler (get-in component [:sente-handler :handler] handler)
+             {:keys [chsk ch-recv send-fn state]} (sente/make-channel-socket-client! path options)
              component (assoc component
                               :chsk chsk
                               :ch-chsk ch-recv ; ChannelSocket's receive channel
