@@ -63,9 +63,11 @@
            (assoc component :router (atom (sente/start-chsk-router! ch-recv handler)))
            component)))
      (stop [component]
-       (if-let [stop-f (and router @router)]
-         (assoc component :router (stop-f))
-         component))))
+       (when chsk
+         (sente/chsk-disconnect! chsk))
+       (when-let [stop-f (and router @router)]
+         (stop-f))
+       (dissoc component :router :chsk :ch-recv :chsk-send! :chsk-state))))
 
 #?(:cljs
    (defn new-channel-socket-client
