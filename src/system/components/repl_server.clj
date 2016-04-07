@@ -9,8 +9,7 @@
   (stop [component]
     (when server
       (stop-server server)
-      component)))
+      (assoc component :server nil))))
 
 (defn new-repl-server [port]
   (map->ReplServer {:port port}))
-

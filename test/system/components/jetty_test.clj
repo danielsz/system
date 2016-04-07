@@ -1,6 +1,9 @@
 (ns system.components.jetty-test
-  (:require [system.components.jetty :refer [new-web-server]]
+  (:require
+   [system.components.jetty :refer [new-web-server]]
+   system.monitoring.jetty
    [com.stuartsierra.component :as component]
+   [system.monitoring.monitoring :as monitoring]
    [clojure.test :refer [testing deftest is]]))
 
 (defn handler [request]
@@ -9,7 +12,7 @@
    :body "Hello World"})
 
 (def http-server (new-web-server 8081 handler))
- 
+
 (deftest http-server-lifecycle
   (alter-var-root #'http-server component/start)
   (is (:server http-server) "HTTP server has been added to component")
@@ -45,3 +48,9 @@
 
 (deftest http-server-max-threads-too-low-throws
   (is (thrown? RuntimeException (new-web-server 8080 handler {:max-threads 0}))))
+
+(deftest http-server-monitoring-status
+  (alter-var-root #'http-server component/start)
+  (is (= (monitoring/status http-server) :running))
+  (alter-var-root #'http-server component/stop)
+  (is (= (monitoring/status http-server) :down)))

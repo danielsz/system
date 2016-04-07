@@ -1,7 +1,10 @@
 (ns system.components.scheduled-executor-service-test
-  (:require [clojure.test :refer [deftest is]]
-            [com.stuartsierra.component :as component]
-            [system.components.scheduled-executor-service :refer [new-scheduler]]))
+  (:require
+   [system.components.scheduled-executor-service :refer [new-scheduler]]
+   system.monitoring.scheduled-executor-service
+   [com.stuartsierra.component :as component]
+   [system.monitoring.monitoring :as monitoring]
+   [clojure.test :refer [deftest is]]))
 
 (def scheduler (new-scheduler (+ 2 (.availableProcessors (Runtime/getRuntime)))))
 
@@ -10,3 +13,9 @@
   (is (= java.util.concurrent.ScheduledThreadPoolExecutor (type (:scheduler scheduler))) "the scheduler is running")
   (alter-var-root #'scheduler component/stop)
   (is (.isShutdown (:scheduler scheduler)) "the scheduler is stopped"))
+
+(deftest scheduler-monitoring-status
+  (alter-var-root #'scheduler component/start)
+  (is (= (monitoring/status scheduler) :running))
+  (alter-var-root #'scheduler component/stop)
+  (is (= (monitoring/status scheduler) :down)))
