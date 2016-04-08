@@ -37,7 +37,7 @@ Add the following to your project’s dependencies.
 *Attention:* ~0.3.0-SNAPSHOT~ is a breaking release. Please refer to the changelog.
 
 ** Example project
-An example project is available under the [[https://github.com/danielsz/system/tree/master/examples][examples]] folder. It is a self-contained project that will help you get started. Both the [[https://github.com/danielsz/system/tree/master/examples/leiningen][Leinigen]] and [[https://github.com/danielsz/system/tree/master/examples/boot][Boot]] toolchain are covered.
+An example project is available under the [[https://github.com/danielsz/system/tree/master/examples][examples]] folder. It is a self-contained project that will help you get started. Both the [[https://github.com/danielsz/system/tree/master/examples/leiningen][Leiningen]] and [[https://github.com/danielsz/system/tree/master/examples/boot][Boot]] toolchain are covered.
 ** Usage
 
 First, assemble your system(s) in a namespace of your choosing. Here we define two systems, development and production.
