@@ -13,7 +13,7 @@
   (stop [component]
     (when server
       (server)
-      (assoc component :server nil))))
+      component)))
 
 (def Options
   {(s/optional-key :ip) sc/IpAddress
@@ -30,7 +30,7 @@
   ([port handler]
    (new-web-server port handler {}))
   ([port handler options]
-   (map->WebServer {:options (s/validate Options
+   (map->WebServer {:options (s/validate Options 
                                          (merge {:port port}
                                                 options))
                     :handler handler})))

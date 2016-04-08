@@ -10,7 +10,7 @@
   (stop [component]
     (when server
       (stop-server server)
-      (assoc component :server nil))))
+      component)))
 
 (defn new-cider-repl-server [port]
   (map->CiderReplServer {:port port}))

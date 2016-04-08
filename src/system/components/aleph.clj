@@ -11,7 +11,7 @@
   (stop [component]
     (when server
       (.close server)
-      (assoc component :server nil))))
+      component)))
 
 (defn new-web-server
   ([port]

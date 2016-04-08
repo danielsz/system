@@ -27,7 +27,7 @@
    (s/optional-key :key-password) s/Str
    (s/optional-key :truststore) s/Str
    (s/optional-key :trust-password) s/Str
-   (s/optional-key :max-threads) sc/PosInt
+   (s/optional-key :max-threads) sc/PosInt 
    (s/optional-key :min-threads) sc/PosInt
    (s/optional-key :max-idle-time) sc/PosInt
    (s/optional-key :client-auth) s/Any
@@ -45,3 +45,5 @@
    (map->WebServer {:options (s/validate Options (merge {:port port :join? false}
                                                         options))
                     :handler handler})))
+
+

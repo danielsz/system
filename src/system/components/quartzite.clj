@@ -11,7 +11,7 @@
   (stop [component]
     (qs/shutdown scheduler)
     component))
-
+  
 (defn new-scheduler
   []
   (map->Scheduler {}))
