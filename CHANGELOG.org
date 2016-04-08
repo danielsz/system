@@ -10,6 +10,7 @@ This is a breaking change release
 - Adi component added
 - JDBC component made idempotent
 - Test selectors
+- Monitoring (protocol and various implementations)
 ** 0.2.1-SNAPSHOT
 - Fixes a long-standing issue with *data-readers* in Boot: https://github.com/boot-clj/boot/issues/47
 - Release Datomic connection upon stop. https://github.com/danielsz/system/pull/46  
