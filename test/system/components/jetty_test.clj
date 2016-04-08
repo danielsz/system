@@ -1,9 +1,9 @@
 (ns system.components.jetty-test
   (:require
-   [system.components.jetty :refer [new-web-server]]
-   system.monitoring.jetty
    [com.stuartsierra.component :as component]
-   [system.monitoring.monitoring :as monitoring]
+   [system.components.jetty :refer [new-web-server]]
+   (system.monitoring jetty
+                      [core :refer [started? stopped?]])
    [clojure.test :refer [testing deftest is]]))
 
 (defn handler [request]
@@ -51,6 +51,6 @@
 
 (deftest http-server-monitoring-status
   (alter-var-root #'http-server component/start)
-  (is (= (monitoring/status http-server) :running))
+  (is (started? http-server))
   (alter-var-root #'http-server component/stop)
-  (is (= (monitoring/status http-server) :down)))
+  (is (stopped? http-server)))

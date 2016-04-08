@@ -209,6 +209,13 @@ With ~system~, you can enjoy a true Lisp environment where code is always live (
 
 If you are using Leiningen, we recommend [[https://github.com/bhauman/lein-figwheel][Figwheel]] to address browser-side hot-reloading concerns.
 
+** Monitoring
+
+A monitoring protocol is available to query the status of
+components. Two methods are available, ~started?~ and ~stopped?~,
+whose concrete implementations depend on the native APIs of the
+service behind the component.
+
 ** The Reloaded pattern
 Here are a couple of links that are sure to shed more light on the motivations of the reloaded workflow.
 
@@ -256,11 +263,6 @@ dependencies. Tests that do require external services being installed
 on your system (such as Mongo, Postgres or Elasticsearch) can be run
 with ~lein test :dependency~. Use ~lein test :all~ to run the full
 test suite.
-
-*** Implementing the monitoring API
- Implement the ~system.monitoring.monitoring/Monitoring~ protocol if
- you want your component report back its status.
-
 
 ** Credits
 I wish to thank [[https://github.com/stuartsierra][Stuart Sierra]] for the pioneering and guidance. Special thanks to [[https://github.com/weavejester][James Reeves]] for the [[https://github.com/weavejester/reloaded.repl][reloaded.rep]]l library and general inspiration. Thanks to [[https://github.com/ptaoussanis][Peter Taoussanis]], the friendly OSS contributor, who helped to ‘componentize’ [[https://github.com/ptaoussanis/sente][sente]], an amazing library on its own right.

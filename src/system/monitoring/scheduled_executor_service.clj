@@ -1,9 +1,10 @@
 (ns system.monitoring.scheduled-executor-service
-  (:require system.components.scheduled-executor-service
-            [system.monitoring.monitoring :as m])
+  (:require [system.monitoring.core :as m])
   (:import [system.components.scheduled_executor_service Scheduler]))
 
 (extend-type Scheduler
   m/Monitoring
-  (status [component]
-    (if (.isShutdown (:scheduler component)) :down :running)))
+  (started? [component]
+    (not (.isShutdown (:scheduler component))))
+  (stopped? [component]
+    (.isShutdown (:scheduler component))))

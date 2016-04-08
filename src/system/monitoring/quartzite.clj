@@ -1,12 +1,11 @@
 (ns system.monitoring.quartzite
-  (:require system.components.quartzite
-            [system.monitoring.monitoring :as m]
-            clojurewerkz.quartzite.scheduler)
+  (:require [system.monitoring.core :as c]
+            [clojurewerkz.quartzite.scheduler :as s])
   (:import [system.components.quartzite Scheduler]))
 
 (extend-type Scheduler
-  m/Monitoring
-  (status [component]
-    (if (clojurewerkz.quartzite.scheduler/shutdown? (:scheduler component))
-      :down
-      :running)))
+  c/Monitoring
+  (started? [component]
+    (s/started? (:scheduler component)))
+  (stopped? [component]
+    (s/shutdown? (:scheduler component))))

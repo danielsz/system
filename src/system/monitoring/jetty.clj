@@ -1,9 +1,10 @@
 (ns system.monitoring.jetty
-  (:require system.components.jetty
-            [system.monitoring.monitoring :as m])
+  (:require [system.monitoring.core :as c])
   (:import [system.components.jetty WebServer]))
 
 (extend-type WebServer
-  m/Monitoring
-  (status [component]
-    (if (.isStopped (:server component)) :down :running)))
+  c/Monitoring
+  (started? [component]
+    (.isStarted (:server component)))
+  (stopped? [component]
+    (.isStopped (:server component))))

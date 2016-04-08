@@ -1,9 +1,9 @@
 (ns system.components.quartzite-test
   (:require
-   [system.components.quartzite :as quartz]
-   system.monitoring.quartzite
    [com.stuartsierra.component :as component]
-   [system.monitoring.monitoring :as monitoring]
+   [system.components.quartzite :as quartz]
+   (system.monitoring quartzite
+                      [core :refer [started? stopped?]])
    [clojurewerkz.quartzite.scheduler :as qs]
    [clojure.test :refer [deftest is]]))
 
@@ -18,6 +18,6 @@
 
 (deftest quartzite-monitoring-status
   (alter-var-root #'scheduler component/start)
-  (is (= (monitoring/status scheduler) :running))
+  (is (started? scheduler))
   (alter-var-root #'scheduler component/stop)
-  (is (= (monitoring/status scheduler) :down)))
+  (is (stopped? scheduler)))

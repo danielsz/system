@@ -1,9 +1,9 @@
 (ns system.components.scheduled-executor-service-test
   (:require
-   [system.components.scheduled-executor-service :refer [new-scheduler]]
-   system.monitoring.scheduled-executor-service
    [com.stuartsierra.component :as component]
-   [system.monitoring.monitoring :as monitoring]
+   [system.components.scheduled-executor-service :refer [new-scheduler]]
+   (system.monitoring scheduled-executor-service
+                      [core :refer [started? stopped?]])
    [clojure.test :refer [deftest is]]))
 
 (def scheduler (new-scheduler (+ 2 (.availableProcessors (Runtime/getRuntime)))))
@@ -16,6 +16,6 @@
 
 (deftest scheduler-monitoring-status
   (alter-var-root #'scheduler component/start)
-  (is (= (monitoring/status scheduler) :running))
+  (is (started? scheduler))
   (alter-var-root #'scheduler component/stop)
-  (is (= (monitoring/status scheduler) :down)))
+  (is (stopped? scheduler)))
