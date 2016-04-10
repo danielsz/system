@@ -8,6 +8,7 @@ This is a breaking change release
 - Validation with prismatic/schema
 - Mongo component supports options, credentials
 - Adi component added
+- Hikari component added
 - JDBC component made idempotent
 - Test selectors
 - Monitoring (protocol and various implementations)
