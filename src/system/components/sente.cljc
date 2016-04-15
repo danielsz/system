@@ -26,11 +26,11 @@
         :ch-chsk ch-recv
         :chsk-send! send-fn
         :connected-uids connected-uids
-        :router (atom (sente/start-chsk-router! ch-recv (if (:wrap-component? options)
-                                                          (handler component)
-                                                          handler))))))
+        :router (sente/start-chsk-router! ch-recv (if (:wrap-component? options)
+                                                    (handler component)
+                                                    handler)))))
   (stop [component]
-    (if-let [stop-f (and router @router)]
+    (if-let [stop-f router]
       (assoc component :router (stop-f))
       component)))
 
@@ -60,12 +60,12 @@
                               :chsk-send! send-fn ; ChannelSocket's send API fn
                               :chsk-state state)]
          (if handler
-           (assoc component :router (atom (sente/start-chsk-router! ch-recv handler)))
+           (assoc component :router (sente/start-chsk-router! ch-recv handler))
            component)))
      (stop [component]
        (when chsk
          (sente/chsk-disconnect! chsk))
-       (when-let [stop-f (and router @router)]
+       (when-let [stop-f router]
          (stop-f))
        (dissoc component :router :chsk :ch-recv :chsk-send! :chsk-state))))
 
