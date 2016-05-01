@@ -4,9 +4,8 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.8.0"]
-                 [reloaded.repl "0.1.0"]
                  [prismatic/schema "1.0.4"]
-                 [ns-tracker "0.3.0"]
+                 [org.clojure/tools.namespace "0.3.0-alpha3"]
                  [com.stuartsierra/component "0.3.1"]]
   :profiles {:dev {:dependencies [[org.clojure/clojurescript "1.8.34"]
                                   [org.clojure/tools.nrepl "0.2.11"]

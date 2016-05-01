@@ -1,13 +1,19 @@
 (ns system.boot
   {:boot/export-tasks true}
-  (:require [ns-tracker.core :refer [ns-tracker]]
-            [reloaded.repl :refer [set-init! reset go]]
-            [boot.core       :as core]
-            [boot.util       :as util]))
+  (:require
+   [system.repl :refer [init start reset refresh]]
+   [clojure.tools.namespace.dir :as dir]
+   [clojure.tools.namespace.track :as track]
+   [boot.core       :as core]
+   [boot.util       :as util]
+   [clojure.string :as str]))
 
-(defn- modified-files? [before-fileset after-fileset files]
-  (when files (->> (core/fileset-diff @before-fileset after-fileset)
-                   core/input-files
+(defn- modified-files [before-fileset after-fileset]
+  (->> (core/fileset-diff @before-fileset after-fileset)
+       core/input-files))
+
+(defn- restart? [before-fileset after-fileset files]
+  (when files (->> (modified-files before-fileset after-fileset)
                    (core/by-name files)
                    not-empty
                    boolean)))
@@ -16,20 +22,23 @@
                       a auto bool "Manages the lifecycle of the application automatically."
                       f files FILES [str] "A vector of files. Will reset the system if a filename in the supplied vector changes."]
   (#'clojure.core/load-data-readers)
+  (alter-var-root #'clojure.main/repl-requires conj '[system.repl :refer [init start reset]])
   (let [fs-prev-state (atom nil)
-        init-system (delay (do (set-init! sys) (util/info (str sys (go) "\n"))))
-        tracker (ns-tracker (into [] (core/get-env :directories)))]
+        dirs (into [] (core/get-env :directories))
+        tracker (atom (dir/scan-dirs (track/tracker) dirs))
+        init-system (delay (do (init sys) (util/info (str sys " " (start) "\n"))))]
     (fn [next-task]
       (fn [fileset]
         (with-bindings {#'*data-readers* (.getRawRoot #'*data-readers*)}
           (when auto
             (when (realized? init-system)
-              (doseq [ns-sym (tracker)]
-                  (require ns-sym :reload)
-                  (util/info (str sys ":refreshing:" ns-sym "\n")))
-              (when (modified-files? fs-prev-state fileset files)
-                (util/info (str sys ":restarting\n")) (with-bindings {#'*ns* *ns*} (reset))))
-             @init-system)
+              (swap! tracker dir/scan-dirs)
+              (util/info (str sys ":refreshing\n"))
+              (refresh tracker)
+              (when (restart? fs-prev-state fileset files)
+                (util/info (str sys ":restarting\n"))
+                (reset)))
+            @init-system)
           (next-task (reset! fs-prev-state fileset)))))))
 
 (core/deftask run
@@ -42,3 +51,4 @@
       (apply f arguments)
       (throw (ex-info "No -main method found" {:main-namespace main-namespace})))
     fs))
+

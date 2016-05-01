@@ -12,7 +12,6 @@
                  [org.clojure/tools.nrepl "0.2.12"]])
 
 (require
- '[reloaded.repl :as repl :refer [start stop go reset]]
  '[example.systems :refer [dev-system]]
  '[environ.boot :refer [environ]]
  '[system.boot :refer [system run]])
