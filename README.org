@@ -35,7 +35,7 @@ Add the following to your project’s dependencies.
 
 *ProTip:* Snapshot versions may be available.
 
-*Attention:* ~0.3.0-SNAPSHOT~ is a breaking release. Please refer to the changelog.
+*Attention:* ~0.3.0-SNAPSHOT~ is a breaking release. ~reloaded.repl~ is now ~system.repl~. Please refer to the changelog to see all changes.
 
 ** Example project
 An example project is available under the [[https://github.com/danielsz/system/tree/master/examples][examples]] folder. It is a self-contained project that will help you get started. Both the [[https://github.com/danielsz/system/tree/master/examples/leiningen][Leiningen]] and [[https://github.com/danielsz/system/tree/master/examples/boot][Boot]] toolchain are covered.
@@ -75,12 +75,12 @@ Then, in user.clj:
 
 #+BEGIN_SRC clojure
 (ns user
-  (:require [reloaded.repl :refer [system init start stop go reset]]
+  (:require [system.repl :refer [system init start stop reset]]
             [my-app.systems :refer [dev-system]]))
 
-(reloaded.repl/set-init! dev-system)
+(init dev-system)
 #+END_SRC
-You can now manipulate the system in the REPL: ~(go)~, ~(reset)~ or ~(stop)~. The system map is accessible at any time, it resides in a var named, as you can guess, ~#'system~.
+You can now manipulate the system in the REPL: ~(start)~, ~(reset)~ or ~(stop)~. The system map is accessible at any time, it resides in a var named, as you can guess, ~#'system~.
 
 In production, in core.clj:
 
@@ -100,14 +100,14 @@ Or, if you want to keep a handler on your system in production:
 #+BEGIN_SRC clojure
 (ns my-app.core
   (:gen-class)
-  (:require [reloaded.repl :refer [system init start stop go reset]]
+  (:require [system.repl :refer [system init start stop reset]]
             [my-app.systems :refer [prod-system]]))
 
 (defn -main
   "Start the application"
   []
-  (reloaded.repl/set-init! prod-system)
-  (go))
+  (init prod-system)
+  (start))
 #+END_SRC
 
 *** defsystem
@@ -142,11 +142,11 @@ A convenience macro, ~defsystem~, allows you to declare systems succinctly:
 
 *** At runtime: global system map vs dependency injection
 
-At runtime, the *system* var can be used anywhere after requiring it from the *reloaded.repl* namespace:
+At runtime, the *system* var can be used anywhere after requiring it from the *system.repl* namespace:
 
 #+BEGIN_SRC clojure
 (ns front-end.webapp.handler
- (:require [reloaded.repl :refer [system]]))
+ (:require [system.repl :refer [system]]))
 
 (code-using system ...)
 #+END_SRC

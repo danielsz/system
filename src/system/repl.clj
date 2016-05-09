@@ -1,18 +1,26 @@
 (ns system.repl
   (require [com.stuartsierra.component :as component]
            [clojure.tools.namespace.track :as track]
-           [system.reload :as reload]))
+           [system.reload :as reload]
+           [clojure.stacktrace :as st]
+           [io.aviso.ansi :refer [bold-red]] ))
+
 
 (declare system)
+(declare system-sym)
+
+(defn set-init! [sys]
+  (intern 'system.repl 'system-sym (symbol (str (:ns (meta sys))) (str (:name (meta sys))))))
 
 (defn init
   "Constructs the current development system."
-  [sys]
-  (alter-var-root #'system  (constantly (sys))))
+  []  
+  (alter-var-root #'system (constantly ((find-var system-sym)))))
 
 (defn start
   "Starts the current development system."
   []
+  (init)
   (alter-var-root #'system component/start))
 
 (defn stop
@@ -25,14 +33,20 @@
   (stop)
   (start))
 
-(defn refresh [tracker]
-  ;(println :unloading (::track/unload @tracker))
-  (println :reloading (::track/load @tracker))
-  (when (::reload/error @tracker) (println "Error reloading" (::reload/error-ns @tracker)))
-  (swap! tracker reload/track-reload))
+(defn refresh [tracker {:keys [restart?]}]
+  (when restart? (stop))
+
+  (println "Unloading:" (::track/unload @tracker))
+  (println "Reloading:" (::track/load @tracker))
+  (swap! tracker reload/track-reload)
+  (when (::reload/error @tracker)
+    (println (bold-red (str "Error reloading: " (::reload/error-ns @tracker))))
+    (st/print-throwable (::reload/error @tracker)))
+
+  (when restart? (start)))
 
 
 ;; No need to break API signatures
 
 (def go start)
-(def set-init! init)
+

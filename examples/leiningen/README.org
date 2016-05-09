@@ -12,7 +12,7 @@ $ lein repl
 
 In the user namespace, type: 
 #+BEGIN_SRC clojure 
-user=> (go)
+user=> (start)
 #+END_SRC
 
 Your local web app can be found on [[http://localhost:300][localhost]] on port 3000.

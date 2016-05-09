@@ -6,6 +6,7 @@
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [prismatic/schema "1.0.4"]
                  [org.clojure/tools.namespace "0.3.0-alpha3"]
+                 [io.aviso/pretty "0.1.26"]
                  [com.stuartsierra/component "0.3.1"]]
   :profiles {:dev {:dependencies [[org.clojure/clojurescript "1.8.34"]
                                   [org.clojure/tools.nrepl "0.2.11"]

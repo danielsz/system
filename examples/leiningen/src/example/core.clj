@@ -1,11 +1,11 @@
 (ns example.core
   (:gen-class)
   (:require 
-   [reloaded.repl :refer [system init start stop go reset]]
+   [system.repl :refer [system init start stop reset]]
    [example.systems :refer [prod-system]]))
 
 (defn -main
   "Start a production system."
   [& args]
-  (reloaded.repl/set-init! prod-system)
-  (go))
+  (init prod-system)
+  (start))

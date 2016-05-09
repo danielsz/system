@@ -1,7 +1,7 @@
 (ns system.boot
   {:boot/export-tasks true}
   (:require
-   [system.repl :refer [init start reset refresh]]
+   [system.repl :refer [set-init! start refresh]]
    [clojure.tools.namespace.dir :as dir]
    [clojure.tools.namespace.track :as track]
    [boot.core       :as core]
@@ -18,15 +18,24 @@
                    not-empty
                    boolean)))
 
-(core/deftask system [s sys SYS code "The system var."
-                      a auto bool "Manages the lifecycle of the application automatically."
-                      f files FILES [str] "A vector of files. Will reset the system if a filename in the supplied vector changes."]
+(core/deftask system
+  "Runtime code loading. Automatic System restarts. Fileset driven. 
+
+   Mark your namespace with metadata if you don't want to unload it before reloading its definitions. 
+   Valid keys are :passover :blood-of-spring-lamb, :red-pill, :blue-pil or :no-remove-ns.
+
+     You take the blue pill—the story ends. You take the red pill, and I show you how deep the rabbit hole goes."
+  [s sys SYS edn "The system Var."
+   a auto bool "Manages the lifecycle of the application automatically."
+   f files FILES [str] "A vector of files. Will reset the system if a filename in the supplied vector changes."]
   (#'clojure.core/load-data-readers)
-  (alter-var-root #'clojure.main/repl-requires conj '[system.repl :refer [init start reset]])
+  (alter-var-root #'clojure.main/repl-requires conj '[system.repl :refer [set-init! start go stop reset]])
   (let [fs-prev-state (atom nil)
         dirs (into [] (core/get-env :directories))
         tracker (atom (dir/scan-dirs (track/tracker) dirs))
-        init-system (delay (do (init sys) (util/info (str sys " " (start) "\n"))))]
+        init-system (delay (do (set-init! sys)
+                               (start)
+                               (util/info (str "Starting " sys "\n"))))]
     (fn [next-task]
       (fn [fileset]
         (with-bindings {#'*data-readers* (.getRawRoot #'*data-readers*)}
@@ -34,10 +43,7 @@
             (when (realized? init-system)
               (swap! tracker dir/scan-dirs)
               (util/info (str sys ":refreshing\n"))
-              (refresh tracker)
-              (when (restart? fs-prev-state fileset files)
-                (util/info (str sys ":restarting\n"))
-                (reset)))
+              (refresh tracker {:restart? (restart? fs-prev-state fileset files)}))
             @init-system)
           (next-task (reset! fs-prev-state fileset)))))))
 

@@ -1,19 +1,21 @@
 (set-env!
  :resource-paths #{"src"}
- :dependencies '[[org.danielsz/system "0.3.0-SNAPSHOT"]
+ :dependencies '[[tolitius/boot-check "0.1.2-SNAPSHOT" :scope "test"]
+
+                 [org.danielsz/system "0.3.0-SNAPSHOT"]
                  [environ "1.0.2"]
                  [boot-environ "1.0.2"]
 
-                 [ring/ring-core "1.4.0"]
-                 [ring/ring-jetty-adapter "1.4.0"]
+                 [ring "1.4.0"]
                  [ring/ring-defaults "0.1.5"]
                  [compojure "1.4.0"]
 
                  [org.clojure/tools.nrepl "0.2.12"]])
 
 (require
- '[example.systems :refer [dev-system]]
+ '[tolitius.boot-check :as check]
  '[environ.boot :refer [environ]]
+ '[example.systems :refer [dev-system]]
  '[system.boot :refer [system run]])
 
 (deftask dev
@@ -30,7 +32,7 @@
   []
   (comp
    (environ :env {:http-port "3000"})
-   (run :main-namespace "example.core" :arguments [#'dev-system])
+   (run :main-namespace "example.core" :arguments ['dev-system])
    (wait)))
 
 (deftask build

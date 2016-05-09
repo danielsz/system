@@ -17,8 +17,8 @@
   (alter-var-root #'http-server component/start)
   (is (:server http-server) "HTTP server has been added to component")
   (is (.isStarted (:server http-server)) "HTTP server starts")
-  (alter-var-root #'http-server component/stop)
-  (is (.isStopped (:server http-server)) "HTTP server stops"))
+  (is (not (.isStopped (:server http-server))) "HTTP server stops")
+  (alter-var-root #'http-server component/stop))
 
 (deftest http-server-valid-options-does-not-throw
   (is (new-web-server 8081 handler {:host "example.com"
@@ -52,5 +52,5 @@
 (deftest http-server-monitoring-status
   (alter-var-root #'http-server component/start)
   (is (started? http-server))
-  (alter-var-root #'http-server component/stop)
-  (is (stopped? http-server)))
+  (is (not (stopped? http-server)))
+  (alter-var-root #'http-server component/stop)  )

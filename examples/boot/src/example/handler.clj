@@ -9,10 +9,9 @@
 (defroutes routes
   (GET "/" [] (html/index))
   (GET "/test" [] (-> (response "Example.")
-                      (content-type "text/html")))
+                      (content-type "text/plain")))
   (route/not-found "<h1>Page not found</h1>"))
 
 (def app
-  (-> #'routes
-      (wrap-defaults site-defaults)))
+  (wrap-defaults #'routes site-defaults))
 

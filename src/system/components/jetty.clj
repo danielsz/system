@@ -4,15 +4,19 @@
             [com.stuartsierra.component :as component]
             [ring.adapter.jetty :refer [run-jetty]]))
 
-(defrecord WebServer [options server handler]
+(defrecord WebServer [options handler]
   component/Lifecycle
   (start [component]
-    (let [handler (get-in component [:handler :handler] handler)
-          server (run-jetty handler options)]
-      (assoc component :server server)))
+    (if (:server component)
+      component
+      (let [handler (get-in component [:handler :handler] handler)
+            server (run-jetty (fn [req] (handler req)) options)]
+        (assoc component :server server))))
   (stop [component]
-    (when server
-      (.stop server)
+    (if-let [server (:server component)]
+      (do (.stop server)
+          (.join server)
+          (dissoc component :server))
       component)))
 
 (def Options
@@ -45,5 +49,3 @@
    (map->WebServer {:options (s/validate Options (merge {:port port :join? false}
                                                         options))
                     :handler handler})))
-
-
