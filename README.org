@@ -194,7 +194,7 @@ It is important to understand that code reloading and system restarts are orthog
 
 We *don’t want* to restart the system with *every* code change. Ideally, we want to only reload the code that has changed, and occasionally restart (when necessary).
 
-~boot-system~ gives you finegrained tuning over system restarts vs code reload. Each time you change a file, ~boot-system~ will reload your code. Conversely, filenames that have been designated in the ~files~ option will trigger a full restart. Typically, the files vector will be small, as most modifications do not warrant a full restart. An example of when you would want a full restart is when you modify a Var that is used in a thread (that of a web server, for example). This is explained in detail in the [[http://danielsz.github.io/2016/05/06/Ghosts-in-the-machine][~Ghosts in the machine~]] blog post. 
+~boot-system~ gives you finegrained tuning over system restarts vs code reload. Each time you change a file, ~boot-system~ will reload your code. Conversely, filenames that have been designated in the ~files~ option will trigger a full restart. Typically, the files vector will be small, as most modifications do not warrant a full restart. An example of when you would want a full restart is when you modify a Var that is used in a thread (that of a web server, for example). This is explained in detail in the [[http://danielsz.github.io/2016/05/06/Ghosts-in-the-machine][Ghosts in the machine]] blog post. 
 Check the options with ~boot system -h~. 
 
 In summary, when you instruct ~boot-system~ to manage your application lifecycle (with the ~auto~ option), either one of those two things will happen after you change a source file:
