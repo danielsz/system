@@ -49,7 +49,7 @@ Two minimal projects that will help you get started. Both the [[https://github.c
 
 A web service written multiple times using different styles.
 
-- System map is accessed directly (project for beginners). https://github.com/danielsz/system-advanced-example
+- System map is accessed directly. https://github.com/danielsz/system-advanced-example
 - Dependency injection, Duct abstractions and other known techniques. https://github.com/danielsz/system-dependency-injection
 
 ** Usage
