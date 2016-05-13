@@ -3,8 +3,8 @@
  :dependencies '[[tolitius/boot-check "0.1.2-SNAPSHOT" :scope "test"]
 
                  [org.danielsz/system "0.3.0-SNAPSHOT"]
-                 [environ "1.0.2"]
-                 [boot-environ "1.0.2"]
+                 [environ "1.0.3"]
+                 [boot-environ "1.0.3"]
 
                  [ring "1.4.0"]
                  [ring/ring-defaults "0.1.5"]
