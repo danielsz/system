@@ -4,10 +4,10 @@
              [jetty :refer [new-web-server]]
              [repl-server :refer [new-repl-server]])
             [environ.core :refer [env]]
-            [example.handler :refer [app routes]]))
+            [example.handler :refer [app]]))
 
 (defsystem dev-system
-  [:web (new-web-server (Integer. (env :http-port)) (var routes))])
+  [:web (new-web-server (Integer. (env :http-port)) app)])
 
 (defsystem prod-system
   [:web (new-web-server (Integer. (env :http-port)) app)

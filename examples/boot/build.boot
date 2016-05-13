@@ -32,7 +32,7 @@
   []
   (comp
    (environ :env {:http-port "3000"})
-   (run :main-namespace "example.core" :arguments ['dev-system])
+   (run :main-namespace "example.core" :arguments [#'dev-system])
    (wait)))
 
 (deftask build
