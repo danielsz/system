@@ -88,10 +88,10 @@ Then, in user.clj:
 
 #+BEGIN_SRC clojure
 (ns user
-  (:require [system.repl :refer [system init start stop reset]]
+  (:require [system.repl :refer [system set-init! start stop reset]]
             [my-app.systems :refer [dev-system]]))
 
-(init dev-system)
+(set-init! #'dev-system)
 #+END_SRC
 You can now manipulate the system in the REPL: ~(start)~, ~(reset)~ or ~(stop)~. The system map is accessible at any time, it resides in a var named, as you can guess, ~#'system~.
 
@@ -113,13 +113,13 @@ Or, if you want to keep a handler on your system in production:
 #+BEGIN_SRC clojure
 (ns my-app.core
   (:gen-class)
-  (:require [system.repl :refer [system init start stop reset]]
+  (:require [system.repl :refer [set-init! start]]
             [my-app.systems :refer [prod-system]]))
 
 (defn -main
   "Start the application"
   []
-  (init prod-system)
+  (set-init! #'prod-system)
   (start))
 #+END_SRC
 
