@@ -10,7 +10,9 @@
 (declare system-sym)
 
 (defn set-init! [sys]
-  (intern 'system.repl 'system-sym (symbol (str (:ns (meta sys))) (str (:name (meta sys))))))
+  (if (var? sys)
+    (intern 'system.repl 'system-sym (symbol (str (:ns (meta sys))) (str (:name (meta sys)))))
+    (throw (Exception. "sys-init! expects a Var, eg. #'system-dev "))))
 
 (defn init
   "Constructs the current development system."
