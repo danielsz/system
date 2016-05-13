@@ -1,6 +1,6 @@
 (ns user
   (:require 
-   [system.repl :refer [system init start stop reset]]
+   [system.repl :refer [system set-init! start stop reset]]
    [example.systems :refer [dev-system]]))
 
 (set-init! #'dev-system)
