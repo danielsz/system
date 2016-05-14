@@ -3,10 +3,10 @@
 This is a breaking change release
 - Incorporates Duct abstractions (endpoint and handlers)
 - App component is deprecated
-- Everybody is welcome to participate in the discussion around the upcoming changes: https://github.com/danielsz/system/issues/48
 - Revised the reloading mechanism. Leveraging tools.namespace. New option enabling to turn unloading on or off.
 - `reloaded.repl` is now `system.repl`
 - Validation with prismatic/schema
+- New example for system + sente
 - Mongo component supports options, credentials
 - Adi component added
 - Hikari component added
