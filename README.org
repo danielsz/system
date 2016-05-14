@@ -52,6 +52,12 @@ A web service written multiple times using different styles.
 - System map is accessed directly. https://github.com/danielsz/system-advanced-example
 - Dependency injection, Duct abstractions and other known techniques. https://github.com/danielsz/system-dependency-injection
 
+*** Websockets
+
+A web application with client-side UI. Demonstrates login procedure with Sente (a realtime web comms library).  
+
+- https://github.com/danielsz/system-websockets
+ 
 ** Usage
 
 First, assemble your system(s) in a namespace of your choosing. Here we define two systems, development and production.
