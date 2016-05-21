@@ -13,6 +13,7 @@
                                   [cider/cider-nrepl "0.10.1"]
                                   [ring "1.4.0"]
                                   [im.chit/hara.io.watch "2.1.7"]
+                                  [im.chit/hara.io.scheduler "2.3.6"]
                                   [im.chit/adi "0.3.2"]
                                   [com.datomic/datomic-free "0.9.4815.12"]
                                   [com.novemberain/monger "3.0.2"]
@@ -23,7 +24,7 @@
                                   [clojurewerkz/neocons "3.0.0"]
                                   [clojurewerkz/quartzite "2.0.0"]
                                   [com.taoensso/sente "1.8.1"]
-                                  [org.danielsz/etsy "0.1.2" ]
+                                  [org.danielsz/etsy "0.1.2"]
                                   [compojure "1.4.0"]
                                   [http-kit "2.1.19"]
                                   [org.immutant/web "2.1.2"]
@@ -55,5 +56,5 @@
   :scm {:name "git"
         :url "https://github.com/danielsz/system"}
   :test-selectors {:default (complement :dependency)
-                   :dependency :dependency}
-)
+                   :dependency :dependency})
+
