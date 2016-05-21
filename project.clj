@@ -29,6 +29,7 @@
                                   [http-kit "2.1.19"]
                                   [org.immutant/web "2.1.2"]
                                   [hikari-cp "1.6.1"]
+                                  [com.taoensso/carmine "2.12.2"]
                                   [org.elasticsearch/elasticsearch "1.6.0"
                                    :exclusions [org.antlr/antlr-runtime
                                                 org.apache.lucene/lucene-analyzers-common
