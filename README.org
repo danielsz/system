@@ -20,6 +20,7 @@
 - [[http://clojurerabbitmq.info/][Langohr]] (RabbitMQ client)
 - [[https://github.com/danielsz/etsy-clojure-api][Etsy]] (Etsy client)
 - [[http://docs.caudate.me/hara/#haraiowatch][hara.io.watch]] (File watcher)
+- [[http://docs.caudate.me/hara/hara-io-scheduler.html][hara.io.scheduler]] (Cron-like scheduler)
 - [[https://www.elastic.co/][Elasticsearch]] (Elasticsearch full-text search engine)
 - [[https://github.com/weavejester/duct][Duct-style]] components for Ring applications
 - [[https://github.com/tomekw/hikari-cp][Hikari CP]] (JDBC connection pool)
