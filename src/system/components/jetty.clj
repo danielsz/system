@@ -31,7 +31,7 @@
    (s/optional-key :key-password) s/Str
    (s/optional-key :truststore) s/Str
    (s/optional-key :trust-password) s/Str
-   (s/optional-key :max-threads) sc/PosInt 
+   (s/optional-key :max-threads) sc/PosInt
    (s/optional-key :min-threads) sc/PosInt
    (s/optional-key :max-idle-time) sc/PosInt
    (s/optional-key :client-auth) s/Any

@@ -30,7 +30,7 @@
   ([port handler]
    (new-web-server port handler {}))
   ([port handler options]
-   (map->WebServer {:options (s/validate Options 
+   (map->WebServer {:options (s/validate Options
                                          (merge {:port port}
                                                 options))
                     :handler handler})))

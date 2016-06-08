@@ -1,6 +1,5 @@
 (ns system.components.rabbitmq
   (:require [com.stuartsierra.component :as component]
-            [environ.core :refer [env]]
             [langohr.core      :as rmq]
             [langohr.channel   :as lch]))
 
@@ -17,4 +16,3 @@
 
 (defn new-rabbit-mq [uri]
   (map->Rabbit {:uri uri}))
-

@@ -15,7 +15,7 @@
       (.close conn))
     (dissoc component :connection)))
 
-(defn new-database 
+(defn new-database
   ([db-spec]
    (map->JDBCDatabase {:db-spec db-spec}))
   ([db-spec init-fn]

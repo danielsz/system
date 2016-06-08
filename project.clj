@@ -54,6 +54,10 @@
                                          :compiler {:output-to "resources/public/js/testable.js"
                                                     :main system.cljs-runner
                                                     :optimizations :none}}]}}}
+                                  
+             :mount {:dependencies [[mount "0.1.10"]]}
+             :mountlite {:dependencies [[functionalbytes/mount-lite "0.9.8"]
+                                        [org.clojure/tools.namespace "0.3.0-alpha3"]]}
   :scm {:name "git"
         :url "https://github.com/danielsz/system"}
   :test-selectors {:default (complement :dependency)
