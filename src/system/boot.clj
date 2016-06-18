@@ -17,12 +17,10 @@
                           regexes core/by-re
                           :else   core/by-name)
         files (if regexes (map re-pattern files) files)]
-    (let [x (when files (->> (modified-files before-fileset after-fileset)
-                             (core/by-name files)
-                             not-empty
-                             boolean))]
-      (pr "restart? " x)
-      x)))
+    (when files (->> (modified-files before-fileset after-fileset)
+                     (file-filter files)
+                     not-empty
+                     boolean))))
 
 (core/deftask system
   "Runtime code loading. Automatic System restarts. Fileset driven. 
