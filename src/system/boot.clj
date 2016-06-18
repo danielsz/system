@@ -12,11 +12,15 @@
   (->> (core/fileset-diff @before-fileset after-fileset)
        core/input-files))
 
-(defn- restart? [before-fileset after-fileset files]
-  (when files (->> (modified-files before-fileset after-fileset)
-                   (core/by-name files)
-                   not-empty
-                   boolean)))
+(defn- restart? [before-fileset after-fileset files {:keys [paths regexes]}]
+  (let [file-filter (cond paths   core/by-path
+                          regexes core/by-re
+                          :else   core/by-name)
+        files (if regexes (map re-pattern files) files)]
+    (when files (->> (modified-files before-fileset after-fileset)
+                     (file-filter files)
+                     not-empty
+                     boolean))))
 
 (core/deftask system
   "Runtime code loading. Automatic System restarts. Fileset driven. 
@@ -27,7 +31,9 @@
      You take the blue pill—the story ends. You take the red pill, and I show you how deep the rabbit hole goes."
   [s sys SYS edn "The system Var."
    a auto bool "Manages the lifecycle of the application automatically."
-   f files FILES [str] "A vector of files. Will reset the system if a filename in the supplied vector changes."]
+   f files FILES [str] "A vector of files. Will reset the system if a filename in the supplied vector changes."
+   r regexes bool "Treat --files as regexes, not file names. Only one of regexes|paths is allowed."
+   p paths   bool "Treat --files as classpath paths, not file names. Only one of regexes|paths is allowed."]
   (#'clojure.core/load-data-readers)
   (alter-var-root #'clojure.main/repl-requires conj '[system.repl :refer [set-init! start go stop reset]])
   (let [fs-prev-state (atom nil)
@@ -36,6 +42,9 @@
         init-system (delay (do (set-init! sys)
                                (start)
                                (util/info (str "Starting " sys "\n"))))]
+    (when (and regexes paths)
+      (util/fail "You can only specify --regexes or --paths, not both.\n")
+      (*usage*))
     (fn [next-task]
       (fn [fileset]
         (with-bindings {#'*data-readers* (.getRawRoot #'*data-readers*)}
@@ -43,7 +52,7 @@
             (when (realized? init-system)
               (swap! tracker dir/scan-dirs)
               (util/info (str sys ":refreshing\n"))
-              (refresh tracker {:restart? (restart? fs-prev-state fileset files)}))
+              (refresh tracker {:restart? (restart? fs-prev-state fileset files {:regexes regexes :paths paths})}))
             @init-system)
           (next-task (reset! fs-prev-state fileset)))))))
 
