@@ -2,6 +2,7 @@
 ** 0.3.1-SNAPSHOT
 - Carmine/Redis PubSub (pattern channels)
 - hara.io.scheduler 
+- Allow regex and paths in files vector (https://github.com/danielsz/system/pull/86)
 ** 0.3.0-SNAPSHOT
 This is a breaking change release
 - Incorporates Duct abstractions (endpoint and handlers)
