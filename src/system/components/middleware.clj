@@ -1,6 +1,5 @@
 (ns system.components.middleware
-  (:require [com.stuartsierra.component :as component]
-            [compojure.core :as compojure]))
+  (:require [com.stuartsierra.component :as component]))
 
 (defn- middleware-fn [middleware entry]
   (if (vector? entry)
