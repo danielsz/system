@@ -67,7 +67,12 @@
          (sente/chsk-disconnect! chsk))
        (when-let [stop-f router]
          (stop-f))
-       (dissoc component :router :chsk :ch-recv :chsk-send! :chsk-state))))
+       (assoc component
+              :router nil
+              :chsk nil
+              :ch-chsk nil
+              :chsk-send! nil
+              :chsk-state nil))))
 
 #?(:cljs
    (defn new-channel-socket-client

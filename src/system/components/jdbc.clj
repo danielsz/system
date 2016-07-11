@@ -13,7 +13,7 @@
   (stop [component]
     (when-let [conn (:connection component)]
       (.close conn))
-    (dissoc component :connection)))
+    (assoc component :connection nil)))
 
 (defn new-database 
   ([db-spec]
