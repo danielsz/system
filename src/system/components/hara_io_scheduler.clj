@@ -10,7 +10,7 @@
     (assoc component :scheduler scheduler))
   (stop [component]
     (sch/stop! scheduler)
-    (dissoc component :scheduler)))
+    (assoc component :scheduler nil)))
 
 (defn new-scheduler
   ([]

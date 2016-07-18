@@ -12,4 +12,4 @@
   (alter-var-root #'scheduler component/start)
   (is (= (clock-started? (get-in scheduler [:scheduler :clock])) true))
   (alter-var-root #'scheduler component/stop)
-  (is (empty? scheduler)))
+  (is (nil? (:scheduler scheduler))))
