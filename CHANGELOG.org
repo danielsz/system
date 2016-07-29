@@ -5,6 +5,7 @@
 - Allow regex and paths in files vector (https://github.com/danielsz/system/pull/86)
 - Accomodate simplest use case (no system). http://stackoverflow.com/questions/38622722/reloading-from-clojure-file/38625722#38625722
 - Print output when system starts and stops (@peterromfeldhk)
+- Validate sys. https://github.com/danielsz/system/issues/91
 ** 0.3.0-SNAPSHOT
 This is a breaking change release
 - Incorporates Duct abstractions (endpoint and handlers)
