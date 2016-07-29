@@ -13,7 +13,8 @@
 (deftest http-server-lifecycle
   (alter-var-root #'http-server component/start)
   (is (:server http-server) "HTTP server has been added to component")
-  (alter-var-root #'http-server component/stop))
+  (alter-var-root #'http-server component/stop)
+  (is (= system.components.http_kit.WebServer (type http-server))))
 
 (deftest http-server-options-invalid-key-throws
   (is (thrown? RuntimeException (new-web-server 8080 handler {:threads 7}))))

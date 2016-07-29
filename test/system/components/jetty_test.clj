@@ -18,7 +18,8 @@
   (is (:server http-server) "HTTP server has been added to component")
   (is (.isStarted (:server http-server)) "HTTP server starts")
   (is (not (.isStopped (:server http-server))) "HTTP server stops")
-  (alter-var-root #'http-server component/stop))
+  (alter-var-root #'http-server component/stop)
+  (is (= system.components.jetty.WebServer (type http-server))))
 
 (deftest http-server-valid-options-does-not-throw
   (is (new-web-server 8081 handler {:host "example.com"

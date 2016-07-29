@@ -42,6 +42,7 @@
   (create-and-drop-collection (:db mongo-db-prod))
   (println (get (cmd/server-status (:db mongo-db-prod)) "connections"))
   (alter-var-root #'mongo-db-prod component/stop)
+  (is (= system.components.mongo.Mongo  (type mongo-db-prod)))
   (is (nil? (:db mongo-db-prod)) "DB is stopped"))
 
 (deftest ^:dependency mongo-production-with-options
