@@ -4,9 +4,12 @@
    [system.repl :refer [set-init! start refresh]]
    [clojure.tools.namespace.dir :as dir]
    [clojure.tools.namespace.track :as track]
+   [clojure.tools.namespace.find :as ns-find]
    [boot.core       :as core]
+   [boot.pod        :as pod]
    [boot.util       :as util]
-   [clojure.string :as str]))
+   [clojure.string :as str]
+   [clojure.java.io :as io]))
 
 (defn- modified-files [before-fileset after-fileset]
   (->> (core/fileset-diff @before-fileset after-fileset)
@@ -21,6 +24,16 @@
                      (file-filter files)
                      not-empty
                      boolean))))
+
+(defn validate-sys [sys]
+  (let [dirs (core/get-env :directories)
+        namespaces (set (mapcat #(ns-find/find-namespaces-in-dir (io/file %)) dirs))]
+    (cond
+      (not (var? sys)) (throw (Exception. "sys argument expects a Var, eg. #'system-dev"))
+      (not (= com.stuartsierra.component.SystemMap (type (try (sys)
+                                                              (catch Exception e))))) (throw (Exception. (str sys " is not a SystemMap")))
+      (not (contains? namespaces (symbol (str (:ns (meta sys)))))) (throw (Exception. "The System's Var has to be defined in the project's namespaces."))
+      :else sys)))
 
 (core/deftask system
   "Runtime code loading. Automatic System restarts. Fileset driven. 
@@ -40,10 +53,10 @@
         dirs (into [] (core/get-env :directories))
         tracker (atom (dir/scan-dirs (track/tracker) dirs))
         init-system (if sys
-                      (delay (do (set-init! sys)
+                      (delay (do (set-init! (validate-sys sys))
                                  (start)
                                  (util/info (str "Starting " sys "\n"))))
-                      (delay (util/info (str "System was not supplied.\n"))))]
+                      (delay (util/info (str "System was not supplied. Will reload code, but not perform restarts.\n"))))]
     (when (and regexes paths)
       (util/fail "You can only specify --regexes or --paths, not both.\n")
       (*usage*))
