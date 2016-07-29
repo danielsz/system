@@ -39,9 +39,11 @@
   (let [fs-prev-state (atom nil)
         dirs (into [] (core/get-env :directories))
         tracker (atom (dir/scan-dirs (track/tracker) dirs))
-        init-system (delay (do (set-init! sys)
-                               (start)
-                               (util/info (str "Starting " sys "\n"))))]
+        init-system (if sys
+                      (delay (do (set-init! sys)
+                                 (start)
+                                 (util/info (str "Starting " sys "\n"))))
+                      (delay (util/info (str "System was not supplied.\n"))))]
     (when (and regexes paths)
       (util/fail "You can only specify --regexes or --paths, not both.\n")
       (*usage*))

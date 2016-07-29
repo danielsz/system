@@ -3,7 +3,7 @@
            [clojure.tools.namespace.track :as track]
            [system.reload :as reload]
            [clojure.stacktrace :as st]
-           [io.aviso.ansi :refer [bold-red]] ))
+           [io.aviso.ansi :refer [bold-red bold-yellow]] ))
 
 
 (declare system)
@@ -36,7 +36,9 @@
   (start))
 
 (defn refresh [tracker {:keys [restart?]}]
-  (when restart? (stop))
+  (when restart?
+    (stop)
+    (println (bold-yellow (str "Stopping " system-sym))))
 
   (println "Unloading:" (::track/unload @tracker))
   (println "Reloading:" (::track/load @tracker))
@@ -45,7 +47,9 @@
     (println (bold-red (str "Error reloading: " (::reload/error-ns @tracker))))
     (st/print-throwable (::reload/error @tracker)))
 
-  (when restart? (start)))
+  (when restart?
+    (start)
+    (println (bold-yellow (str "Starting " system-sym)))))
 
 
 ;; No need to break API signatures
