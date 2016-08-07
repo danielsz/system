@@ -24,7 +24,7 @@
   (comp
    (environ :env {:http-port "3000"})
    (watch :verbose true)
-   (system :sys #'+ :auto true :files ["handler.clj" "html.clj"])
+   (system :sys #'dev-system :auto true :files ["handler.clj" "html.clj"])
    (repl :server true)))
 
 (deftask dev-run
