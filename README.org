@@ -204,8 +204,11 @@ Which outputs, for example:
 -s, --sys SYS      Set the system var to SYS.
 -a, --auto         Manages the lifecycle of the application automatically.
 -f, --files FILES  Will reset the system if a filename in the supplied vector changes.
-
+-r, --regexes      Treat --files as regexes, not file names. Only one of regexes|paths is allowed.
+-p, --paths        Treat --files as classpath paths, not file names. Only one of regexes|paths is allowed.
 #+END_SRC
+
+Note: If you don’t supply a SYS argument, the system task will act as a ~tools.namespace~ wrapper. Each time you save your file, affected namespaces are reloaded in dependency order (after being unloaded in reverse order). This is handy for projects that do not use ~Component~, like this [[https://github.com/danielsz/no-restarts][example]] project. 
 
 *** Code reload vs system restart
 
