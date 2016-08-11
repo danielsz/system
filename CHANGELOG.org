@@ -1,4 +1,6 @@
 * Changes 
+** 0.3.2-SNAPSHOT
+- Sente: Add options to component before wrapping, https://github.com/danielsz/system/pull/92/files
 ** 0.3.1-SNAPSHOT
 - Carmine/Redis PubSub (pattern channels)
 - hara.io.scheduler 
