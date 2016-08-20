@@ -1,5 +1,5 @@
 (ns system.reload
-  (require  [clojure.tools.namespace.track :as track]))
+  (:require  [clojure.tools.namespace.track :as track]))
 
 (defn clean-lib
   "Remove lib's mappings (unintern symbols)"
