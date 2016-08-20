@@ -1,9 +1,9 @@
 (ns system.repl
-  (require [com.stuartsierra.component :as component]
-           [clojure.tools.namespace.track :as track]
-           [system.reload :as reload]
-           [clojure.stacktrace :as st]
-           [io.aviso.ansi :refer [bold-red bold-yellow]] ))
+  (:require [com.stuartsierra.component :as component]
+            [clojure.tools.namespace.track :as track]
+            [system.reload :as reload]
+            [clojure.stacktrace :as st]
+            [io.aviso.ansi :refer [bold-red bold-yellow]] ))
 
 
 (declare system)
