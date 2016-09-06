@@ -1,14 +1,15 @@
 * Changes 
 ** 0.3.2-SNAPSHOT
 - Sente: Add options to component before wrapping, https://github.com/danielsz/system/pull/92/files
-** 0.3.1-SNAPSHOT
+- Alex Miller’s bad namespace form. https://github.com/danielsz/system/pull/93 & https://github.com/danielsz/system/pull/94 
+** 0.3.1
 - Carmine/Redis PubSub (pattern channels)
 - hara.io.scheduler 
 - Allow regex and paths in files vector (https://github.com/danielsz/system/pull/86)
 - Accomodate simplest use case (no system). http://stackoverflow.com/questions/38622722/reloading-from-clojure-file/38625722#38625722
 - Print output when system starts and stops (@peterromfeldhk)
 - Validate sys. https://github.com/danielsz/system/issues/91
-** 0.3.0-SNAPSHOT
+** 0.3.0
 This is a breaking change release
 - Incorporates Duct abstractions (endpoint and handlers)
 - App component is deprecated
@@ -23,10 +24,10 @@ This is a breaking change release
 - Jetty made idempotent
 - Test selectors
 - Monitoring (protocol and various implementations)
-** 0.2.1-SNAPSHOT
+** 0.2.1
 - Fixes a long-standing issue with *data-readers* in Boot: https://github.com/boot-clj/boot/issues/47
 - Release Datomic connection upon stop. https://github.com/danielsz/system/pull/46  
-**  0.2.0
+** 0.2.0
 - Dependencies: clojure 1.7.0, sente 1.6.0
 - Cider nREPL component
 - Neo4j component
