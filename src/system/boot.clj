@@ -57,7 +57,7 @@
    p paths   bool "Treat --files as classpath paths, not file names. Only one of regexes|paths is allowed."]
   (validate *opts* *usage*)
   (#'clojure.core/load-data-readers)
-  (alter-var-root #'clojure.main/repl-requires conj '[system.repl :refer [set-init! start go stop reset]])
+  (alter-var-root #'clojure.main/repl-requires conj '[system.repl :refer [start go stop reset]])
   (let [fs-prev-state (atom nil)
         dirs (into [] (core/get-env :directories))
         tracker (atom (dir/scan-dirs (track/tracker) dirs))
