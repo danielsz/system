@@ -2,7 +2,7 @@
  :resource-paths #{"src"}
  :dependencies '[[tolitius/boot-check "0.1.2-SNAPSHOT" :scope "test"]
 
-                 [org.danielsz/system "0.3.1-SNAPSHOT"]
+                 [org.danielsz/system "0.3.2-SNAPSHOT"]
                  [environ "1.0.3"]
                  [boot-environ "1.0.3"]
 
@@ -24,7 +24,7 @@
   (comp
    (environ :env {:http-port "3000"})
    (watch :verbose true)
-   (system :sys #'dev-system :auto true :files ["handler.clj" "html.clj"])
+   (system :sys #'dev-system :auto false :files ["handler.clj" "html.clj"])
    (repl :server true)))
 
 (deftask dev-run

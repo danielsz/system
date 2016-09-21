@@ -63,12 +63,11 @@
     (fn [next-task]
       (fn [fileset]
         (with-bindings {#'*data-readers* (.getRawRoot #'*data-readers*)}
-          (when auto
-            (when (realized? init-system)
-              (swap! tracker dir/scan-dirs)
-              (util/info (str sys ":refreshing\n"))
-              (refresh tracker {:restart? (restart? fs-prev-state fileset files {:regexes regexes :paths paths})}))
-            @init-system)
+          (when (and auto (realized? init-system))
+            (swap! tracker dir/scan-dirs)
+            (util/info (str sys ":refreshing\n"))
+            (refresh tracker {:restart? (restart? fs-prev-state fileset files {:regexes regexes :paths paths})}))
+          @init-system
           (next-task (reset! fs-prev-state fileset)))))))
 
 (core/deftask run
