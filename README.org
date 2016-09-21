@@ -208,7 +208,11 @@ Which outputs, for example:
 -p, --paths        Treat --files as classpath paths, not file names. Only one of regexes|paths is allowed.
 #+END_SRC
 
-Note: If you don’t supply a SYS argument, the system task will act as a ~tools.namespace~ wrapper. Each time you save your file, affected namespaces are reloaded in dependency order (after being unloaded in reverse order). This is handy for projects that do not use ~Component~, like this [[https://github.com/danielsz/no-restarts][example]] project. 
+When ~auto~ is set to true, reloading of namespaces and restarts are being managed automatically.
+
+If you set ~auto~ to false, you indicate that you want to handle restarts manually at the REPL, with ~(system.repl/reset)~. Please note that SYS will be initialized and started for you at first run. 
+
+If you don’t supply a SYS argument, the system task will act as a ~tools.namespace~ wrapper. Each time you save your file, affected namespaces are reloaded in dependency order (after being unloaded in reverse order). This is handy for projects that do not use ~Component~, like this [[https://github.com/danielsz/no-restarts][example]] project. 
 
 *** Code reload vs system restart
 
