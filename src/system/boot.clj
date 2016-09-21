@@ -35,6 +35,14 @@
       (not (contains? namespaces (symbol (str (:ns (meta sys)))))) (throw (Exception. "The System's Var has to be defined in the project's namespaces."))
       :else sys)))
 
+(defn validate [{:keys [auto files regexes paths]} usage]
+  (when (and regexes paths)
+      (util/fail "You can only specify --regexes or --paths, not both.\n")
+      (throw (Exception. "Task configuration failed.")))
+  (when (and (not auto) files)
+      (util/fail "You have specified manual mode, the files vector should not be present in that case.\n")
+      (throw (Exception. "Task configuration failed."))))
+
 (core/deftask system
   "Runtime code loading. Automatic System restarts. Fileset driven. 
 
@@ -47,6 +55,7 @@
    f files FILES [str] "A vector of files. Will reset the system if a filename in the supplied vector changes."
    r regexes bool "Treat --files as regexes, not file names. Only one of regexes|paths is allowed."
    p paths   bool "Treat --files as classpath paths, not file names. Only one of regexes|paths is allowed."]
+  (validate *opts* *usage*)
   (#'clojure.core/load-data-readers)
   (alter-var-root #'clojure.main/repl-requires conj '[system.repl :refer [set-init! start go stop reset]])
   (let [fs-prev-state (atom nil)
@@ -57,9 +66,6 @@
                                  (start)
                                  (util/info (str "Starting " sys "\n"))))
                       (delay (util/info (str "System was not supplied. Will reload code, but not perform restarts.\n"))))]
-    (when (and regexes paths)
-      (util/fail "You can only specify --regexes or --paths, not both.\n")
-      (*usage*))
     (fn [next-task]
       (fn [fileset]
         (with-bindings {#'*data-readers* (.getRawRoot #'*data-readers*)}
