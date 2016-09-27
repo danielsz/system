@@ -19,4 +19,22 @@
         (spit "test.watcher" "Hello")
         @result)))
 
+(deftest start-watcher-idempotent
+  (let [watcher (new-watcher ["."]
+                             (constantly nil)
+                             {})
+        started (component/start watcher)]
+    (is (identical? started (component/start started)))
+    (component/stop watcher)))
+
+(deftest stop-watcher-idempotent
+  (let [watcher (new-watcher ["."]
+                             (constantly nil)
+                             {})
+        started (component/start watcher)
+        stopped (component/stop started)]
+    (is (identical? stopped (component/stop stopped)))))
+
 (watcher-lifecycle)
+(start-watcher-idempotent)
+(stop-watcher-idempotent)

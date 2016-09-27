@@ -6,10 +6,13 @@
 (extend-protocol component/Lifecycle
   Watcher
   (component/start [watcher]
-    (watch/start-watcher watcher))
-
+    (if-not (:running watcher)
+      (watch/start-watcher watcher)
+      watcher))
   (component/stop [watcher]
-    (watch/stop-watcher watcher)))
+    (if (:running watcher)
+      (watch/stop-watcher watcher)
+      watcher)))
 
 (defn new-watcher [paths callback & [config]]
   (watch/watcher paths callback config))
