@@ -1,6 +1,8 @@
 (ns system.components.watcher-test
   (:require [system.components.watcher :refer :all]
-            [com.stuartsierra.component :as component]
+            (system.monitoring watcher
+                               [core :refer [started? stopped?]])
+            [com.stuartsierra.component :as component]            
             [clojure.test :refer [testing deftest is]]))
 
 (deftest watcher-lifecycle
@@ -35,6 +37,10 @@
         stopped (component/stop started)]
     (is (identical? stopped (component/stop stopped)))))
 
-(watcher-lifecycle)
-(start-watcher-idempotent)
-(stop-watcher-idempotent)
+(deftest watcher-monitoring
+  (let [watcher (new-watcher ["."]
+                             (constantly nil)
+                             {})]
+    (is (started? (component/start watcher)))
+    (is (stopped? (component/stop watcher)))))
+

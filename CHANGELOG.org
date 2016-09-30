@@ -4,6 +4,8 @@
 - Alex Miller’s bad namespace form. https://github.com/danielsz/system/pull/93 & https://github.com/danielsz/system/pull/94 
 - Regression fix. https://github.com/danielsz/system/issues/96
 - Parameter validations (auto and files, regexes and paths).
+- Hara Watcher idempotency https://github.com/danielsz/system/pull/99
+- Hara Watcher monitoring
 ** 0.3.1
 - Carmine/Redis PubSub (pattern channels)
 - hara.io.scheduler 
