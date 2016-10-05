@@ -56,8 +56,8 @@
    r regexes bool "Treat --files as regexes, not file names. Only one of regexes|paths is allowed."
    p paths   bool "Treat --files as classpath paths, not file names. Only one of regexes|paths is allowed."]
   (validate *opts* *usage*)
-  (#'clojure.core/load-data-readers)
   (alter-var-root #'clojure.main/repl-requires conj '[system.repl :refer [start go stop reset]])
+  (#'clojure.core/load-data-readers)
   (let [fs-prev-state (atom nil)
         dirs (into [] (core/get-env :directories))
         tracker (atom (dir/scan-dirs (track/tracker) dirs))
@@ -72,9 +72,9 @@
           (when (and auto (realized? init-system))
             (swap! tracker dir/scan-dirs)
             (util/info (str sys ":refreshing\n"))
-            (refresh tracker {:restart? (restart? fs-prev-state fileset files {:regexes regexes :paths paths})}))
-          @init-system
-          (next-task (reset! fs-prev-state fileset)))))))
+            (refresh tracker {:restart? (restart? fs-prev-state fileset files {:regexes regexes :paths paths})})))
+        @init-system
+        (next-task (reset! fs-prev-state fileset))))))
 
 (core/deftask run
   "Run the -main function in some namespace with arguments."

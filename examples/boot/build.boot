@@ -1,6 +1,6 @@
 (set-env!
  :resource-paths #{"src"}
- :dependencies '[[tolitius/boot-check "0.1.2-SNAPSHOT" :scope "test"]
+ :dependencies '[[tolitius/boot-check "0.1.3" :scope "test"]
 
                  [org.danielsz/system "0.3.2-SNAPSHOT"]
                  [environ "1.0.3"]

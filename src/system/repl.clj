@@ -42,6 +42,7 @@
   (println "Reloading:" (::track/load @tracker))
   (swap! tracker reload/track-reload)
   (when (::reload/error @tracker)
+    (swap! boot.core/*warnings* inc)
     (println (bold-red (str "Error reloading: " (::reload/error-ns @tracker))))
     (st/print-throwable (::reload/error @tracker)))
 
