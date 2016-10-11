@@ -33,14 +33,14 @@
   (stop)
   (start))
 
-(defn refresh [tracker {:keys [restart?]}]
+(defn refresh [tracker {:keys [restart? mode]}]
   (when restart?
     (stop)
     (println (bold-yellow (str "Stopping " system-sym))))
 
-  (println "Unloading:" (::track/unload @tracker))
-  (println "Reloading:" (::track/load @tracker))
-  (swap! tracker reload/track-reload)
+  (when (= mode :tools.namespace) (println "Unmapping namespaces:" (::track/unload @tracker)))
+  (println "Recompiling namespaces:" (::track/load @tracker))
+  (swap! tracker reload/track-reload (= mode :tools.namespace))
   (when (::reload/error @tracker)
     (swap! boot.core/*warnings* inc)
     (println (bold-red (str "Error reloading: " (::reload/error-ns @tracker))))

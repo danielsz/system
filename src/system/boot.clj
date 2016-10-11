@@ -54,10 +54,10 @@
    a auto bool "Manages the lifecycle of the application automatically."
    f files FILES [str] "A vector of files. Will reset the system if a filename in the supplied vector changes."
    r regexes bool "Treat --files as regexes, not file names. Only one of regexes|paths is allowed."
-   p paths   bool "Treat --files as classpath paths, not file names. Only one of regexes|paths is allowed."]
+   p paths   bool "Treat --files as classpath paths, not file names. Only one of regexes|paths is allowed."
+   m mode MODE kw "Standard mode (lisp) or tools.namespace mode"]
   (validate *opts* *usage*)
   (alter-var-root #'clojure.main/repl-requires conj '[system.repl :refer [start go stop reset]])
-  (#'clojure.core/load-data-readers)
   (let [fs-prev-state (atom nil)
         dirs (into [] (core/get-env :directories))
         tracker (atom (dir/scan-dirs (track/tracker) dirs))
@@ -68,11 +68,11 @@
                       (delay (util/info (str "System was not supplied. Will reload code, but not perform restarts.\n"))))]
     (fn [next-task]
       (fn [fileset]
-        (with-bindings {#'*data-readers* (.getRawRoot #'*data-readers*)}
-          (when (and auto (realized? init-system))
-            (swap! tracker dir/scan-dirs)
-            (util/info (str sys ":refreshing\n"))
-            (refresh tracker {:restart? (restart? fs-prev-state fileset files {:regexes regexes :paths paths})})))
+        (when (and auto (realized? init-system))
+          (swap! tracker dir/scan-dirs)
+          (util/info (str sys ":refreshing\n"))
+          (refresh tracker {:restart? (restart? fs-prev-state fileset files {:regexes regexes :paths paths})
+                            :mode (or mode :tools.namespace)}))
         @init-system
         (next-task (reset! fs-prev-state fileset))))))
 

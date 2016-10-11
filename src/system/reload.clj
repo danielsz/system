@@ -27,11 +27,11 @@
   tracker. Returns the updated dependency tracker. If reloading caused
   an error, it is captured as ::error and the namespace which caused
   the error is ::error-ns."
-  [tracker]
+  [tracker unload?]
   (let [{unload ::track/unload, load ::track/load} tracker]
     (cond
       (seq unload) (let [n (first unload)]
-                     (remove-lib n)
+                     (when unload? (remove-lib n))
                      (update-in tracker [::track/unload] rest))
       (seq load) (let [n (first load)]
                    (try
@@ -47,10 +47,10 @@
   "Executes all pending unload/reload operations on dependency tracker
   until either an error is encountered or there are no more pending
   operations."
-  [tracker]
+  [tracker unload?]
   (loop [tracker (dissoc tracker ::error ::error-ns)]
-    (let [{error ::error, unload ::track/unload, load ::track/load} tracker]
+    (let [{error ::error unload ::track/unload load ::track/load} tracker]
       (if (and (not error)
                (or (seq load) (seq unload)))
-        (recur (track-reload-one tracker))
+        (recur (track-reload-one tracker unload?))
         tracker))))
