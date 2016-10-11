@@ -55,7 +55,7 @@
    f files FILES [str] "A vector of files. Will reset the system if a filename in the supplied vector changes."
    r regexes bool "Treat --files as regexes, not file names. Only one of regexes|paths is allowed."
    p paths   bool "Treat --files as classpath paths, not file names. Only one of regexes|paths is allowed."
-   m mode MODE kw "Standard mode (lisp) or tools.namespace mode"]
+   m mode MODE kw "Standard Lisp mode - recompilation only. Tools.namespace mode - load + unload (default)."]
   (validate *opts* *usage*)
   (alter-var-root #'clojure.main/repl-requires conj '[system.repl :refer [start go stop reset]])
   (let [fs-prev-state (atom nil)
