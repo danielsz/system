@@ -3,6 +3,7 @@
             [clojure.tools.namespace.track :as track]
             [system.reload :as reload]
             [clojure.stacktrace :as st]
+            [boot.core :refer [*warnings*]]
             [io.aviso.ansi :refer [bold-red bold-yellow]] ))
 
 
@@ -42,7 +43,7 @@
   (println "Recompiling namespaces:" (::track/load @tracker))
   (swap! tracker reload/track-reload (= mode :tools.namespace))
   (when (::reload/error @tracker)
-    (swap! boot.core/*warnings* inc)
+    (swap! *warnings* inc)
     (println (bold-red (str "Error reloading: " (::reload/error-ns @tracker))))
     (st/print-throwable (::reload/error @tracker)))
 
