@@ -2,7 +2,7 @@
   (:require [com.stuartsierra.component :as component]
             [etsy.core :refer [make-client]]))
 
-(defrecord Etsy [token secret client]
+(defrecord Etsy [token secret]
   component/Lifecycle
   (start [component]
     (let [client (make-client token secret)]
