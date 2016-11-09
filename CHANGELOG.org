@@ -8,6 +8,7 @@
 - Hara Watcher monitoring
 - Removed data_readers loading, since it is built-in the boot-repl task
 - Added modes to run system.boot in standard (Lisp) mode, no unloading (no remove-ns), or default tools.namespace mode (with remove-ns)
+- Etsy component: removed extraneous field
 ** 0.3.1
 - Carmine/Redis PubSub (pattern channels)
 - hara.io.scheduler 
