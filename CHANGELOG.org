@@ -9,6 +9,32 @@
 - Removed data_readers loading, since it is built-in the boot-repl task
 - Added modes to run system.boot in standard (Lisp) mode, no unloading (no remove-ns), or default tools.namespace mode (with remove-ns)
 - Etsy component: removed extraneous field
+- Duct abstractions: enhancements
+
+    - Endpoints can specify middleware
+    - Routes will be recombined according to their middleware
+    - The Handler component can also specify middleware that will be applied to all endpoints/routes
+
+    This allows to address the use case when different routes need
+    different middleware. For example, Sente is incompatible with
+    `wrap-restful-format'.
+
+    https://github.com/ptaoussanis/sente/issues/123
+
+    Decomplecting routes and middleware also enables better
+    composition. Side-effectful middleware, such as wrap-params, consumes
+    the request body upon reading it. This means it should only be applied
+    once. Hence, web-centric libraries should never force such middleware
+    on the user, but rather let him apply any middleware needed on
+    recombined routes in the end application.
+
+    https://github.com/ring-clojure/ring-defaults/issues/10
+
+    With our new implementation, it is possible to write libraries, for
+    example a social sign-in library, keep it totally separate from
+    application code, and then, with the Duct abstractions in `system',
+    compose endpoints with any middleware the application should need.
+
 ** 0.3.1
 - Carmine/Redis PubSub (pattern channels)
 - hara.io.scheduler 
