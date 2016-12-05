@@ -18,9 +18,9 @@
   component/Lifecycle
   (start [component]
     (let [wrap-mw (compose-middleware middleware)]
-      (assoc component :wrap-wm wrap-mw)))
+      (assoc component :wrap-mw wrap-mw)))
   (stop [component]
-    (dissoc component :wrap-wm)))
+    (dissoc component :wrap-mw)))
 
 (defn new-middleware
   ([middleware] (->Middleware middleware)))
