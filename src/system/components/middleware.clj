@@ -1,18 +1,22 @@
 (ns system.components.middleware
   (:require [com.stuartsierra.component :as component]))
 
-(defn- middleware-fn [middleware entry]
+; vector of vectors
+#_ (defn- middleware-fn2 [entry]
+  (if (seq (rest entry))
+    #(apply (first entry) % (rest entry))
+    (first entry)))
+
+; vector of functions or vectors
+(defn- middleware-fn [entry]
   (if (vector? entry)
-    (let [[f & keys] entry
-          arguments  (map #(get middleware %) keys)]
-      #(apply f % arguments))
+    #(apply (first entry) % (rest entry))
     entry))
 
+;; explanation for reverse https://github.com/duct-framework/duct/issues/31#issuecomment-171459482
 (defn- compose-middleware [middleware]
   (let [entries (:middleware middleware)]
-    (->> (reverse entries)
-         (map #(middleware-fn middleware %))
-         (apply comp identity))))
+    (apply comp (map middleware-fn (reverse entries)))))
 
 (defrecord Middleware [middleware]
   component/Lifecycle
