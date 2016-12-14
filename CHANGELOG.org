@@ -35,6 +35,13 @@
     application code, and then, with the Duct abstractions in `system',
     compose endpoints with any middleware the application should need.
 
+    Middleware: https://github.com/danielsz/system/issues/48 
+
+    New, simplified middleware component. Receives a vector of
+    functions or vectors. If vector is specified, apply first item in
+    vector to handler and rest of vector items (middleware arguments).
+    This is a breaking change (only for the middeware component).
+
 ** 0.3.1
 - Carmine/Redis PubSub (pattern channels)
 - hara.io.scheduler 
