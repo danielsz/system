@@ -4,7 +4,7 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.8.0"]
-                 [prismatic/schema "1.0.4"]
+                 [prismatic/schema "1.1.3"]
                  [org.danielsz/lang-utils "0.1.0-SNAPSHOT"]
                  [org.clojure/tools.namespace "0.3.0-alpha3"]
                  [io.aviso/pretty "0.1.26"]
