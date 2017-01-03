@@ -1,6 +1,6 @@
 (ns system.components.handler
   (:require [com.stuartsierra.component :as component]
-            [lang-utils.core :refer [contains+? &]]
+            [lang-utils.core :refer [contains+? ∘]]
             [compojure.core :as compojure]))
 
 (defn- endpoints [component]
@@ -21,7 +21,7 @@
 (defrecord Handler []
   component/Lifecycle
   (start [component]
-    (let [endpoints-with-middleware (partition-by middleware-key ((& with-middleware endpoints) component))
+    (let [endpoints-with-middleware (partition-by middleware-key ((∘ with-middleware endpoints) component))
           handlers (for [endpoints endpoints-with-middleware
                          :let [mw-key (middleware-key (first endpoints))
                                wrap-mw (get-in (val (first endpoints)) [mw-key :wrap-mw])
@@ -31,7 +31,7 @@
                                          endpoints
                                          (with-middleware false))))
           wrap-mw (get-in component [:middleware :wrap-mw] identity)
-          handler (wrap-mw (apply compojure/routes (concat  handlers routes)))]
+          handler (wrap-mw (apply compojure/routes (concat handlers routes)))]
       (assoc component :handler handler)))
   (stop [component]
     (dissoc component :handler)))
