@@ -43,6 +43,9 @@
     vector to handler and rest of vector items (middleware arguments).
     This is a breaking change (only for the middeware component).
 
+    Middleware plays well in the dependency injection mechanism of Component. 
+    To wrap the component in middleware, use :component keyword (convention).
+
 ** 0.3.1
 - Carmine/Redis PubSub (pattern channels)
 - hara.io.scheduler 
