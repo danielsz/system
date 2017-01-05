@@ -10,6 +10,7 @@
 - Added modes to run system.boot in standard (Lisp) mode, no unloading (no remove-ns), or default tools.namespace mode (with remove-ns)
 - Etsy component: removed extraneous field
 - Removed dependencies from the dev profile in favor of test profile  https://github.com/danielsz/system/issues/102
+- New Konserve component
 - Duct abstractions: enhancements
 
     - Endpoints can specify middleware
