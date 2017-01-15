@@ -46,6 +46,7 @@
 
     Middleware plays well in the dependency injection mechanism of Component. 
     To wrap the component in middleware, use :component keyword (convention).
+- Duct components docstrings: https://github.com/danielsz/system/pull/103
 
 ** 0.3.1
 - Carmine/Redis PubSub (pattern channels)
