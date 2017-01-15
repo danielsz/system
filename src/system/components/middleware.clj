@@ -2,24 +2,42 @@
   (:require [com.stuartsierra.component :as component]
             [lang-utils.core :refer [∘]]))
 
-; vector of vectors
+; vector of vectors, unused
 #_ (defn- middleware-fn2 [entry]
   (if (seq (rest entry))
     #(apply (first entry) % (rest entry))
     (first entry)))
 
 ; vector of functions or vectors
-(defn- middleware-fn [entry]
+(defn- middleware-fn
+  "Middleware are specified in a vector, either as standalone
+  functions (when they don't take arguments other than the handler),
+  or as vectors where the function come first, and the arguments
+  next.
+
+  Example:
+
+  (new-middleware {:middleware [wrap-restful-format
+                                [wrap-defaults site]
+                                [wrap-not-found (html/not-found)]]})"
+  [entry]
   (if (vector? entry)
     #(apply (first entry) % (rest entry))
     entry))
 
-;; explanation for reverse https://github.com/duct-framework/duct/issues/31#issuecomment-171459482
-(defn- compose [entries]
+;; 
+(defn- compose
+  "Middleware functions compose. However, pay close attention when writing impure middleware, such that mutate the request.
+
+  Explanation for reverse:
+  https://github.com/duct-framework/duct/issues/31#issuecomment-171459482"
+  [entries]
   (apply ∘ (map middleware-fn (reverse entries))))
 
-;; allow middleware to wrap the component
-(defn- sanitize [component entry]
+
+(defn- sanitize
+  "Replaces the keyword `:component` with the actual component."
+  [component entry]
   (if (vector? entry)
     (replace {:component component} entry)
     entry))
@@ -35,4 +53,27 @@
     (dissoc component :wrap-mw)))
 
 (defn new-middleware
+  "If you want to inject dependencies in middleware, the convention is to pass the
+  keyword `:component` as argument in the vector. 
+  
+  Example:
+
+  (component/system-map
+          :db (new-db)
+          :endpoint (-> (new-endpoint other-routes)
+                          (component/using [:endpoint-middleware]))
+          :endpoint-middleware (new-middleware {:middleware [wrap-login :component]})
+          :middleware (new-middleware {:middleware [,,,]})
+          :handler (-> (new-handler)
+                       (component/using [:endpoint :middleware]))
+          :jetty (-> (new-web-server port)
+                     (component/using [:handler])))
+  
+  Now you can write middleware that wraps the component, like so:
+
+  (defn wrap-login [handler {db :db}]
+    (fn [request]
+      (do-something-with db)
+       ...
+      (handler request)))))"
   ([middleware] (->Middleware middleware)))
