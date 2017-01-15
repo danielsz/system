@@ -68,7 +68,7 @@
          :endpoint-b-middleware (new-middleware {:middleware [,,,]})
          :middleware (new-middleware {:middleware [,,,]})
          :handler (-> (new-handler)
-                      (component/using [:endpoint :middleware]))
+                      (component/using [:endpoint-a :endpoint-b :middleware]))
          :jetty (-> (new-web-server port)
                     (component/using [:handler])))"
   ([] (->Handler)))
