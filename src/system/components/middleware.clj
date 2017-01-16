@@ -62,7 +62,7 @@
           :db (new-db)
           :endpoint (-> (new-endpoint other-routes)
                           (component/using [:endpoint-middleware]))
-          :endpoint-middleware (new-middleware {:middleware [wrap-login :component]})
+          :endpoint-middleware (component/using (new-middleware {:middleware [wrap-login :component]}) [:db])
           :middleware (new-middleware {:middleware [,,,]})
           :handler (-> (new-handler)
                        (component/using [:endpoint :middleware]))
