@@ -1,5 +1,5 @@
 * Changes 
-** 0.3.2-SNAPSHOT
+** 0.4.0
 - Sente: Add options to component before wrapping, https://github.com/danielsz/system/pull/92/files
 - Alex Miller’s bad namespace form. https://github.com/danielsz/system/pull/93 & https://github.com/danielsz/system/pull/94 
 - Regression fix. https://github.com/danielsz/system/issues/96
