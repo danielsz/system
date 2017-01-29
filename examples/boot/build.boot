@@ -2,7 +2,7 @@
  :resource-paths #{"src"}
  :dependencies '[[tolitius/boot-check "0.1.3" :scope "test"]
 
-                 [org.danielsz/system "0.3.2-SNAPSHOT"]
+                 [org.danielsz/system "0.4.0"]
                  [environ "1.0.3"]
                  [boot-environ "1.0.3"]
 
