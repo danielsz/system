@@ -10,7 +10,7 @@
     (if (:server component)
       component
       (let [handler (get-in component [:handler :handler] handler)
-            server (run-jetty (fn [req] (handler req)) options)]
+            server (run-jetty handler options)]
         (assoc component :server server))))
   (stop [component]
     (if-let [server (:server component)]
