@@ -2,13 +2,6 @@
   (:require [com.stuartsierra.component :as component]
             [lang-utils.core :refer [∘]]))
 
-; vector of vectors, unused
-#_ (defn- middleware-fn2 [entry]
-  (if (seq (rest entry))
-    #(apply (first entry) % (rest entry))
-    (first entry)))
-
-; vector of functions or vectors
 (defn- middleware-fn
   "Middleware are specified in a vector, either as standalone
   functions (when they don't take arguments other than the handler),
