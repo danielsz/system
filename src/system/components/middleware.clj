@@ -18,7 +18,6 @@
     #(apply (first entry) % (rest entry))
     entry))
 
-;; 
 (defn- compose
   "Middleware functions compose. However, pay close attention when writing impure middleware, such that mutate the request.
 

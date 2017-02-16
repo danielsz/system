@@ -55,9 +55,12 @@
                                          :source-paths ["src" "test"]
                                          :compiler {:output-to "resources/public/js/testable.js"
                                                     :main system.cljs-runner
-                                                    :optimizations :none}}]}}}
+                                                    :optimizations :none}}]}}
+             :doc {:plugins [[lein-codox "0.10.3"]]
+                   :codox {:namespaces [system.components.handler
+                                        system.components.middleware
+                                        system.components.endpoint]}}}
   :scm {:name "git"
         :url "https://github.com/danielsz/system"}
   :test-selectors {:default (complement :dependency)
                    :dependency :dependency})
-

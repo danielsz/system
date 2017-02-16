@@ -8,5 +8,8 @@
   (stop [component]
     (dissoc component :routes)))
 
-(defn new-endpoint [routes-fn]
+(defn new-endpoint
+  "Creates an endpoint. An endpoint is a closure over Compojure routes
+  with the component map accessible in the enclosing scope."
+  [routes-fn]
   (->Endpoint routes-fn))
