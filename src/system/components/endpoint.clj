@@ -10,6 +10,6 @@
 
 (defn new-endpoint
   "Creates an endpoint. An endpoint is a closure over Compojure routes
-  with the component map accessible in the enclosing scope."
+  with component dependencies in scope."
   [routes-fn]
   (->Endpoint routes-fn))
