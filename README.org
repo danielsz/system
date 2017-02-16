@@ -179,6 +179,7 @@ Starting with version *0.3.0*, *system* provides components inspired from the [[
 
 The ability to decompose a web application in mulitple ~endpoints~ offers flexibility and opportunies of reuse. For example, you can isolate functionality in library projects, and join the ~endpoints~ in the target application’s unified ~handler~. The possibilities are numerous.
 
+Documentation for the Duct namepaces is [[http://danielsz.github.io/system/][available]].
 #+BEGIN_QUOTE
 As with many patterns, DI can be abused. It is easy to get carried away with dependency injection and build a towering dependency graph that is unnecessary and even counter-productive. — Ben Morris in [[http://www.ben-morris.com/how-not-to-use-dependency-injection-service-locators-and-injection-mania/][How not to use dependency injection: service locators and injection mania.]]
 #+END_QUOTE
