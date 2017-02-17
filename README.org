@@ -25,6 +25,7 @@
 - [[https://github.com/weavejester/duct][Duct-style]] components for Ring applications
 - [[https://github.com/tomekw/hikari-cp][Hikari CP]] (JDBC connection pool)
 - [[https://github.com/ptaoussanis/carmine][Carmine]] (Redis PubSub)
+- [[https://github.com/clojure/core.async/wiki/Pub-Sub][core.async PubSub]] (Channel based pubbing and subbing) 
 - [[https://github.com/replikativ/konserve][Konserve]] (Document store protocol)
 
 ** Motivation
