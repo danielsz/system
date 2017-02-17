@@ -59,7 +59,8 @@
              :doc {:plugins [[lein-codox "0.10.3"]]
                    :codox {:namespaces [system.components.handler
                                         system.components.middleware
-                                        system.components.endpoint]}}}
+                                        system.components.endpoint
+                                        system.components.core-async-pubsub]}}}
   :scm {:name "git"
         :url "https://github.com/danielsz/system"}
   :test-selectors {:default (complement :dependency)

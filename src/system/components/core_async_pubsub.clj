@@ -15,13 +15,12 @@
     (close! (:channel component))
     (dissoc component :publication :channel)))
 
-
 (defn new-pubsub
-  "'channel-fn` is a channel returning function. The funtion receives
-  the component as argument, so that you are free to implement
-  application-level logic with dependencies in scope. The function is
-  responsible to create the channel and to return it. It is writing to
-  it in go/thread constructs.
+  "'channel-fn` is a funtion that receives the component as argument,
+  so that you are free to implement application-level logic with
+  dependencies in scope. The function is responsible to create a
+  channel and to return it. Presumably, you will be writing to the
+  channel in the body of go blocks or thread constructs.
   
   'topic-fn` is the same as in the signature of core.async's
   'sub`.  
