@@ -11,8 +11,10 @@
           ch   (lch/open conn)]
       (assoc component :conn conn :ch ch)))
   (stop [component]
-    (rmq/close ch)
-    (rmq/close conn)
+    (try (rmq/close ch)
+         (catch com.rabbitmq.client.AlreadyClosedException e nil))
+    (try (rmq/close conn)
+         (catch com.rabbitmq.client.AlreadyClosedException e nil))
     component))
 
 (defn new-rabbit-mq [uri]
