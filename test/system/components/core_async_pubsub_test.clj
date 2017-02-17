@@ -28,7 +28,7 @@
                             c))
         pubsub (component/start (new-pubsub channel-fn topic-fn))
         president-subscriber (let [c (chan)
-                         o (a/take 5 c)]
+                                   o (a/take 5 c)]
                                (a/sub (:publication pubsub) :president c)
                                o)
         scientist-subscriber (let [c (chan)
