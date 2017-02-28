@@ -77,24 +77,24 @@ First, assemble your system(s) in a namespace of your choosing. Here we define t
    [my-app.webapp :refer [handler]]
    [environ.core :refer [env]]))
 
-(defn dev-system []
+(defn dev-system
+  "Assembles and returns components for an application in production"
+  []
   (component/system-map
    :datomic-db (new-datomic-db (env :db-url))
    :mongo-db (new-mongo-db)
    :web (new-web-server (env :http-port) handler)))
 
-(defn prod-system []
-  "Assembles and returns components for an application in production"
+(defn prod-system
+  "Assembles and returns components for a production deployment"
   []
-    (component/system-map
-     :datomic-db (new-datomic-db (env :db-url))
-     :mongo-db (new-mongo-db (env :mongo-url))
-     :web (new-web-server (env :http-port) handler)
-     :repl-server (new-repl-server (env :repl-port))))
+  (merge (dev-system)
+         (component/system-map
+          :repl-server (new-repl-server (env :repl-port))))
 
 #+END_SRC
 
-Then, in user.clj:
+Then, in `user.clj`:
 
 #+BEGIN_SRC clojure
 (ns user
@@ -105,20 +105,7 @@ Then, in user.clj:
 #+END_SRC
 You can now manipulate the system in the REPL: ~(start)~, ~(reset)~ or ~(stop)~. The system map is accessible at any time, it resides in a var named, as you can guess, ~#'system~.
 
-In production, in core.clj:
-
-#+BEGIN_SRC clojure
-(ns my-app.core
-  (:gen-class)
-  (:require [my-app.systems :refer [prod-system]]))
-
-(defn -main
-  "Start the application"
-  []
-  (alter-var-root #'prod-system component/start)
-#+END_SRC
-
-Or, if you want to keep a handler on your system in production:
+In production, in `core.clj`:
 
 #+BEGIN_SRC clojure
 (ns my-app.core
