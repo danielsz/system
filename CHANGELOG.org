@@ -5,6 +5,7 @@
 - For danielsz/system users: Wondering if anyone know why `(fn [req] (handler req))` wraps the handler in line: https://github.com/danielsz/system/blob/master/src/system/components/jetty.clj#L13
 - rabbitmq try catch on close https://github.com/danielsz/system/pull/105
 - New core.async pubsub component with tests
+- Swapped routes and handlers in handler component: https://github.com/danielsz/system/issues/106
 ** 0.4.0
 - Sente: Add options to component before wrapping, https://github.com/danielsz/system/pull/92/files
 - Alex Miller’s bad namespace form. https://github.com/danielsz/system/pull/93 & https://github.com/danielsz/system/pull/94 
