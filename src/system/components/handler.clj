@@ -40,7 +40,7 @@
                                          endpoints
                                          (with-middleware false))))
           wrap-mw (get-in component [:middleware :wrap-mw] identity)
-          handler (wrap-mw (apply compojure/routes (concat handlers routes)))]
+          handler (wrap-mw (apply compojure/routes (concat routes handlers)))]
       (assoc component :handler handler)))
   (stop [component]
     (dissoc component :handler)))
