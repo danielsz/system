@@ -6,6 +6,7 @@
 - rabbitmq try catch on close https://github.com/danielsz/system/pull/105
 - New core.async pubsub component with tests
 - Swapped routes and handlers in handler component: https://github.com/danielsz/system/issues/106
+- New durable queue component (Factual)
 ** 0.4.0
 - Sente: Add options to component before wrapping, https://github.com/danielsz/system/pull/92/files
 - Alex Miller’s bad namespace form. https://github.com/danielsz/system/pull/93 & https://github.com/danielsz/system/pull/94 
