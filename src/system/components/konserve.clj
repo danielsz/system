@@ -4,11 +4,13 @@
             [konserve.memory :refer [new-mem-store]]
             [clojure.core.async :as async :refer [<!!]]))
 
-(defrecord Konserve [type opts]
+(defrecord Konserve [type path serializer]
   component/Lifecycle
   (start [component]
     (let [store (case type
-                  :filestore (<!! (new-fs-store (:path opts)))
+                  :filestore (if serializer
+                               (<!! (new-fs-store path :serializer serializer))
+                               (<!! (new-fs-store path)))
                   :memstore (<!! (new-mem-store)))]
       (assoc component :store store)))
   (stop [component]
@@ -16,6 +18,8 @@
 
 (defn new-konserve
   ([]
-   (map->Konserve {:type :memstore :opts {}}))
+   (map->Konserve {:type :memstore}))
   ([path]
-   (map->Konserve {:type :filestore :opts {:path path}})))
+   (map->Konserve {:type :filestore :path path}))
+  ([path serializer]
+   (map->Konserve {:type :filestore :path path :serializer serializer})))
