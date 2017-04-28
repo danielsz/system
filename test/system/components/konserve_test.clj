@@ -30,7 +30,7 @@
 (deftest filesystem
   (let [path "/tmp/konserve-fs-test"
         _ (delete-store path)
-        db (component/start (c/new-konserve path))
+        db (component/start (c/new-konserve :type :filestore :path path))
         store (:store db)]
      (is (= (<!! (k/get-in store [:foo]))
              nil))
@@ -54,7 +54,7 @@
 (deftest serializer
   (let [path "/tmp/konserve-fs-test"
         _ (delete-store path)
-        db (component/start (c/new-konserve path (s/fressian-serializer)))
+        db (component/start (c/new-konserve :type :filestore :path path :serializer (s/fressian-serializer)))
         store (:store db)]
      (is (= (<!! (k/get-in store [:foo]))
              nil))
@@ -74,3 +74,21 @@
       (is (= (<!! (list-keys store))
              #{}))
       (component/stop db)))
+
+
+(deftest ^:dependency carmine-store
+  (testing "Test the core API."
+    (let [db (component/start (c/new-konserve :type :carmine))
+          store (:store db)]
+      (is (= (<!! (k/get-in store [:foo]))
+             nil))
+      (<!! (k/assoc-in store [:foo] :bar))
+      (is (= (<!! (k/get-in store [:foo]))
+             :bar))
+      (<!! (k/dissoc store :foo))
+      (is (= (<!! (k/get-in store [:foo]))
+             nil))
+      (<!! (k/bassoc store :binbar (byte-array (range 10))))
+      (<!! (k/bget store :binbar (fn [{:keys [input-stream]}]
+                                   (is (= (map byte (slurp input-stream))
+                                          (range 10)))))))))
