@@ -7,7 +7,7 @@
                  [prismatic/schema "1.1.3"]
                  [org.danielsz/lang-utils "0.1.0-SNAPSHOT"]
                  [org.clojure/tools.namespace "0.3.0-alpha3"]
-                 [io.aviso/pretty "0.1.26"]
+                 [io.aviso/pretty "0.1.33"]
                  [com.stuartsierra/component "0.3.1"]]
   :profiles {:test {:dependencies [[org.clojure/clojurescript "1.8.34"]
                                    [org.clojure/tools.nrepl "0.2.11"]
