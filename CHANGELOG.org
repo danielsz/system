@@ -10,6 +10,7 @@
 - Konserve component accepts custom serializer + test
 - Konserve with carmine backend
 - Redis component with test
+- Benjamin component with test
 ** 0.4.0
 - Sente: Add options to component before wrapping, https://github.com/danielsz/system/pull/92/files
 - Alex Miller’s bad namespace form. https://github.com/danielsz/system/pull/93 & https://github.com/danielsz/system/pull/94 
