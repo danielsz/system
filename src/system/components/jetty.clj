@@ -2,6 +2,7 @@
   (:require [schema.core :as s]
             [system.schema :as sc]
             [com.stuartsierra.component :as component]
+            [lang-utils.core :refer [∘ seek]]
             [ring.adapter.jetty :refer [run-jetty]]))
 
 (defrecord WebServer [options handler]
@@ -9,7 +10,7 @@
   (start [component]
     (if (:server component)
       component
-      (let [handler (get-in component [:handler :handler] handler)
+      (let [handler (if (fn? handler) handler (:handler (val (seek (∘ :handler val) component))))
             server (run-jetty handler options)]
         (assoc component :server server))))
   (stop [component]
@@ -49,3 +50,7 @@
    (map->WebServer {:options (s/validate Options (merge {:port port :join? false}
                                                         options))
                     :handler handler})))
+
+(defn new-jetty [& {:keys [port handler options]}]
+  (map->WebServer {:options (s/validate Options (merge {:port port :join? false} options))
+                   :handler handler}))

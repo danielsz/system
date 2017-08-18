@@ -7,7 +7,7 @@
   "Find all endpoints this component depends on, returns map entries of the form
   [name component]. An endpoint is a component that define a `:routes` key."
   [component]
-  (filter (comp :routes val) component))
+  (filter (∘ :routes val) component))
 
 (defn- with-middleware
   "Returns all endpoints that include middleware. With `flag` being false:

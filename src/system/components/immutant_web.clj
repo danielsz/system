@@ -2,12 +2,13 @@
   (:require [schema.core :as s]
             [system.schema :as sc]
             [com.stuartsierra.component :as component]
+            [lang-utils.core :refer [∘ seek]]
             [immutant.web :refer [run stop]]))
 
 (defrecord WebServer [options server handler]
   component/Lifecycle
   (start [component]
-    (let [handler (get-in component [:handler :handler] handler)
+    (let [handler (if (fn? handler) handler (:handler (val (seek (∘ :handler val) component))))
           server (run handler options)]
       (assoc component :server server)))
   (stop [component]
@@ -32,3 +33,7 @@
    (map->WebServer {:options (s/validate Options (merge {:host "0.0.0.0" :port port}
                                                options))
                     :handler handler})))
+
+(defn new-immutant-web [& {:keys [port handler options]}]
+  (map->WebServer {:options (s/validate Options (merge {:host "0.0.0.0" :port port} options))
+                   :handler handler}))

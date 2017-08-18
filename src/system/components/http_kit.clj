@@ -2,12 +2,13 @@
   (:require [com.stuartsierra.component :as component]
             [schema.core :as s]
             [system.schema :as sc]
+            [lang-utils.core :refer [∘ seek]]
             [org.httpkit.server :refer [run-server]]))
 
 (defrecord WebServer [options server handler]
   component/Lifecycle
   (start [component]
-    (let [handler (get-in component [:handler :handler] handler)
+    (let [handler (if (fn? handler) handler (:handler (val (seek (∘ :handler val) component))))
           server (run-server handler options)]
       (assoc component :server server)))
   (stop [component]
@@ -34,3 +35,7 @@
                                          (merge {:port port}
                                                 options))
                     :handler handler})))
+
+(defn new-http-kit [& {:keys [port handler options]}]
+  (map->WebServer {:options (s/validate Options (merge {:port port :join? false} options))
+                   :handler handler}))
