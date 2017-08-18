@@ -1,7 +1,8 @@
 (ns system.components.handler
   (:require [com.stuartsierra.component :as component]
             [lang-utils.core :refer [contains+? ∘]]
-            [compojure.core :as compojure]))
+            [compojure.core :as compojure]
+            [bidi.ring :as bidi]))
 
 (defn- endpoints
   "Find all endpoints this component depends on, returns map entries of the form
@@ -27,7 +28,15 @@
  [endpoint]
   (reduce-kv (fn [_ k v] (if (contains+? v :middleware) (reduced k) _)) {} (val endpoint)))
 
-(defrecord Handler []
+(def ^:private accepted-routing-lib #{:compojure :bidi})
+
+(defmulti ^:private make-handler-fn accepted-routing-lib)
+
+(defmethod make-handler-fn :compojure [_] compojure/routes)
+
+(defmethod make-handler-fn :bidi [_] bidi/make-handler)
+
+(defrecord Handler [routing-lib]
   component/Lifecycle
   (start [component]
     (let [endpoints-with-middleware (partition-by middleware-key ((∘ with-middleware endpoints) component))
@@ -35,12 +44,12 @@
                          :let [mw-key (middleware-key (first endpoints))
                                wrap-mw (get-in (val (first endpoints)) [mw-key :wrap-mw])
                                routes (keep :routes (vals endpoints))]]
-                     (wrap-mw (apply compojure/routes routes)))
+                     (wrap-mw (apply (make-handler-fn routing-lib) routes)))
           routes (keep :routes (vals (-> component
                                          endpoints
                                          (with-middleware false))))
           wrap-mw (get-in component [:middleware :wrap-mw] identity)
-          handler (wrap-mw (apply compojure/routes (concat routes handlers)))]
+          handler (wrap-mw (apply (make-handler-fn routing-lib) (concat routes handlers)))]
       (assoc component :handler handler)))
   (stop [component]
     (dissoc component :handler)))
@@ -71,4 +80,11 @@
                       (component/using [:endpoint-a :endpoint-b :middleware]))
          :jetty (-> (new-web-server port)
                     (component/using [:handler])))"
-  ([] (->Handler)))
+  ([] (->Handler :compojure))
+  ([routing-lib]
+    (if (nil? (accepted-routing-lib routing-lib))
+      (throw (IllegalArgumentException.
+               (str "The routing lib that you asked is not yet available. "
+                    "You can already choose between : "
+                    (apply str (interpose ", " accepted-routing-lib)))))
+      (->Handler routing-lib))))
