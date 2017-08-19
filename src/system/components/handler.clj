@@ -1,8 +1,7 @@
 (ns system.components.handler
   (:require [com.stuartsierra.component :as component]
             [lang-utils.core :refer [contains+? ∘]]
-            [compojure.core :as compojure]
-            [bidi.ring :as bidi]))
+            [compojure.core :as compojure]))
 
 (defn- endpoints
   "Find all endpoints this component depends on, returns map entries of the form
@@ -25,18 +24,10 @@
 (defn- middleware-key
   "Given the endpoint map-entry this returns the key of the
   middleware dependency if any, or an empty map."
- [endpoint]
+  [endpoint]
   (reduce-kv (fn [_ k v] (if (contains+? v :middleware) (reduced k) _)) {} (val endpoint)))
 
-(def ^:private accepted-routing-lib #{:compojure :bidi})
-
-(defmulti ^:private make-handler-fn accepted-routing-lib)
-
-(defmethod make-handler-fn :compojure [_] compojure/routes)
-
-(defmethod make-handler-fn :bidi [_] bidi/make-handler)
-
-(defrecord Handler [routing-lib]
+(defrecord Handler [router]
   component/Lifecycle
   (start [component]
     (let [endpoints-with-middleware (partition-by middleware-key ((∘ with-middleware endpoints) component))
@@ -44,12 +35,12 @@
                          :let [mw-key (middleware-key (first endpoints))
                                wrap-mw (get-in (val (first endpoints)) [mw-key :wrap-mw])
                                routes (keep :routes (vals endpoints))]]
-                     (wrap-mw (apply (make-handler-fn routing-lib) routes)))
+                     (wrap-mw (apply router routes)))
           routes (keep :routes (vals (-> component
                                          endpoints
                                          (with-middleware false))))
           wrap-mw (get-in component [:middleware :wrap-mw] identity)
-          handler (wrap-mw (apply (make-handler-fn routing-lib) (concat routes handlers)))]
+          handler (wrap-mw (apply router (concat routes handlers)))]
       (assoc component :handler handler)))
   (stop [component]
     (dissoc component :handler)))
@@ -80,11 +71,13 @@
                       (component/using [:endpoint-a :endpoint-b :middleware]))
          :jetty (-> (new-web-server port)
                     (component/using [:handler])))"
-  ([] (->Handler :compojure))
-  ([routing-lib]
-    (if (nil? (accepted-routing-lib routing-lib))
-      (throw (IllegalArgumentException.
-               (str "The routing lib that you asked is not yet available. "
-                    "You can already choose between : "
-                    (apply str (interpose ", " accepted-routing-lib)))))
-      (->Handler routing-lib))))
+  ([] (new-handler :compojure))
+  ([router]
+   (let [router-libs {:compojure #'compojure/routes
+                      :bidi      (ns-resolve 'bidi.ring (symbol "make-handler"))}]
+     (if-let [make-handler-var (router-libs router)]
+       (map->Handler {:router make-handler-var})
+       (throw (IllegalArgumentException.
+                (str "The routing lib that you asked is not yet available. "
+                     "You can already choose between : "
+                     (apply str (interpose ", " (map name (keys router-libs)))))))))))
