@@ -42,6 +42,8 @@
    (s/optional-key :response-header-size) sc/PosInt})
 
 (defn new-web-server
+  "Deprecated - this function will eventually be removed. Use keyword arguments instead"
+  {:deprecated "0.4.1-SNAPSHOT"}
   ([port]
    (new-web-server port nil {}))
   ([port handler]
