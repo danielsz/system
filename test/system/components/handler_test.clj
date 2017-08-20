@@ -21,7 +21,8 @@
             [lang-utils.core :refer [contains+? ∘]]))
 
 
-
+;; =============================================================================
+;; Bidi system set up
 (defn config []
   {:http-port  (Integer. 8081)
    :middleware [[wrap-defaults api-defaults]
@@ -43,7 +44,7 @@
         ["articles/" :id "/article.html"] article-handler}])
 
 
-(defn app-system [config]
+(defn bidi-system [config]
   (component/system-map
     :routes     (new-endpoint home-routes)
     :middleware (new-middleware {:middleware (:middleware config)})
@@ -51,18 +52,24 @@
                     (component/using [:routes :middleware]))
     :http       (-> (new-web-server (:http-port config))
                     (component/using [:handler]))))
+;; =============================================================================
+;; End of bidi system setup
 
+(def bs (bidi-system (config)))
 
-(comment
-  (def c (-> (config)
-             app-system
-             component/start))
+(defn bidi-fixtures [f]
+  (alter-var-root #'bs component/start)
+  (f)
+  (alter-var-root #'bs component/stop))
 
+(use-fixtures :each bidi-fixtures)
 
+(deftest check-instance
+  (is (instance? system.components.endpoint.Endpoint (:routes bs)))
+  (is (instance? system.components.middleware.Middleware (:middleware bs)))
+  (is (instance? system.components.handler.Handler (:handler bs))))
 
-
-
-
-
-
-  )
+(deftest bidi
+  (is (= #'bidi.ring/make-handler (get-in bs [:handler :router])))
+  (is (= (home-routes nil)
+         (get-in bs [:handler :routes :routes]))))
