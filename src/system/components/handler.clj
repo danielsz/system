@@ -24,10 +24,10 @@
 (defn- middleware-key
   "Given the endpoint map-entry this returns the key of the
   middleware dependency if any, or an empty map."
- [endpoint]
+  [endpoint]
   (reduce-kv (fn [_ k v] (if (contains+? v :middleware) (reduced k) _)) {} (val endpoint)))
 
-(defrecord Handler []
+(defrecord Handler [router]
   component/Lifecycle
   (start [component]
     (let [endpoints-with-middleware (partition-by middleware-key ((∘ with-middleware endpoints) component))
@@ -35,12 +35,12 @@
                          :let [mw-key (middleware-key (first endpoints))
                                wrap-mw (get-in (val (first endpoints)) [mw-key :wrap-mw])
                                routes (keep :routes (vals endpoints))]]
-                     (wrap-mw (apply compojure/routes routes)))
+                     (wrap-mw (apply router routes)))
           routes (keep :routes (vals (-> component
                                          endpoints
                                          (with-middleware false))))
           wrap-mw (get-in component [:middleware :wrap-mw] identity)
-          handler (wrap-mw (apply compojure/routes (concat routes handlers)))]
+          handler (wrap-mw (apply router (concat routes handlers)))]
       (assoc component :handler handler)))
   (stop [component]
     (dissoc component :handler)))
@@ -71,4 +71,13 @@
                       (component/using [:endpoint-a :endpoint-b :middleware]))
          :jetty (-> (new-web-server port)
                     (component/using [:handler])))"
-  ([] (->Handler)))
+  ([] (new-handler :compojure))
+  ([router]
+   (let [router-libs {:compojure #'compojure/routes
+                      :bidi      (ns-resolve 'bidi.ring (symbol "make-handler"))}]
+     (if-let [make-handler-var (router-libs router)]
+       (map->Handler {:router make-handler-var})
+       (throw (IllegalArgumentException.
+                (str "The routing lib that you asked is not yet available. "
+                     "You can already choose between : "
+                     (apply str (interpose ", " (map name (keys router-libs)))))))))))
