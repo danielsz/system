@@ -30,8 +30,8 @@
         namespaces (set (mapcat #(ns-find/find-namespaces-in-dir (io/file %)) dirs))]
     (cond
       (not (var? sys)) (throw (Exception. "sys argument expects a Var, eg. #'system-dev"))
-      (not (= com.stuartsierra.component.SystemMap (type (try (sys)
-                                                              (catch Exception e))))) (throw (Exception. (str sys " is not a SystemMap")))
+      (not (instance? com.stuartsierra.component.SystemMap (try (sys)
+                                                                (catch Exception e (util/fail (str (.getMessage e) "\n")))))) (throw (Exception. (str sys " is not a SystemMap")))
       (not (contains? namespaces (symbol (str (:ns (meta sys)))))) (throw (Exception. "The System's Var has to be defined in the project's namespaces."))
       :else sys)))
 

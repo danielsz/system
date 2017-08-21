@@ -76,5 +76,7 @@
                     (component/using [:handler])))"
   [& {:keys [router] :or {router :compojure}}]
   (let [routers {:compojure #'compojure/routes
-                 :bidi      (ns-resolve 'bidi.ring (symbol "make-handler"))}]
-    (map->Handler {:router (router routers)})))
+                 :bidi      #(ns-resolve 'bidi.ring (symbol "make-handler"))}]
+    (map->Handler {:router (if (= :compojure router)
+                             (router routers)
+                             ((router routers)))})))
