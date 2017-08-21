@@ -14,6 +14,7 @@
                                    [cider/cider-nrepl "0.10.1"]
                                    [ring "1.6.2"]
                                    [ring/ring-defaults "0.3.1"]
+                                   [ring/ring-mock "0.3.1"]
                                    [bk/ring-gzip "0.2.1"]
                                    [bidi "2.1.2"]
                                    [im.chit/hara.io.watch "2.1.7"]
