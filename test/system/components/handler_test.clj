@@ -92,11 +92,12 @@
                         :handler    (-> (new-handler)
                                         (component/using [:routes :middleware]))
                         :http       (-> (new-web-server 8083)
-                                        (component/using [:handler])))]
+                                        (component/using [:handler])))
+        running-system (component/start default-system)]
     (is (instance? com.stuartsierra.component.SystemMap default-system))
     (is (= #'compojure/routes (get-in default-system [:handler :router])))
-    (is (= ((:handler (:handler (component/start default-system))) (mock/request :get "/"))
+    (is (= ((:handler (:handler running-system)) (mock/request :get "/"))
            {:status  200
             :headers {"Content-Type" "text/plain; charset=utf-8"}
             :body    "Example."}))
-    (component/stop default-system)))
+    (component/stop running-system)))
