@@ -23,53 +23,45 @@
 
 ;; =============================================================================
 ;; Bidi system set up
-(defn config []
-  {:http-port  (Integer. 8081)
-   :middleware [[wrap-defaults api-defaults]
-                wrap-gzip]})
-
 
 (defn index-handler
   [request]
   (res/response "Homepage"))
 
-
 (defn article-handler
   [{:keys [route-params]}]
   (res/response (str "You are viewing article: " (:id route-params))))
-
 
 (defn home-routes [endpoint]
   ["/" {"index.html" index-handler
         ["articles/" :id "/article.html"] article-handler}])
 
-
-(defn bidi-system [config]
+(def bidi-system
   (component/system-map
     :routes     (new-endpoint home-routes)
-    :middleware (new-middleware {:middleware (:middleware config)})
-    :handler    (-> (new-handler :bidi)
+    :middleware (new-middleware {:middleware [[wrap-defaults api-defaults]
+                                              wrap-gzip]})
+    :handler    (-> (new-handler :router :bidi)
                     (component/using [:routes :middleware]))
-    :http       (-> (new-web-server (:http-port config))
+    :http       (-> (new-web-server 8081)
                     (component/using [:handler]))))
 ;; =============================================================================
 ;; End of bidi system setup
 
-(def bs (bidi-system (config)))
 
 (defn bidi-fixtures [f]
-  (alter-var-root #'bs component/start)
+  (alter-var-root #'bidi-system component/start)
   (f)
-  (alter-var-root #'bs component/stop))
+  (alter-var-root #'bidi-system component/stop))
 
 (use-fixtures :each bidi-fixtures)
 
 (deftest check-instance
-  (is (instance? system.components.endpoint.Endpoint (:routes bs)))
-  (is (instance? system.components.middleware.Middleware (:middleware bs)))
-  (is (instance? system.components.handler.Handler (:handler bs))))
+  (is (instance? system.components.endpoint.Endpoint (:routes bidi-system)))
+  (is (instance? system.components.middleware.Middleware (:middleware bidi-system)))
+  (is (instance? system.components.handler.Handler (:handler bidi-system))))
 
 (deftest bidi
-  (is (= #'bidi.ring/make-handler (get-in bs [:handler :router])))
+  (is (= #'bidi.ring/make-handler (get-in bidi-system [:handler :router])))
   (is (= (home-routes nil)
-         (get-in bs [:handler :routes :routes]))))
+         (get-in bidi-system [:handler :routes :routes]))))

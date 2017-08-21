@@ -56,6 +56,9 @@
   per-endpoint, or once for the complete handler. Per-endpoint middleware can
   use any name, middleware on the handler must be called `:middleware`.
 
+  An optional `router` parameter allows you to specify the routing
+  library. At the moment, one of `:compojure` or `:bidi`.
+
   The resulting ring handler function is available as `:handler` on the handler
   component.
 
@@ -71,13 +74,7 @@
                       (component/using [:endpoint-a :endpoint-b :middleware]))
          :jetty (-> (new-web-server port)
                     (component/using [:handler])))"
-  ([] (new-handler :compojure))
-  ([router]
-   (let [router-libs {:compojure #'compojure/routes
-                      :bidi      (ns-resolve 'bidi.ring (symbol "make-handler"))}]
-     (if-let [make-handler-var (router-libs router)]
-       (map->Handler {:router make-handler-var})
-       (throw (IllegalArgumentException.
-                (str "The routing lib that you asked is not yet available. "
-                     "You can already choose between : "
-                     (apply str (interpose ", " (map name (keys router-libs)))))))))))
+  [& {:keys [router] :or {router :compojure}}]
+  (let [routers {:compojure #'compojure/routes
+                 :bidi      (ns-resolve 'bidi.ring (symbol "make-handler"))}]
+    (map->Handler {:router (router routers)})))
