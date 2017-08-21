@@ -13,6 +13,7 @@
 - Benjamin component with test
 - Added new constructor signature to web components, supporting keyword arguments
 - Web server handlers can now be called anything (not just `:handler’), which allows to define any number of web servers in the system map
+- Support for alternative routing libraries (bidi)
 ** 0.4.0
 - Sente: Add options to component before wrapping, https://github.com/danielsz/system/pull/92/files
 - Alex Miller’s bad namespace form. https://github.com/danielsz/system/pull/93 & https://github.com/danielsz/system/pull/94 
