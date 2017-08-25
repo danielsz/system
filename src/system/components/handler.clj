@@ -1,7 +1,6 @@
 (ns system.components.handler
   (:require [com.stuartsierra.component :as component]
-            [lang-utils.core :refer [contains+? ∘]]
-            [compojure.core :as compojure]))
+            [lang-utils.core :refer [contains+? ∘]]))
 
 (defn- endpoints
   "Find all endpoints this component depends on, returns map entries of the form
@@ -75,8 +74,6 @@
          :jetty (-> (new-web-server port)
                     (component/using [:handler])))"
   [& {:keys [router] :or {router :compojure}}]
-  (let [routers {:compojure #'compojure/routes
+  (let [routers {:compojure #(ns-resolve 'compojure.core (symbol "routes"))
                  :bidi      #(ns-resolve 'bidi.ring (symbol "make-handler"))}]
-    (map->Handler {:router (if (= :compojure router)
-                             (router routers)
-                             ((router routers)))})))
+    (map->Handler {:router ((router routers))})))
