@@ -7,12 +7,12 @@ The build tool used in this project is [[http://boot-clj.com/][Boot]].
 ** Instructions
 *** Development
 
-Run a development pipeline from the command line:
+Run the development pipeline from the command line:
 #+BEGIN_SRC bash
 $ boot dev
 #+END_SRC
 
-Which is actually the following, defined in ~build.boot~:
+Which is actually a ~boot~ task, defined in ~build.boot~:
 
 #+BEGIN_SRC clojure
 (deftask dev
