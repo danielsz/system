@@ -9,10 +9,10 @@ The build tool used in this project is [[http://boot-clj.com/][Boot]].
 
 Run a development pipeline from the command line:
 #+BEGIN_SRC bash
-$ boot environ -e http-port=3000 watch -v system -s dev-system repl -s
+$ boot dev
 #+END_SRC
 
-Alternatively, write it in ~build.boot~ as a function:
+Which is actually the following, defined in ~build.boot~:
 
 #+BEGIN_SRC clojure
 (deftask dev
@@ -21,20 +21,23 @@ Alternatively, write it in ~build.boot~ as a function:
   (comp
    (environ :env {:http-port 3000})
    (watch :verbose true)
-   (system :sys #'dev-system)
+   (system :sys #'dev-system :auto true)
    (repl :server true)))
 #+END_SRC
 
-You’re all set now. You can connect to your REPL from your favorite editor, and then start your application:
-In the boot.user namespace, type: 
+The ~:auto~ option tells ~system~ to start your application and automatically reload namespaces when you change them. You can manage restarts manually if you prefer. In that case, connect to your REPL from your favorite editor, and in the boot.user namespace, type: 
+
 #+BEGIN_SRC clojure 
 boot.user=> (go)
 #+END_SRC
-Your local web app can be found on [[http://localhost:300][localhost]] on port 3000. Now you can edit your source files and make changes. Save and restart your application whenever you want a clean slate:
+
+You’re all set now. Your local web app can be found on [[http://localhost:300][localhost]] on port 3000. Now you can edit your source files and make changes. Save and restart your application whenever you want a clean slate:
 
 #+BEGIN_SRC clojure 
 boot.user=> (reset)
 #+END_SRC
+
+_Note_: If you have set ~:auto~ to true, you don’t need to restart manually. Namespaces are reloaded when source files are saved, and the ~:files~ option allow you to specify files that warrant a restart at the component level.
 
 If you want to run your development system from the command line (without opening a REPL), type:
 #+BEGIN_SRC sh

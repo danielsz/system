@@ -1,22 +1,21 @@
 (set-env!
  :resource-paths #{"src"}
- :dependencies '[[tolitius/boot-check "0.1.3" :scope "test"]
+ :dependencies '[[org.danielsz/system "0.4.0"]
 
-                 [org.danielsz/system "0.4.0"]
-                 [environ "1.0.3"]
-                 [boot-environ "1.0.3"]
+                 [environ "1.1.0"]
+                 [boot-environ "1.1.0"]
 
-                 [ring "1.4.0"]
-                 [ring/ring-defaults "0.1.5"]
-                 [compojure "1.4.0"]
+                 [ring "1.6.2"]
+                 [ring/ring-defaults "0.3.1"]
+                 [compojure "1.6.0"]
 
                  [org.clojure/tools.nrepl "0.2.12"]])
 
 (require
- '[tolitius.boot-check :as check]
  '[environ.boot :refer [environ]]
  '[example.systems :refer [dev-system]]
- '[system.boot :refer [system run]])
+ '[system.boot :refer [system run]]
+ '[system.repl :refer [go reset]])
 
 (deftask dev
   "Run a restartable system in the Repl"
