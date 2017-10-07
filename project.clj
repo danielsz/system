@@ -33,6 +33,7 @@
                                    [org.danielsz/benjamin "0.1.0-SNAPSHOT"]
                                    [compojure "1.4.0"]
                                    [http-kit "2.1.19"]
+                                   [lambdacd "0.13.2"]
                                    [org.immutant/web "2.1.2"]
                                    [hikari-cp "1.6.1"]
                                    [com.taoensso/encore "2.91.0"]
