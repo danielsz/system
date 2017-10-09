@@ -2,11 +2,11 @@
   (:require [com.stuartsierra.component :as component]
             [clojure.tools.nrepl.server :refer [start-server stop-server]]))
 
-(defrecord ReplServer [server port bind]
+(defrecord ReplServer [port bind]
   component/Lifecycle
   (start [component]
     (assoc component :server (start-server :port port :bind bind)))
-  (stop [component]
+  (stop [{server :server :as component}]
     (when server
       (stop-server server)
       component)))
