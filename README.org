@@ -23,7 +23,7 @@
 - [[http://docs.caudate.me/hara/hara-io-scheduler.html][hara.io.scheduler]] (Cron-like scheduler)
 - [[https://www.elastic.co/][Elasticsearch]] (Elasticsearch full-text search engine)
 - [[https://github.com/weavejester/duct][Duct-style]] components for Ring applications
-- [[https://github.com/clojure/java.jdbc] [clojure.java.jdbc]] (Low level JDBC access for Clojure)
+- [[https://github.com/clojure/java.jdbc][clojure.java.jdbc]] (Low level JDBC access for Clojure)
 - [[https://github.com/tomekw/hikari-cp][Hikari CP]] (JDBC connection pool)
 - [[https://github.com/ptaoussanis/carmine][Carmine]] (Redis PubSub)
 - [[https://github.com/clojure/core.async/wiki/Pub-Sub][core.async PubSub]] (Channel based pubbing and subbing) 
