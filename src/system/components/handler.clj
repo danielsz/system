@@ -26,7 +26,7 @@
   [endpoint]
   (reduce-kv (fn [_ k v] (if (contains+? v :middleware) (reduced k) _)) {} (val endpoint)))
 
-(defrecord Handler [router]
+(defrecord Handler [router shared-root-middleware?]
   component/Lifecycle
   (start [component]
     (let [endpoints-with-middleware (partition-by middleware-key ((∘ with-middleware endpoints) component))
@@ -39,7 +39,9 @@
                                          endpoints
                                          (with-middleware false))))
           wrap-mw (get-in component [:middleware :wrap-mw] identity)
-          handler (wrap-mw (apply router (concat routes handlers)))]
+          handler (if shared-root-middleware?
+                    (wrap-mw (apply router (concat routes handlers)))
+                    (apply router (conj routes (wrap-mw (apply router handlers)))))]
       (assoc component :handler handler)))
   (stop [component]
     (dissoc component :handler)))
@@ -73,7 +75,7 @@
                       (component/using [:endpoint-a :endpoint-b :middleware]))
          :jetty (-> (new-web-server port)
                     (component/using [:handler])))"
-  [& {:keys [router] :or {router :compojure}}]
+  [& {:keys [router shared-root-middleware?] :or {router :compojure shared-root-middleware? true}}]
   (let [routers {:compojure #(ns-resolve 'compojure.core (symbol "routes"))
                  :bidi      #(ns-resolve 'bidi.ring (symbol "make-handler"))}]
-    (map->Handler {:router ((router routers))})))
+    (map->Handler {:router ((router routers)) :shared-root-middleware? shared-root-middleware?})))

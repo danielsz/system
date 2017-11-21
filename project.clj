@@ -36,6 +36,7 @@
                                    [lambdacd "0.13.2"]
                                    [org.immutant/web "2.1.2"]
                                    [hikari-cp "1.6.1"]
+                                   [clj-http "3.7.0"]
                                    [com.taoensso/encore "2.91.0"]
                                    [com.taoensso/carmine "2.16.0"]
                                    [io.replikativ/konserve-carmine "0.1.1"]

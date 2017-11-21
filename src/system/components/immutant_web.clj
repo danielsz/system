@@ -5,7 +5,7 @@
             [lang-utils.core :refer [∘ seek]]
             [immutant.web :refer [run stop]]))
 
-(defrecord WebServer [options server handler]
+(defrecord WebServer [handler server options]
   component/Lifecycle
   (start [component]
     (let [handler (if (fn? handler) handler (:handler (val (seek (∘ :handler val) component))))
@@ -32,8 +32,7 @@
   ([port handler]
    (new-web-server port handler {}))
   ([port handler options]
-   (map->WebServer {:options (s/validate Options (merge {:host "0.0.0.0" :port port}
-                                               options))
+   (map->WebServer {:options (s/validate Options (merge {:host "0.0.0.0" :port port} options))
                     :handler handler})))
 
 (defn new-immutant-web [& {:keys [port handler options]}]
