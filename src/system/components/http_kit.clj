@@ -39,5 +39,5 @@
                     :handler handler})))
 
 (defn new-http-kit [& {:keys [port handler options]}]
-  (map->WebServer {:options (s/validate Options (merge {:port port :join? false} options))
+  (map->WebServer {:options (s/validate Options (merge {:port port} options))
                    :handler handler}))
