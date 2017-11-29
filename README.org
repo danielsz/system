@@ -22,7 +22,7 @@
 - [[http://docs.caudate.me/hara/#haraiowatch][hara.io.watch]] (File watcher)
 - [[http://docs.caudate.me/hara/hara-io-scheduler.html][hara.io.scheduler]] (Cron-like scheduler)
 - [[https://www.elastic.co/][Elasticsearch]] (Elasticsearch full-text search engine)
-- [[https://github.com/weavejester/duct][Duct-style]] components for Ring applications
+- Raamwerk ([[https://github.com/weavejester/duct][Duct-style]] components for Ring applications)
 - [[https://github.com/clojure/java.jdbc][clojure.java.jdbc]] (Low level JDBC access for Clojure)
 - [[https://github.com/tomekw/hikari-cp][Hikari CP]] (JDBC connection pool)
 - [[https://github.com/ptaoussanis/carmine][Carmine]] (Redis PubSub)
@@ -166,7 +166,7 @@ At runtime, the *system* var can be used anywhere after requiring it from the *s
 
 Note this pattern of directly accessing the global system var is in contrast with the pattern of dependency injection integral to Stuart Sierra's vision of Component. In this perspective, /components are defined in terms of the components on which they depend/. *system*, as a repository of readymade, reusable components, cannot and does not anticipate all the possible ways in which users will want to assemble components together. What it can and does, however, is anticipate common scenarii. Like your typical Ring application, for [[https://github.com/danielsz/system-dependency-injection][example]], where you may want to inject the database in the routes, so that it is readily available when serving http requests.
 
-Starting with version *0.3.0*, *system* provides components inspired from the [[https://github.com/weavejester/duct][Duct]] framework: the ~endpoint~, ~middleware~ and ~handler~ components. The ~endpoint~ component returns routes that are closed over by the component passed to it, so that its constituents are accessible via standard map destructuring. The rationale for this is explained [[https://www.booleanknot.com/blog/2015/05/22/structuring-clojure-web-apps.html][here]]. If the previous sentence didn’t sound agreeable, I suggest you check out the examples where we demonstrate usage with a single ~endpoint~ as well as multiple ~endpoints~.
+*system* ships with a web framework, ~Raamwerk~, inspired by the [[https://github.com/weavejester/duct][Duct]] framework: the ~endpoint~, ~middleware~ and ~handler~ components. The ~endpoint~ component returns routes that are closed over by the component passed to it, so that its constituents are accessible via standard map destructuring. The rationale for this is explained [[https://www.booleanknot.com/blog/2015/05/22/structuring-clojure-web-apps.html][here]]. If the previous sentence didn’t sound agreeable, I suggest you check out the [[https://github.com/danielsz/system/wiki/Raamwerk][wiki]] and the examples.
 
 The ability to decompose a web application in mulitple ~endpoints~ offers flexibility and opportunies of reuse. For example, you can isolate functionality in library projects, and join the ~endpoints~ in the target application’s unified ~handler~. The possibilities are numerous.
 

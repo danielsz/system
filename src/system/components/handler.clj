@@ -41,7 +41,7 @@
           wrap-mw (get-in component [:middleware :wrap-mw] identity)
           handler (if shared-root-middleware?
                     (wrap-mw (apply router (concat routes handlers)))
-                    (apply router (conj routes (wrap-mw (apply router handlers)))))]
+                    (apply router (reverse (conj routes (wrap-mw (apply router handlers))))))]
       (assoc component :handler handler)))
   (stop [component]
     (dissoc component :handler)))
