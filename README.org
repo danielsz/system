@@ -65,6 +65,11 @@ A web application with client-side UI. Demonstrates login procedure with Sente (
 
 - https://github.com/danielsz/system-websockets
  
+*** Raamwerk
+A Ring application is composed with separate API and site middleware.
+
+- Applying separate middleware to corresponding routes. [[https://github.com/danielsz/system-api-example][https://github.com/danielsz/system-api-example]]
+- Running multiple handlers separately. [[https://github.com/danielsz/system-api-immutant-example][https://github.com/danielsz/system-api-immutant-example]]
 ** Usage
 
 First, assemble your system(s) in a namespace of your choosing. Here we define two systems, development and production.
