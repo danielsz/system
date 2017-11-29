@@ -8,7 +8,7 @@
                  [ring/ring-defaults "0.1.5"]
                  [compojure "1.5.0"]
                  [hiccup "1.0.5"]
-                 [org.danielsz/system "0.4.0"]
+                 [org.danielsz/system "0.4.1"]
                  [environ "1.0.0"]]
   :plugins [[lein-environ "1.0.0"]]
   :profiles {:dev {:source-paths ["dev"]

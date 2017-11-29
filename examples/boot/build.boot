@@ -1,6 +1,6 @@
 (set-env!
  :resource-paths #{"src"}
- :dependencies '[[org.danielsz/system "0.4.0"]
+ :dependencies '[[org.danielsz/system "0.4.1"]
 
                  [environ "1.1.0"]
                  [boot-environ "1.1.0"]
