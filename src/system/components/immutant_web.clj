@@ -5,15 +5,15 @@
             [lang-utils.core :refer [∘ seek]]
             [immutant.web :refer [run stop]]))
 
-(defrecord WebServer [handler server options]
+(defrecord WebServer [handler options]
   component/Lifecycle
   (start [component]
     (let [handler (if (fn? handler) handler (:handler (val (seek (∘ :handler val) component))))
           server (run handler options)]
       (assoc component :server server)))
   (stop [component]
-    (when server
-      (stop server)
+    (if-let [server (:server component)]
+      (assoc component :server (stop server))
       component)))
 
 (def Options
