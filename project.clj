@@ -20,7 +20,7 @@
                                    [im.chit/hara.io.watch "2.1.7"]
                                    [im.chit/hara.io.scheduler "2.3.6"]
                                    [im.chit/adi "0.3.2"]
-                                   [com.datomic/datomic-free "0.9.4815.12"]
+                                   [com.datomic/datomic-free "0.9.5656"]
                                    [com.novemberain/monger "3.0.2"]
                                    [org.clojure/java.jdbc "0.3.5"]
                                    [com.h2database/h2 "1.4.181"]
