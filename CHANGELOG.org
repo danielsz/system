@@ -3,6 +3,7 @@
 - Handler component has an option to disable shared root middleware
 - Fix: https://github.com/danielsz/system/issues/120
 - New Riemann client component
+- New Kampbell component
 ** 0.4.1
 - REPL server with bind address option
 - Cider REPL server with bind address option

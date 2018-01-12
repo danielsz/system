@@ -28,6 +28,7 @@
 - [[https://github.com/ptaoussanis/carmine][Carmine]] (Redis PubSub)
 - [[https://github.com/clojure/core.async/wiki/Pub-Sub][core.async PubSub]] (Channel based pubbing and subbing) 
 - [[https://github.com/replikativ/konserve][Konserve]] (Document store protocol)
+- [[https://github.com/danielsz/kampbell][Kampbell]] (Entity model layer on top of Konserve)
 - [[https://github.com/Factual/durable-queue][Durable Queue]] (Factual’s disk-backed task queue)
 - [[https://github.com/danielsz/benjamin][Benjamin]] (Idempotency with side-effects)
 - [[http://www.lambda.cd/][LambdaCD]] (build pipelines as code)

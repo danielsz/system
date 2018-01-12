@@ -1,7 +1,5 @@
 (ns system.components.carmine
-  (:require [schema.core :as s]
-            [system.schema :as sc]
-            [com.stuartsierra.component :as component]
+  (:require [com.stuartsierra.component :as component]
             [taoensso.carmine :as car]))
 
 (defrecord PubSub [host port topic handler options]

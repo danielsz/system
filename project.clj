@@ -3,7 +3,7 @@
   :url "https://github.com/danielsz/system"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
-  :dependencies [[org.clojure/clojure "1.8.0" :scope "provided"]
+  :dependencies [[org.clojure/clojure "1.9.0" :scope "provided"]
                  [prismatic/schema "1.1.3"]
                  [org.danielsz/lang-utils "0.1.0"]
                  [org.clojure/tools.namespace "0.3.0-alpha3"]
@@ -11,7 +11,7 @@
                  [com.stuartsierra/component "0.3.1"]]
   :profiles {:test {:dependencies [[org.clojure/clojurescript "1.8.34"]
                                    [org.clojure/tools.nrepl "0.2.13"]
-                                   [cider/cider-nrepl "0.15.1"]
+                                   [cider/cider-nrepl "0.16.0"]
                                    [ring "1.6.2"]
                                    [ring/ring-defaults "0.3.1"]
                                    [ring/ring-mock "0.3.1"]
@@ -30,7 +30,9 @@
                                    [clojurewerkz/quartzite "2.0.0"]
                                    [com.taoensso/sente "1.8.1"]
                                    [org.danielsz/etsy "0.1.2"]
-                                   [org.danielsz/benjamin "0.1.0-SNAPSHOT"]
+                                   [org.danielsz/benjamin "0.1.0"]
+                                   [org.danielsz/kampbell "0.1.0"]
+                                   [org.danielsz/maarschalk "0.1.0"]
                                    [riemann-clojure-client "0.4.5"]
                                    [compojure "1.4.0"]
                                    [http-kit "2.1.19"]
