@@ -52,7 +52,7 @@
                 :email "daniel@szmulewicz.com"})
 
 (defn save-user [store v]
-  (let [v (assoc v :domain/made_at (Instant/now))]
+  (let [v (assoc v :domain.utils/created-at (Instant/now))]
     (<!! (k/save-entity store :domain/user v))))
 
 (defn get-users [store]
@@ -61,16 +61,15 @@
 (deftest Kampbell
   (let [system (-> (component/system-map
                     :db (konserve/new-konserve :type :filestore :path *db-path* :serializer (m/fressian-serializer))
-                    :kampbell (component/using (kampbell/new-kampbell :equality-specs #{:domain/made_at} :entities #{"users"}) [:db]))
+                    :kampbell (component/using (kampbell/new-kampbell :equality-specs #{:domain.utils/created-at} :entities #{"users"}) [:db]))
                    component/start)
         db (:store (:db system))]
     (is (some? db))
     (is (= #{["users"]} (k/list-collections db)))
-    (is (contains? kampbell.core/equality-specs :created_at))
-    (is (contains? kampbell.core/equality-specs :domain/made_at))
+    (is (contains? kampbell.core/equality-specs :created-at))
+    (is (contains? kampbell.core/equality-specs :domain.utils/created-at))
     (is (empty? (get-users db)))
     (save-user db good-input)
-    (is (not (empty? (get-users db))))
     (is (= 1 (count (get-users db))))
     (save-user db good-input)
     (is (= 1 (count (get-users db))))
