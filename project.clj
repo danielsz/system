@@ -31,7 +31,7 @@
                                    [com.taoensso/sente "1.8.1"]
                                    [org.danielsz/etsy "0.1.2"]
                                    [org.danielsz/benjamin "0.1.0"]
-                                   [org.danielsz/kampbell "0.1.0"]
+                                   [org.danielsz/kampbell "0.1.1"]
                                    [org.danielsz/maarschalk "0.1.0"]
                                    [riemann-clojure-client "0.4.5"]
                                    [compojure "1.4.0"]

@@ -40,30 +40,41 @@
 ;; register as a one-time callback
 (use-fixtures :once once-fixture)
 
-(s/def ::name string?)
-(s/def ::email (s/and string? #(re-matches #"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,63}" %)))
-(s/def ::user (s/keys :req [::name
-                            ::email]))
+(s/def :domain.user/name string?)
+(s/def :domain.user/email (s/and string? #(re-matches #"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,63}" %)))
+(s/def :domain/user (s/keys :req [:domain.user/name
+                                  :domain.user/email]))
+
+(def good-input #:domain.user{:name "Daniel Szmulewicz"
+                               :email "daniel@szmulewicz.com"})
+
+(def bad-input {:name "Daniel Szmulewicz"
+                :email "daniel@szmulewicz.com"})
 
 (defn save-user [store v]
-  (let [v (assoc v :created_at (Instant/now))]
-    (<!! (k/save-entity store ::user v))))
+  (let [v (assoc v :domain/made_at (Instant/now))]
+    (<!! (k/save-entity store :domain/user v))))
 
 (defn get-users [store]
   (<!! (k/get-coll store "users")))
 
-(def daniel #::{:name "Daniel Szmulewicz"
-                :email "daniel@szmulewicz.com"})
-
 (deftest Kampbell
   (let [system (-> (component/system-map
                     :db (konserve/new-konserve :type :filestore :path *db-path* :serializer (m/fressian-serializer))
-                    :kampbell (component/using (kampbell/new-kampbell :equality-specs [:made_at] :entities ["users"]) [:db]))
+                    :kampbell (component/using (kampbell/new-kampbell :equality-specs #{:domain/made_at} :entities #{"users"}) [:db]))
                    component/start)
         db (:store (:db system))]
     (is (some? db))
     (is (= #{["users"]} (k/list-collections db)))
+    (is (contains? kampbell.core/equality-specs :created_at))
+    (is (contains? kampbell.core/equality-specs :domain/made_at))
     (is (empty? (get-users db)))
-    (save-user db daniel)
+    (save-user db good-input)
     (is (not (empty? (get-users db))))
+    (is (= 1 (count (get-users db))))
+    (save-user db good-input)
+    (is (= 1 (count (get-users db))))
+    (is (thrown-with-msg? clojure.lang.ExceptionInfo #"Invalid input" (save-user db bad-input)))
+    (save-user db (assoc good-input :domain.user/name "Alan Kay"))
+    (is (= 2 (count (get-users db))))
     (component/stop system)))
