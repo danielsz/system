@@ -58,6 +58,16 @@
 (defn get-users [store]
   (<!! (k/get-coll store "users")))
 
+(defn get-user [db v]
+  (<!! (k/get-entity db "users" :domain.user/email v)))
+
+(defn update-user [db v & specs]
+  {:pre [(some? specs) (every? keyword? specs)]}
+  (<!! (k/update-entity db "users" v (into #{} specs))))
+
+(defn delete-user [db v]
+  (<!! (k/delete-entity db :domain/user v)))
+
 (deftest Kampbell
   (let [system (-> (component/system-map
                     :db (konserve/new-konserve :type :filestore :path *db-path* :serializer (m/fressian-serializer))
@@ -76,4 +86,16 @@
     (is (thrown-with-msg? clojure.lang.ExceptionInfo #"Invalid input" (save-user db bad-input)))
     (save-user db (assoc good-input :domain.user/name "Alan Kay"))
     (is (= 2 (count (get-users db))))
+    (let [user (get-user db "daniel@szmulewicz.com")]
+      (is (=  "Daniel Szmulewicz" (:domain.user/name user)))
+      (update-user db (assoc user :domain.user/name "Hans Solo") :domain.user/name))
+    (let [user (get-user db "daniel@szmulewicz.com")]
+      (is (thrown-with-msg? clojure.lang.ExceptionInfo #"Invalid input" (update-user db (assoc user :domain.user/name 1234) :domain.user/name))))
+    (let [user (get-user db "daniel@szmulewicz.com")]
+      (is (=  "Hans Solo" (:domain.user/name user)))
+      (update-user db (assoc user :domain.user/name "Greedo" :domain.user/email "greedo@greedo.com") :domain.user/name :domain.user/email))
+    (is (some #(= "Greedo" (:domain.user/name %)) (get-users db)))
+    (let [user (get-user db "greedo@greedo.com")]
+      (delete-user db user))
+    (is (= 1 (count (get-users db))))
     (component/stop system)))
