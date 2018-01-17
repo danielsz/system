@@ -26,11 +26,6 @@
         attrs (into-array FileAttribute [attr])]
     (Files/createTempDirectory prefix attrs)))
 
-(defn one-time-setup []
-  (println "one time setup"))
-
-(defn one-time-teardown []
-  (println "one time teardown"))
 
 (defn once-fixture [f]
   (binding [*db-path* (str (create-temp-dir "data"))]
@@ -46,17 +41,17 @@
                                   :domain.user/email]))
 
 (def good-input #:domain.user{:name "Daniel Szmulewicz"
-                               :email "daniel@szmulewicz.com"})
+                              :email "daniel@szmulewicz.com"})
 
 (def bad-input {:name "Daniel Szmulewicz"
                 :email "daniel@szmulewicz.com"})
 
-(defn save-user [store v]
+(defn save-user [db v]
   (let [v (assoc v :domain.utils/created-at (Instant/now))]
-    (<!! (k/save-entity store :domain/user v))))
+    (<!! (k/save-entity db :domain/user v))))
 
-(defn get-users [store]
-  (<!! (k/get-coll store "users")))
+(defn get-users [db]
+  (<!! (k/get-coll db "users")))
 
 (defn get-user [db v]
   (<!! (k/get-entity db "users" :domain.user/email v)))
