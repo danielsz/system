@@ -231,7 +231,7 @@ In summary, when you instruct ~boot-system~ to manage your application lifecycle
 
 *** The Holy Grail
 
-With ~system~, you can enjoy a true Lisp environment where code is always live (*live coding*). A [[https://github.com/danielsz/holygrail][tutorial]] is available in a separate repository.
+With ~system~, you can enjoy a true Lisp environment where code is always live (*live coding*). A tutorial is available in a separate repository. It is dubbed the [[https://github.com/danielsz/holygrail][Holy Grail]], because the solution encompasses back-end and front-end. Some people like to start off from the setup in that repo as a fast track for clj/cljs combo projects. For them, Akash Shakdwipeea has made a [[https://github.com/shakdwipeea/system-template][Boot template]] available.
 
 *** Leiningen
 
