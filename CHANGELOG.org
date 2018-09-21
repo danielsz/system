@@ -4,10 +4,13 @@
 - Fix: https://github.com/danielsz/system/issues/120
 - New Riemann client component
 - New Kampbell component
+- Repl server component will automatically detect the new [[https://github.com/nrepl/nREPL][nrepl]] namespaces if present.
+- Repl server component supports ~with-cider~ flag for Cider support 
+- Cider Repl server component deprecated (merged with Repl server component)
 ** 0.4.1
 - REPL server with bind address option
 - Cider REPL server with bind address option
-- For danielsz/system users: Wondering if anyone know why `(fn [req] (handler req))` wraps the handler in line: https://github.com/danielsz/system/blob/master/src/system/components/jetty.clj#L13
+- For danielsz/system users: Wondering if anyone know why ~(fn [req] (handler req))~ wraps the handler in line: https://github.com/danielsz/system/blob/master/src/system/components/jetty.clj#L13
 - rabbitmq try catch on close https://github.com/danielsz/system/pull/105
 - New core.async pubsub component with tests
 - Swapped routes and handlers in handler component: https://github.com/danielsz/system/issues/106
