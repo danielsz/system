@@ -1,4 +1,6 @@
 * Changes 
+** 0.4.3-SNAPSHOT
+- Sente security fix: https://github.com/ptaoussanis/sente/issues/137
 ** 0.4.2
 - Handler component has an option to disable shared root middleware
 - Fix: https://github.com/danielsz/system/issues/120

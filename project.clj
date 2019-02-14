@@ -1,4 +1,4 @@
-(defproject org.danielsz/system "0.4.2"
+(defproject org.danielsz/system "0.4.3-SNAPSHOT"
   :description "Reloaded components à la carte"
   :url "https://github.com/danielsz/system"
   :license {:name "Eclipse Public License"
@@ -12,7 +12,7 @@
   :profiles {:test {:dependencies [[org.clojure/clojurescript "1.8.34"]
                                    [nrepl "0.4.5"]
                                    [org.clojure/tools.nrepl "0.2.13"]
-                                   [cider/cider-nrepl "0.18.0"]
+                                   [nrepl "0.6.0"]
                                    [ring "1.6.2"]
                                    [ring/ring-defaults "0.3.1"]
                                    [ring/ring-mock "0.3.1"]
@@ -36,7 +36,7 @@
                                    [org.danielsz/maarschalk "0.1.0"]
                                    [riemann-clojure-client "0.4.5"]
                                    [compojure "1.4.0"]
-                                   [http-kit "2.1.19"]
+                                   [http-kit "2.4.0-alpha3"]
                                    [lambdacd "0.13.2"]
                                    [org.immutant/web "2.1.2"]
                                    [hikari-cp "1.6.1"]

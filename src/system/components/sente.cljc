@@ -51,11 +51,11 @@
 
 ;; Sente does not support CLJ as a client yet
 #?(:cljs
-   (defrecord ChannelSocketClient [chsk ch-chsk chsk-send! chsk-state path router handler options]
+   (defrecord ChannelSocketClient [chsk ch-chsk chsk-send! chsk-state path csrf-token router handler options]
      component/Lifecycle
      (start [component]
        (let [handler (get-in component [:sente-handler :handler] handler)
-             {:keys [chsk ch-recv send-fn state]} (sente/make-channel-socket-client! path options)
+             {:keys [chsk ch-recv send-fn state]} (sente/make-channel-socket-client! path csrf-token options)
              component (assoc component
                               :chsk chsk
                               :ch-chsk ch-recv ; ChannelSocket's receive channel
@@ -78,13 +78,14 @@
 
 #?(:cljs
    (defn new-channel-socket-client
-     ([]
-      (new-channel-socket-client nil "/chsk" {}))
-     ([path]
-      (new-channel-socket-client nil path {}))
-     ([event-msg-handler path]
-      (new-channel-socket-client event-msg-handler path {}))
-     ([event-msg-handler path options]
+     ([csrf-token]
+      (new-channel-socket-client nil "/chsk" csrf-token {}))
+     ([path csrf-token]
+      (new-channel-socket-client nil path csrf-token {}))
+     ([event-msg-handler path csrf-token]
+      (new-channel-socket-client event-msg-handler path csrf-token {}))
+     ([event-msg-handler path csrf-token options]
       (map->ChannelSocketClient {:path    path
+                                 :csrf-token csrf-token
                                  :handler event-msg-handler
                                  :options options}))))
