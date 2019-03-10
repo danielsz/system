@@ -2,7 +2,8 @@
 ** 0.4.3-SNAPSHOT
 - Sente security fix: https://github.com/ptaoussanis/sente/issues/137
 - Revamped Scheduled Executor Service component. Declarative. Starting jobs directly from the component. See test for usage.
-- Poco, plain old component. Bare bones component. Conjes a map and that’s it.
+- Revamped Durable Queue. Declarative. Starting jobs directly from the component. See test for usage.
+- Poco: “plain old component”. Bare bones component. Conjes a map and that’s it.
 ** 0.4.2
 - Handler component has an option to disable shared root middleware
 - Fix: https://github.com/danielsz/system/issues/120
