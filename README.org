@@ -294,7 +294,7 @@ test suite.
 ** Credits
 I wish to thank [[https://github.com/stuartsierra][Stuart Sierra]] for the pioneering and guidance. Special thanks to [[https://github.com/weavejester][James Reeves]] for the [[https://github.com/weavejester/reloaded.repl][reloaded.rep]]l library and general inspiration. Thanks to [[https://github.com/ptaoussanis][Peter Taoussanis]], the friendly OSS contributor, who helped to ‘componentize’ [[https://github.com/ptaoussanis/sente][sente]], an amazing library on its own right.
 ** License
-Distributed under the [[http://opensource.org/licenses/eclipse-1.0.php][Eclipse Public License]] (the same as Clojure) with the [[https://github.com/996icu/996.ICU/blob/master/LICENSE][966.icu]] license.
+Distributed under the [[http://opensource.org/licenses/eclipse-1.0.php][Eclipse Public License]] (the same as Clojure) together with the [[https://github.com/996icu/996.ICU/blob/master/LICENSE][966.icu]] license.
 
 [[https://img.shields.io/badge/link-996.icu-red.svg][https://img.shields.io/badge/link-996.icu-red.svg]]
 
