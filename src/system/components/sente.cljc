@@ -2,7 +2,9 @@
   #?(:clj
      (:require [com.stuartsierra.component :as component]
                [compojure.core :refer [routes GET POST]]
-               [taoensso.sente :as sente])
+               [taoensso.sente :as sente]
+               [ring.util.response :as ring]
+               [clojure.tools.logging :as log])
 
      :cljs
      (:require [com.stuartsierra.component :as component]
@@ -10,7 +12,12 @@
 #?(:clj
    (defn sente-routes [{{ring-ajax-post :ring-ajax-post ring-ajax-get-or-ws-handshake :ring-ajax-get-or-ws-handshake} :sente}]
      (routes
-      (GET  "/chsk" req (ring-ajax-get-or-ws-handshake req))
+      (GET  "/chsk" req (try
+                          (ring-ajax-get-or-ws-handshake req)
+                          (catch clojure.lang.ExceptionInfo e
+                            (log/error (ex-data e))
+                            (-> (ring/response "")
+                                (ring/status 400)))))
       (POST "/chsk" req (ring-ajax-post                req)))))
 
 ;; Sente supports both CLJ and CLJS as a server
