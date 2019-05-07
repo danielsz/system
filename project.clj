@@ -1,11 +1,11 @@
-(defproject org.danielsz/system "0.4.3-SNAPSHOT"
+(defproject org.danielsz/system "0.4.3"
   :description "Reloaded components à la carte"
   :url "https://github.com/danielsz/system"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.9.0" :scope "provided"]
                  [prismatic/schema "1.1.3"]
-                 [org.danielsz/lang-utils "0.1.0"]
+                 [org.danielsz/lang-utils "0.1.1"]
                  [org.clojure/tools.namespace "0.3.0-alpha3"]
                  [io.aviso/pretty "0.1.35"]
                  [com.stuartsierra/component "0.3.1"]]
@@ -33,7 +33,7 @@
                                    [org.danielsz/etsy "0.1.2"]
                                    [org.danielsz/benjamin "0.1.0"]
                                    [org.danielsz/kampbell "0.1.3"]
-                                   [org.danielsz/maarschalk "0.1.0"]
+                                   [org.danielsz/maarschalk "0.1.3"]
                                    [riemann-clojure-client "0.5.0"]
                                    [io.netty/netty-all "4.1.34.Final"]
                                    [compojure "1.4.0"]
