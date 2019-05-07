@@ -1,5 +1,5 @@
 * Changes 
-** 0.4.3-SNAPSHOT
+** 0.4.3
 - Sente security fix: https://github.com/ptaoussanis/sente/issues/137
 - Revamped Scheduled Executor Service component. Declarative. Starting jobs directly from the component. See test for usage.
 - Revamped Durable Queue. Declarative. Starting jobs directly from the component. See test for usage.
