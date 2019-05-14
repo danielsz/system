@@ -13,10 +13,11 @@
 
 (deftest durable-queue-with-workers
   (let [counter (atom 0)
-        dq (component/start (new-durable-queue "/tmp" :xs [{:f (fn [queue component] (let [v (q/take! queue :foo)]
-                                                                                      (swap! counter inc)
-                                                                                      (println @v)
-                                                                                      (q/complete! v)))}]))
+        dq (component/start (new-durable-queue "/tmp" :xs [{:f (fn [queue component]
+                                                                 (let [v (q/take! queue :foo)]
+                                                                   (swap! counter inc)
+                                                                   (println @v)
+                                                                   (q/complete! v)))}]))
         queue (:queue dq)]
     (q/put! queue :foo "a task")
     (is (= @counter 1))
