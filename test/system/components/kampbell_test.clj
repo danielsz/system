@@ -8,7 +8,8 @@
             [maarschalk.konserve :as m]
             [clojure.spec.alpha :as s]
             [clojure.java.io :as io]
-            [clojure.test :as t :refer [use-fixtures deftest is testing]])
+            [clojure.test :as t :refer [use-fixtures deftest is testing]]
+            [clojure.tools.logging :as log])
   (:import [java.nio.file Files]
            [java.nio.file.attribute PosixFilePermissions FileAttribute]
            [java.nio.file Path Paths]
@@ -35,10 +36,12 @@
 ;; register as a one-time callback
 (use-fixtures :once once-fixture)
 
+(s/def :domain.user/address string?)
 (s/def :domain.user/name string?)
 (s/def :domain.user/email (s/and string? #(re-matches #"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,63}" %)))
 (s/def :domain/user (s/keys :req [:domain.user/name
-                                  :domain.user/email]))
+                                  :domain.user/email]
+                            :opt [:domain.user/address]))
 
 (def good-input #:domain.user{:name "Daniel Szmulewicz"
                               :email "daniel@szmulewicz.com"})
@@ -51,7 +54,7 @@
     (<!! (k/save-entity db :domain/user v))))
 
 (defn get-users [db]
-  (<!! (k/get-coll db "users")))
+  (<!! (k/get-entities db "users")))
 
 (defn get-user [db v]
   (<!! (k/get-entity db "users" :domain.user/email v)))
@@ -85,11 +88,28 @@
       (is (=  "Daniel Szmulewicz" (:domain.user/name user)))
       (update-user db (assoc user :domain.user/name "Hans Solo") :domain.user/name))
     (let [user (get-user db "daniel@szmulewicz.com")]
+      (s/valid? :domain/user user))
+    (let [user (get-user db "daniel@szmulewicz.com")]
       (is (thrown-with-msg? clojure.lang.ExceptionInfo #"Invalid input" (update-user db (assoc user :domain.user/name 1234) :domain.user/name))))
     (let [user (get-user db "daniel@szmulewicz.com")]
       (is (=  "Hans Solo" (:domain.user/name user)))
       (update-user db (assoc user :domain.user/name "Greedo" :domain.user/email "greedo@greedo.com") :domain.user/name :domain.user/email))
     (is (some #(= "Greedo" (:domain.user/name %)) (get-users db)))
+    (let [user (get-user db "greedo@greedo.com")]
+      (update-user db (assoc user :domain.user/address "Stairway to Heaven 669") :domain.user/address)
+      (is (= "Stairway to Heaven 669" (:domain.user/address (get-user db "greedo@greedo.com")))))
+    (let [user (get-user db "greedo@greedo.com")]
+      (is (true? (contains? user :domain.user/address))))
+    (let [user (get-user db "greedo@greedo.com")]
+      (update-user db (dissoc user :domain.user/address) :domain.user/address)
+      (is (nil? (:domain.user/address (get-user db "greedo@greedo.com")))))
+    (let [user (get-user db "greedo@greedo.com")]
+      (is (false? (contains? user :domain.user/address))))
+    (let [user (get-user db "greedo@greedo.com")]
+      (update-user db (dissoc user :domain.user/name) :domain.user/name)
+      (is (nil? (:domain.user/name (get-user db "greedo@greedo.com")))))
+    (let [user (get-user db "greedo@greedo.com")]
+      (is (false? (s/valid? :domain/user user)))) ;; doesn't catch absence of required keys, breaks integrity guarantee
     (let [user (get-user db "greedo@greedo.com")]
       (delete-user db user))
     (is (= 1 (count (get-users db))))
