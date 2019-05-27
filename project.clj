@@ -5,7 +5,7 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.10.0" :scope "provided"]
                  [prismatic/schema "1.1.3"]
-                 [org.danielsz/lang-utils "0.1.1"]
+                 [org.danielsz/lang-utils "0.1.2"]
                  [org.clojure/tools.namespace "0.3.0-alpha4"]
                  [io.aviso/pretty "0.1.35"]
                  [com.stuartsierra/component "0.4.0"]]

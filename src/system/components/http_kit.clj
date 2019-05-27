@@ -2,13 +2,13 @@
   (:require [com.stuartsierra.component :as component]
             [schema.core :as s]
             [system.schema :as sc]
-            [lang-utils.core :refer [∘ seek]]
+            [lang-utils.core :refer [seek]]
             [org.httpkit.server :refer [run-server]]))
 
 (defrecord WebServer [options server handler]
   component/Lifecycle
   (start [component]
-    (let [handler (if (fn? handler) handler (:handler (val (seek (∘ :handler val) component))))
+    (let [handler (if (fn? handler) handler (:handler (val (seek (comp :handler val) component))))
           server (run-server handler options)]
       (assoc component :server server)))
   (stop [component]

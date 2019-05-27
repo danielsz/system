@@ -1,6 +1,6 @@
 * Changes 
 ** 0.4.4-SNAPSHOT
-- Updated core dependencies
+- Updated core dependencies (~lang-utils~, for example)
 ** 0.4.3
 - Sente security fix: https://github.com/ptaoussanis/sente/issues/137
 - Revamped Scheduled Executor Service component. Declarative. Starting jobs directly from the component. See test for usage.
