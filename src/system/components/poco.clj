@@ -1,14 +1,13 @@
 (ns system.components.poco
   (:require [com.stuartsierra.component :as component]))
 
-(defrecord Poco [xs]
+(defrecord Poco [db]
   component/Lifecycle
   (start [component]
-    (conj component xs))
+    component)
   (stop [component]
-    (assoc component :xs nil))) 
+    (assoc component :db nil)))
 
 (defn new-poco [xs]
-  {:pre [(map? xs)]}
-  (map->Poco {:xs xs}))
+  (map->Poco {:db xs}))
 

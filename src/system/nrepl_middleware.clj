@@ -32,7 +32,9 @@
                            (set-profile-properties profile)
                            (t/send transport (response-for msg :status :done :report {:count (count (keys profile))})))
       "meyvn-system-init" (let [conf (read-conf)
+                                profile (get-in conf [:profiles :development])
                                 sys (get-in conf [:interactive :system])]
+                            (set-profile-properties profile)
                             (require  (symbol (first (str/split (str (quote ninjasocks.systems/base)) #"/"))))
                             (set-init! (resolve sys))
                             (t/send transport (response-for msg :status :done :value system.repl/system-sym)))
