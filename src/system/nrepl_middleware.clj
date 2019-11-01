@@ -22,6 +22,14 @@
       slurp
       edn/read-string))
 
+(defn system-init []
+  (let [conf (read-conf)
+        profile (get-in conf [:profiles :development])
+        sys (get-in conf [:interactive :system :var])]
+    (set-profile-properties profile)
+    (require (symbol (namespace sys)))
+    (set-init! (resolve sys))))
+
 (defn wrap-meyvn
   [h]
   (fn [{:keys [op transport] :as msg}]
@@ -30,17 +38,16 @@
                                profile (get-in conf [:profiles :development])]
                            (set-profile-properties profile)
                            (t/send transport (response-for msg :status :done :report {:count (count (keys profile))})))
-      "meyvn-system-init" (let [conf (read-conf)
-                                profile (get-in conf [:profiles :development])
-                                sys (get-in conf [:interactive :system])]
-                            (set-profile-properties profile)
-                            (require (symbol (namespace sys)))
-                            (set-init! (resolve sys))
+      "meyvn-system-init" (do (system-init)
                             (t/send transport (response-for msg :status :done :value system.repl/system-sym)))
-      "meyvn-system-go" (do (go)
+      "meyvn-system-go" (do (when-not (bound? (var system.repl/system-sym))
+                              (system-init))
+                            (go)
                             (t/send transport (response-for msg :status :done :value "OK")))
-      "meyvn-system-reset" (do (reset)
-                            (t/send transport (response-for msg :status :done :value "OK")))
+      "meyvn-system-reset" (do (when-not (bound? (var system.repl/system-sym))
+                                 (system-init))
+                               (reset)
+                               (t/send transport (response-for msg :status :done :value "OK")))
       (h msg))))
 
 
