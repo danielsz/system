@@ -1,6 +1,5 @@
 (ns system.nrepl-middleware
-  (:require  [nrepl.core :as nrepl]
-             [nrepl.misc :refer [response-for]]
+  (:require  [nrepl.misc :refer [response-for]]
              [nrepl.middleware :refer [set-descriptor!]]
              [nrepl.middleware.session :refer [session]]
              [nrepl.transport :as t]
@@ -35,7 +34,7 @@
                                 profile (get-in conf [:profiles :development])
                                 sys (get-in conf [:interactive :system])]
                             (set-profile-properties profile)
-                            (require  (symbol (first (str/split (str (quote ninjasocks.systems/base)) #"/"))))
+                            (require (symbol (namespace sys)))
                             (set-init! (resolve sys))
                             (t/send transport (response-for msg :status :done :value system.repl/system-sym)))
       "meyvn-system-go" (do (go)
