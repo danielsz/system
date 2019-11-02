@@ -25,7 +25,7 @@
 (defn system-init []
   (let [conf (read-conf)
         profile (get-in conf [:profiles :development])
-        sys (get-in conf [:interactive :system :var])]
+        sys (symbol (get-in conf [:interactive :system :var]))]
     (set-profile-properties profile)
     (require (symbol (namespace sys)))
     (set-init! (resolve sys))))
