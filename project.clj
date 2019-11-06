@@ -6,7 +6,7 @@
   :dependencies [[org.clojure/clojure "1.10.0" :scope "provided"]
                  [prismatic/schema "1.1.3"]
                  [org.danielsz/lang-utils "0.1.2"]
-                 [org.clojure/tools.namespace "0.3.0-alpha4"]
+                 [org.clojure/tools.namespace "0.3.1"]
                  [io.aviso/pretty "0.1.35"]
                  [com.stuartsierra/component "0.4.0"]]
   :profiles {:test {:dependencies [[org.clojure/clojurescript "1.8.34"]
