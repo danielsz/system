@@ -40,7 +40,7 @@
     (require (symbol (namespace sys)))
     (set-init! (resolve sys))))
 
-(defn wrap-meyvn
+(defn wrap-system
   [h]
   (fn [{:keys [op transport] :as msg}]
     (condp = op
@@ -62,7 +62,7 @@
       (h msg))))
 
 
-(set-descriptor! #'wrap-meyvn
+(set-descriptor! #'wrap-system
                  {:requires #{#'session}
                   :handles {"meyvn-system-init" {:doc "Sets the system var"}
                             "meyvn-system-go" {:doc "Starts the system"}
