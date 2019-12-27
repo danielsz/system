@@ -12,6 +12,10 @@
   font-size: 2rem;
 }
 
+ul {
+  list-style-type: circle;
+}
+
 p,
 li {
   font-family: 'Source Sans Pro', sans-serif;
