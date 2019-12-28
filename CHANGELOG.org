@@ -1,5 +1,5 @@
 * Changes 
-** 0.4.4-SNAPSHOT
+** 0.4.4
 - Updated core dependencies (~lang-utils~, for example)
 - nREPL middleware for system (used by the Meyvn build tool).
 - Poco component is even simpler (no need to conj)
