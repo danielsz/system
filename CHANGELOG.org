@@ -1,4 +1,6 @@
 * Changes 
+** 0.4.5-SNAPSHOT
+LDAP component (UnboundID LDAP SDK for Java)
 ** 0.4.4
 - Updated core dependencies (~lang-utils~, for example)
 - nREPL middleware for system (used by the Meyvn build tool).

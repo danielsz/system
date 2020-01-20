@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-12-27 Fri 00:28 -->
+<!-- 2020-01-20 Mon 02:30 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>system</title>
@@ -255,25 +255,25 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org8927682">What is it?</a></li>
-<li><a href="#org7fe349f">Motivation</a></li>
-<li><a href="#org2a83a5d">Is it good?</a></li>
-<li><a href="#org9feb4aa">Examples</a></li>
-<li><a href="#org17a910a">Usage</a></li>
-<li><a href="#org4f0d80f">Boot-system</a></li>
-<li><a href="#orgede115d">Monitoring</a></li>
-<li><a href="#orga40ae61">The Reloaded pattern</a></li>
-<li><a href="#org9be7272">Compatibility</a></li>
-<li><a href="#orge9f1b7a">Contributing</a></li>
-<li><a href="#org41a4853">Credits</a></li>
-<li><a href="#org44d26be">License</a></li>
+<li><a href="#org2313d5d">What is it?</a></li>
+<li><a href="#org267ad41">Motivation</a></li>
+<li><a href="#org1d1ab5f">Is it good?</a></li>
+<li><a href="#org0658627">Examples</a></li>
+<li><a href="#orgf7c79ae">Usage</a></li>
+<li><a href="#org61f7cc3">Boot-system</a></li>
+<li><a href="#org64b6cc5">Monitoring</a></li>
+<li><a href="#org03660c1">The Reloaded pattern</a></li>
+<li><a href="#org3cc183b">Compatibility</a></li>
+<li><a href="#org874c68f">Contributing</a></li>
+<li><a href="#orgd0dbb8a">Credits</a></li>
+<li><a href="#org3e9ee9f">License</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org8927682" class="outline-2">
-<h2 id="org8927682">What is it?</h2>
-<div class="outline-text-2" id="text-org8927682">
+<div id="outline-container-org2313d5d" class="outline-2">
+<h2 id="org2313d5d">What is it?</h2>
+<div class="outline-text-2" id="text-org2313d5d">
 <p>
 <b>system</b> owes to <a href="https://github.com/stuartsierra/component">component</a> both in spirit and in name. The component library helps implement the reloaded pattern as championed by Stuart Sierra. <b>system</b> is built on top of it, offering a set of readymade components. The idea is to expand the set over time with contributions from the community. It currently includes:
 </p>
@@ -309,45 +309,46 @@ for the JavaScript code in this tag.
 <li><a href="https://github.com/danielsz/benjamin">Benjamin</a> (Idempotency with side-effects)</li>
 <li><a href="http://www.lambda.cd/">LambdaCD</a> (build pipelines as code)</li>
 <li><a href="https://github.com/riemann/riemann-clojure-client">Riemann client</a> (client for the network event stream processing system)</li>
+<li><a href="https://ldap.com/unboundid-ldap-sdk-for-java/">LDAP</a> (Directory services)</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org7fe349f" class="outline-2">
-<h2 id="org7fe349f">Motivation</h2>
-<div class="outline-text-2" id="text-org7fe349f">
+<div id="outline-container-org267ad41" class="outline-2">
+<h2 id="org267ad41">Motivation</h2>
+<div class="outline-text-2" id="text-org267ad41">
 <p>
 A good REPL experience is a prerogative of Lisp languages. <a href="https://github.com/stuartsierra/reloaded">Reloaded</a> components enable this goodness in Clojureland. Since they require an amount of setup, the first steps when starting a new project are generally devoted to infrastructure. My first attempt to tackle the boilerplate was a Leiningen <a href="https://github.com/danielsz/back-end-template">template</a>. The problem is that Leiningen templates are hard to maintain and difficult to retrofit on existing projects. I was finding myself repeatedly updating the template for future use. Then it dawned on me that a library would better fit the bill. And so <b>system</b> came to light. It’s now the first dependency I add to any project, allowing me to focus from the get-go on the substance of my application.
 </p>
 </div>
 </div>
-<div id="outline-container-org2a83a5d" class="outline-2">
-<h2 id="org2a83a5d">Is it good?</h2>
-<div class="outline-text-2" id="text-org2a83a5d">
+<div id="outline-container-org1d1ab5f" class="outline-2">
+<h2 id="org1d1ab5f">Is it good?</h2>
+<div class="outline-text-2" id="text-org1d1ab5f">
 <p>
 <a href="https://news.ycombinator.com/item?id=3067434">Yes.</a>
 </p>
 </div>
 </div>
-<div id="outline-container-org9feb4aa" class="outline-2">
-<h2 id="org9feb4aa">Examples</h2>
-<div class="outline-text-2" id="text-org9feb4aa">
+<div id="outline-container-org0658627" class="outline-2">
+<h2 id="org0658627">Examples</h2>
+<div class="outline-text-2" id="text-org0658627">
 <p>
 Example projects are available under the <a href="https://github.com/danielsz/system/tree/master/examples">examples</a> folder.
 </p>
 </div>
 
-<div id="outline-container-org7a55a6b" class="outline-3">
-<h3 id="org7a55a6b">Get-started projects</h3>
-<div class="outline-text-3" id="text-org7a55a6b">
+<div id="outline-container-org0c003e8" class="outline-3">
+<h3 id="org0c003e8">Get-started projects</h3>
+<div class="outline-text-3" id="text-org0c003e8">
 <p>
 Two minimal projects that will help you get started. Both the <a href="https://github.com/danielsz/system/tree/master/examples/leiningen">Leiningen</a> and <a href="https://github.com/danielsz/system/tree/master/examples/boot">Boot</a> toolchain are covered.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org1559bfe" class="outline-3">
-<h3 id="org1559bfe">Real-world web service</h3>
-<div class="outline-text-3" id="text-org1559bfe">
+<div id="outline-container-orgf3d813c" class="outline-3">
+<h3 id="orgf3d813c">Real-world web service</h3>
+<div class="outline-text-3" id="text-orgf3d813c">
 <p>
 A web service written multiple times using different styles.
 </p>
@@ -359,9 +360,9 @@ A web service written multiple times using different styles.
 </div>
 </div>
 
-<div id="outline-container-orgcac3bae" class="outline-3">
-<h3 id="orgcac3bae">Websockets</h3>
-<div class="outline-text-3" id="text-orgcac3bae">
+<div id="outline-container-orgb8ab4d7" class="outline-3">
+<h3 id="orgb8ab4d7">Websockets</h3>
+<div class="outline-text-3" id="text-orgb8ab4d7">
 <p>
 A web application with client-side UI. Demonstrates login procedure with Sente (a realtime web comms library).  
 </p>
@@ -372,9 +373,9 @@ A web application with client-side UI. Demonstrates login procedure with Sente (
 </div>
 </div>
 
-<div id="outline-container-org796f056" class="outline-3">
-<h3 id="org796f056">Raamwerk</h3>
-<div class="outline-text-3" id="text-org796f056">
+<div id="outline-container-org7837fa3" class="outline-3">
+<h3 id="org7837fa3">Raamwerk</h3>
+<div class="outline-text-3" id="text-org7837fa3">
 <p>
 A Ring application is composed with separate API and site middleware.
 </p>
@@ -386,9 +387,9 @@ A Ring application is composed with separate API and site middleware.
 </div>
 </div>
 </div>
-<div id="outline-container-org17a910a" class="outline-2">
-<h2 id="org17a910a">Usage</h2>
-<div class="outline-text-2" id="text-org17a910a">
+<div id="outline-container-orgf7c79ae" class="outline-2">
+<h2 id="orgf7c79ae">Usage</h2>
+<div class="outline-text-2" id="text-orgf7c79ae">
 <p>
 First, assemble your system(s) in a namespace of your choosing. Here we define two systems, development and production.
 </p>
@@ -457,9 +458,9 @@ In production, in `core.clj`:
 </div>
 </div>
 
-<div id="outline-container-org377e28d" class="outline-4">
-<h4 id="org377e28d">defsystem</h4>
-<div class="outline-text-4" id="text-org377e28d">
+<div id="outline-container-org7be6e8b" class="outline-4">
+<h4 id="org7be6e8b">defsystem</h4>
+<div class="outline-text-4" id="text-org7be6e8b">
 <p>
 A convenience macro, <code>defsystem</code>, allows you to declare systems succinctly:
 </p>
@@ -495,9 +496,9 @@ A convenience macro, <code>defsystem</code>, allows you to declare systems succi
 </div>
 </div>
 
-<div id="outline-container-org4c9d509" class="outline-4">
-<h4 id="org4c9d509">At runtime: global system map vs dependency injection</h4>
-<div class="outline-text-4" id="text-org4c9d509">
+<div id="outline-container-org191c9eb" class="outline-4">
+<h4 id="org191c9eb">At runtime: global system map vs dependency injection</h4>
+<div class="outline-text-4" id="text-org191c9eb">
 <p>
 At runtime, the <b>system</b> var can be used anywhere after requiring it from the <b>system.repl</b> namespace:
 </p>
@@ -538,9 +539,9 @@ Whatever you do, use your best judgment.
 </div>
 </div>
 
-<div id="outline-container-org4f0d80f" class="outline-2">
-<h2 id="org4f0d80f">Boot-system</h2>
-<div class="outline-text-2" id="text-org4f0d80f">
+<div id="outline-container-org61f7cc3" class="outline-2">
+<h2 id="org61f7cc3">Boot-system</h2>
+<div class="outline-text-2" id="text-org61f7cc3">
 <p>
 <code>System</code> and <code>Boot</code> are a match made in heaven. Some of the properties that boot-system brings to your workflow are:
 </p>
@@ -587,9 +588,9 @@ If you don’t supply a SYS argument, the system task will act as a <code>tools.
 </p>
 </div>
 
-<div id="outline-container-org308c490" class="outline-3">
-<h3 id="org308c490">Code reload vs system restart</h3>
-<div class="outline-text-3" id="text-org308c490">
+<div id="outline-container-org5657488" class="outline-3">
+<h3 id="org5657488">Code reload vs system restart</h3>
+<div class="outline-text-3" id="text-org5657488">
 <p>
 In traditional Lisp systems, users can redefine arbitrary, discrete units of code. Clojure, as a Lisp, is no exception. However, as a hosted language with many advanced dynamic features, code reloading has many <a href="https://github.com/clojure/tools.namespace#reloading-code-motivation">pitfalls</a>. <code>tools.namespace</code> fixes many of them, but ultimately, reloaded code will not agree with runtime state, and the system will need a full restart. This is  where <code>component</code> fits in. (Note that both libraries were authored by Stuart Sierra).
 </p>
@@ -617,18 +618,18 @@ In summary, when you instruct <code>boot-system</code> to manage your applicatio
 </div>
 </div>
 
-<div id="outline-container-org4c8be5b" class="outline-3">
-<h3 id="org4c8be5b">The Holy Grail</h3>
-<div class="outline-text-3" id="text-org4c8be5b">
+<div id="outline-container-org6d9bf65" class="outline-3">
+<h3 id="org6d9bf65">The Holy Grail</h3>
+<div class="outline-text-3" id="text-org6d9bf65">
 <p>
 With <code>system</code>, you can enjoy a true Lisp environment where code is always live (<b>live coding</b>). A tutorial is available in a separate repository. It is dubbed the <a href="https://github.com/danielsz/holygrail">Holy Grail</a>, because the solution encompasses back-end and front-end. Some people like to start off from the setup in that repo as a fast track for clj/cljs combo projects. For them, Akash Shakdwipeea has made a <a href="https://github.com/shakdwipeea/system-template">Boot template</a> available.
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgd6995e2" class="outline-3">
-<h3 id="orgd6995e2">Leiningen</h3>
-<div class="outline-text-3" id="text-orgd6995e2">
+<div id="outline-container-org0f6c977" class="outline-3">
+<h3 id="org0f6c977">Leiningen</h3>
+<div class="outline-text-3" id="text-org0f6c977">
 <p>
 If you are using Leiningen, we recommend <a href="https://github.com/bhauman/lein-figwheel">Figwheel</a> to address browser-side hot-reloading concerns.
 </p>
@@ -636,9 +637,9 @@ If you are using Leiningen, we recommend <a href="https://github.com/bhauman/lei
 </div>
 </div>
 
-<div id="outline-container-orgede115d" class="outline-2">
-<h2 id="orgede115d">Monitoring</h2>
-<div class="outline-text-2" id="text-orgede115d">
+<div id="outline-container-org64b6cc5" class="outline-2">
+<h2 id="org64b6cc5">Monitoring</h2>
+<div class="outline-text-2" id="text-org64b6cc5">
 <p>
 A monitoring protocol is available to query the status of
 components. Two methods are available, <code>started?</code> and <code>stopped?</code>,
@@ -648,26 +649,26 @@ service behind the component.
 </div>
 </div>
 
-<div id="outline-container-orga40ae61" class="outline-2">
-<h2 id="orga40ae61">The Reloaded pattern</h2>
-<div class="outline-text-2" id="text-orga40ae61">
+<div id="outline-container-org03660c1" class="outline-2">
+<h2 id="org03660c1">The Reloaded pattern</h2>
+<div class="outline-text-2" id="text-org03660c1">
 <p>
 Here are a couple of links that are sure to shed more light on the motivations of the reloaded workflow.
 </p>
 </div>
 
-<div id="outline-container-orgdd7e34d" class="outline-3">
-<h3 id="orgdd7e34d">The canonical reference:</h3>
-<div class="outline-text-3" id="text-orgdd7e34d">
+<div id="outline-container-org4abb46b" class="outline-3">
+<h3 id="org4abb46b">The canonical reference:</h3>
+<div class="outline-text-3" id="text-org4abb46b">
 <p>
 <a href="http://thinkrelevance.com/blog/2013/06/04/clojure-workflow-reloaded">My Clojure Workflow, Reloaded</a>
 </p>
 </div>
 </div>
 
-<div id="outline-container-org5b6e81b" class="outline-3">
-<h3 id="org5b6e81b">Interactive programming</h3>
-<div class="outline-text-3" id="text-org5b6e81b">
+<div id="outline-container-org802a078" class="outline-3">
+<h3 id="org802a078">Interactive programming</h3>
+<div class="outline-text-3" id="text-org802a078">
 <p>
 I gave a talk at several Clojure user groups (Belgium, Spain, Israel). BeClojure did a great job at recording it and making it available on Youtube. Mattias Buelens also produced a very nice <a href="http://mattiasbuelens.github.io/interactiveprogrammingtalk/interactiveprogramming.html">interactive UI</a> for the BeClojure talk.
 </p>
@@ -676,9 +677,9 @@ I gave a talk at several Clojure user groups (Belgium, Spain, Israel). BeClojure
 </div>
 </div>
 
-<div id="outline-container-orgd470b1c" class="outline-3">
-<h3 id="orgd470b1c">Additional references</h3>
-<div class="outline-text-3" id="text-orgd470b1c">
+<div id="outline-container-org053e3bf" class="outline-3">
+<h3 id="org053e3bf">Additional references</h3>
+<div class="outline-text-3" id="text-org053e3bf">
 <p>
 And more references touching on the topic.
 </p>
@@ -692,9 +693,9 @@ And more references touching on the topic.
 </div>
 </div>
 
-<div id="outline-container-org9be7272" class="outline-2">
-<h2 id="org9be7272">Compatibility</h2>
-<div class="outline-text-2" id="text-org9be7272">
+<div id="outline-container-org3cc183b" class="outline-2">
+<h2 id="org3cc183b">Compatibility</h2>
+<div class="outline-text-2" id="text-org3cc183b">
 <p>
 There is a host of components libraries in the Clojure ecosystem, each with its own take, its own philosophy. For example:
 </p>
@@ -712,9 +713,9 @@ Navigating this space can be difficult or overwhelming. Due to the nature of Ope
 </p>
 </div>
 
-<div id="outline-container-orga5048af" class="outline-4">
-<h4 id="orga5048af">Choosing</h4>
-<div class="outline-text-4" id="text-orga5048af">
+<div id="outline-container-org5b3c573" class="outline-4">
+<h4 id="org5b3c573">Choosing</h4>
+<div class="outline-text-4" id="text-org5b3c573">
 <p>
 To help choose if <code>system</code> is right for you, here are a couple of tips. Take a component for an often used dependency (a web server, for example, or a database), and compare their source code. The <code>system</code> library puts an emphasis on two properties:
 </p>
@@ -727,9 +728,9 @@ To help choose if <code>system</code> is right for you, here are a couple of tip
 </div>
 </div>
 
-<div id="outline-container-orge9f1b7a" class="outline-2">
-<h2 id="orge9f1b7a">Contributing</h2>
-<div class="outline-text-2" id="text-orge9f1b7a">
+<div id="outline-container-org874c68f" class="outline-2">
+<h2 id="org874c68f">Contributing</h2>
+<div class="outline-text-2" id="text-org874c68f">
 <p>
 Please fork and issue a pull request to add more components. Please
 don't forget to include tests. You can refer to the existing ones to
@@ -746,17 +747,17 @@ test suite.
 </div>
 </div>
 
-<div id="outline-container-org41a4853" class="outline-2">
-<h2 id="org41a4853">Credits</h2>
-<div class="outline-text-2" id="text-org41a4853">
+<div id="outline-container-orgd0dbb8a" class="outline-2">
+<h2 id="orgd0dbb8a">Credits</h2>
+<div class="outline-text-2" id="text-orgd0dbb8a">
 <p>
 I wish to thank <a href="https://github.com/stuartsierra">Stuart Sierra</a> for the pioneering and guidance. Special thanks to <a href="https://github.com/weavejester">James Reeves</a> for the <a href="https://github.com/weavejester/reloaded.repl">reloaded.rep</a>l library and general inspiration. Thanks to <a href="https://github.com/ptaoussanis">Peter Taoussanis</a>, the friendly OSS contributor, who helped to ‘componentize’ <a href="https://github.com/ptaoussanis/sente">sente</a>, an amazing library on its own right.
 </p>
 </div>
 </div>
-<div id="outline-container-org44d26be" class="outline-2">
-<h2 id="org44d26be">License</h2>
-<div class="outline-text-2" id="text-org44d26be">
+<div id="outline-container-org3e9ee9f" class="outline-2">
+<h2 id="org3e9ee9f">License</h2>
+<div class="outline-text-2" id="text-org3e9ee9f">
 <p>
 Distributed under the <a href="http://opensource.org/licenses/eclipse-1.0.php">Eclipse Public License</a> (the same as Clojure) together with the <a href="https://996.icu/#/en_US">966.icu</a> <a href="https://github.com/996icu/996.ICU/blob/master/LICENSE">license</a>.
 </p>
@@ -772,7 +773,7 @@ Sorry, your browser does not support SVG.</object></a>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Daniel Szmulewicz</p>
-<p class="date">Created: 2019-12-27 Fri 00:28</p>
+<p class="date">Created: 2020-01-20 Mon 02:30</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

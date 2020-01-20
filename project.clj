@@ -1,4 +1,4 @@
-(defproject org.danielsz/system "0.4.4"
+(defproject org.danielsz/system "0.4.5-SNAPSHOT"
   :description "Reloaded components à la carte"
   :url "https://github.com/danielsz/system"
   :license {:name "Eclipse Public License"
@@ -37,6 +37,7 @@
                                    [riemann-clojure-client "0.5.0"]
                                    [io.netty/netty-all "4.1.34.Final"]
                                    [compojure "1.4.0"]
+                                   [com.unboundid/unboundid-ldapsdk "4.0.14"]
                                    [http-kit "2.4.0-alpha3"]
                                    [lambdacd "0.13.2"]
                                    [org.immutant/web "2.1.2"]
