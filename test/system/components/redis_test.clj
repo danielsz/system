@@ -11,4 +11,5 @@
           k (name (gensym))]
       (is (= 1 (wcar conn (car/sadd k "bar"))))
       (is (= 0 (wcar conn (car/sadd k "bar"))))
+      (wcar conn (car/srem k "bar"))
       (component/stop db))))

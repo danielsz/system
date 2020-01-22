@@ -6,9 +6,8 @@
   component/Lifecycle
   (start [component]
     (let [conn {:pool pool :spec spec}
-          workers (for [x xs]
-                    (car-mq/worker conn (:q x) {:handler ((:f x) component)}))]
-      (doall workers)
+          workers (doall (for [x xs]
+                           (car-mq/worker conn (:q x) {:handler ((:f x) component)})))]
       (assoc component :workers workers :conn conn)))
   (stop [component]
     (doseq [worker (:workers component)]

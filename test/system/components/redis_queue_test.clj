@@ -15,9 +15,8 @@
                                                                    (swap! counter inc)
                                                                    (println "Received" (:event message))
                                                                    {:status :success}))
-                                                            :q :testing}]))
-          k (name (gensym))]
-      (dotimes [n 10] (car/wcar (:conn queue) (car-mq/enqueue :testing {:event k :iter n})))
+                                                            :q :testing}]))]
+      (dotimes [n 10] (car/wcar (:conn queue) (car-mq/enqueue :testing {:event (name (gensym)) :iter n})))
       (Thread/sleep 30000)
       (is (= 10 @counter))
       (component/stop queue))))
