@@ -1,6 +1,9 @@
 * Changes 
 ** 0.4.5-SNAPSHOT
-LDAP component (UnboundID LDAP SDK for Java)
+- LDAP component (UnboundID LDAP SDK for Java)
+- New Redis queue component
+- Renamed Redis pub sub component (previously known a Carmine)
+- Bump dependency version for org.danielsz/lang-utils
 ** 0.4.4
 - Updated core dependencies (~lang-utils~, for example)
 - nREPL middleware for system (used by the Meyvn build tool).

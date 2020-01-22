@@ -1,8 +1,8 @@
-(ns system.components.carmine
+(ns system.components.redis-pubsub
   (:require [com.stuartsierra.component :as component]
             [taoensso.carmine :as car]))
 
-(defrecord PubSub [host port topic handler options]
+(defrecord RedisPubSub [host port topic handler options]
   component/Lifecycle
   (start [component]
     (if (:listener component)
@@ -21,10 +21,10 @@
           (dissoc component :listener))
       component)))
 
-(defn new-pubsub
+(defn new-redis-pubsub
   ([topic handler]
-   (new-pubsub "127.0.0.1" 6379 topic handler {}))
+   (new-redis-pubsub "127.0.0.1" 6379 topic handler {}))
   ([topic handler options]
-   (new-pubsub "127.0.0.1" 6379 topic handler options))
+   (new-redis-pubsub "127.0.0.1" 6379 topic handler options))
   ([host port topic handler options]
-   (map->PubSub {:host host :port port :topic topic :handler handler :options options})))
+   (map->RedisPubSub {:host host :port port :topic topic :handler handler :options options})))
