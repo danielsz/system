@@ -1,5 +1,5 @@
 * Changes 
-** 0.4.5-SNAPSHOT
+** 0.4.5
 - LDAP component (UnboundID LDAP SDK for Java)
 - New Redis queue component
 - Renamed Redis pub sub component (previously known a Carmine)
