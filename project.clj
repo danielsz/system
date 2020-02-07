@@ -1,4 +1,4 @@
-(defproject org.danielsz/system "0.4.5"
+(defproject org.danielsz/system "0.4.6-SNAPSHOT"
   :description "Reloaded components à la carte"
   :url "https://github.com/danielsz/system"
   :license {:name "Eclipse Public License"
@@ -31,7 +31,7 @@
                                    [clojurewerkz/quartzite "2.0.0"]
                                    [com.taoensso/sente "1.8.1"]
                                    [org.danielsz/etsy "0.1.2"]
-                                   [org.danielsz/benjamin "0.1.0"]
+                                   [org.danielsz/benjamin "0.1.3"]
                                    [org.danielsz/kampbell "0.1.6"]
                                    [org.danielsz/maarschalk "0.1.3"]
                                    [riemann-clojure-client "0.5.0"]

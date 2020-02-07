@@ -1,4 +1,6 @@
 * Changes 
+** 0.4.6-SNAPSHOT
+- Benjamin: ability to wrap component for both persistence-fn and logbook-fn independently.
 ** 0.4.5
 - LDAP component (UnboundID LDAP SDK for Java)
 - New Redis queue component
