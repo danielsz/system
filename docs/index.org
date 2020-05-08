@@ -18,6 +18,8 @@
 - [[http://docs.caudate.me/adi/][Adi]] (Datomic interface)
 - [[http://www.h2database.com/][H2]] (H2 relational database)
 - [[http://www.postgresql.org][PostgreSQL]] (SQL Database)
+- [[https://mariadb.com/][MariaDB]] (SQL Database)
+- [[https://github.com/seancorfield/next-jdbc][next-jdbc]] (JDBC wrapper)
 - [[http://clojuremongodb.info/][Monger]] (MongoDB client)
 - [[http://clojureneo4j.info/][Neo4j]] (Graph database)
 - [[http://clojurequartz.info/][Quartzite]] (Quartz Scheduler)
