@@ -3,6 +3,7 @@
 - Benjamin: ability to wrap component for both persistence-fn and logbook-fn independently.
 - Mariadb: database connection component
 - Next.jdbc: database connection component
+- Defensive measure in durable queue component
 ** 0.4.5
 - LDAP component (UnboundID LDAP SDK for Java)
 - New Redis queue component

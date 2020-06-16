@@ -12,7 +12,8 @@
                                  ((:f x) queues component))))))
       (assoc component :queue queues :guard guard)))
   (stop [component]
-    (vswap! (:guard component) not)
+    (when-let [guard (:guard component)]
+      (vswap! guard not))
     (dissoc component :queue :guard)))
 
 (defn new-durable-queue
