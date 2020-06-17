@@ -13,7 +13,8 @@
           :fixed-rate (.scheduleAtFixedRate ^ScheduledThreadPoolExecutor s ((:f x) component) (:initial-delay x) (:period x) (:unit x))))
       (assoc component :scheduler s)))
   (stop [component]
-    (.shutdown (:scheduler component))
+    (when-let [scheduler (:scheduler component)]
+      (.shutdown scheduler))
     component))
 
 (defn new-scheduler [& {:keys [n-threads xs] :or {n-threads (.availableProcessors (Runtime/getRuntime))}}]
