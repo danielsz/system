@@ -9,7 +9,7 @@
                            (resolve 'clojure.tools.nrepl.server/start-server))
           nrepl-handler #(do (require 'cider.nrepl)
                              (ns-resolve 'cider.nrepl 'cider-nrepl-handler))
-          handler (when with-cider (nrepl-handler))]
+          handler (when with-cider nrepl-handler)]
       (assoc component :server (start-server :port port :bind bind :handler handler))))
   (stop [{server :server :as component}]
     (when server
