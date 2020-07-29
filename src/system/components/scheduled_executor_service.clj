@@ -11,7 +11,7 @@
         (case (:method x)
           :fixed-delay (.scheduleWithFixedDelay ^ScheduledThreadPoolExecutor s ((:f x) component) (:initial-delay x) (:period x) (:unit x))
           :fixed-rate (.scheduleAtFixedRate ^ScheduledThreadPoolExecutor s ((:f x) component) (:initial-delay x) (:period x) (:unit x))
-          :one-off (.schedule ^ScheduledThreadPoolExecutor s ((:f x) component) (:initial-delay x) (:unit x))))
+          :one-off (.schedule ^ScheduledThreadPoolExecutor s ((:f x) (assoc component :s s)) (:initial-delay x) (:unit x))))
       (assoc component :scheduler s)))
   (stop [component]
     (when-let [scheduler (:scheduler component)]
