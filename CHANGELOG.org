@@ -6,6 +6,7 @@
 - Defensive measure in durable queue component
 - Scheduled Executor Service: added one-off method for non-repeating tasks
 - Scheduled Executor Service: recursive scheduler for the one-off method (ability to schedule in the scheduled task)
+- Cleanup of Sente component
 ** 0.4.5
 - LDAP component (UnboundID LDAP SDK for Java)
 - New Redis queue component
