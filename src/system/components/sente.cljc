@@ -5,43 +5,39 @@
                [taoensso.sente :as sente]
                [ring.util.response :as ring]
                [clojure.tools.logging :as log])
-
      :cljs
      (:require [com.stuartsierra.component :as component]
                [taoensso.sente :as sente])))
 #?(:clj
    (defn sente-routes [{{ring-ajax-post :ring-ajax-post ring-ajax-get-or-ws-handshake :ring-ajax-get-or-ws-handshake} :sente}]
      (routes
-      (GET  "/chsk" req (try
-                          (ring-ajax-get-or-ws-handshake req)
-                          (catch clojure.lang.ExceptionInfo e
-                            (log/error (ex-data e))
-                            (-> (ring/response "")
-                                (ring/status 400)))))
+      (GET "/chsk" req (try
+                         (ring-ajax-get-or-ws-handshake req)
+                         (catch clojure.lang.ExceptionInfo e
+                           (log/error (ex-data e))
+                           (-> (ring/response "")
+                              (ring/status 400)))))
       (POST "/chsk" req (ring-ajax-post                req)))))
 
 ;; Sente supports both CLJ and CLJS as a server
-(defrecord ChannelSocketServer [ring-ajax-post ring-ajax-get-or-ws-handshake ch-chsk chsk-send! connected-uids router web-server-adapter handler options]
+(defrecord ChannelSocketServer [web-server-adapter handler options]
   component/Lifecycle
   (start [component]
     (let [handler (get-in component [:sente-handler :handler] handler)
-          {:keys [ch-recv send-fn ajax-post-fn ajax-get-or-ws-handshake-fn connected-uids]}
-          (sente/make-channel-socket-server! web-server-adapter options)
-          component (assoc component
-                           :ring-ajax-post ajax-post-fn
-                           :ring-ajax-get-or-ws-handshake ajax-get-or-ws-handshake-fn
-                           :ch-chsk ch-recv
-                           :chsk-send! send-fn
-                           :connected-uids connected-uids)]
+          {:keys [ch-recv ajax-post-fn ajax-get-or-ws-handshake-fn send-fn connected-uids]} (sente/make-channel-socket-server! web-server-adapter options)]
       (assoc component
-             :router (sente/start-chsk-router!
-                      ch-recv (if (:wrap-component? options)
-                                (handler component)
-                                handler)))))
+             :ch-chsk ch-recv
+             :ring-ajax-post ajax-post-fn
+             :ring-ajax-get-or-ws-handshake ajax-get-or-ws-handshake-fn
+             :chsk-send! send-fn
+             :connected-uids connected-uids
+             :router (sente/start-chsk-router! ch-recv (if (:wrap-component? options)
+                                                         (handler component)
+                                                         handler)))))
   (stop [component]
-    (if-let [stop-f router]
-      (assoc component :router (stop-f))
-      component)))
+    (when-let [stop-f (:router component)]
+      (stop-f))
+    component))
 
 (defn new-channel-socket-server
   ([web-server-adapter]
@@ -58,7 +54,7 @@
 
 ;; Sente does not support CLJ as a client yet
 #?(:cljs
-   (defrecord ChannelSocketClient [chsk ch-chsk chsk-send! chsk-state path csrf-token router handler options]
+   (defrecord ChannelSocketClient [path csrf-token options]
      component/Lifecycle
      (start [component]
        (let [handler (get-in component [:sente-handler :handler] handler)
@@ -72,9 +68,9 @@
            (assoc component :router (sente/start-chsk-router! ch-recv handler))
            component)))
      (stop [component]
-       (when chsk
+       (when (:chsk component)
          (sente/chsk-disconnect! chsk))
-       (when-let [stop-f router]
+       (when-let [stop-f (:router component)]
          (stop-f))
        (assoc component
               :router nil
@@ -86,13 +82,10 @@
 #?(:cljs
    (defn new-channel-socket-client
      ([csrf-token]
-      (new-channel-socket-client nil "/chsk" csrf-token {}))
+      (new-channel-socket-client "/chsk" csrf-token))
      ([path csrf-token]
-      (new-channel-socket-client nil path csrf-token {}))
-     ([event-msg-handler path csrf-token]
-      (new-channel-socket-client event-msg-handler path csrf-token {}))
-     ([event-msg-handler path csrf-token options]
-      (map->ChannelSocketClient {:path    path
+      (new-channel-socket-client path csrf-token {}))
+     ([path csrf-token options]
+      (map->ChannelSocketClient {:path path
                                  :csrf-token csrf-token
-                                 :handler event-msg-handler
                                  :options options}))))
