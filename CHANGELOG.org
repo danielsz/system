@@ -1,4 +1,6 @@
 * Changes 
+** 0.4.7-SNAPSHOT
+- Etsy: configurable throttle rate
 ** 0.4.6
 - Benjamin: ability to wrap component for both persistence-fn and logbook-fn independently.
 - Mariadb: database connection component
