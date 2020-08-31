@@ -1,5 +1,5 @@
 * Changes 
-** 0.4.6-SNAPSHOT
+** 0.4.6
 - Benjamin: ability to wrap component for both persistence-fn and logbook-fn independently.
 - Mariadb: database connection component
 - Next.jdbc: database connection component
