@@ -12,9 +12,9 @@
           server (run handler options)]
       (assoc component :server server)))
   (stop [component]
-    (if-let [server (:server component)]
-      (assoc component :server (stop server))
-      component)))
+    (when-let [server (:server component)]
+      (stop server))
+    (assoc component :server nil)))
 
 (def Options
   {(s/optional-key :host) sc/Hostname
