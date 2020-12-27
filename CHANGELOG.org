@@ -1,6 +1,7 @@
 * Changes 
 ** 0.4.7-SNAPSHOT
 - Etsy: configurable throttle rate
+- Immutant web: bug fix (stopping the server twice in a sequence would throw an error)
 ** 0.4.6
 - Benjamin: ability to wrap component for both persistence-fn and logbook-fn independently.
 - Mariadb: database connection component
