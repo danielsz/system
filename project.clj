@@ -4,11 +4,11 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.10.0" :scope "provided"]
-                 [prismatic/schema "1.1.3"]
+                 [prismatic/schema "1.1.12"]
                  [org.danielsz/lang-utils "0.1.3"]
-                 [org.clojure/tools.namespace "0.3.1"]
-                 [io.aviso/pretty "0.1.35"]
-                 [com.stuartsierra/component "0.4.0"]]
+                 [org.clojure/tools.namespace "1.1.0"]
+                 [io.aviso/pretty "0.1.37"]
+                 [com.stuartsierra/component "1.0.0"]]
   :profiles {:test {:dependencies [[org.clojure/clojurescript "1.8.34"]
                                    [nrepl "0.4.5"]
                                    [org.clojure/tools.nrepl "0.2.13"]
