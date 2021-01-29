@@ -1,5 +1,5 @@
 * Changes 
-** 0.4.7-SNAPSHOT
+** 0.4.7
 - Etsy: configurable throttle rate
 - Immutant web: bug fix (stopping the server twice in a sequence would throw an error)
 - Meyvn config + dependencies updated to their latest versions
