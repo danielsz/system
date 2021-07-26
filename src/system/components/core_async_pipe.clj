@@ -4,7 +4,6 @@
 
 
 (defn worker
-  "Default implementation. Provide your own in options map, if desired."
   [f to]
   (async/thread
     (loop []
@@ -40,6 +39,9 @@
       (dissoc component :from :to :pipe :worker)))
 
 (defn new-pipe
+  "The default implementation is geared towards throttling the
+  throughput of a stream. Provide your own implementation along the
+  options map."
   ([handler]
    (new-pipe handler {}))
   ([handler options]
