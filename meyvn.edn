@@ -19,8 +19,6 @@
                                           :javafx-class "main.core.App"},
                        :pre-compilation-script {:enabled false,
                                                 :path "repl/pre-script.clj"},
-                       :remote-repository {:id "ssh-repository",
-                                           :url "scpexe://user@domain:/home/.m2/repository"},
                        :jpackage {:enabled false,
                                   :destination "jpackage-target"},
                        :javafx {:enabled false,
@@ -56,9 +54,7 @@
                                                  :path "repl/post-script.clj"}},
              :jar {:enabled true,
                    :gpg {:enabled true},
-                   :sources {:enabled false},
-                   :remote-repository {:id "clojars",
-                                       :url "https://clojars.org/repo"}}},
+                   :sources {:enabled false}}},
  :testing {:enabled false, :tools-deps-alias :test},
  :scm {:enabled false},
  :interactive {:system {:enabled false,
@@ -103,4 +99,6 @@
                                       :foreign-libs [],
                                       :main "main.core"},
                       :tools-deps-alias :cljs}},
- :profiles {:enabled false}}
+ :profiles {:enabled false}
+ :distribution-management {:id "clojars",
+                           :url "https://clojars.org/repo"}}
