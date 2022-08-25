@@ -3,7 +3,7 @@
 - Mariadb: data-source and connection
 - core.async pipe: high-level component for a core.async pipe
 - Sente client fixes (ChannelSocketClient)
-- Bump dependencies  
+- Bump dependencies  (including tools.namespace and prismatic schema)
 ** 0.4.7
 - Etsy: configurable throttle rate
 - Immutant web: bug fix (stopping the server twice in a sequence would throw an error)
