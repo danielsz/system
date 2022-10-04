@@ -1,13 +1,48 @@
 * Changes 
-** 0.4.2-SNAPSHOT
+** 0.4.8-SNAPSHOT
+- Mariadb: data-source and connection
+- core.async pipe: high-level component for a core.async pipe
+- Sente client fixes (ChannelSocketClient)
+- Bump dependencies  
+** 0.4.7
+- Etsy: configurable throttle rate
+- Immutant web: bug fix (stopping the server twice in a sequence would throw an error)
+- Meyvn config + dependencies updated to their latest versions
+** 0.4.6
+- Benjamin: ability to wrap component for both persistence-fn and logbook-fn independently.
+- Mariadb: database connection component
+- Next.jdbc: database connection component
+- Defensive measure in durable queue component
+- Scheduled Executor Service: added one-off method for non-repeating tasks
+- Scheduled Executor Service: recursive scheduler for the one-off method (ability to schedule in the scheduled task)
+- Cleanup of Sente component
+- Option to get a throttled Etsy client
+** 0.4.5
+- LDAP component (UnboundID LDAP SDK for Java)
+- New Redis queue component
+- Renamed Redis pub sub component (previously known a Carmine)
+- Bump dependency version for org.danielsz/lang-utils
+** 0.4.4
+- Updated core dependencies (~lang-utils~, for example)
+- nREPL middleware for system (used by the Meyvn build tool).
+- Poco component is even simpler (no need to conj)
+** 0.4.3
+- Sente security fix: https://github.com/ptaoussanis/sente/issues/137
+- Revamped Scheduled Executor Service component. Declarative. Starting jobs directly from the component. See test for usage.
+- Revamped Durable Queue. Declarative. Starting jobs directly from the component. See test for usage.
+- Poco: “plain old component”. Bare bones component. Conjes a map and that’s it.
+** 0.4.2
 - Handler component has an option to disable shared root middleware
 - Fix: https://github.com/danielsz/system/issues/120
 - New Riemann client component
 - New Kampbell component
+- Repl server component will automatically detect the new [[https://github.com/nrepl/nREPL][nrepl]] namespaces if present.
+- Repl server component supports ~with-cider~ flag for Cider support 
+- Cider Repl server component deprecated (merged with Repl server component)
 ** 0.4.1
 - REPL server with bind address option
 - Cider REPL server with bind address option
-- For danielsz/system users: Wondering if anyone know why `(fn [req] (handler req))` wraps the handler in line: https://github.com/danielsz/system/blob/master/src/system/components/jetty.clj#L13
+- For danielsz/system users: Wondering if anyone know why ~(fn [req] (handler req))~ wraps the handler in line: https://github.com/danielsz/system/blob/master/src/system/components/jetty.clj#L13
 - rabbitmq try catch on close https://github.com/danielsz/system/pull/105
 - New core.async pubsub component with tests
 - Swapped routes and handlers in handler component: https://github.com/danielsz/system/issues/106

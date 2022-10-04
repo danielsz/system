@@ -1,0 +1,303 @@
+#+title: system
+#+SUBTITLE: Reloaded components à la carte
+#+OPTIONS: toc:1 num:nil
+#+HTML_HEAD: <link rel="stylesheet" href="css/et-book.css" type="text/css" media="screen" />
+#+HTML_HEAD: <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,600&display=swap" rel="stylesheet">
+#+HTML_HEAD: <link rel="stylesheet" href="css/main.css" type="text/css" media="screen" />
+#+HTML_HEAD: <link rel="stylesheet" href="css/post.css" type="text/css" media="screen" />
+#+HTML_HEAD:  <script type="text/javascript" src="js/navigation.js"></script>
+
+* What is it?
+*system* owes to [[https://github.com/stuartsierra/component][component]] both in spirit and in name. The component library helps implement the reloaded pattern as championed by Stuart Sierra. *system* is built on top of it, offering a set of readymade components. The idea is to expand the set over time with contributions from the community. It currently includes:
+
+- [[https://github.com/ring-clojure/ring][Jetty]] (HTTP server)
+- [[http://http-kit.org/][HTTP kit]] (Async HTTP server)
+- [[https://github.com/ztellman/aleph][aleph]] (Async HTTP server)
+- [[http://immutant.org/][Immutant Web]] (Web component in application server suite)
+- [[http://www.datomic.com/][Datomic]] (Immutable database)
+- [[http://docs.caudate.me/adi/][Adi]] (Datomic interface)
+- [[http://www.h2database.com/][H2]] (H2 relational database)
+- [[http://www.postgresql.org][PostgreSQL]] (SQL Database)
+- [[https://mariadb.com/][MariaDB]] (SQL Database)
+- [[https://github.com/seancorfield/next-jdbc][next-jdbc]] (JDBC wrapper)
+- [[http://clojuremongodb.info/][Monger]] (MongoDB client)
+- [[http://clojureneo4j.info/][Neo4j]] (Graph database)
+- [[http://clojurequartz.info/][Quartzite]] (Quartz Scheduler)
+- [[https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/ScheduledExecutorService.html][ScheduledExecutorService]] (Java scheduler)
+- [[https://github.com/ptaoussanis/sente][Sente]] (Websockets/Ajax communications library)
+- [[https://github.com/clojure/tools.nrepl][nREPL]] (Clojure network REPL)
+- [[http://clojurerabbitmq.info/][Langohr]] (RabbitMQ client)
+- [[https://github.com/danielsz/etsy-clojure-api][Etsy]] (Etsy client)
+- [[http://docs.caudate.me/hara/#haraiowatch][hara.io.watch]] (File watcher)
+- [[http://docs.caudate.me/hara/hara-io-scheduler.html][hara.io.scheduler]] (Cron-like scheduler)
+- [[https://www.elastic.co/][Elasticsearch]] (Elasticsearch full-text search engine)
+- [[https://github.com/danielsz/system/wiki/Raamwerk][Raamwerk]] ([[https://github.com/weavejester/duct][Duct-style]] components for Ring applications)
+- [[https://github.com/clojure/java.jdbc][clojure.java.jdbc]] (Low level JDBC access for Clojure)
+- [[https://github.com/tomekw/hikari-cp][Hikari CP]] (JDBC connection pool)
+- [[https://github.com/ptaoussanis/carmine][Redis]] (Redis connection)
+- [[https://github.com/ptaoussanis/carmine#listeners--pubsub][Redis pubsub]]  (Redis PubSub)
+- [[https://github.com/ptaoussanis/carmine#message-queue][Redis queue]] (Redis queue)
+- [[https://github.com/clojure/core.async/wiki/Pub-Sub][core.async PubSub]] (Channel based pubbing and subbing) 
+- [[https://github.com/replikativ/konserve][Konserve]] (Document store protocol)
+- [[https://github.com/danielsz/kampbell][Kampbell]] (Entity layer on top of key-value stores)
+- [[https://github.com/Factual/durable-queue][Durable Queue]] (Factual’s disk-backed task queue)
+- [[https://github.com/danielsz/benjamin][Benjamin]] (Idempotency with side-effects)
+- [[http://www.lambda.cd/][LambdaCD]] (build pipelines as code)
+- [[https://github.com/riemann/riemann-clojure-client][Riemann client]] (client for the network event stream processing system)
+- [[https://ldap.com/unboundid-ldap-sdk-for-java/][LDAP]] (Directory services) 
+* Motivation
+A good REPL experience is a prerogative of Lisp languages. [[https://github.com/stuartsierra/reloaded][Reloaded]] components enable this goodness in Clojureland. Since they require an amount of setup, the first steps when starting a new project are generally devoted to infrastructure. My first attempt to tackle the boilerplate was a Leiningen [[https://github.com/danielsz/back-end-template][template]]. The problem is that Leiningen templates are hard to maintain and difficult to retrofit on existing projects. I was finding myself repeatedly updating the template for future use. Then it dawned on me that a library would better fit the bill. And so *system* came to light. It’s now the first dependency I add to any project, allowing me to focus from the get-go on the substance of my application.
+* Is it good?
+[[https://news.ycombinator.com/item?id=3067434][Yes.]]
+* Examples
+
+Example projects are available under the [[https://github.com/danielsz/system/tree/master/examples][examples]] folder.
+
+** Get-started projects
+
+Two minimal projects that will help you get started. Both the [[https://github.com/danielsz/system/tree/master/examples/leiningen][Leiningen]] and [[https://github.com/danielsz/system/tree/master/examples/boot][Boot]] toolchain are covered.
+
+** Real-world web service
+
+A web service written multiple times using different styles.
+
+- System map is accessed directly. https://github.com/danielsz/system-advanced-example
+- Dependency injection, Duct abstractions and other known techniques. https://github.com/danielsz/system-dependency-injection
+
+** Websockets
+
+A web application with client-side UI. Demonstrates login procedure with Sente (a realtime web comms library).  
+
+- https://github.com/danielsz/system-websockets
+ 
+** Raamwerk
+A Ring application is composed with separate API and site middleware.
+
+- Applying separate middleware to corresponding routes. [[https://github.com/danielsz/system-api-example][https://github.com/danielsz/system-api-example]]
+- Running multiple handlers separately. [[https://github.com/danielsz/system-api-immutant-example][https://github.com/danielsz/system-api-immutant-example]]
+* Usage
+
+First, assemble your system(s) in a namespace of your choosing. Here we define two systems, development and production.
+#+BEGIN_SRC clojure
+(ns my-app.systems
+  (:require
+   [com.stuartsierra.component :as component]
+   (system.components
+    [jetty :refer [new-web-server]]
+    [repl-server :refer [new-repl-server]]
+    [datomic :refer [new-datomic-db]]
+    [mongo :refer [new-mongo-db]])
+   [my-app.webapp :refer [handler]]
+   [environ.core :refer [env]]))
+
+(defn dev-system
+  "Assembles and returns components for an application in production"
+  []
+  (component/system-map
+   :datomic-db (new-datomic-db (env :db-url))
+   :mongo-db (new-mongo-db)
+   :web (new-web-server (env :http-port) handler)))
+
+(defn prod-system
+  "Assembles and returns components for a production deployment"
+  []
+  (merge (dev-system)
+         (component/system-map
+          :repl-server (new-repl-server (env :repl-port))))
+
+#+END_SRC
+
+Then, in `user.clj`:
+
+#+BEGIN_SRC clojure
+(ns user
+  (:require [system.repl :refer [system set-init! start stop reset]]
+            [my-app.systems :refer [dev-system]]))
+
+(set-init! #'dev-system)
+#+END_SRC
+You can now manipulate the system in the REPL: ~(start)~, ~(reset)~ or ~(stop)~. The system map is accessible at any time, it resides in a var named, as you can guess, ~#'system~.
+
+In production, in `core.clj`:
+
+#+BEGIN_SRC clojure
+(ns my-app.core
+  (:gen-class)
+  (:require [system.repl :refer [set-init! start]]
+            [my-app.systems :refer [prod-system]]))
+
+(defn -main
+  "Start the application"
+  []
+  (set-init! #'prod-system)
+  (start))
+#+END_SRC
+
+*** defsystem
+
+A convenience macro, ~defsystem~, allows you to declare systems succinctly:
+
+#+BEGIN_SRC clojure
+(ns my-app.systems
+  (:require
+   [system.core :refer [defsystem]]
+   (system.components
+    [jetty :refer [new-web-server]]
+    [repl-server :refer [new-repl-server]]
+    [datomic :refer [new-datomic-db]]
+    [mongo :refer [new-mongo-db]])
+   [my-app.webapp :refer [handler]]
+   [environ.core :refer [env]]))
+
+(defsystem dev-system
+  [:datomic-db (new-datomic-db (env :db-url))
+   :mongo-db (new-mongo-db)
+   :web (new-web-server (env :http-port) handler)])
+
+(defsystem prod-system
+  [:datomic-db (new-datomic-db (env :db-url))
+   :mongo-db (new-mongo-db (env :mongo-url))
+   :web (new-web-server (env :http-port) handler)
+   :repl-server (new-repl-server (env :repl-port))])
+
+#+END_SRC
+*Note:* Component allows you to define dependency relationships within systems. Please don’t use said macro for those cases. Be sure to consult component’s API to see the range of options available to you.
+
+*** At runtime: global system map vs dependency injection
+
+At runtime, the *system* var can be used anywhere after requiring it from the *system.repl* namespace:
+
+#+BEGIN_SRC clojure
+(ns front-end.webapp.handler
+ (:require [system.repl :refer [system]]))
+
+(code-using system ...)
+#+END_SRC
+
+Note this pattern of directly accessing the global system var is in contrast with the pattern of dependency injection integral to Stuart Sierra's vision of Component. In this perspective, /components are defined in terms of the components on which they depend/. *system*, as a repository of readymade, reusable components, cannot and does not anticipate all the possible ways in which users will want to assemble components together. What it can and does, however, is anticipate common scenarii. Like your typical Ring application, for [[https://github.com/danielsz/system-dependency-injection][example]], where you may want to inject the database in the routes, so that it is readily available when serving http requests.
+
+*system* ships with a web framework, ~Raamwerk~, inspired by the [[https://github.com/weavejester/duct][Duct]] framework: the ~endpoint~, ~middleware~ and ~handler~ components. The ~endpoint~ component returns routes that are closed over by the component passed to it, so that its constituents are accessible via standard map destructuring. The rationale for this is explained [[https://www.booleanknot.com/blog/2015/05/22/structuring-clojure-web-apps.html][here]]. If the previous sentence didn’t sound agreeable, I suggest you check out the [[https://github.com/danielsz/system/wiki/Raamwerk][wiki]] and the examples.
+
+The ability to decompose a web application in mulitple ~endpoints~ offers flexibility and opportunies of reuse. For example, you can isolate functionality in library projects, and join the ~endpoints~ in the target application’s unified ~handler~. The possibilities are numerous.
+
+Documentation for Raamwerk’s components is [[http://danielsz.github.io/system/][available]].
+#+BEGIN_QUOTE
+As with many patterns, DI can be abused. It is easy to get carried away with dependency injection and build a towering dependency graph that is unnecessary and even counter-productive. — Ben Morris in [[http://www.ben-morris.com/how-not-to-use-dependency-injection-service-locators-and-injection-mania/][How not to use dependency injection: service locators and injection mania.]]
+#+END_QUOTE
+
+Whatever you do, use your best judgment.
+
+* Boot-system
+~System~ and ~Boot~ are a match made in heaven. Some of the properties that boot-system brings to your workflow are:
+
+- Manual and automatic mode, ie. either you manipulate the system in the REPL, or you configure it to react to editing changes.
+- Restartable system. What warrants a system restart is user-configurable. File-based granularity.
+- Changes that do not require a restart are available in the running system instantly (via namespace reloading).
+- Full /Lisp-style/ interactive programming via the REPL and hot-reloading in the browser.
+
+The ~system~ task is invoked like any ~boot~ task.
+#+BEGIN_SRC shell
+$ boot system -h
+#+END_SRC
+
+Which outputs, for example:
+
+#+BEGIN_SRC shell
+-h, --help         Print this help info.
+-s, --sys SYS      Set the system var to SYS.
+-a, --auto         Manages the lifecycle of the application automatically.
+-f, --files FILES  Will reset the system if a filename in the supplied vector changes.
+-r, --regexes      Treat --files as regexes, not file names. Only one of regexes|paths is allowed.
+-p, --paths        Treat --files as classpath paths, not file names. Only one of regexes|paths is allowed.
+#+END_SRC
+
+When ~auto~ is set to true, reloading of namespaces and restarts are being managed automatically.
+
+If you set ~auto~ to false, you indicate that you want to handle restarts manually at the REPL, with ~(system.repl/reset)~. Please note that SYS will be initialized and started for you at first run. 
+
+If you don’t supply a SYS argument, the system task will act as a ~tools.namespace~ wrapper. Each time you save your file, affected namespaces are reloaded in dependency order (after being unloaded in reverse order). This is handy for projects that do not use ~Component~, like this [[https://github.com/danielsz/no-restarts][example]] project. 
+
+** Code reload vs system restart
+
+In traditional Lisp systems, users can redefine arbitrary, discrete units of code. Clojure, as a Lisp, is no exception. However, as a hosted language with many advanced dynamic features, code reloading has many [[https://github.com/clojure/tools.namespace#reloading-code-motivation][pitfalls]]. ~tools.namespace~ fixes many of them, but ultimately, reloaded code will not agree with runtime state, and the system will need a full restart. This is  where ~component~ fits in. (Note that both libraries were authored by Stuart Sierra).
+
+It is important to understand that code reloading and system restarts are orthogonal—both are desirable properties in a programming environment. A full restart is a blunt tool. No need to restart the database just because a helper function was modified.
+
+We *don’t want* to restart the system with *every* code change. Ideally, we want to only reload the code that has changed, and occasionally restart (when necessary).
+
+~boot-system~ gives you finegrained tuning over system restarts vs code reload. Each time you change a file, ~boot-system~ will reload your code. Conversely, filenames that have been designated in the ~files~ option will trigger a full restart. Typically, the files vector will be small, as most modifications do not warrant a full restart. An example of when you would want a full restart is when you modify a Var that is used in a thread (that of a web server, for example). This is explained in detail in the [[http://danielsz.github.io/2016/05/06/Ghosts-in-the-machine][Ghosts in the machine]] blog post. 
+Check the options with ~boot system -h~. 
+
+In summary, when you instruct ~boot-system~ to manage your application lifecycle (with the ~auto~ option), either one of those two things will happen after you change a source file:
+- ~refresh~ will first unload all affected namespaces (to remove old definitions) before reloading them in dependency order.
+- ~reset~ will restart the system if that file was defined in the ~files~ vector.
+
+** The Holy Grail
+
+With ~system~, you can enjoy a true Lisp environment where code is always live (*live coding*). A tutorial is available in a separate repository. It is dubbed the [[https://github.com/danielsz/holygrail][Holy Grail]], because the solution encompasses back-end and front-end. Some people like to start off from the setup in that repo as a fast track for clj/cljs combo projects. For them, Akash Shakdwipeea has made a [[https://github.com/shakdwipeea/system-template][Boot template]] available.
+
+** Leiningen
+
+If you are using Leiningen, we recommend [[https://github.com/bhauman/lein-figwheel][Figwheel]] to address browser-side hot-reloading concerns.
+
+* Monitoring
+
+A monitoring protocol is available to query the status of
+components. Two methods are available, ~started?~ and ~stopped?~,
+whose concrete implementations depend on the native APIs of the
+service behind the component.
+
+* The Reloaded pattern
+Here are a couple of links that are sure to shed more light on the motivations of the reloaded workflow.
+
+** The canonical reference:
+[[http://thinkrelevance.com/blog/2013/06/04/clojure-workflow-reloaded][My Clojure Workflow, Reloaded]]
+
+** Interactive programming
+I gave a talk at several Clojure user groups (Belgium, Spain, Israel). BeClojure did a great job at recording it and making it available on Youtube. Mattias Buelens also produced a very nice [[http://mattiasbuelens.github.io/interactiveprogrammingtalk/interactiveprogramming.html][interactive UI]] for the BeClojure talk.
+
+#+HTML: <a href="http://www.youtube.com/watch?feature=player_embedded&v=50vU6rp2jyA" target="_blank"><img src="http://img.youtube.com/vi/50vU6rp2jyA/0.jpg" alt="Interactive programming" width="560" height="315" border="10" /></a>
+
+** Additional references
+And more references touching on the topic.
+- [[http://www.infoq.com/presentations/Clojure-Large-scale-patterns-techniques][Clojure in the Large]]
+- [[http://martintrojer.github.io/clojure/2013/09/07/retrofitting-the-reloaded-pattern-into-clojure-projects/][Retrofitting the Reloaded pattern into Clojure projects]]
+- [[http://software-ninja-ninja.blogspot.co.il/2014/04/5-faces-of-dependency-injection-in.html][5 faces of dependency injection in Clojure]]
+- [[https://github.com/weavejester/reloaded.repl][REPL functions to support the reloaded workflow]]
+
+* Compatibility
+There is a host of components libraries in the Clojure ecosystem, each with its own take, its own philosophy. For example:
+
+- [[https://github.com/juxt/modular][modular]]
+- [[https://github.com/palletops/leaven][leaven]] and [[https://github.com/palletops/bakery][bakery]]
+- [[https://github.com/james-henderson/yoyo][yoyo]]
+- [[http://docs.caudate.me/hara/#haracomponent][hara.component]]
+- [[https://github.com/tolitius/mount][mount]]
+
+Navigating this space can be difficult or overwhelming. Due to the nature of Open Source Software, it is unlikely to see any kind of standardization taking place. Let’s embrace the diversity instead, and emphasize the *compatibility* of components. As long as a component adheres to Stuart Sierra’s Lifecycle protocol, you can import it in your ~systems~ namespace and refer to it as any other native ~system~ component.
+
+*** Choosing
+
+To help choose if ~system~ is right for you, here are a couple of tips. Take a component for an often used dependency (a web server, for example, or a database), and compare their source code. The ~system~ library puts an emphasis on two properties:
+
+- minimalism: ~system~ provides a way to instantiate components that fulfill the Licecycle protocol (~start~ and ~stop~). Nothing more, nothing less.
+- Interactive programming: ~system~ is best used in a Lispy, interactive workflow, hence its deep integration with boot.
+
+* Contributing
+Please fork and issue a pull request to add more components. Please
+don't forget to include tests. You can refer to the existing ones to
+get started.
+
+Calling ~lein test~ will tests that have no external
+dependencies. Tests that do require external services being installed
+on your system (such as Mongo, Postgres or Elasticsearch) can be run
+with ~lein test :dependency~. Use ~lein test :all~ to run the full
+test suite.
+
+* Credits
+I wish to thank [[https://github.com/stuartsierra][Stuart Sierra]] for the pioneering and guidance. Special thanks to [[https://github.com/weavejester][James Reeves]] for the [[https://github.com/weavejester/reloaded.repl][reloaded.rep]]l library and general inspiration. Thanks to [[https://github.com/ptaoussanis][Peter Taoussanis]], the friendly OSS contributor, who helped to ‘componentize’ [[https://github.com/ptaoussanis/sente][sente]], an amazing library on its own right.
+* License
+Distributed under the [[http://opensource.org/licenses/eclipse-1.0.php][Eclipse Public License]] (the same as Clojure) together with the [[https://996.icu/#/en_US][966.icu]] [[https://github.com/996icu/996.ICU/blob/master/LICENSE][license]].
+
+[[https://img.shields.io/badge/link-996.icu-red.svg][https://img.shields.io/badge/link-996.icu-red.svg]]
+

@@ -2,19 +2,19 @@
   (:require [schema.core :as s]
             [system.schema :as sc]
             [com.stuartsierra.component :as component]
-            [lang-utils.core :refer [∘ seek]]
+            [lang-utils.core :refer [seek]]
             [immutant.web :refer [run stop]]))
 
 (defrecord WebServer [handler options]
   component/Lifecycle
   (start [component]
-    (let [handler (if (fn? handler) handler (:handler (val (seek (∘ :handler val) component))))
+    (let [handler (if (fn? handler) handler (:handler (val (seek (comp :handler val) component))))
           server (run handler options)]
       (assoc component :server server)))
   (stop [component]
-    (if-let [server (:server component)]
-      (assoc component :server (stop server))
-      component)))
+    (when-let [server (:server component)]
+      (stop server))
+    (assoc component :server nil)))
 
 (def Options
   {(s/optional-key :host) sc/Hostname

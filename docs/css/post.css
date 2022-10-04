@@ -1,0 +1,25 @@
+#content {
+    display: grid;
+    grid-template-columns: [full-start] minmax(1em, 2fr) [main-start] minmax(0, 38em) [main-end] minmax(1em, 1fr) [full-end];
+}
+
+#content > * {
+    grid-column: main;
+}
+
+#content > .org-src-container {
+    grid-column: full;
+}
+
+#content > blockquote {
+    grid-column: full;
+}
+
+#org-div-home-and-up {
+    grid-column-start: -2;
+    text-align: center;
+}
+
+#content img {
+    max-width: 100%;
+}

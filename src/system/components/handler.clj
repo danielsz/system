@@ -1,14 +1,13 @@
 (ns system.components.handler
   (:require [com.stuartsierra.component :as component]
-            [system.components.middleware]
-            [lang-utils.core :refer [∘]])
+            [system.components.middleware])
   (:import [system.components.middleware Middleware]))
 
 (defn- endpoints
   "Find all endpoints this component depends on, returns map entries of the form
   [name component]. An endpoint is a component that define a `:routes` key."
   [component]
-  (filter (∘ :routes val) component))
+  (filter (comp :routes val) component))
 
 (defn- with-middleware
   "Returns all endpoints that include middleware. With `flag` being false:
@@ -31,7 +30,7 @@
 (defrecord Handler [router shared-root-middleware?]
   component/Lifecycle
   (start [component]
-    (let [endpoints-with-middleware (partition-by middleware-key ((∘ with-middleware endpoints) component))
+    (let [endpoints-with-middleware (partition-by middleware-key ((comp with-middleware endpoints) component))
           handlers (for [endpoints endpoints-with-middleware
                          :let [mw-key (middleware-key (first endpoints))
                                wrap-mw (get-in (val (first endpoints)) [mw-key :wrap-mw])

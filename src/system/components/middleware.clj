@@ -1,6 +1,5 @@
 (ns system.components.middleware
-  (:require [com.stuartsierra.component :as component]
-            [lang-utils.core :refer [∘]]))
+  (:require [com.stuartsierra.component :as component]))
 
 (defn- middleware-fn
   "Middleware are specified in a vector, either as standalone
@@ -24,7 +23,7 @@
   Explanation for reverse:
   https://github.com/duct-framework/duct/issues/31#issuecomment-171459482"
   [entries]
-  (apply ∘ (map middleware-fn (reverse entries))))
+  (apply comp (map middleware-fn (reverse entries))))
 
 
 (defn- sanitize

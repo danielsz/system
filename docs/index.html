@@ -1,0 +1,784 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2020-05-08 Fri 23:04 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>system</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Daniel Szmulewicz" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" href="css/et-book.css" type="text/css" media="screen" />
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="css/post.css" type="text/css" media="screen" />
+<script type="text/javascript" src="js/navigation.js"></script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2020 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">system
+<br />
+<span class="subtitle">Reloaded components à la carte</span>
+</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org413257d">What is it?</a></li>
+<li><a href="#org7808421">Motivation</a></li>
+<li><a href="#orgdab5512">Is it good?</a></li>
+<li><a href="#org79ccf7d">Examples</a></li>
+<li><a href="#org5aeecd0">Usage</a></li>
+<li><a href="#org4910939">Boot-system</a></li>
+<li><a href="#org42896a1">Monitoring</a></li>
+<li><a href="#org1cb6c1f">The Reloaded pattern</a></li>
+<li><a href="#org4b9768b">Compatibility</a></li>
+<li><a href="#orgeaf81d9">Contributing</a></li>
+<li><a href="#org8e2c107">Credits</a></li>
+<li><a href="#org87a8029">License</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org413257d" class="outline-2">
+<h2 id="org413257d">What is it?</h2>
+<div class="outline-text-2" id="text-org413257d">
+<p>
+<b>system</b> owes to <a href="https://github.com/stuartsierra/component">component</a> both in spirit and in name. The component library helps implement the reloaded pattern as championed by Stuart Sierra. <b>system</b> is built on top of it, offering a set of readymade components. The idea is to expand the set over time with contributions from the community. It currently includes:
+</p>
+
+<ul class="org-ul">
+<li><a href="https://github.com/ring-clojure/ring">Jetty</a> (HTTP server)</li>
+<li><a href="http://http-kit.org/">HTTP kit</a> (Async HTTP server)</li>
+<li><a href="https://github.com/ztellman/aleph">aleph</a> (Async HTTP server)</li>
+<li><a href="http://immutant.org/">Immutant Web</a> (Web component in application server suite)</li>
+<li><a href="http://www.datomic.com/">Datomic</a> (Immutable database)</li>
+<li><a href="http://docs.caudate.me/adi/">Adi</a> (Datomic interface)</li>
+<li><a href="http://www.h2database.com/">H2</a> (H2 relational database)</li>
+<li><a href="http://www.postgresql.org">PostgreSQL</a> (SQL Database)</li>
+<li><a href="https://mariadb.com/">MariaDB</a> (SQL Database)</li>
+<li><a href="https://github.com/seancorfield/next-jdbc">next-jdbc</a> (JDBC wrapper)</li>
+<li><a href="http://clojuremongodb.info/">Monger</a> (MongoDB client)</li>
+<li><a href="http://clojureneo4j.info/">Neo4j</a> (Graph database)</li>
+<li><a href="http://clojurequartz.info/">Quartzite</a> (Quartz Scheduler)</li>
+<li><a href="https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/ScheduledExecutorService.html">ScheduledExecutorService</a> (Java scheduler)</li>
+<li><a href="https://github.com/ptaoussanis/sente">Sente</a> (Websockets/Ajax communications library)</li>
+<li><a href="https://github.com/clojure/tools.nrepl">nREPL</a> (Clojure network REPL)</li>
+<li><a href="http://clojurerabbitmq.info/">Langohr</a> (RabbitMQ client)</li>
+<li><a href="https://github.com/danielsz/etsy-clojure-api">Etsy</a> (Etsy client)</li>
+<li><a href="http://docs.caudate.me/hara/#haraiowatch">hara.io.watch</a> (File watcher)</li>
+<li><a href="http://docs.caudate.me/hara/hara-io-scheduler.html">hara.io.scheduler</a> (Cron-like scheduler)</li>
+<li><a href="https://www.elastic.co/">Elasticsearch</a> (Elasticsearch full-text search engine)</li>
+<li><a href="https://github.com/danielsz/system/wiki/Raamwerk">Raamwerk</a> (<a href="https://github.com/weavejester/duct">Duct-style</a> components for Ring applications)</li>
+<li><a href="https://github.com/clojure/java.jdbc">clojure.java.jdbc</a> (Low level JDBC access for Clojure)</li>
+<li><a href="https://github.com/tomekw/hikari-cp">Hikari CP</a> (JDBC connection pool)</li>
+<li><a href="https://github.com/ptaoussanis/carmine">Redis</a> (Redis connection)</li>
+<li><a href="https://github.com/ptaoussanis/carmine#listeners--pubsub">Redis pubsub</a>  (Redis PubSub)</li>
+<li><a href="https://github.com/ptaoussanis/carmine#message-queue">Redis queue</a> (Redis queue)</li>
+<li><a href="https://github.com/clojure/core.async/wiki/Pub-Sub">core.async PubSub</a> (Channel based pubbing and subbing)</li>
+<li><a href="https://github.com/replikativ/konserve">Konserve</a> (Document store protocol)</li>
+<li><a href="https://github.com/danielsz/kampbell">Kampbell</a> (Entity layer on top of key-value stores)</li>
+<li><a href="https://github.com/Factual/durable-queue">Durable Queue</a> (Factual’s disk-backed task queue)</li>
+<li><a href="https://github.com/danielsz/benjamin">Benjamin</a> (Idempotency with side-effects)</li>
+<li><a href="http://www.lambda.cd/">LambdaCD</a> (build pipelines as code)</li>
+<li><a href="https://github.com/riemann/riemann-clojure-client">Riemann client</a> (client for the network event stream processing system)</li>
+<li><a href="https://ldap.com/unboundid-ldap-sdk-for-java/">LDAP</a> (Directory services)</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org7808421" class="outline-2">
+<h2 id="org7808421">Motivation</h2>
+<div class="outline-text-2" id="text-org7808421">
+<p>
+A good REPL experience is a prerogative of Lisp languages. <a href="https://github.com/stuartsierra/reloaded">Reloaded</a> components enable this goodness in Clojureland. Since they require an amount of setup, the first steps when starting a new project are generally devoted to infrastructure. My first attempt to tackle the boilerplate was a Leiningen <a href="https://github.com/danielsz/back-end-template">template</a>. The problem is that Leiningen templates are hard to maintain and difficult to retrofit on existing projects. I was finding myself repeatedly updating the template for future use. Then it dawned on me that a library would better fit the bill. And so <b>system</b> came to light. It’s now the first dependency I add to any project, allowing me to focus from the get-go on the substance of my application.
+</p>
+</div>
+</div>
+<div id="outline-container-orgdab5512" class="outline-2">
+<h2 id="orgdab5512">Is it good?</h2>
+<div class="outline-text-2" id="text-orgdab5512">
+<p>
+<a href="https://news.ycombinator.com/item?id=3067434">Yes.</a>
+</p>
+</div>
+</div>
+<div id="outline-container-org79ccf7d" class="outline-2">
+<h2 id="org79ccf7d">Examples</h2>
+<div class="outline-text-2" id="text-org79ccf7d">
+<p>
+Example projects are available under the <a href="https://github.com/danielsz/system/tree/master/examples">examples</a> folder.
+</p>
+</div>
+
+<div id="outline-container-org8f542da" class="outline-3">
+<h3 id="org8f542da">Get-started projects</h3>
+<div class="outline-text-3" id="text-org8f542da">
+<p>
+Two minimal projects that will help you get started. Both the <a href="https://github.com/danielsz/system/tree/master/examples/leiningen">Leiningen</a> and <a href="https://github.com/danielsz/system/tree/master/examples/boot">Boot</a> toolchain are covered.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgfe2dd2e" class="outline-3">
+<h3 id="orgfe2dd2e">Real-world web service</h3>
+<div class="outline-text-3" id="text-orgfe2dd2e">
+<p>
+A web service written multiple times using different styles.
+</p>
+
+<ul class="org-ul">
+<li>System map is accessed directly. <a href="https://github.com/danielsz/system-advanced-example">https://github.com/danielsz/system-advanced-example</a></li>
+<li>Dependency injection, Duct abstractions and other known techniques. <a href="https://github.com/danielsz/system-dependency-injection">https://github.com/danielsz/system-dependency-injection</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org7745fbf" class="outline-3">
+<h3 id="org7745fbf">Websockets</h3>
+<div class="outline-text-3" id="text-org7745fbf">
+<p>
+A web application with client-side UI. Demonstrates login procedure with Sente (a realtime web comms library).  
+</p>
+
+<ul class="org-ul">
+<li><a href="https://github.com/danielsz/system-websockets">https://github.com/danielsz/system-websockets</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org4b959aa" class="outline-3">
+<h3 id="org4b959aa">Raamwerk</h3>
+<div class="outline-text-3" id="text-org4b959aa">
+<p>
+A Ring application is composed with separate API and site middleware.
+</p>
+
+<ul class="org-ul">
+<li>Applying separate middleware to corresponding routes. <a href="https://github.com/danielsz/system-api-example">https://github.com/danielsz/system-api-example</a></li>
+<li>Running multiple handlers separately. <a href="https://github.com/danielsz/system-api-immutant-example">https://github.com/danielsz/system-api-immutant-example</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org5aeecd0" class="outline-2">
+<h2 id="org5aeecd0">Usage</h2>
+<div class="outline-text-2" id="text-org5aeecd0">
+<p>
+First, assemble your system(s) in a namespace of your choosing. Here we define two systems, development and production.
+</p>
+<div class="org-src-container">
+<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #a020f0;">ns</span> <span style="color: #228b22;">my-app.systems</span>
+  <span style="color: #7388d6;">(</span><span style="color: #008b8b;">:require</span>
+   <span style="color: #909183;">[</span>com.stuartsierra.component <span style="color: #008b8b;">:as</span> component<span style="color: #909183;">]</span>
+   <span style="color: #909183;">(</span>system.components
+    <span style="color: #709870;">[</span>jetty <span style="color: #008b8b;">:refer</span> <span style="color: #907373;">[</span>new-web-server<span style="color: #907373;">]</span><span style="color: #709870;">]</span>
+    <span style="color: #709870;">[</span>repl-server <span style="color: #008b8b;">:refer</span> <span style="color: #907373;">[</span>new-repl-server<span style="color: #907373;">]</span><span style="color: #709870;">]</span>
+    <span style="color: #709870;">[</span>datomic <span style="color: #008b8b;">:refer</span> <span style="color: #907373;">[</span>new-datomic-db<span style="color: #907373;">]</span><span style="color: #709870;">]</span>
+    <span style="color: #709870;">[</span>mongo <span style="color: #008b8b;">:refer</span> <span style="color: #907373;">[</span>new-mongo-db<span style="color: #907373;">]</span><span style="color: #709870;">]</span><span style="color: #909183;">)</span>
+   <span style="color: #909183;">[</span>my-app.webapp <span style="color: #008b8b;">:refer</span> <span style="color: #709870;">[</span>handler<span style="color: #709870;">]</span><span style="color: #909183;">]</span>
+   <span style="color: #909183;">[</span>environ.core <span style="color: #008b8b;">:refer</span> <span style="color: #709870;">[</span>env<span style="color: #709870;">]</span><span style="color: #909183;">]</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+
+<span style="color: #707183;">(</span><span style="color: #a020f0;">defn</span> <span style="color: #0000ff;">dev-system</span>
+  <span style="color: #8b2252;">"Assembles and returns components for an application in production"</span>
+  <span style="color: #7388d6;">[]</span>
+  <span style="color: #7388d6;">(</span><span style="color: #228b22;">component</span>/system-map
+   <span style="color: #008b8b;">:datomic-db</span> <span style="color: #909183;">(</span>new-datomic-db <span style="color: #709870;">(</span>env <span style="color: #008b8b;">:db-url</span><span style="color: #709870;">)</span><span style="color: #909183;">)</span>
+   <span style="color: #008b8b;">:mongo-db</span> <span style="color: #909183;">(</span>new-mongo-db<span style="color: #909183;">)</span>
+   <span style="color: #008b8b;">:web</span> <span style="color: #909183;">(</span>new-web-server <span style="color: #709870;">(</span>env <span style="color: #008b8b;">:http-port</span><span style="color: #709870;">)</span> handler<span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+
+<span style="color: #707183;">(</span><span style="color: #a020f0;">defn</span> <span style="color: #0000ff;">prod-system</span>
+  <span style="color: #8b2252;">"Assembles and returns components for a production deployment"</span>
+  <span style="color: #7388d6;">[]</span>
+  <span style="color: #7388d6;">(</span>merge <span style="color: #909183;">(</span>dev-system<span style="color: #909183;">)</span>
+         <span style="color: #909183;">(</span><span style="color: #228b22;">component</span>/system-map
+          <span style="color: #008b8b;">:repl-server</span> <span style="color: #709870;">(</span>new-repl-server <span style="color: #907373;">(</span>env <span style="color: #008b8b;">:repl-port</span><span style="color: #907373;">)</span><span style="color: #709870;">)</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span>
+
+</pre>
+</div>
+
+<p>
+Then, in `user.clj`:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #a020f0;">ns</span> <span style="color: #228b22;">user</span>
+  <span style="color: #7388d6;">(</span><span style="color: #008b8b;">:require</span> <span style="color: #909183;">[</span>system.repl <span style="color: #008b8b;">:refer</span> <span style="color: #709870;">[</span>system set-init! start stop reset<span style="color: #709870;">]</span><span style="color: #909183;">]</span>
+            <span style="color: #909183;">[</span>my-app.systems <span style="color: #008b8b;">:refer</span> <span style="color: #709870;">[</span>dev-system<span style="color: #709870;">]</span><span style="color: #909183;">]</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+
+<span style="color: #707183;">(</span>set-init! #'dev-system<span style="color: #707183;">)</span>
+</pre>
+</div>
+<p>
+You can now manipulate the system in the REPL: <code>(start)</code>, <code>(reset)</code> or <code>(stop)</code>. The system map is accessible at any time, it resides in a var named, as you can guess, <code>#'system</code>.
+</p>
+
+<p>
+In production, in `core.clj`:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #a020f0;">ns</span> <span style="color: #228b22;">my-app.core</span>
+  <span style="color: #7388d6;">(</span><span style="color: #008b8b;">:gen-class</span><span style="color: #7388d6;">)</span>
+  <span style="color: #7388d6;">(</span><span style="color: #008b8b;">:require</span> <span style="color: #909183;">[</span>system.repl <span style="color: #008b8b;">:refer</span> <span style="color: #709870;">[</span>set-init! start<span style="color: #709870;">]</span><span style="color: #909183;">]</span>
+            <span style="color: #909183;">[</span>my-app.systems <span style="color: #008b8b;">:refer</span> <span style="color: #709870;">[</span>prod-system<span style="color: #709870;">]</span><span style="color: #909183;">]</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+
+<span style="color: #707183;">(</span><span style="color: #a020f0;">defn</span> <span style="color: #0000ff;">-main</span>
+  <span style="color: #8b2252;">"Start the application"</span>
+  <span style="color: #7388d6;">[]</span>
+  <span style="color: #7388d6;">(</span>set-init! #'prod-system<span style="color: #7388d6;">)</span>
+  <span style="color: #7388d6;">(</span>start<span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org8cab8a2" class="outline-4">
+<h4 id="org8cab8a2">defsystem</h4>
+<div class="outline-text-4" id="text-org8cab8a2">
+<p>
+A convenience macro, <code>defsystem</code>, allows you to declare systems succinctly:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #a020f0;">ns</span> <span style="color: #228b22;">my-app.systems</span>
+  <span style="color: #7388d6;">(</span><span style="color: #008b8b;">:require</span>
+   <span style="color: #909183;">[</span>system.core <span style="color: #008b8b;">:refer</span> <span style="color: #709870;">[</span>defsystem<span style="color: #709870;">]</span><span style="color: #909183;">]</span>
+   <span style="color: #909183;">(</span>system.components
+    <span style="color: #709870;">[</span>jetty <span style="color: #008b8b;">:refer</span> <span style="color: #907373;">[</span>new-web-server<span style="color: #907373;">]</span><span style="color: #709870;">]</span>
+    <span style="color: #709870;">[</span>repl-server <span style="color: #008b8b;">:refer</span> <span style="color: #907373;">[</span>new-repl-server<span style="color: #907373;">]</span><span style="color: #709870;">]</span>
+    <span style="color: #709870;">[</span>datomic <span style="color: #008b8b;">:refer</span> <span style="color: #907373;">[</span>new-datomic-db<span style="color: #907373;">]</span><span style="color: #709870;">]</span>
+    <span style="color: #709870;">[</span>mongo <span style="color: #008b8b;">:refer</span> <span style="color: #907373;">[</span>new-mongo-db<span style="color: #907373;">]</span><span style="color: #709870;">]</span><span style="color: #909183;">)</span>
+   <span style="color: #909183;">[</span>my-app.webapp <span style="color: #008b8b;">:refer</span> <span style="color: #709870;">[</span>handler<span style="color: #709870;">]</span><span style="color: #909183;">]</span>
+   <span style="color: #909183;">[</span>environ.core <span style="color: #008b8b;">:refer</span> <span style="color: #709870;">[</span>env<span style="color: #709870;">]</span><span style="color: #909183;">]</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+
+<span style="color: #707183;">(</span><span style="color: #a020f0;">defsystem</span> <span style="color: #0000ff;">dev-system</span>
+  <span style="color: #7388d6;">[</span><span style="color: #008b8b;">:datomic-db</span> <span style="color: #909183;">(</span>new-datomic-db <span style="color: #709870;">(</span>env <span style="color: #008b8b;">:db-url</span><span style="color: #709870;">)</span><span style="color: #909183;">)</span>
+   <span style="color: #008b8b;">:mongo-db</span> <span style="color: #909183;">(</span>new-mongo-db<span style="color: #909183;">)</span>
+   <span style="color: #008b8b;">:web</span> <span style="color: #909183;">(</span>new-web-server <span style="color: #709870;">(</span>env <span style="color: #008b8b;">:http-port</span><span style="color: #709870;">)</span> handler<span style="color: #909183;">)</span><span style="color: #7388d6;">]</span><span style="color: #707183;">)</span>
+
+<span style="color: #707183;">(</span><span style="color: #a020f0;">defsystem</span> <span style="color: #0000ff;">prod-system</span>
+  <span style="color: #7388d6;">[</span><span style="color: #008b8b;">:datomic-db</span> <span style="color: #909183;">(</span>new-datomic-db <span style="color: #709870;">(</span>env <span style="color: #008b8b;">:db-url</span><span style="color: #709870;">)</span><span style="color: #909183;">)</span>
+   <span style="color: #008b8b;">:mongo-db</span> <span style="color: #909183;">(</span>new-mongo-db <span style="color: #709870;">(</span>env <span style="color: #008b8b;">:mongo-url</span><span style="color: #709870;">)</span><span style="color: #909183;">)</span>
+   <span style="color: #008b8b;">:web</span> <span style="color: #909183;">(</span>new-web-server <span style="color: #709870;">(</span>env <span style="color: #008b8b;">:http-port</span><span style="color: #709870;">)</span> handler<span style="color: #909183;">)</span>
+   <span style="color: #008b8b;">:repl-server</span> <span style="color: #909183;">(</span>new-repl-server <span style="color: #709870;">(</span>env <span style="color: #008b8b;">:repl-port</span><span style="color: #709870;">)</span><span style="color: #909183;">)</span><span style="color: #7388d6;">]</span><span style="color: #707183;">)</span>
+
+</pre>
+</div>
+<p>
+<b>Note:</b> Component allows you to define dependency relationships within systems. Please don’t use said macro for those cases. Be sure to consult component’s API to see the range of options available to you.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org25d66c0" class="outline-4">
+<h4 id="org25d66c0">At runtime: global system map vs dependency injection</h4>
+<div class="outline-text-4" id="text-org25d66c0">
+<p>
+At runtime, the <b>system</b> var can be used anywhere after requiring it from the <b>system.repl</b> namespace:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-clojure"><span style="color: #707183;">(</span><span style="color: #a020f0;">ns</span> <span style="color: #228b22;">front-end.webapp.handler</span>
+ <span style="color: #7388d6;">(</span><span style="color: #008b8b;">:require</span> <span style="color: #909183;">[</span>system.repl <span style="color: #008b8b;">:refer</span> <span style="color: #709870;">[</span>system<span style="color: #709870;">]</span><span style="color: #909183;">]</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+
+<span style="color: #707183;">(</span>code-using system ...<span style="color: #707183;">)</span>
+</pre>
+</div>
+
+<p>
+Note this pattern of directly accessing the global system var is in contrast with the pattern of dependency injection integral to Stuart Sierra's vision of Component. In this perspective, <i>components are defined in terms of the components on which they depend</i>. <b>system</b>, as a repository of readymade, reusable components, cannot and does not anticipate all the possible ways in which users will want to assemble components together. What it can and does, however, is anticipate common scenarii. Like your typical Ring application, for <a href="https://github.com/danielsz/system-dependency-injection">example</a>, where you may want to inject the database in the routes, so that it is readily available when serving http requests.
+</p>
+
+<p>
+<b>system</b> ships with a web framework, <code>Raamwerk</code>, inspired by the <a href="https://github.com/weavejester/duct">Duct</a> framework: the <code>endpoint</code>, <code>middleware</code> and <code>handler</code> components. The <code>endpoint</code> component returns routes that are closed over by the component passed to it, so that its constituents are accessible via standard map destructuring. The rationale for this is explained <a href="https://www.booleanknot.com/blog/2015/05/22/structuring-clojure-web-apps.html">here</a>. If the previous sentence didn’t sound agreeable, I suggest you check out the <a href="https://github.com/danielsz/system/wiki/Raamwerk">wiki</a> and the examples.
+</p>
+
+<p>
+The ability to decompose a web application in mulitple <code>endpoints</code> offers flexibility and opportunies of reuse. For example, you can isolate functionality in library projects, and join the <code>endpoints</code> in the target application’s unified <code>handler</code>. The possibilities are numerous.
+</p>
+
+<p>
+Documentation for Raamwerk’s components is <a href="http://danielsz.github.io/system/">available</a>.
+</p>
+<blockquote>
+<p>
+As with many patterns, DI can be abused. It is easy to get carried away with dependency injection and build a towering dependency graph that is unnecessary and even counter-productive. — Ben Morris in <a href="http://www.ben-morris.com/how-not-to-use-dependency-injection-service-locators-and-injection-mania/">How not to use dependency injection: service locators and injection mania.</a>
+</p>
+</blockquote>
+
+<p>
+Whatever you do, use your best judgment.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org4910939" class="outline-2">
+<h2 id="org4910939">Boot-system</h2>
+<div class="outline-text-2" id="text-org4910939">
+<p>
+<code>System</code> and <code>Boot</code> are a match made in heaven. Some of the properties that boot-system brings to your workflow are:
+</p>
+
+<ul class="org-ul">
+<li>Manual and automatic mode, ie. either you manipulate the system in the REPL, or you configure it to react to editing changes.</li>
+<li>Restartable system. What warrants a system restart is user-configurable. File-based granularity.</li>
+<li>Changes that do not require a restart are available in the running system instantly (via namespace reloading).</li>
+<li>Full <i>Lisp-style</i> interactive programming via the REPL and hot-reloading in the browser.</li>
+</ul>
+
+<p>
+The <code>system</code> task is invoked like any <code>boot</code> task.
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">$ boot system -h
+</pre>
+</div>
+
+<p>
+Which outputs, for example:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">-h, --help         Print this help info.
+-s, --sys SYS      Set the system var to SYS.
+-a, --auto         Manages the lifecycle of the application automatically.
+-f, --files FILES  Will reset the system if a filename<span style="color: #a020f0;"> in</span> the supplied vector changes.
+-r, --regexes      Treat --files as regexes, not file names. Only one of regexes|paths is allowed.
+-p, --paths        Treat --files as classpath paths, not file names. Only one of regexes|paths is allowed.
+</pre>
+</div>
+
+<p>
+When <code>auto</code> is set to true, reloading of namespaces and restarts are being managed automatically.
+</p>
+
+<p>
+If you set <code>auto</code> to false, you indicate that you want to handle restarts manually at the REPL, with <code>(system.repl/reset)</code>. Please note that SYS will be initialized and started for you at first run. 
+</p>
+
+<p>
+If you don’t supply a SYS argument, the system task will act as a <code>tools.namespace</code> wrapper. Each time you save your file, affected namespaces are reloaded in dependency order (after being unloaded in reverse order). This is handy for projects that do not use <code>Component</code>, like this <a href="https://github.com/danielsz/no-restarts">example</a> project. 
+</p>
+</div>
+
+<div id="outline-container-orge3a7e26" class="outline-3">
+<h3 id="orge3a7e26">Code reload vs system restart</h3>
+<div class="outline-text-3" id="text-orge3a7e26">
+<p>
+In traditional Lisp systems, users can redefine arbitrary, discrete units of code. Clojure, as a Lisp, is no exception. However, as a hosted language with many advanced dynamic features, code reloading has many <a href="https://github.com/clojure/tools.namespace#reloading-code-motivation">pitfalls</a>. <code>tools.namespace</code> fixes many of them, but ultimately, reloaded code will not agree with runtime state, and the system will need a full restart. This is  where <code>component</code> fits in. (Note that both libraries were authored by Stuart Sierra).
+</p>
+
+<p>
+It is important to understand that code reloading and system restarts are orthogonal—both are desirable properties in a programming environment. A full restart is a blunt tool. No need to restart the database just because a helper function was modified.
+</p>
+
+<p>
+We <b>don’t want</b> to restart the system with <b>every</b> code change. Ideally, we want to only reload the code that has changed, and occasionally restart (when necessary).
+</p>
+
+<p>
+<code>boot-system</code> gives you finegrained tuning over system restarts vs code reload. Each time you change a file, <code>boot-system</code> will reload your code. Conversely, filenames that have been designated in the <code>files</code> option will trigger a full restart. Typically, the files vector will be small, as most modifications do not warrant a full restart. An example of when you would want a full restart is when you modify a Var that is used in a thread (that of a web server, for example). This is explained in detail in the <a href="http://danielsz.github.io/2016/05/06/Ghosts-in-the-machine">Ghosts in the machine</a> blog post. 
+Check the options with <code>boot system -h</code>. 
+</p>
+
+<p>
+In summary, when you instruct <code>boot-system</code> to manage your application lifecycle (with the <code>auto</code> option), either one of those two things will happen after you change a source file:
+</p>
+<ul class="org-ul">
+<li><code>refresh</code> will first unload all affected namespaces (to remove old definitions) before reloading them in dependency order.</li>
+<li><code>reset</code> will restart the system if that file was defined in the <code>files</code> vector.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgb72de41" class="outline-3">
+<h3 id="orgb72de41">The Holy Grail</h3>
+<div class="outline-text-3" id="text-orgb72de41">
+<p>
+With <code>system</code>, you can enjoy a true Lisp environment where code is always live (<b>live coding</b>). A tutorial is available in a separate repository. It is dubbed the <a href="https://github.com/danielsz/holygrail">Holy Grail</a>, because the solution encompasses back-end and front-end. Some people like to start off from the setup in that repo as a fast track for clj/cljs combo projects. For them, Akash Shakdwipeea has made a <a href="https://github.com/shakdwipeea/system-template">Boot template</a> available.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org14cbf5a" class="outline-3">
+<h3 id="org14cbf5a">Leiningen</h3>
+<div class="outline-text-3" id="text-org14cbf5a">
+<p>
+If you are using Leiningen, we recommend <a href="https://github.com/bhauman/lein-figwheel">Figwheel</a> to address browser-side hot-reloading concerns.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org42896a1" class="outline-2">
+<h2 id="org42896a1">Monitoring</h2>
+<div class="outline-text-2" id="text-org42896a1">
+<p>
+A monitoring protocol is available to query the status of
+components. Two methods are available, <code>started?</code> and <code>stopped?</code>,
+whose concrete implementations depend on the native APIs of the
+service behind the component.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1cb6c1f" class="outline-2">
+<h2 id="org1cb6c1f">The Reloaded pattern</h2>
+<div class="outline-text-2" id="text-org1cb6c1f">
+<p>
+Here are a couple of links that are sure to shed more light on the motivations of the reloaded workflow.
+</p>
+</div>
+
+<div id="outline-container-org6615e98" class="outline-3">
+<h3 id="org6615e98">The canonical reference:</h3>
+<div class="outline-text-3" id="text-org6615e98">
+<p>
+<a href="http://thinkrelevance.com/blog/2013/06/04/clojure-workflow-reloaded">My Clojure Workflow, Reloaded</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org686e2c7" class="outline-3">
+<h3 id="org686e2c7">Interactive programming</h3>
+<div class="outline-text-3" id="text-org686e2c7">
+<p>
+I gave a talk at several Clojure user groups (Belgium, Spain, Israel). BeClojure did a great job at recording it and making it available on Youtube. Mattias Buelens also produced a very nice <a href="http://mattiasbuelens.github.io/interactiveprogrammingtalk/interactiveprogramming.html">interactive UI</a> for the BeClojure talk.
+</p>
+
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=50vU6rp2jyA" target="_blank"><img src="http://img.youtube.com/vi/50vU6rp2jyA/0.jpg" alt="Interactive programming" width="560" height="315" border="10" /></a>
+</div>
+</div>
+
+<div id="outline-container-org4f9b003" class="outline-3">
+<h3 id="org4f9b003">Additional references</h3>
+<div class="outline-text-3" id="text-org4f9b003">
+<p>
+And more references touching on the topic.
+</p>
+<ul class="org-ul">
+<li><a href="http://www.infoq.com/presentations/Clojure-Large-scale-patterns-techniques">Clojure in the Large</a></li>
+<li><a href="http://martintrojer.github.io/clojure/2013/09/07/retrofitting-the-reloaded-pattern-into-clojure-projects/">Retrofitting the Reloaded pattern into Clojure projects</a></li>
+<li><a href="http://software-ninja-ninja.blogspot.co.il/2014/04/5-faces-of-dependency-injection-in.html">5 faces of dependency injection in Clojure</a></li>
+<li><a href="https://github.com/weavejester/reloaded.repl">REPL functions to support the reloaded workflow</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org4b9768b" class="outline-2">
+<h2 id="org4b9768b">Compatibility</h2>
+<div class="outline-text-2" id="text-org4b9768b">
+<p>
+There is a host of components libraries in the Clojure ecosystem, each with its own take, its own philosophy. For example:
+</p>
+
+<ul class="org-ul">
+<li><a href="https://github.com/juxt/modular">modular</a></li>
+<li><a href="https://github.com/palletops/leaven">leaven</a> and <a href="https://github.com/palletops/bakery">bakery</a></li>
+<li><a href="https://github.com/james-henderson/yoyo">yoyo</a></li>
+<li><a href="http://docs.caudate.me/hara/#haracomponent">hara.component</a></li>
+<li><a href="https://github.com/tolitius/mount">mount</a></li>
+</ul>
+
+<p>
+Navigating this space can be difficult or overwhelming. Due to the nature of Open Source Software, it is unlikely to see any kind of standardization taking place. Let’s embrace the diversity instead, and emphasize the <b>compatibility</b> of components. As long as a component adheres to Stuart Sierra’s Lifecycle protocol, you can import it in your <code>systems</code> namespace and refer to it as any other native <code>system</code> component.
+</p>
+</div>
+
+<div id="outline-container-orgfe3b245" class="outline-4">
+<h4 id="orgfe3b245">Choosing</h4>
+<div class="outline-text-4" id="text-orgfe3b245">
+<p>
+To help choose if <code>system</code> is right for you, here are a couple of tips. Take a component for an often used dependency (a web server, for example, or a database), and compare their source code. The <code>system</code> library puts an emphasis on two properties:
+</p>
+
+<ul class="org-ul">
+<li>minimalism: <code>system</code> provides a way to instantiate components that fulfill the Licecycle protocol (<code>start</code> and <code>stop</code>). Nothing more, nothing less.</li>
+<li>Interactive programming: <code>system</code> is best used in a Lispy, interactive workflow, hence its deep integration with boot.</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgeaf81d9" class="outline-2">
+<h2 id="orgeaf81d9">Contributing</h2>
+<div class="outline-text-2" id="text-orgeaf81d9">
+<p>
+Please fork and issue a pull request to add more components. Please
+don't forget to include tests. You can refer to the existing ones to
+get started.
+</p>
+
+<p>
+Calling <code>lein test</code> will tests that have no external
+dependencies. Tests that do require external services being installed
+on your system (such as Mongo, Postgres or Elasticsearch) can be run
+with <code>lein test :dependency</code>. Use <code>lein test :all</code> to run the full
+test suite.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8e2c107" class="outline-2">
+<h2 id="org8e2c107">Credits</h2>
+<div class="outline-text-2" id="text-org8e2c107">
+<p>
+I wish to thank <a href="https://github.com/stuartsierra">Stuart Sierra</a> for the pioneering and guidance. Special thanks to <a href="https://github.com/weavejester">James Reeves</a> for the <a href="https://github.com/weavejester/reloaded.repl">reloaded.rep</a>l library and general inspiration. Thanks to <a href="https://github.com/ptaoussanis">Peter Taoussanis</a>, the friendly OSS contributor, who helped to ‘componentize’ <a href="https://github.com/ptaoussanis/sente">sente</a>, an amazing library on its own right.
+</p>
+</div>
+</div>
+<div id="outline-container-org87a8029" class="outline-2">
+<h2 id="org87a8029">License</h2>
+<div class="outline-text-2" id="text-org87a8029">
+<p>
+Distributed under the <a href="http://opensource.org/licenses/eclipse-1.0.php">Eclipse Public License</a> (the same as Clojure) together with the <a href="https://996.icu/#/en_US">966.icu</a> <a href="https://github.com/996icu/996.ICU/blob/master/LICENSE">license</a>.
+</p>
+
+
+<div class="figure">
+<p><a href="https://img.shields.io/badge/link-996.icu-red.svg"><object type="image/svg+xml" data="https://img.shields.io/badge/link-996.icu-red.svg" class="org-svg">
+Sorry, your browser does not support SVG.</object></a>
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Daniel Szmulewicz</p>
+<p class="date">Created: 2020-05-08 Fri 23:04</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

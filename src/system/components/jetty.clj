@@ -2,7 +2,7 @@
   (:require [schema.core :as s]
             [system.schema :as sc]
             [com.stuartsierra.component :as component]
-            [lang-utils.core :refer [∘ seek]]
+            [lang-utils.core :refer [seek]]
             [ring.adapter.jetty :refer [run-jetty]]))
 
 (defrecord WebServer [options handler]
@@ -10,7 +10,7 @@
   (start [component]
     (if (:server component)
       component
-      (let [handler (if (fn? handler) handler (:handler (val (seek (∘ :handler val) component))))
+      (let [handler (if (fn? handler) handler (:handler (val (seek (comp :handler val) component))))
             server (run-jetty handler options)]
         (assoc component :server server))))
   (stop [component]
