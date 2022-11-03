@@ -1,5 +1,5 @@
 * Changes 
-** 0.4.8-SNAPSHOT
+** 0.4.8
 - Mariadb: data-source and connection
 - core.async pipe: high-level component for a core.async pipe
 - Sente client fixes (ChannelSocketClient)
