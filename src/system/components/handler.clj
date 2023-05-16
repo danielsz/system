@@ -1,6 +1,7 @@
 (ns system.components.handler
   (:require [com.stuartsierra.component :as component]
-            [lang-utils.core :refer [contains+?]]))
+            [system.components.middleware])
+  (:import [system.components.middleware Middleware]))
 
 (defn- endpoints
   "Find all endpoints this component depends on, returns map entries of the form
@@ -16,15 +17,15 @@
    (with-middleware endpoints true))
   ([endpoints flag]
    (let [f (if flag
-             (fn [[k v]] (contains+? v :middleware))
-             (fn [[k v]] (not (contains+? v :middleware))))]
+             (fn [[k v]] (instance? Middleware v))
+             (fn [[k v]] (not (instance? Middleware v))))]
      (filter f endpoints))))
 
 (defn- middleware-key
   "Given the endpoint map-entry this returns the key of the
   middleware dependency if any, or an empty map."
   [endpoint]
-  (reduce-kv (fn [_ k v] (if (contains+? v :middleware) (reduced k) _)) {} (val endpoint)))
+  (reduce-kv (fn [_ k v] (if (instance? Middleware v) (reduced k) _)) {} (val endpoint)))
 
 (defrecord Handler [router shared-root-middleware?]
   component/Lifecycle
