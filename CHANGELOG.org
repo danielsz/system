@@ -1,5 +1,6 @@
 * Changes 
 ** 0.4.9-SNAPSHOT
+- Raamwerk framework overhaul. Adoption of reitit as routing library. No need for middleware component, and handler component is greatly simplified.
 - Undertow web server
 ** 0.4.8
 - Mariadb: data-source and connection

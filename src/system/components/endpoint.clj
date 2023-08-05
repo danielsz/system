@@ -1,10 +1,10 @@
 (ns system.components.endpoint
   (:require [com.stuartsierra.component :as component]))
 
-(defrecord Endpoint [routes-fn]
+(defrecord Endpoint [f]
   component/Lifecycle
   (start [component]
-    (assoc component :routes (routes-fn component)))
+    (assoc component :routes (f component)))
   (stop [component]
     (dissoc component :routes)))
 

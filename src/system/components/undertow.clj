@@ -1,12 +1,13 @@
 (ns system.components.undertow
   (:require [ring.adapter.undertow :refer [run-undertow]]
-            [com.stuartsierra.component :as component]
-            [lang-utils.core :refer [seek]]))
+            [com.stuartsierra.component :as component]))
 
 (defrecord WebServer [handler options]
   component/Lifecycle
   (start [component]
-    (let [handler (if (fn? handler) handler (:handler (val (seek (comp :handler val) component))))
+    (let [handler (if (fn? handler)
+                    handler
+                    (get-in component [:handler :handler]))
           server (run-undertow handler options)]
       (assoc component :server server)))
   (stop [component]
