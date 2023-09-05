@@ -1,5 +1,5 @@
 * Changes 
-** 0.5.0-SNAPSHOT
+** 0.5.0
 - Raamwerk refinement with the endpoints. Now accepts route data or closures over Reitit routes with component dependencies in scope.
 ** 0.4.9
 - Raamwerk framework overhaul. Adoption of reitit as routing library. No need for middleware component, and handler component is greatly simplified.
