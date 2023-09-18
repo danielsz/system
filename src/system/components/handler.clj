@@ -20,9 +20,9 @@
     (let [routes (map :routes (vals (endpoints component)))
           routers (apply merge-routers routes)
           handler (ring/ring-handler routers (default-handler component) options)]
-      (assoc component :handler handler)))
+      (assoc component :handler handler :debug (r/routes routers))))
   (stop [component]
-    (dissoc component :handler)))
+    (dissoc component :handler :debug)))
 
 (defn new-handler
   [& {:keys [default-handler options]}]

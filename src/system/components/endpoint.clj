@@ -6,11 +6,18 @@
 (defrecord Endpoint [routes middleware]
   component/Lifecycle
   (start [component]
-    (assoc component :routes (cond
-                               (vector? routes) (if (not-empty middleware)
-                                                        (ring/router routes {:reitit.middleware/transform #(into % middleware)})
-                                                        (ring/router routes))
-                               (and (ifn? routes) (satisfies? Router (routes component))) (routes component))))
+    (let [transform (fn [routes] (mapv
+                                 (fn [entry]
+                                   (if (associative? entry)
+                                     (let [[k v] entry]
+                                       [k (assoc v :middleware middleware)])
+                                     entry))
+                                 routes))]
+      (assoc component :routes (cond
+                                 (vector? routes) (if (not-empty middleware)
+                                                    (ring/router (transform routes))
+                                                    (ring/router routes))
+                                 (and (ifn? routes) (satisfies? Router (routes component))) (routes component)))))
   (stop [component]
     (dissoc component :routes)))
 
