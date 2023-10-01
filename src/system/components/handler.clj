@@ -19,6 +19,7 @@
   (start [component]
     (let [routes (map :routes (vals (endpoints component)))
           routers (apply merge-routers routes)
+          ;; When assembling the handler, find the APIHandler and append it to routers. (merge-routers routers (:routes APIhandler))
           handler (ring/ring-handler routers (default-handler component) options)]
       (assoc component :handler handler :debug (r/routes routers))))
   (stop [component]
@@ -27,3 +28,18 @@
 (defn new-handler
   [& {:keys [default-handler options]}]
   (map->Handler {:default-handler default-handler :options options}))
+
+
+(defrecord APIHandler [routes]
+  component/Lifecycle
+  (start [component]
+    (assoc component :routes routes))
+  (stop [component]
+    (dissoc component :routes)))
+
+(defn new-api-handler
+  [& {:keys [routes]}]
+  (map->APIHandler {:routes routes}))
+
+
+;; Idea: When assembling the handler, find the APIHandler and append its routes to the existing session handler.
