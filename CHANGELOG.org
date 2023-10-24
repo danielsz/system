@@ -1,4 +1,6 @@
 * Changes 
+** 0.5.2
+- Facilities to include an api handler behind prefix and separate middleware
 ** 0.5.1
 - Endpoints in Raamwerk, route data can have their per-endpoint middleware.
 ** 0.5.0
