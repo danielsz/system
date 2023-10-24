@@ -10,6 +10,7 @@
                                (vector? routes) (if (not-empty middleware)
                                                   (ring/router routes {:data {:middleware middleware}})
                                                   (ring/router routes))
+                               (and (ifn? routes) (vector? (routes component))) (ring/router (routes component))
                                (and (ifn? routes) (satisfies? Router (routes component))) (routes component))))
   (stop [component]
     (dissoc component :routes)))
