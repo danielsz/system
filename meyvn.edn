@@ -1,6 +1,6 @@
 {:pom {:group-id "org.danielsz",
        :artifact-id "system",
-       :version "0.5.2",
+       :version "0.5.3-SNAPSHOT",
        :name "system"},
  :build-properties {:project-build-sourceEncoding "UTF-8"},
  :packaging {:uberjar {:graalvm {:enabled false,
