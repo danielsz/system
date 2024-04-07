@@ -1,5 +1,5 @@
 * Changes 
-** 0.5.3-SNAPSHOT
+** 0.5.3
 - Support for info.sunng/ring-jetty9-adapter
 ** 0.5.2
 - Facilities to include an api handler behind prefix and separate middleware
