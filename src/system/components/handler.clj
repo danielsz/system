@@ -16,7 +16,7 @@
   (filter (comp :routes val) component))
 
 (defn api-endpoints? [component]
-  (some #(contains? component %) [:api-handlers :api-handler]))
+  (contains? component :api-handler))
 
 (defrecord Handler [default-handler options]
   component/Lifecycle
@@ -28,7 +28,7 @@
           routers (apply merge-routers routes)
           handler (if (api-endpoints? component)
                     (let [site-router (ring/router (r/routes routers) {:data options})
-                          api-router (for [api-handler (some #(get component %) [:api-handler :api-handlers])
+                          api-router (for [api-handler (:api-handler component)
                                            :let [api-routes ((:api-route api-handler) component)
                                                  api-middleware (:api-middleware api-handler)
                                                  api-prefix (get api-handler :api-prefix "/api")
@@ -47,13 +47,13 @@
   [& {:keys [default-handler options]}]
   (map->Handler {:default-handler default-handler :options options}))
 
-(defn new-api-handlers
-  [xs]
-  (into [] (for [{:keys [api-route api-prefix api-middleware]} xs]
-            {:api-route api-route :api-prefix api-prefix :api-middleware api-middleware})))
-
 (defn new-api-handler
   [& {:as m}]
-  (new-api-handlers [m]))
+  (cond
+    (map? m) [m]
+    (vector? m) (into [] (for [{:keys [api-route api-prefix api-middleware]} m]
+                           {:api-route api-route :api-prefix api-prefix :api-middleware api-middleware}))))
+
+
 
 
