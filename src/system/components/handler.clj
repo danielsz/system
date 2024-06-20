@@ -11,12 +11,21 @@
 
 (defn endpoints
   "Find all endpoints this component depends on, returns map entries of the form
-  [name component]. An endpoint is a component that define a `:routes` key."
+  [name component]. An endpoint is its own type."
   [component]
-  (filter (comp :routes val) component))
+  (filter #(instance? system.components.endpoint.Endpoint (val %)) component))
 
-(defn api-endpoints? [component]
-  (contains? component :api-handler))
+(defrecord APIHandler [api-route api-prefix api-middleware]
+  component/Lifecycle
+  (start [component]
+    (assoc component :api-route (api-route component))) ;; each api handler can have its own dependencies
+  (stop [component]
+    (dissoc component :api-route :api-prefix :api-middleware)))
+
+(defn api-handlers
+  "Find all API handlers. An API handler is a siloed handler with a prefix and its own middleware."
+  [component]
+  (filter #(instance? APIHandler (val %)) component))
 
 (defrecord Handler [default-handler options]
   component/Lifecycle
@@ -26,10 +35,10 @@
                     options)
           routes (map :routes (vals (endpoints component)))
           routers (apply merge-routers routes)
-          handler (if (api-endpoints? component)
+          handler (if-let [api-handlers (api-handlers component)]
                     (let [site-router (ring/router (r/routes routers) {:data options})
-                          api-router (for [api-handler (:api-handler component)
-                                           :let [api-routes ((:api-route api-handler) component)
+                          api-router (for [api-handler (vals api-handlers)
+                                           :let [api-routes (:api-route api-handler)
                                                  api-middleware (:api-middleware api-handler)
                                                  api-prefix (get api-handler :api-prefix "/api")
                                                  api-router (cond
@@ -48,12 +57,7 @@
   (map->Handler {:default-handler default-handler :options options}))
 
 (defn new-api-handler
-  [& {:as m}]
-  (cond
-    (map? m) [m]
-    (vector? m) (into [] (for [{:keys [api-route api-prefix api-middleware]} m]
-                           {:api-route api-route :api-prefix api-prefix :api-middleware api-middleware}))))
-
-
+  [& {:keys [api-route api-prefix api-middleware]}]
+  (map->APIHandler {:api-route api-route :api-prefix api-prefix :api-middleware api-middleware}))
 
 
