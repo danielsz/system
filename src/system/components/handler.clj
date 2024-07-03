@@ -18,7 +18,9 @@
 (defrecord APIHandler [api-route api-prefix api-middleware]
   component/Lifecycle
   (start [component]
-    (assoc component :api-route (api-route component))) ;; each api handler can have its own dependencies
+    (assoc component
+           :api-route (api-route component)
+           :api-middleware (postwalk-replace {:component component} api-middleware))) ;; each api handler can have its own dependencies
   (stop [component]
     (dissoc component :api-route :api-prefix :api-middleware)))
 

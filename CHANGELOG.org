@@ -1,5 +1,5 @@
 * Changes 
-** 0.5.4-SNAPSHOT
+** 0.5.4
 - Support for multiple API handlers, which are siloed handlers with their own prefix, middleware and dependencies.
 ** 0.5.3
 - Support for info.sunng/ring-jetty9-adapter
