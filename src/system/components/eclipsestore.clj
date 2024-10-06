@@ -6,19 +6,19 @@
   component/Lifecycle
   (start [component]
     (let [storage-manager (EmbeddedStorage/start)
-          data (if (.root storage-manager)
-               (.root storage-manager)
-               {})
-          data-in-atom (atom data)]
-      (add-watch data-in-atom :watcher
-               (fn [key atom old-state new-state]
-                 (.setRoot storage-manager new-state)
-                 (.storeRoot storage-manager)))
-      (assoc component :db data-in-atom :storage-manager storage-manager)))
-  (stop [component]
+          root (if (.root storage-manager)
+                 (.root storage-manager)
+                 {})
+          data (atom root)]
+      (.setRoot storage-manager root)      
+      (add-watch data :watcher
+                 (fn [key atom old-state new-state]               
+                   (.storeRoot storage-manager)))
+      (assoc component :db data :storage-manager storage-manager)))
+  (stop [component]    
     (remove-watch (:db component) :watcher)
     (.shutdown (:storage-manager component))
-    (dissoc component :db)))
+    (dissoc component :db :storage-manager)))
 
 (defn new-eclipsestore [& {:keys []}]
   (map->EclipseStore {}))
