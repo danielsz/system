@@ -1,7 +1,7 @@
 * Changes 
 ** 0.5.5-SNAPSHOT
 - Init-fn for Mariadb component.
-- Support for EclipseStore, persistable atom component
+- Support for Datomic local. Init-fn takes the Datomic connection as argument.
 ** 0.5.4
 - Support for multiple API handlers, which are siloed handlers with their own prefix, middleware and dependencies.
 ** 0.5.3
