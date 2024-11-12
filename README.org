@@ -1,7 +1,7 @@
 * system
 
 
-[[http://clojars.org/org.danielsz/system/latest-version.svg]]
+[[https://clojars.org/org.danielsz/system/latest-version.svg]]
 
 *ProTip:* Snapshot versions may be available.
 
