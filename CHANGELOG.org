@@ -1,5 +1,5 @@
 * Changes 
-** 0.5.5-SNAPSHOT
+** 0.5.5
 - Init-fn for Mariadb component.
 - Support for Datomic local. Init-fn takes the Datomic connection as argument.
 ** 0.5.4

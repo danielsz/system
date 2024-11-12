@@ -3,7 +3,7 @@
             [clojure.tools.namespace.track :as track]
             [system.reload :as reload]
             [clojure.stacktrace :as st]
-            [io.aviso.ansi :refer [bold-red bold-yellow]] ))
+            [io.aviso.ansi :refer [bright-red bright-yellow]] ))
 
 
 (declare system)
@@ -36,19 +36,19 @@
 (defn refresh [tracker {:keys [restart? mode]}]
   (when restart?
     (stop)
-    (println (bold-yellow (str "Stopping " system-sym))))
+    (println (bright-yellow (str "Stopping " system-sym))))
 
   (when (= mode :tools.namespace) (println "Unmapping namespaces:" (::track/unload @tracker)))
   (println "Recompiling namespaces:" (::track/load @tracker))
   (swap! tracker reload/track-reload (= mode :tools.namespace))
   (when (::reload/error @tracker)
     (swap! @(resolve 'boot.core/*warnings*) inc)
-    (println (bold-red (str "Error reloading: " (::reload/error-ns @tracker))))
+    (println (bright-red (str "Error reloading: " (::reload/error-ns @tracker))))
     (st/print-throwable (::reload/error @tracker)))
 
   (when restart?
     (start)
-    (println (bold-yellow (str "Starting " system-sym)))))
+    (println (bright-yellow (str "Starting " system-sym)))))
 
 
 ;; No need to break API signatures
