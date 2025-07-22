@@ -1,4 +1,7 @@
 * Changes 
+** 0.5.6-SNAPSHOT
+- Datomic local storage, test valid targer
+- Mariadb connection pooling  
 ** 0.5.5
 - Init-fn for Mariadb component.
 - Support for Datomic local. Init-fn takes the Datomic connection as argument.
