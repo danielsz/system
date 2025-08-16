@@ -9,14 +9,6 @@
              [system.repl :refer [go reset set-init!]])
   (:import [java.util.jar JarInputStream]))
 
-(defn meyvn-classpath []
-  (let [url  (-> (System/getProperty "java.class.path")
-                io/as-file
-                io/as-url)
-        is  (JarInputStream. (.openStream url))
-        mf (.getManifest is)]
-    (.getValue (.getMainAttributes mf) "Class-Path")))
-
 (defn key-to-java-property [k]
   (->  k
        name
@@ -58,7 +50,6 @@
                                  (system-init))
                                (reset)
                                (t/send transport (response-for msg :status :done :value "OK")))
-      "meyvn-classpath" (t/send transport (response-for msg :status :done :value (meyvn-classpath)))
       (h msg))))
 
 
@@ -67,6 +58,5 @@
                   :handles {"meyvn-system-init" {:doc "Sets the system var"}
                             "meyvn-system-go" {:doc "Starts the system"}
                             "meyvn-system-reset" {:doc "Resets the system"}
-                            "meyvn-properties" {:doc "Sets properties for the environment"}
-                            "meyvn-classpath" {:doc "Returns classpath"}}})
+                            "meyvn-properties" {:doc "Sets properties for the environment"}}})
 

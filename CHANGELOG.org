@@ -1,7 +1,8 @@
 * Changes 
-** 0.5.6-SNAPSHOT
+** 0.5.6
 - Datomic local storage, test valid targer
-- Mariadb connection pooling  
+- Mariadb connection pooling
+- Removed classpath from nrepl-middleware (moved to meyvn-nrepl-middleware)  
 ** 0.5.5
 - Init-fn for Mariadb component.
 - Support for Datomic local. Init-fn takes the Datomic connection as argument.

@@ -1,6 +1,6 @@
 {:pom {:group-id "org.danielsz",
        :artifact-id "system",
-       :version "0.5.6-SNAPSHOT",
+       :version "0.5.6",
        :name "system"
        :licenses [{:name "Eclipse Public License -v 1.0"
               :url "https://opensource.org/license/epl-1-0/"}]},
