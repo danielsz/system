@@ -1,7 +1,7 @@
 * Changes 
 ** 0.5.8
 - MAxmindb
-- API client  
+- API client
 ** 0.5.6
 - Datomic local storage, test valid targer
 - Mariadb connection pooling
